@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-textPrimary font-body antialiased;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  code, pre {
+    @apply font-mono;
+  }
+
+  /* Focus styles for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-500;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-textMuted;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-server text-white rounded-lg font-medium
+           hover:bg-opacity-90 transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-server focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-surface text-textPrimary rounded-lg font-medium
+           hover:bg-opacity-80 transition-all duration-200 border border-textMuted
+           focus:outline-none focus:ring-2 focus:ring-textMuted focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  .card {
+    @apply bg-surface rounded-xl p-6 border border-textMuted/20;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
