@@ -126,6 +126,6 @@ export const externalLinks = {
   spiffe: 'https://spiffe.io',
   spire: 'https://github.com/spiffe/spire',
   slack: 'https://slack.spiffe.io',
-  github: 'https://github.com/secretlivesofidentity/spiffe',
+  github: 'https://github.com/infamousjoeg/thesecretlivesofidentity',
   inspiration: 'https://thesecretlivesofdata.com/raft',
 };
