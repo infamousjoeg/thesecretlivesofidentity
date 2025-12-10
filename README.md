@@ -1,6 +1,6 @@
 # The Secret Lives of Identity
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/your-badge-id/deploy-status)](https://app.netlify.com/sites/thesecretlivesofidentity/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e16e5597-61ec-4a0d-9bfc-9d1539877f6b/deploy-status)](https://app.netlify.com/sites/thesecretlivesofidentity/deploys)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 An interactive visualization that explains SPIFFE and workload identity — no prior knowledge required.
