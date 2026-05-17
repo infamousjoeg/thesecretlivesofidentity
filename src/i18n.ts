@@ -14,9 +14,16 @@ import ptBRTracks from '@/locales/pt-BR/tracks.json';
 import ptBRContent from '@/locales/pt-BR/content.json';
 import ptBRFrames from '@/locales/pt-BR/frames.json';
 
+import es419Ui from '@/locales/es-419/ui.json';
+import es419Landing from '@/locales/es-419/landing.json';
+import es419Tracks from '@/locales/es-419/tracks.json';
+import es419Content from '@/locales/es-419/content.json';
+import es419Frames from '@/locales/es-419/frames.json';
+
 export const supportedLanguages = [
   { code: 'en', label: 'English', flag: '🇺🇸' },
   { code: 'pt-BR', label: 'Português', flag: '🇧🇷' },
+  { code: 'es-419', label: 'Español', flag: '🇲🇽' },
 ] as const;
 
 export type LanguageCode = (typeof supportedLanguages)[number]['code'];
@@ -39,6 +46,13 @@ i18n
         tracks: ptBRTracks,
         content: ptBRContent,
         frames: ptBRFrames,
+      },
+      'es-419': {
+        ui: es419Ui,
+        landing: es419Landing,
+        tracks: es419Tracks,
+        content: es419Content,
+        frames: es419Frames,
       },
     },
     fallbackLng: 'en',

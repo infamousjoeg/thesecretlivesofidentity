@@ -1,0 +1,30 @@
+{
+  "heroTitle": "Las Vidas Secretas de la",
+  "heroTitleHighlight": "Identidad",
+  "heroSubtitle": "Visualizaciones interactivas que desmitifican los conceptos de identidad y seguridad",
+  "startWithSpiffe": "Comenzar con SPIFFE",
+  "featuredBadge": "Destacado",
+  "featuredDescription": "Aprende cómo las cargas de trabajo prueban su identidad sin secretos. De cero al entendimiento de SPIFFE en 95 fotogramas.",
+  "beginJourney": "Comenzar el recorrido",
+  "comingSoon": "Próximamente",
+  "aboutTitle": "Acerca de este proyecto",
+  "aboutDescription": "Una contribución comunitaria al ecosistema SPIFFE, inspirada en The Secret Lives of Data. Nuestro objetivo es hacer que los conceptos complejos de identidad sean accesibles para todos, sin importar el conocimiento previo.",
+  "topics": {
+    "mtls": {
+      "title": "TLS Mutuo",
+      "description": "Cómo dos partes prueban su identidad mutuamente"
+    },
+    "oauth": {
+      "title": "OAuth 2.0 / OIDC",
+      "description": "Identidad basada en tokens para personas y servicios"
+    },
+    "opa": {
+      "title": "OPA",
+      "description": "Decisiones de autorización basadas en políticas"
+    },
+    "wimse": {
+      "title": "WIMSE",
+      "description": "Federación de identidad de cargas de trabajo entre dominios"
+    }
+  }
+}
