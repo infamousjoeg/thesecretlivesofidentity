@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent, RegistrationEntry } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -13,6 +14,7 @@ import { colors } from '@/utils/constants';
 export const Frame5_7: React.FC = () => {
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation('frames');
 
   return (
     <Stage>
@@ -29,7 +31,7 @@ export const Frame5_7: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Matching Against Entries
+          {t('frame5_7.title')}
         </motion.text>
 
         {/* Collected selectors */}
@@ -40,7 +42,7 @@ export const Frame5_7: React.FC = () => {
         >
           <rect x={50} y={120} width={180} height={120} rx={8} fill={colors.surface} stroke={colors.agent} strokeWidth={2} />
           <text x={140} y={145} textAnchor="middle" fill={colors.agent} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            Collected Selectors
+            {t('frame5_7.collectedSelectors')}
           </text>
           <text x={70} y={170} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">k8s:ns:payments</text>
           <text x={70} y={190} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">k8s:sa:api-svc</text>
@@ -101,7 +103,7 @@ export const Frame5_7: React.FC = () => {
                 <path d="M0,0 L0,6 L9,3 z" fill={colors.success} />
               </marker>
             </defs>
-            <text x={500} y={140} fill={colors.success} fontSize={12} fontWeight="bold">✓ Match!</text>
+            <text x={500} y={140} fill={colors.success} fontSize={12} fontWeight="bold">{t('frame5_7.matchFound')}</text>
           </motion.g>
         )}
 
@@ -114,7 +116,7 @@ export const Frame5_7: React.FC = () => {
           >
             <rect x={200} y={380} width={400} height={80} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={410} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Match found!
+              {t('frame5_7.matchFound')}
             </text>
             <text x={400} y={435} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="JetBrains Mono, monospace">
               → Issue SVID for spiffe://acme/payments/api

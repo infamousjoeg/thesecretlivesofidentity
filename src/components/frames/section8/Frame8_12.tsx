@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Clustered SPIRE servers with shared datastore
  */
 export const Frame8_12: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame8_12: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          High Availability
+          {t('frame8_12.title', { defaultValue: 'High Availability' })}
         </motion.text>
 
         {/* Cluster box */}
@@ -39,7 +41,7 @@ export const Frame8_12: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <rect x={150} y={100} width={500} height={200} rx={12} fill={colors.surface} stroke={colors.server} strokeWidth={2} strokeDasharray="10 5" />
-          <text x={400} y={125} textAnchor="middle" fill={colors.server} fontSize={12} fontWeight="bold">SPIRE Server Cluster</text>
+          <text x={400} y={125} textAnchor="middle" fill={colors.server} fontSize={12} fontWeight="bold">{t('frame8_12.serverCluster', { defaultValue: 'SPIRE Server Cluster' })}</text>
         </motion.g>
 
         {/* Multiple servers */}
@@ -63,8 +65,8 @@ export const Frame8_12: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={300} y={340} width={200} height={70} rx={8} fill={colors.surface} stroke={colors.warning} strokeWidth={2} />
-            <text x={400} y={370} textAnchor="middle" fill={colors.warning} fontSize={12} fontWeight="bold">Shared Datastore</text>
-            <text x={400} y={390} textAnchor="middle" fill={colors.textMuted} fontSize={10}>PostgreSQL / MySQL</text>
+            <text x={400} y={370} textAnchor="middle" fill={colors.warning} fontSize={12} fontWeight="bold">{t('frame8_12.sharedDatastore', { defaultValue: 'Shared Datastore' })}</text>
+            <text x={400} y={390} textAnchor="middle" fill={colors.textMuted} fontSize={10}>{t('frame8_12.database', { defaultValue: 'PostgreSQL / MySQL' })}</text>
 
             <line x1={250} y1={240} x2={350} y2={335} stroke={colors.warning} strokeWidth={1} strokeDasharray="4 2" />
             <line x1={400} y1={240} x2={400} y2={335} stroke={colors.warning} strokeWidth={1} strokeDasharray="4 2" />
@@ -80,8 +82,8 @@ export const Frame8_12: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={150} y={430} width={500} height={50} rx={6} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={1} />
-            <text x={260} y={460} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold">✓ No single point of failure</text>
-            <text x={540} y={460} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold">✓ Production ready</text>
+            <text x={260} y={460} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold">{t('frame8_12.benefit1', { defaultValue: '✓ No single point of failure' })}</text>
+            <text x={540} y={460} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold">{t('frame8_12.benefit2', { defaultValue: '✓ Production ready' })}</text>
           </motion.g>
         )}
       </svg>

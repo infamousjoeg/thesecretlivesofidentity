@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer, SpireAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,15 +12,16 @@ import { colors } from '@/utils/constants';
  * Visual: Step-by-step attestation flow
  */
 export const Frame4_6: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 400, 400]);
   const prefersReducedMotion = useReducedMotion();
 
   const steps = [
-    { num: 1, text: 'Agent starts on a node', color: colors.agent },
-    { num: 2, text: 'Agent asks platform for proof', color: colors.success },
-    { num: 3, text: 'Agent sends proof to Server', color: colors.server },
-    { num: 4, text: 'Server validates with platform', color: colors.success },
-    { num: 5, text: 'Server issues Agent SVID', color: colors.svid },
+    { num: 1, textKey: 'frame4_6.step1', color: colors.agent },
+    { num: 2, textKey: 'frame4_6.step2', color: colors.success },
+    { num: 3, textKey: 'frame4_6.step4', color: colors.server },
+    { num: 4, textKey: 'frame4_6.step5', color: colors.success },
+    { num: 5, textKey: 'frame4_6.step6', color: colors.svid },
   ];
 
   return (
@@ -37,7 +39,7 @@ export const Frame4_6: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          How Node Attestation Works
+          {t('frame4_6.title')}
         </motion.text>
 
         {/* Entities */}
@@ -50,7 +52,7 @@ export const Frame4_6: React.FC = () => {
           <rect x={50} y={80} width={120} height={80} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
           <text x={110} y={115} textAnchor="middle" fontSize={20}>☁️</text>
           <text x={110} y={140} textAnchor="middle" fill={colors.success} fontSize={10} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            Platform
+            {t('frame4_5.platformLabel')}
           </text>
 
           {/* Agent */}
@@ -138,7 +140,7 @@ export const Frame4_6: React.FC = () => {
                 {step.num}
               </text>
               <text x={180} y={218 + index * 55} fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-                {step.text}
+                {t(step.textKey)}
               </text>
             </motion.g>
           )
@@ -157,7 +159,7 @@ export const Frame4_6: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            ✓ Agent is now attested and can issue workload SVIDs
+            {t('frame4_6.complete')}
           </motion.text>
         )}
       </svg>

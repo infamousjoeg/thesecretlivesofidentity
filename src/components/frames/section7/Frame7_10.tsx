@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Complete lifecycle loop
  */
 export const Frame7_10: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame7_10: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Lifecycle Complete
+          {t('frame7_10.title', { defaultValue: 'Lifecycle Complete' })}
         </motion.text>
 
         {/* Circular lifecycle */}
@@ -49,7 +51,7 @@ export const Frame7_10: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <rect x={340} y={100} width={120} height={40} rx={6} fill={colors.success} />
-            <text x={400} y={125} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">1. Issue</text>
+            <text x={400} y={125} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">{t('frame7_10.step1', { defaultValue: '1. Issue' })}</text>
             <Badge spiffeId="new" position={{ x: 400, y: 170 }} state="valid" size={30} animate={!prefersReducedMotion} />
           </motion.g>
         )}
@@ -62,7 +64,7 @@ export const Frame7_10: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <rect x={500} y={230} width={100} height={40} rx={6} fill={colors.svid} />
-            <text x={550} y={255} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">2. Use</text>
+            <text x={550} y={255} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">{t('frame7_10.step2', { defaultValue: '2. Use' })}</text>
           </motion.g>
         )}
 
@@ -74,7 +76,7 @@ export const Frame7_10: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <rect x={340} y={340} width={120} height={40} rx={6} fill={colors.warning} />
-            <text x={400} y={365} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">3. Rotate</text>
+            <text x={400} y={365} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">{t('frame7_10.step3', { defaultValue: '3. Rotate' })}</text>
           </motion.g>
         )}
 
@@ -86,7 +88,7 @@ export const Frame7_10: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={200} y={230} width={100} height={40} rx={6} fill={colors.agent} />
-            <text x={250} y={255} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">4. Repeat</text>
+            <text x={250} y={255} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">{t('frame7_10.step4', { defaultValue: '4. Repeat' })}</text>
           </motion.g>
         )}
 
@@ -99,10 +101,10 @@ export const Frame7_10: React.FC = () => {
           >
             <rect x={150} y={410} width={500} height={70} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={2} />
             <text x={400} y={440} textAnchor="middle" fill={colors.textPrimary} fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Issue → Use → Rotate → Repeat
+{t('frame7_10.flow', { defaultValue: 'Issue → Use → Rotate → Repeat' })}
             </text>
             <text x={400} y={465} textAnchor="middle" fill={colors.success} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              All automatic. All cryptographic. No human intervention.
+{t('frame7_10.automatic', { defaultValue: 'All automatic. All cryptographic. No human intervention.' })}
             </text>
           </motion.g>
         )}

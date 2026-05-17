@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer, SpireAgent, Workload, Connection } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Full Server + multiple Agents + workloads architecture
  */
 export const Frame3_7: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame3_7: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Architecture
+          {t('frame3_7.title')}
         </motion.text>
 
         {/* Server at top */}
@@ -40,7 +42,7 @@ export const Frame3_7: React.FC = () => {
         >
           <SpireServer label="SPIRE Server" position={{ x: 400, y: 100 }} size={60} animate={!prefersReducedMotion} />
           <text x={400} y={150} textAnchor="middle" fill={colors.server} fontSize={11} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-            Central Authority
+            {t('frame3_7.centralAuthority')}
           </text>
         </motion.g>
 
@@ -105,18 +107,18 @@ export const Frame3_7: React.FC = () => {
           >
             <rect x={150} y={390} width={200} height={50} rx={6} fill={colors.surface} stroke={colors.server} strokeWidth={1} />
             <text x={250} y={415} textAnchor="middle" fill={colors.server} fontSize={11} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Server: Central management
+              {t('frame3_7.serverDescription')}
             </text>
             <text x={250} y={432} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              Identity policy & signing
+              {t('frame3_7.serverSubDescription')}
             </text>
 
             <rect x={450} y={390} width={200} height={50} rx={6} fill={colors.surface} stroke={colors.agent} strokeWidth={1} />
             <text x={550} y={415} textAnchor="middle" fill={colors.agent} fontSize={11} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Agents: Local distribution
+              {t('frame3_7.agentsDescription')}
             </text>
             <text x={550} y={432} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              Fast, local badge issuance
+              {t('frame3_7.agentsSubDescription')}
             </text>
           </motion.g>
         )}
@@ -133,7 +135,7 @@ export const Frame3_7: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Together they form a distributed identity system.
+            {t('frame3_7.conclusion')}
           </motion.text>
         )}
       </svg>

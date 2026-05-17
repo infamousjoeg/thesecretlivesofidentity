@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -13,6 +14,7 @@ import { colors } from '@/utils/constants';
 export const Frame5_9: React.FC = () => {
   const { phase } = useAnimationPhase([0, 500, 500, 500, 600]);
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation('frames');
 
   return (
     <Stage>
@@ -29,7 +31,7 @@ export const Frame5_9: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          What's in the SVID?
+          {t('frame5_9.title')}
         </motion.text>
 
         {/* Central badge */}
@@ -70,7 +72,7 @@ export const Frame5_9: React.FC = () => {
           >
             <rect x={550} y={130} width={150} height={40} rx={6} fill={colors.surface} stroke={colors.success} strokeWidth={1} />
             <text x={625} y={155} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Public Key
+              {t('frame5_9.publicKeyLabel')}
             </text>
             <line x1={545} y1={150} x2={470} y2={170} stroke={colors.success} strokeWidth={1} strokeDasharray="4 2" />
           </motion.g>
@@ -84,7 +86,7 @@ export const Frame5_9: React.FC = () => {
           >
             <rect x={100} y={220} width={150} height={40} rx={6} fill={colors.surface} stroke={colors.warning} strokeWidth={1} />
             <text x={175} y={245} textAnchor="middle" fill={colors.warning} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Validity Period
+              {t('frame5_9.validityLabel')}
             </text>
             <line x1={255} y1={240} x2={330} y2={200} stroke={colors.warning} strokeWidth={1} strokeDasharray="4 2" />
           </motion.g>
@@ -98,7 +100,7 @@ export const Frame5_9: React.FC = () => {
           >
             <rect x={550} y={220} width={150} height={40} rx={6} fill={colors.surface} stroke={colors.server} strokeWidth={1} />
             <text x={625} y={245} textAnchor="middle" fill={colors.server} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              CA Signature
+              {t('frame5_9.signatureLabel')}
             </text>
             <line x1={545} y1={240} x2={470} y2={200} stroke={colors.server} strokeWidth={1} strokeDasharray="4 2" />
           </motion.g>
@@ -113,12 +115,12 @@ export const Frame5_9: React.FC = () => {
           >
             <rect x={150} y={320} width={500} height={130} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={350} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              The SVID contains:
+              {t('frame5_9.contains')}
             </text>
-            <text x={200} y={380} fill={colors.svid} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">• SPIFFE ID - who you are</text>
-            <text x={200} y={400} fill={colors.success} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">• Public key - for cryptographic proofs</text>
-            <text x={200} y={420} fill={colors.warning} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">• Validity period - when it expires</text>
-            <text x={200} y={440} fill={colors.server} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">• CA signature - proof from authority</text>
+            <text x={200} y={380} fill={colors.svid} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">{t('frame5_9.bullet1', { defaultValue: '• SPIFFE ID - who you are' })}</text>
+            <text x={200} y={400} fill={colors.success} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">{t('frame5_9.bullet2', { defaultValue: '• Public key - for cryptographic proofs' })}</text>
+            <text x={200} y={420} fill={colors.warning} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">{t('frame5_9.bullet3', { defaultValue: '• Validity period - when it expires' })}</text>
+            <text x={200} y={440} fill={colors.server} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">{t('frame5_9.bullet4', { defaultValue: '• CA signature - proof from authority' })}</text>
           </motion.g>
         )}
       </svg>

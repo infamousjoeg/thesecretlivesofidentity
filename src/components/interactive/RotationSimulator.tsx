@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge, SpireAgent } from '@/components/entities';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -17,6 +18,7 @@ interface SVIDState {
  * Shows time-lapse of SVID lifecycle with speed controls
  */
 export const RotationSimulator: React.FC = () => {
+  const { t } = useTranslation('frames');
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [currentSVID, setCurrentSVID] = useState<SVIDState>({
@@ -39,24 +41,22 @@ export const RotationSimulator: React.FC = () => {
           const newAge = prev.age + 1;
           const lifePercent = newAge / prev.maxAge;
 
-          // Check if it's time to rotate
           if (lifePercent >= ROTATION_THRESHOLD && prev.status === 'active') {
-            // Start rotation
-            setHistory(h => [...h, { time: newAge, event: `SVID #${prev.id} rotation started` }]);
+            setHistory(h => [...h, {
+              time: newAge,
+              event: t('rotationSimulator.eventRotationStarted', { id: prev.id, defaultValue: `SVID #${prev.id} rotation started` }),
+            }]);
             return { ...prev, age: newAge, status: 'expiring' };
           }
 
-          // Complete rotation when expired
           if (newAge >= prev.maxAge) {
             const newId = prev.id + 1;
             setRotationCount(c => c + 1);
-            setHistory(h => [...h, { time: 0, event: `SVID #${newId} issued (fresh!)` }]);
-            return {
-              id: newId,
-              age: 0,
-              maxAge: 60,
-              status: 'active',
-            };
+            setHistory(h => [...h, {
+              time: 0,
+              event: t('rotationSimulator.eventIssued', { id: newId, defaultValue: `SVID #${newId} issued (fresh!)` }),
+            }]);
+            return { id: newId, age: 0, maxAge: 60, status: 'active' };
           }
 
           return { ...prev, age: newAge };
@@ -67,7 +67,7 @@ export const RotationSimulator: React.FC = () => {
         if (intervalRef.current) clearInterval(intervalRef.current);
       };
     }
-  }, [isPlaying, speed]);
+  }, [isPlaying, speed, t]);
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -77,7 +77,7 @@ export const RotationSimulator: React.FC = () => {
     setIsPlaying(false);
     setCurrentSVID({ id: 1, age: 0, maxAge: 60, status: 'active' });
     setRotationCount(0);
-    setHistory([{ time: 0, event: 'SVID #1 issued (initial)' }]);
+    setHistory([{ time: 0, event: t('rotationSimulator.eventInitial', { defaultValue: 'SVID #1 issued (initial)' }) }]);
   };
 
   const handleSpeedChange = (newSpeed: number) => {
@@ -87,23 +87,23 @@ export const RotationSimulator: React.FC = () => {
   const lifePercent = (currentSVID.age / currentSVID.maxAge) * 100;
   const timeRemaining = currentSVID.maxAge - currentSVID.age;
 
-  // Format time as mm:ss
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  // Initialize history on mount
   useEffect(() => {
-    setHistory([{ time: 0, event: 'SVID #1 issued (initial)' }]);
-  }, []);
+    setHistory([{ time: 0, event: t('rotationSimulator.eventInitial', { defaultValue: 'SVID #1 issued (initial)' }) }]);
+  }, [t]);
 
   return (
     <div className="w-full">
       {/* Speed controls */}
       <div className="flex items-center justify-center gap-4 mb-4">
-        <span className="text-sm text-textMuted">Speed:</span>
+        <span className="text-sm text-textMuted">
+          {t('rotationSimulator.speedLabel', { defaultValue: 'Speed:' })}
+        </span>
         {[1, 5, 10].map(s => (
           <button
             key={s}
@@ -142,7 +142,7 @@ export const RotationSimulator: React.FC = () => {
               fontSize={12}
               fontWeight="bold"
             >
-              SPIFFE ID (Never changes)
+              {t('rotationSimulator.spiffeIdNeverChanges', { defaultValue: 'SPIFFE ID (Never changes)' })}
             </text>
             <text
               x={100}
@@ -247,7 +247,9 @@ export const RotationSimulator: React.FC = () => {
               fill={colors.textSecondary}
               fontSize={11}
             >
-              {currentSVID.status === 'expiring' ? 'Rotating...' : `${Math.round(lifePercent)}% used`}
+              {currentSVID.status === 'expiring'
+                ? t('rotationSimulator.rotating', { defaultValue: 'Rotating...' })
+                : t('rotationSimulator.percentUsed', { percent: Math.round(lifePercent), defaultValue: `${Math.round(lifePercent)}% used` })}
             </text>
             <text
               x={100}
@@ -256,13 +258,13 @@ export const RotationSimulator: React.FC = () => {
               fill={colors.textMuted}
               fontSize={10}
             >
-              Expires in: {formatTime(timeRemaining)}
+              {t('rotationSimulator.expiresIn', { time: formatTime(timeRemaining), defaultValue: `Expires in: ${formatTime(timeRemaining)}` })}
             </text>
           </g>
 
           {/* SPIRE Agent */}
           <SpireAgent
-            label="Agent"
+            label={t('rotationSimulator.agentLabel', { defaultValue: 'Agent' })}
             position={{ x: 400, y: 220 }}
             size={60}
             active={true}
@@ -290,7 +292,7 @@ export const RotationSimulator: React.FC = () => {
                 fontSize={11}
                 fontWeight="bold"
               >
-                Fresh SVID ready!
+                {t('rotationSimulator.freshSVIDReady', { defaultValue: 'Fresh SVID ready!' })}
               </text>
             </motion.g>
           )}
@@ -304,16 +306,16 @@ export const RotationSimulator: React.FC = () => {
               fontSize={14}
               fontWeight="bold"
             >
-              Rotation Stats
+              {t('rotationSimulator.rotationStats', { defaultValue: 'Rotation Stats' })}
             </text>
             <text x={0} y={25} fill={colors.textSecondary} fontSize={12}>
-              Rotations: {rotationCount}
+              {t('rotationSimulator.rotationsCount', { count: rotationCount, defaultValue: `Rotations: ${rotationCount}` })}
             </text>
             <text x={0} y={45} fill={colors.textSecondary} fontSize={12}>
-              Current SVID: #{currentSVID.id}
+              {t('rotationSimulator.currentSVID', { id: currentSVID.id, defaultValue: `Current SVID: #${currentSVID.id}` })}
             </text>
             <text x={0} y={65} fill={colors.success} fontSize={12}>
-              SPIFFE ID: unchanged ✓
+              {t('rotationSimulator.spiffeIdUnchanged', { defaultValue: 'SPIFFE ID: unchanged ✓' })}
             </text>
           </g>
 
@@ -326,7 +328,7 @@ export const RotationSimulator: React.FC = () => {
               fontSize={12}
               fontWeight="bold"
             >
-              Event Log
+              {t('rotationSimulator.eventLog', { defaultValue: 'Event Log' })}
             </text>
             {history.slice(-4).map((h, i) => (
               <text
@@ -346,7 +348,7 @@ export const RotationSimulator: React.FC = () => {
       {/* Key insight */}
       <div className="mt-4 p-3 bg-success/10 border border-success/30 rounded-lg">
         <p className="text-sm text-success font-medium text-center">
-          💡 The SPIFFE ID never changes—only the SVID rotates automatically!
+          {t('rotationSimulator.keyInsight', { defaultValue: '💡 The SPIFFE ID never changes—only the SVID rotates automatically!' })}
         </p>
       </div>
 
@@ -356,13 +358,15 @@ export const RotationSimulator: React.FC = () => {
           onClick={handlePlayPause}
           className="px-6 py-2 bg-success text-white rounded-lg font-medium hover:bg-success/90"
         >
-          {isPlaying ? '⏸ Pause' : '▶ Play'}
+          {isPlaying
+            ? t('rotationSimulator.pause', { defaultValue: '⏸ Pause' })
+            : t('rotationSimulator.play', { defaultValue: '▶ Play' })}
         </button>
         <button
           onClick={handleReset}
           className="px-6 py-2 bg-surface border border-textMuted/30 text-textSecondary rounded-lg font-medium hover:border-textMuted/50"
         >
-          ↺ Reset
+          {t('rotationSimulator.reset', { defaultValue: '↺ Reset' })}
         </button>
       </div>
     </div>

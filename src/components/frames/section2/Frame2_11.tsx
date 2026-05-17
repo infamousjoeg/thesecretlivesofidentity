@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -10,6 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Timeline showing SVID expiration and renewal
  */
 export const Frame2_11: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600, 600]);
 
   return (
@@ -27,7 +29,7 @@ export const Frame2_11: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          SVIDs Are Short-Lived
+          {t('frame2_11.title')}
         </motion.text>
 
         {/* Timeline */}
@@ -103,7 +105,7 @@ export const Frame2_11: React.FC = () => {
           >
             <rect x={300} y={170} width={100} height={25} rx={4} fill={colors.background} stroke={colors.textMuted} strokeWidth={1} />
             <text x={350} y={187} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              Overlap
+              {t('frame2_11.overlap')}
             </text>
           </motion.g>
         )}
@@ -119,22 +121,22 @@ export const Frame2_11: React.FC = () => {
 
             {/* Password comparison */}
             <text x={275} y={410} textAnchor="middle" fill={colors.attacker} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Passwords
+              {t('frame2_11.passwords')}
             </text>
             <text x={275} y={435} textAnchor="middle" fill={colors.textMuted} fontSize={24} fontFamily="JetBrains Mono, monospace">
-              90+ days
+              {t('frame2_11.passwordsDuration')}
             </text>
 
             {/* Divider */}
             <line x1={400} y1={395} x2={400} y2={455} stroke={colors.textMuted} strokeWidth={1} />
-            <text x={400} y={390} textAnchor="middle" fill={colors.textMuted} fontSize={10}>vs</text>
+            <text x={400} y={390} textAnchor="middle" fill={colors.textMuted} fontSize={10}>{t('frame2_11.vs')}</text>
 
             {/* SVID comparison */}
             <text x={525} y={410} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              SVIDs
+              {t('frame2_11.svids')}
             </text>
             <text x={525} y={435} textAnchor="middle" fill={colors.success} fontSize={24} fontFamily="JetBrains Mono, monospace">
-              minutes
+              {t('frame2_11.svidsDuration')}
             </text>
           </motion.g>
         )}
@@ -151,7 +153,7 @@ export const Frame2_11: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Short lifetimes = limited blast radius if compromised
+            {t('frame2_11.blastRadius')}
           </motion.text>
         )}
       </svg>

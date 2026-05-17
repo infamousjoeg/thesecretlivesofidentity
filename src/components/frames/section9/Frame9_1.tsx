@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer, SpireAgent, Badge, TrustBundle } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Summary of all key concepts
  */
 export const Frame9_1: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 400]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame9_1: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          What We've Learned
+          {t('frame9_1.title', { defaultValue: "What We've Learned" })}
         </motion.text>
 
         {/* SPIFFE */}
@@ -39,9 +41,9 @@ export const Frame9_1: React.FC = () => {
           transition={{ duration: 0.4 }}
         >
           <rect x={100} y={100} width={150} height={80} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={2} />
-          <text x={175} y={130} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold">SPIFFE</text>
-          <text x={175} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>Universal workload</text>
-          <text x={175} y={170} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>identity standard</text>
+          <text x={175} y={130} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold">{t('frame9_1.spiffeLabel', { defaultValue: 'SPIFFE' })}</text>
+          <text x={175} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>{t('frame9_1.spiffeDesc1', { defaultValue: 'Universal workload' })}</text>
+          <text x={175} y={170} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>{t('frame9_1.spiffeDesc2', { defaultValue: 'identity standard' })}</text>
         </motion.g>
 
         {/* SPIRE */}
@@ -52,9 +54,9 @@ export const Frame9_1: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <rect x={280} y={100} width={150} height={80} rx={8} fill={`${colors.server}15`} stroke={colors.server} strokeWidth={2} />
-            <text x={355} y={130} textAnchor="middle" fill={colors.server} fontSize={14} fontWeight="bold">SPIRE</text>
-            <text x={355} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>The reference</text>
-            <text x={355} y={170} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>implementation</text>
+            <text x={355} y={130} textAnchor="middle" fill={colors.server} fontSize={14} fontWeight="bold">{t('frame9_1.spireLabel', { defaultValue: 'SPIRE' })}</text>
+            <text x={355} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>{t('frame9_1.spireDesc1', { defaultValue: 'The reference' })}</text>
+            <text x={355} y={170} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>{t('frame9_1.spireDesc2', { defaultValue: 'implementation' })}</text>
           </motion.g>
         )}
 
@@ -66,9 +68,9 @@ export const Frame9_1: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <rect x={460} y={100} width={150} height={80} rx={8} fill={`${colors.svid}15`} stroke={colors.svid} strokeWidth={2} />
-            <text x={535} y={130} textAnchor="middle" fill={colors.svid} fontSize={14} fontWeight="bold">SVIDs</text>
-            <text x={535} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>Short-lived proof</text>
-            <text x={535} y={170} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>documents</text>
+            <text x={535} y={130} textAnchor="middle" fill={colors.svid} fontSize={14} fontWeight="bold">{t('frame9_1.svidsLabel', { defaultValue: 'SVIDs' })}</text>
+            <text x={535} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>{t('frame9_1.svidsDesc1', { defaultValue: 'Short-lived proof' })}</text>
+            <text x={535} y={170} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>{t('frame9_1.svidsDesc2', { defaultValue: 'documents' })}</text>
           </motion.g>
         )}
 
@@ -80,9 +82,9 @@ export const Frame9_1: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <rect x={640} y={100} width={150} height={80} rx={8} fill={`${colors.trustBundle}15`} stroke={colors.trustBundle} strokeWidth={2} />
-            <text x={715} y={130} textAnchor="middle" fill={colors.trustBundle} fontSize={14} fontWeight="bold">Trust Domains</text>
-            <text x={715} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>Security</text>
-            <text x={715} y={170} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>boundaries</text>
+            <text x={715} y={130} textAnchor="middle" fill={colors.trustBundle} fontSize={14} fontWeight="bold">{t('frame9_1.trustDomainsLabel', { defaultValue: 'Trust Domains' })}</text>
+            <text x={715} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>{t('frame9_1.trustDomainsDesc1', { defaultValue: 'Security' })}</text>
+            <text x={715} y={170} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>{t('frame9_1.trustDomainsDesc2', { defaultValue: 'boundaries' })}</text>
           </motion.g>
         )}
 
@@ -113,7 +115,7 @@ export const Frame9_1: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <text x={400} y={480} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              The complete identity infrastructure for modern workloads
+              {t('frame9_1.conclusion', { defaultValue: 'The complete identity infrastructure for modern workloads' })}
             </text>
           </motion.g>
         )}

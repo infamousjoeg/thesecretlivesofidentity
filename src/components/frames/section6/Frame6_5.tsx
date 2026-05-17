@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { TrustBundle, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Trust bundle containing public keys
  */
 export const Frame6_5: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame6_5: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Trust Bundle: The Verifier
+          {t('frame6_5.title', { defaultValue: 'Trust Bundle: The Verifier' })}
         </motion.text>
 
         {/* Question */}
@@ -44,7 +46,7 @@ export const Frame6_5: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          How does a workload know to trust another's SVID?
+          {t('frame6_5.question', { defaultValue: "How does a workload know to trust another's SVID?" })}
         </motion.text>
 
         {/* Trust bundle */}
@@ -55,7 +57,7 @@ export const Frame6_5: React.FC = () => {
         >
           <TrustBundle position={{ x: 400, y: 200 }} size={80} animate={!prefersReducedMotion} />
           <text x={400} y={260} textAnchor="middle" fill={colors.trustBundle} fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            Trust Bundle
+            {t('frame6_5.trustBundleLabel', { defaultValue: 'Trust Bundle' })}
           </text>
         </motion.g>
 
@@ -68,13 +70,13 @@ export const Frame6_5: React.FC = () => {
           >
             <rect x={200} y={290} width={400} height={100} rx={8} fill={colors.surface} stroke={colors.trustBundle} strokeWidth={2} />
             <text x={400} y={320} textAnchor="middle" fill={colors.trustBundle} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Contains:
+              {t('frame6_5.contains', { defaultValue: 'Contains:' })}
             </text>
             <text x={400} y={350} textAnchor="middle" fill={colors.textSecondary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              Public keys of trusted Certificate Authorities
+              {t('frame6_5.publicKeys', { defaultValue: 'Public keys of trusted Certificate Authorities' })}
             </text>
             <text x={400} y={375} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="JetBrains Mono, monospace">
-              (from SPIRE Server)
+              {t('frame6_5.from', { defaultValue: '(from SPIRE Server)' })}
             </text>
           </motion.g>
         )}
@@ -88,7 +90,7 @@ export const Frame6_5: React.FC = () => {
           >
             <Badge spiffeId="spiffe://acme/other" position={{ x: 100, y: 200 }} state="valid" size={50} animate={!prefersReducedMotion} />
             <line x1={160} y1={200} x2={310} y2={200} stroke={colors.svid} strokeWidth={2} strokeDasharray="6 3" />
-            <text x={235} y={185} textAnchor="middle" fill={colors.textMuted} fontSize={10}>verify?</text>
+            <text x={235} y={185} textAnchor="middle" fill={colors.textMuted} fontSize={10}>{t('frame6_5.verify', { defaultValue: 'verify?' })}</text>
           </motion.g>
         )}
 
@@ -111,10 +113,10 @@ export const Frame6_5: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={430} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              If the SVID was signed by a CA in my trust bundle,
+              {t('frame6_5.explanation', { defaultValue: 'If the SVID was signed by a CA in my trust bundle,' })}
             </text>
             <text x={400} y={455} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              I can trust it!
+              {t('frame6_5.conclusion', { defaultValue: 'I can trust it!' })}
             </text>
           </motion.g>
         )}

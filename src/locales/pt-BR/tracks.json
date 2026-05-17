@@ -1,0 +1,29 @@
+{
+  "trackSelector": {
+    "title": "Aprender SPIFFE",
+    "subtitle": "Escolha seu caminho de aprendizado com base no tempo disponível. Cada trilha complementa a anterior.",
+    "startTrack": "Iniciar {{title}}",
+    "hint": "Você pode trocar de trilha a qualquer momento. O progresso é salvo automaticamente."
+  },
+  "bronze": {
+    "title": "Bronze",
+    "subtitle": "O que é SPIFFE?",
+    "duration": "~6 minutos",
+    "description": "A crise de identidade e os conceitos do SPIFFE. Perfeito para uma introdução rápida.",
+    "goal": "Agora consigo explicar o SPIFFE para alguém"
+  },
+  "silver": {
+    "title": "Prata",
+    "subtitle": "Como o SPIFFE Funciona",
+    "duration": "~17 minutos",
+    "description": "Arquitetura do SPIRE, fluxos de atestação e uso de identidade. Entenda o sistema.",
+    "goal": "Agora entendo como o sistema funciona"
+  },
+  "gold": {
+    "title": "Ouro",
+    "subtitle": "SPIFFE em Profundidade",
+    "duration": "~25 minutos",
+    "description": "Curso completo com ciclo de vida da identidade, conceitos avançados e federação.",
+    "goal": "Agora consigo implementar e depurar"
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,13 +12,14 @@ import { colors } from '@/utils/constants';
  * Visual: Agent with its three main responsibilities
  */
 export const Frame3_6: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400]);
   const prefersReducedMotion = useReducedMotion();
 
   const responsibilities = [
-    { title: 'Attests', desc: 'Verifies workload identity', icon: '🔍' },
-    { title: 'Caches', desc: 'Stores SVIDs locally', icon: '💾' },
-    { title: 'Exposes API', desc: 'Workload API endpoint', icon: '🔌' },
+    { titleKey: 'frame3_6.resp1Title', descKey: 'frame3_6.resp1Description', icon: '🔍' },
+    { titleKey: 'frame3_6.resp2Title', descKey: 'frame3_6.resp2Description', icon: '💾' },
+    { titleKey: 'frame3_6.resp3Title', descKey: 'frame3_6.resp3Description', icon: '🔌' },
   ];
 
   return (
@@ -35,7 +37,7 @@ export const Frame3_6: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Agent Responsibilities
+          {t('frame3_6.title')}
         </motion.text>
 
         {/* Agent */}
@@ -57,7 +59,7 @@ export const Frame3_6: React.FC = () => {
         {responsibilities.map((resp, index) => (
           phase >= index + 1 && (
             <motion.g
-              key={resp.title}
+              key={resp.titleKey}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
@@ -85,10 +87,10 @@ export const Frame3_6: React.FC = () => {
                 {resp.icon}
               </text>
               <text x={150 + index * 250} y={365} textAnchor="middle" fill={colors.agent} fontSize={13} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-                {resp.title}
+                {t(resp.titleKey)}
               </text>
               <text x={150 + index * 250} y={385} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-                {resp.desc}
+                {t(resp.descKey)}
               </text>
             </motion.g>
           )
@@ -106,7 +108,7 @@ export const Frame3_6: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            The Agent is the local badge printer—always available, always fast.
+            {t('frame3_6.conclusion')}
           </motion.text>
         )}
       </svg>

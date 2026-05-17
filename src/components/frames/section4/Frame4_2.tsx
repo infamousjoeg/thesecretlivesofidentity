@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -10,6 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Comparison of traditional credential approach vs platform attestation
  */
 export const Frame4_2: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600]);
 
   return (
@@ -27,7 +29,7 @@ export const Frame4_2: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Traditional vs SPIFFE Approach
+          {t('frame4_2.title')}
         </motion.text>
 
         {/* Traditional approach */}
@@ -39,11 +41,11 @@ export const Frame4_2: React.FC = () => {
           <rect x={80} y={90} width={280} height={200} rx={12} fill={colors.surface} stroke={colors.attacker} strokeWidth={2} />
           <rect x={80} y={90} width={280} height={40} rx={12} fill={colors.attacker} />
           <text x={220} y={117} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            ❌ Traditional
+            {t('frame4_2.traditionalLabel')}
           </text>
 
           <text x={220} y={160} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-            Agent presents credentials
+            {t('frame4_2.traditionalDescription')}
           </text>
           <rect x={130} y={180} width={180} height={35} rx={4} fill={`${colors.attacker}15`} />
           <text x={220} y={200} textAnchor="middle" fontSize={20}>🔑</text>
@@ -52,10 +54,10 @@ export const Frame4_2: React.FC = () => {
           </text>
 
           <text x={220} y={250} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-            Problem: Secrets can be stolen
+            {t('frame4_2.traditionalProblem')}
           </text>
           <text x={220} y={270} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-            and used by attackers
+            {/* consolidated into traditionalProblem */}
           </text>
         </motion.g>
 
@@ -69,11 +71,11 @@ export const Frame4_2: React.FC = () => {
             <rect x={440} y={90} width={280} height={200} rx={12} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
             <rect x={440} y={90} width={280} height={40} rx={12} fill={colors.success} />
             <text x={580} y={117} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              ✓ SPIFFE/SPIRE
+              {t('frame4_2.spiffeLabel')}
             </text>
 
             <text x={580} y={160} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Platform vouches for Agent
+              {t('frame4_2.spiffeDescription')}
             </text>
             <rect x={490} y={175} width={180} height={50} rx={4} fill={`${colors.success}15`} />
             <text x={520} y={200} fontSize={18}>☁️</text>
@@ -81,14 +83,14 @@ export const Frame4_2: React.FC = () => {
               AWS / K8s / GCP
             </text>
             <text x={580} y={215} fill={colors.textMuted} fontSize={9} fontFamily="IBM Plex Sans, sans-serif">
-              "This is a real node"
+              {t('frame4_2.platformSays')}
             </text>
 
             <text x={580} y={260} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Can't be faked without
+              {t('frame4_2.spiffeProblem')}
             </text>
             <text x={580} y={280} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              compromising the platform
+              {/* consolidated into spiffeProblem */}
             </text>
           </motion.g>
         )}
@@ -102,13 +104,13 @@ export const Frame4_2: React.FC = () => {
           >
             <rect x={150} y={330} width={500} height={120} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={365} textAnchor="middle" fill={colors.textPrimary} fontSize={15} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              The Key Insight
+              {t('frame4_2.keyInsight')}
             </text>
             <text x={400} y={395} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              The Agent doesn't claim its own identity—
+              {t('frame4_2.keyInsightLine1')}
             </text>
             <text x={400} y={420} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              the <tspan fill={colors.success} fontWeight="bold">underlying platform</tspan> vouches for it.
+              {t('frame4_2.keyInsightLine2')}
             </text>
           </motion.g>
         )}

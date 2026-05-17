@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Attacker } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Attacker unable to fake node attestation
  */
 export const Frame4_10: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame4_10: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Why Attackers Can't Spoof
+          {t('frame4_10.title')}
         </motion.text>
 
         {/* Attacker scenario */}
@@ -46,10 +48,7 @@ export const Frame4_10: React.FC = () => {
           <circle cx={240} cy={160} r={8} fill={colors.surface} stroke={colors.attacker} strokeWidth={1} />
           <circle cx={220} cy={175} r={5} fill={colors.surface} stroke={colors.attacker} strokeWidth={1} />
           <text x={300} y={125} textAnchor="middle" fill={colors.attacker} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-            I'll pretend to be
-          </text>
-          <text x={300} y={140} textAnchor="middle" fill={colors.attacker} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-            a trusted Agent!
+            {t('frame4_10.attackerSays')}
           </text>
         </motion.g>
 
@@ -62,7 +61,7 @@ export const Frame4_10: React.FC = () => {
           >
             <line x1={270} y1={200} x2={380} y2={200} stroke={colors.attacker} strokeWidth={3} strokeDasharray="10 5" />
             <text x={325} y={185} textAnchor="middle" fill={colors.attacker} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              "I'm node X!"
+              {t('frame4_10.attackerClaims')}
             </text>
 
             {/* Big X */}
@@ -81,16 +80,13 @@ export const Frame4_10: React.FC = () => {
             <rect x={500} y={130} width={230} height={140} rx={12} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
             <text x={615} y={165} textAnchor="middle" fontSize={24}>☁️</text>
             <text x={615} y={195} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Platform Says:
+              {t('frame4_10.platformSaysLabel')}
             </text>
             <text x={615} y={220} textAnchor="middle" fill={colors.textPrimary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              "I have no record of
-            </text>
-            <text x={615} y={240} textAnchor="middle" fill={colors.textPrimary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              this supposed Agent."
+              {t('frame4_10.platformResponse')}
             </text>
             <text x={615} y={260} textAnchor="middle" fill={colors.attacker} fontSize={10} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              REJECTED
+              {t('frame4_10.rejected')}
             </text>
           </motion.g>
         )}
@@ -104,16 +100,16 @@ export const Frame4_10: React.FC = () => {
           >
             <rect x={100} y={320} width={600} height={140} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={355} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Why This Works
+              {t('frame4_10.whyItWorks')}
             </text>
             <text x={400} y={385} textAnchor="middle" fill={colors.textPrimary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              To fake node attestation, an attacker would need to:
+              {t('frame4_10.explanation1')}
             </text>
             <text x={400} y={410} textAnchor="middle" fill={colors.attacker} fontSize={12} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
-              Compromise the platform itself (AWS, K8s, GCP...)
+              {t('frame4_10.explanation2')}
             </text>
             <text x={400} y={440} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              A much harder target than stealing a credential
+              {t('frame4_10.explanation3')}
             </text>
           </motion.g>
         )}

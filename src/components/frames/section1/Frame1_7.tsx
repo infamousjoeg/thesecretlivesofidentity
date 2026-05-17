@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -10,6 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Pile of secrets/credentials growing, operational burden
  */
 export const Frame1_7: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 300, 300, 300, 300, 300, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -35,7 +37,7 @@ export const Frame1_7: React.FC = () => {
           fontWeight="bold"
           fontFamily="Space Grotesk, sans-serif"
         >
-          Every Secret is a Liability
+          {t('frame1_7.title')}
         </text>
 
         {/* Secrets stacking up */}
@@ -83,7 +85,7 @@ export const Frame1_7: React.FC = () => {
                 fontSize={11}
                 fontFamily="IBM Plex Sans, sans-serif"
               >
-                {secret.days} days old
+                {t('frame1_7.daysOld', { days: secret.days })}
               </text>
 
               {/* Warning icon for old secrets */}
@@ -105,10 +107,10 @@ export const Frame1_7: React.FC = () => {
           >
             <rect x={200} y={420} width={400} height={60} rx={8} fill={`${colors.warning}15`} stroke={colors.warning} strokeWidth={1} />
             <text x={400} y={448} textAnchor="middle" fill={colors.warning} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              Each secret requires: storage • access control • rotation • auditing
+              {t('frame1_7.requirements')}
             </text>
             <text x={400} y={468} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Multiply by hundreds of services...
+              {t('frame1_7.multiply')}
             </text>
           </motion.g>
         )}

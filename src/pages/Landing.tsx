@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Handshake } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useReducedMotion } from '@/hooks';
 import { externalLinks } from '@/utils/constants';
 
@@ -38,46 +39,20 @@ const WIMSELogo: React.FC<{ className?: string }> = ({ className }) => (
 
 interface TopicItem {
   id: string;
-  title: string;
-  description: string;
   icon?: React.FC<{ className?: string }>;
   customIcon?: React.FC<{ className?: string }>;
-  status: string;
 }
 
-const upcomingTopics: TopicItem[] = [
-  {
-    id: 'mtls',
-    title: 'Mutual TLS',
-    description: 'How two parties prove identity to each other',
-    icon: Handshake,
-    status: 'Coming Soon'
-  },
-  {
-    id: 'oauth',
-    title: 'OAuth 2.0 / OIDC',
-    description: 'Token-based identity for humans and services',
-    customIcon: OpenIDLogo,
-    status: 'Coming Soon'
-  },
-  {
-    id: 'opa',
-    title: 'OPA',
-    description: 'Policy-based authorization decisions',
-    customIcon: OPALogo,
-    status: 'Coming Soon'
-  },
-  {
-    id: 'wimse',
-    title: 'WIMSE',
-    description: 'Cross-boundary workload identity federation',
-    customIcon: WIMSELogo,
-    status: 'Coming Soon'
-  },
+const upcomingTopicsMeta: TopicItem[] = [
+  { id: 'mtls', icon: Handshake },
+  { id: 'oauth', customIcon: OpenIDLogo },
+  { id: 'opa', customIcon: OPALogo },
+  { id: 'wimse', customIcon: WIMSELogo },
 ];
 
 export const Landing: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation('landing');
 
   return (
     <div className="min-h-screen bg-background">
@@ -98,9 +73,9 @@ export const Landing: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            The Secret Lives of{' '}
+            {t('heroTitle')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-server via-agent to-svid">
-              Identity
+              {t('heroTitleHighlight')}
             </span>
           </motion.h1>
 
@@ -110,7 +85,7 @@ export const Landing: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.4 }}
           >
-            Interactive visualizations that demystify identity and security concepts
+            {t('heroSubtitle')}
           </motion.p>
 
           <motion.div
@@ -122,7 +97,7 @@ export const Landing: React.FC = () => {
               to="/spiffe"
               className="inline-flex items-center gap-2 px-6 py-3 bg-server text-white text-lg font-medium rounded-lg hover:bg-opacity-90 transition-all group"
             >
-              <span>Start with SPIFFE</span>
+              <span>{t('startWithSpiffe')}</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -141,19 +116,19 @@ export const Landing: React.FC = () => {
           >
             <div className="relative z-10">
               <span className="inline-block px-3 py-1 text-sm font-medium bg-svid/20 text-svid rounded-full mb-4">
-                Featured
+                {t('featuredBadge')}
               </span>
               <h2 className="text-3xl sm:text-4xl font-display font-bold text-textPrimary mb-4">
                 SPIFFE/SPIRE
               </h2>
               <p className="text-lg text-textSecondary max-w-xl mb-6">
-                Learn how workloads prove their identity without secrets. From zero to understanding SPIFFE in 95 frames.
+                {t('featuredDescription')}
               </p>
               <Link
                 to="/spiffe"
                 className="inline-flex items-center gap-2 text-server hover:text-server/80 font-medium transition-colors"
               >
-                <span>Begin the journey</span>
+                <span>{t('beginJourney')}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -184,10 +159,10 @@ export const Landing: React.FC = () => {
       <section className="py-20 px-4 bg-surface/30">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-textPrimary mb-8 text-center">
-            Coming Soon
+            {t('comingSoon')}
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {upcomingTopics.map((topic) => {
+            {upcomingTopicsMeta.map((topic) => {
               const IconComponent = topic.icon;
               const CustomIconComponent = topic.customIcon;
               return (
@@ -201,12 +176,12 @@ export const Landing: React.FC = () => {
                     <CustomIconComponent className="w-8 h-8 mb-4" />
                   ) : null}
                   <h3 className="font-display font-semibold text-textPrimary mb-1">
-                    {topic.title}
+                    {t(`topics.${topic.id}.title`)}
                   </h3>
                   <p className="text-sm text-textSecondary mb-2">
-                    {topic.description}
+                    {t(`topics.${topic.id}.description`)}
                   </p>
-                  <span className="text-xs text-textMuted">{topic.status}</span>
+                  <span className="text-xs text-textMuted">{t('comingSoon')}</span>
                 </div>
               );
             })}
@@ -218,19 +193,10 @@ export const Landing: React.FC = () => {
       <section className="py-20 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-textPrimary mb-4">
-            About This Project
+            {t('aboutTitle')}
           </h2>
           <p className="text-lg text-textSecondary mb-6">
-            A community contribution to the SPIFFE ecosystem, inspired by{' '}
-            <a
-              href={externalLinks.inspiration}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-server hover:underline"
-            >
-              The Secret Lives of Data
-            </a>
-            . Our goal is to make complex identity concepts accessible to everyone, regardless of prior knowledge.
+            {t('aboutDescription')}
           </p>
           <div className="flex items-center justify-center gap-6 text-textSecondary">
             <a

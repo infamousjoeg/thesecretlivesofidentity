@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent, Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Agent examining a workload
  */
 export const Frame5_2: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 800, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame5_2: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Workload Attestation
+          {t('frame5_2.title')}
         </motion.text>
 
         {/* Agent */}
@@ -70,7 +72,7 @@ export const Frame5_2: React.FC = () => {
           >
             <line x1={280} y1={200} x2={480} y2={200} stroke={colors.agent} strokeWidth={2} strokeDasharray="6 3" />
             <text x={380} y={180} textAnchor="middle" fill={colors.agent} fontSize={12} fontFamily="JetBrains Mono, monospace">
-              examining...
+              {t('frame5_2.examining')}
             </text>
           </motion.g>
         )}
@@ -83,11 +85,11 @@ export const Frame5_2: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={350} y={280} width={200} height={120} rx={8} fill={colors.surface} stroke={colors.agent} strokeWidth={1} />
-            <text x={360} y={305} fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">Checking:</text>
-            <text x={370} y={325} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">• Process ID</text>
-            <text x={370} y={345} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">• User ID</text>
-            <text x={370} y={365} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">• Container ID</text>
-            <text x={370} y={385} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">• K8s metadata</text>
+            <text x={360} y={305} fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">{t('frame5_2.checking')}</text>
+            <text x={370} y={325} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">• {t('frame5_2.check1')}</text>
+            <text x={370} y={345} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">• {t('frame5_2.check2')}</text>
+            <text x={370} y={365} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">• {t('frame5_2.check3')}</text>
+            <text x={370} y={385} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">• {t('frame5_2.check4')}</text>
           </motion.g>
         )}
 
@@ -99,7 +101,7 @@ export const Frame5_2: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={450} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Agent examines workload to decide if it matches a registration entry
+              {t('frame5_2.description')}
             </text>
           </motion.g>
         )}

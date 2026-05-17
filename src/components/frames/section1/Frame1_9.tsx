@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Transition from question to hope - workloads proving identity differently
  */
 export const Frame1_9: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 800, 800, 800]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -30,7 +32,7 @@ export const Frame1_9: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          What if...
+          {t('frame1_9.whatIf')}
         </motion.text>
 
         {/* Two workloads */}
@@ -40,13 +42,13 @@ export const Frame1_9: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <Workload
-            label="Service A"
+            label={t('frame1_9.serviceA', { defaultValue: 'Service A' })}
             position={{ x: 200, y: 280 }}
             attested={false}
             animate={!prefersReducedMotion}
           />
           <Workload
-            label="Service B"
+            label={t('frame1_9.serviceB', { defaultValue: 'Service B' })}
             position={{ x: 600, y: 280 }}
             attested={false}
             animate={!prefersReducedMotion}
@@ -81,13 +83,13 @@ export const Frame1_9: React.FC = () => {
             {/* Proof badge on Service A */}
             <rect x={130} y={200} width={140} height={40} rx={6} fill={colors.success} opacity={0.2} stroke={colors.success} strokeWidth={1} />
             <text x={200} y={225} textAnchor="middle" fill={colors.success} fontSize={11} fontFamily="JetBrains Mono, monospace">
-              I AM Service A
+              {t('frame1_9.iAmServiceA', { defaultValue: 'I AM Service A' })}
             </text>
 
             {/* Proof badge on Service B */}
             <rect x={530} y={200} width={140} height={40} rx={6} fill={colors.success} opacity={0.2} stroke={colors.success} strokeWidth={1} />
             <text x={600} y={225} textAnchor="middle" fill={colors.success} fontSize={11} fontFamily="JetBrains Mono, monospace">
-              I AM Service B
+              {t('frame1_9.iAmServiceB', { defaultValue: 'I AM Service B' })}
             </text>
 
             {/* Verification arrows */}
@@ -99,7 +101,7 @@ export const Frame1_9: React.FC = () => {
               strokeDasharray="6 3"
             />
             <text x={400} y={200} textAnchor="middle" fill={colors.success} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              verify identity
+              {t('frame1_9.verifyIdentity')}
             </text>
           </motion.g>
         )}
@@ -120,7 +122,7 @@ export const Frame1_9: React.FC = () => {
               fontWeight="600"
               fontFamily="Space Grotesk, sans-serif"
             >
-              ...workloads could prove who they are
+              {t('frame1_9.workloadsProve')}
             </text>
             <text
               x={400}
@@ -131,7 +133,7 @@ export const Frame1_9: React.FC = () => {
               fontWeight="bold"
               fontFamily="Space Grotesk, sans-serif"
             >
-              without sharing secrets at all?
+              {t('frame1_9.withoutSecrets')}
             </text>
           </motion.g>
         )}

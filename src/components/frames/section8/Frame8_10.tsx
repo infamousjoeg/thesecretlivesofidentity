@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Hierarchical SPIRE servers
  */
 export const Frame8_10: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame8_10: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Nested SPIRE
+          {t('frame8_10.title', { defaultValue: 'Nested SPIRE' })}
         </motion.text>
 
         {/* Root server */}
@@ -38,8 +40,10 @@ export const Frame8_10: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <SpireServer label="Root Server" position={{ x: 400, y: 140 }} animate={!prefersReducedMotion} size={70} />
-          <text x={400} y={195} textAnchor="middle" fill={colors.server} fontSize={11} fontWeight="bold">Global Root</text>
+          <SpireServer label={t('frame8_10.rootServer', { defaultValue: 'Root Server' })} position={{ x: 400, y: 140 }} animate={!prefersReducedMotion} size={70} />
+          <text x={400} y={195} textAnchor="middle" fill={colors.server} fontSize={11} fontWeight="bold">
+            {t('frame8_10.globalRoot', { defaultValue: 'Global Root' })}
+          </text>
         </motion.g>
 
         {/* Regional servers */}
@@ -49,12 +53,18 @@ export const Frame8_10: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <SpireServer label="US-West" position={{ x: 200, y: 280 }} animate={!prefersReducedMotion} size={55} />
-            <SpireServer label="US-East" position={{ x: 400, y: 280 }} animate={!prefersReducedMotion} size={55} />
-            <SpireServer label="EU" position={{ x: 600, y: 280 }} animate={!prefersReducedMotion} size={55} />
-            <text x={200} y={330} textAnchor="middle" fill={colors.server} fontSize={10}>Regional</text>
-            <text x={400} y={330} textAnchor="middle" fill={colors.server} fontSize={10}>Regional</text>
-            <text x={600} y={330} textAnchor="middle" fill={colors.server} fontSize={10}>Regional</text>
+            <SpireServer label={t('frame8_10.usWest', { defaultValue: 'US-West' })} position={{ x: 200, y: 280 }} animate={!prefersReducedMotion} size={55} />
+            <SpireServer label={t('frame8_10.usEast', { defaultValue: 'US-East' })} position={{ x: 400, y: 280 }} animate={!prefersReducedMotion} size={55} />
+            <SpireServer label={t('frame8_10.europe', { defaultValue: 'EU' })} position={{ x: 600, y: 280 }} animate={!prefersReducedMotion} size={55} />
+            <text x={200} y={330} textAnchor="middle" fill={colors.server} fontSize={10}>
+              {t('frame8_10.regional', { defaultValue: 'Regional' })}
+            </text>
+            <text x={400} y={330} textAnchor="middle" fill={colors.server} fontSize={10}>
+              {t('frame8_10.regional', { defaultValue: 'Regional' })}
+            </text>
+            <text x={600} y={330} textAnchor="middle" fill={colors.server} fontSize={10}>
+              {t('frame8_10.regional', { defaultValue: 'Regional' })}
+            </text>
           </motion.g>
         )}
 
@@ -80,12 +90,12 @@ export const Frame8_10: React.FC = () => {
           >
             <rect x={150} y={370} width={500} height={100} rx={8} fill={colors.surface} stroke={colors.server} strokeWidth={1} />
             <text x={400} y={400} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Large Deployment Pattern
+              {t('frame8_10.largeDeployment', { defaultValue: 'Large Deployment Pattern' })}
             </text>
-            <text x={200} y={430} fill={colors.textSecondary} fontSize={11}>• Regional servers under global root</text>
-            <text x={200} y={450} fill={colors.textSecondary} fontSize={11}>• Locality-aware performance</text>
-            <text x={500} y={430} fill={colors.textSecondary} fontSize={11}>• Hierarchical trust</text>
-            <text x={500} y={450} fill={colors.textSecondary} fontSize={11}>• Fault isolation</text>
+            <text x={200} y={430} fill={colors.textSecondary} fontSize={11}>• {t('frame8_10.bullet1', { defaultValue: 'Regional servers under global root' })}</text>
+            <text x={200} y={450} fill={colors.textSecondary} fontSize={11}>• {t('frame8_10.bullet2', { defaultValue: 'Locality-aware performance' })}</text>
+            <text x={500} y={430} fill={colors.textSecondary} fontSize={11}>• {t('frame8_10.bullet3', { defaultValue: 'Hierarchical trust' })}</text>
+            <text x={500} y={450} fill={colors.textSecondary} fontSize={11}>• {t('frame8_10.bullet4', { defaultValue: 'Fault isolation' })}</text>
           </motion.g>
         )}
       </svg>

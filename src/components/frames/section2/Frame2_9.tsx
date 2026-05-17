@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Corporate badge analogy - Employee ID vs Physical Badge
  */
 export const Frame2_9: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame2_9: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Badge Metaphor
+          {t('frame2_9.title')}
         </motion.text>
 
         <motion.text
@@ -42,7 +44,7 @@ export const Frame2_9: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Let's use a familiar analogy
+          {t('frame2_9.intro')}
         </motion.text>
 
         {/* Employee ID (SPIFFE ID) */}
@@ -54,25 +56,25 @@ export const Frame2_9: React.FC = () => {
           >
             <rect x={100} y={120} width={250} height={200} rx={12} fill={colors.surface} stroke={colors.server} strokeWidth={2} />
             <text x={225} y={155} textAnchor="middle" fill={colors.server} fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Employee ID
+              {t('frame2_9.employeeId')}
             </text>
 
             {/* HR record visual */}
             <rect x={130} y={175} width={190} height={100} rx={6} fill={colors.background} />
             <text x={225} y={200} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              HR Record
+              {t('frame2_9.hrRecord')}
             </text>
             <text x={225} y={230} textAnchor="middle" fill={colors.server} fontSize={14} fontWeight="bold" fontFamily="JetBrains Mono, monospace">
               EMP-12345
             </text>
             <text x={225} y={255} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Never changes
+              {t('frame2_9.neverChanges')}
             </text>
 
             {/* Label */}
             <rect x={130} y={290} width={190} height={25} rx={4} fill={`${colors.server}15`} />
             <text x={225} y={307} textAnchor="middle" fill={colors.server} fontSize={11} fontFamily="Space Grotesk, sans-serif">
-              = SPIFFE ID
+              {t('frame2_9.equalsSPIFFEId')}
             </text>
           </motion.g>
         )}
@@ -86,7 +88,7 @@ export const Frame2_9: React.FC = () => {
           >
             <rect x={450} y={120} width={250} height={200} rx={12} fill={colors.surface} stroke={colors.svid} strokeWidth={2} />
             <text x={575} y={155} textAnchor="middle" fill={colors.svid} fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Physical Badge
+              {t('frame2_9.physicalBadge')}
             </text>
 
             {/* Badge visual */}
@@ -103,7 +105,7 @@ export const Frame2_9: React.FC = () => {
             {/* Label */}
             <rect x={480} y={290} width={190} height={25} rx={4} fill={`${colors.svid}15`} />
             <text x={575} y={307} textAnchor="middle" fill={colors.svid} fontSize={11} fontFamily="Space Grotesk, sans-serif">
-              = SVID (expires & renews)
+              {t('frame2_9.equalsSVID')}
             </text>
           </motion.g>
         )}
@@ -117,7 +119,7 @@ export const Frame2_9: React.FC = () => {
           >
             <line x1={360} y1={220} x2={440} y2={220} stroke={colors.textMuted} strokeWidth={2} markerEnd="url(#arrowMeta)" />
             <text x={400} y={205} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              proves
+              {t('frame2_9.proves')}
             </text>
             <defs>
               <marker id="arrowMeta" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
@@ -136,10 +138,14 @@ export const Frame2_9: React.FC = () => {
           >
             <rect x={150} y={360} width={500} height={80} rx={8} fill={`${colors.success}10`} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={395} textAnchor="middle" fill={colors.textPrimary} fontSize={15} fontFamily="IBM Plex Sans, sans-serif">
-              Your <tspan fill={colors.server} fontWeight="bold">SPIFFE ID</tspan> is your identity (permanent).
+              {t('frame2_9.spiffeIdExplain').split('SPIFFE ID').map((part, i) =>
+                i === 0 ? <tspan key={i}>{part}</tspan> : <tspan key={i}><tspan fill={colors.server} fontWeight="bold">SPIFFE ID</tspan>{part}</tspan>
+              )}
             </text>
             <text x={400} y={420} textAnchor="middle" fill={colors.textPrimary} fontSize={15} fontFamily="IBM Plex Sans, sans-serif">
-              Your <tspan fill={colors.svid} fontWeight="bold">SVID</tspan> is proof of that identity (temporary).
+              {t('frame2_9.svidExplain').split('SVID').map((part, i) =>
+                i === 0 ? <tspan key={i}>{part}</tspan> : <tspan key={i}><tspan fill={colors.svid} fontWeight="bold">SVID</tspan>{part}</tspan>
+              )}
             </text>
           </motion.g>
         )}
@@ -156,7 +162,7 @@ export const Frame2_9: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            We'll use this metaphor throughout—it maps surprisingly well.
+            {t('frame2_9.note')}
           </motion.text>
         )}
       </svg>

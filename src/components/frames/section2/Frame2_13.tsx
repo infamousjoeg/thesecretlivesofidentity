@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,13 +10,14 @@ import { colors } from '@/utils/constants';
  * Visual: Acknowledging where the badge metaphor breaks down
  */
 export const Frame2_13: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 800]);
 
   const differences = [
-    { metaphor: 'Badge renewal: Weekly', reality: 'SVID rotation: Milliseconds' },
-    { metaphor: 'Manual verification', reality: 'Cryptographic proof' },
-    { metaphor: 'Physical document', reality: 'Digital certificate' },
-    { metaphor: 'Human-speed operations', reality: 'Machine-speed operations' },
+    { metaphorKey: 'frame2_13.row1Badge', realityKey: 'frame2_13.row1Reality' },
+    { metaphorKey: 'frame2_13.row2Badge', realityKey: 'frame2_13.row2Reality' },
+    { metaphorKey: 'frame2_13.row3Badge', realityKey: 'frame2_13.row3Reality' },
+    { metaphorKey: 'frame2_13.row4Badge', realityKey: 'frame2_13.row4Reality' },
   ];
 
   return (
@@ -33,7 +35,7 @@ export const Frame2_13: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Metaphor Limits
+          {t('frame2_13.title')}
         </motion.text>
 
         <motion.text
@@ -46,7 +48,7 @@ export const Frame2_13: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Like all analogies, this one has limits
+          {t('frame2_13.intro')}
         </motion.text>
 
         {/* Headers */}
@@ -58,12 +60,12 @@ export const Frame2_13: React.FC = () => {
           >
             <rect x={100} y={110} width={250} height={40} rx={6} fill={colors.svid} />
             <text x={225} y={136} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Badge Metaphor
+              {t('frame2_13.badgeMetaphorCol')}
             </text>
 
             <rect x={450} y={110} width={250} height={40} rx={6} fill={colors.success} />
             <text x={575} y={136} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              SPIFFE Reality
+              {t('frame2_13.spiffeRealityCol')}
             </text>
           </motion.g>
         )}
@@ -76,10 +78,10 @@ export const Frame2_13: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             {differences.map((diff, i) => (
-              <g key={diff.metaphor} transform={`translate(0, ${i * 60})`}>
+              <g key={diff.metaphorKey} transform={`translate(0, ${i * 60})`}>
                 <rect x={100} y={165} width={250} height={50} rx={4} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
                 <text x={225} y={195} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-                  {diff.metaphor}
+                  {t(diff.metaphorKey)}
                 </text>
 
                 {/* Arrow */}
@@ -87,7 +89,7 @@ export const Frame2_13: React.FC = () => {
 
                 <rect x={450} y={165} width={250} height={50} rx={4} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
                 <text x={575} y={195} textAnchor="middle" fill={colors.success} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-                  {diff.reality}
+                  {t(diff.realityKey)}
                 </text>
               </g>
             ))}
@@ -109,10 +111,10 @@ export const Frame2_13: React.FC = () => {
           >
             <rect x={150} y={420} width={500} height={60} rx={8} fill={`${colors.server}10`} stroke={colors.server} strokeWidth={1} />
             <text x={400} y={448} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              The concepts map well, but remember:
+              {t('frame2_13.remember')}
             </text>
             <text x={400} y={468} textAnchor="middle" fill={colors.server} fontSize={13} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              SPIFFE operates at machine speed with cryptographic proofs.
+              {t('frame2_13.machineSpeed')}
             </text>
           </motion.g>
         )}

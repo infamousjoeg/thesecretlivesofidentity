@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,13 +10,14 @@ import { colors } from '@/utils/constants';
  * Visual: SPIFFE as open standards document
  */
 export const Frame2_1: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   const standards = [
-    { label: 'SPIFFE ID', desc: 'How to name workloads' },
-    { label: 'SVID', desc: 'How to prove identity' },
-    { label: 'Trust Bundle', desc: 'How to verify proofs' },
-    { label: 'Workload API', desc: 'How to get identity' },
+    { label: 'SPIFFE ID', descKey: 'frame2_1.standard1' },
+    { label: 'SVID', descKey: 'frame2_1.standard2' },
+    { label: 'Trust Bundle', descKey: 'frame2_1.standard3' },
+    { label: 'Workload API', descKey: 'frame2_1.standard4' },
   ];
 
   return (
@@ -46,7 +48,7 @@ export const Frame2_1: React.FC = () => {
             fontSize={14}
             fontFamily="IBM Plex Sans, sans-serif"
           >
-            Secure Production Identity Framework for Everyone
+            {t('frame2_1.fullName')}
           </text>
         </motion.g>
 
@@ -70,7 +72,7 @@ export const Frame2_1: React.FC = () => {
             {/* Document header */}
             <rect x={250} y={120} width={300} height={40} rx={8} fill={colors.success} />
             <text x={400} y={147} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              OPEN STANDARDS
+              {t('frame2_1.openStandards')}
             </text>
 
             {/* Standards list */}
@@ -81,7 +83,7 @@ export const Frame2_1: React.FC = () => {
                   {std.label}
                 </text>
                 <text x={290} y={214} fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-                  {std.desc}
+                  {t(std.descKey)}
                 </text>
               </g>
             ))}
@@ -97,10 +99,10 @@ export const Frame2_1: React.FC = () => {
           >
             <rect x={580} y={200} width={150} height={60} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={655} y={225} textAnchor="middle" fill={colors.textPrimary} fontSize={12} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Open Source
+              {t('frame2_1.openSource')}
             </text>
             <text x={655} y={245} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              CNCF Project
+              {t('frame2_1.cncfProject')}
             </text>
           </motion.g>
         )}
@@ -117,7 +119,7 @@ export const Frame2_1: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Not a product—a specification anyone can implement.
+            {t('frame2_1.notAProduct')}
           </motion.text>
         )}
       </svg>

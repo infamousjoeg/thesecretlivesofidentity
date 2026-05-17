@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -13,6 +14,7 @@ import { colors } from '@/utils/constants';
 export const Frame5_10: React.FC = () => {
   const { phase } = useAnimationPhase([0, 800, 800, 600]);
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation('frames');
 
   return (
     <Stage>
@@ -29,7 +31,7 @@ export const Frame5_10: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          But Wait—Is There a Secret?
+          {t('frame5_10.title')}
         </motion.text>
 
         {/* Badge */}
@@ -56,13 +58,13 @@ export const Frame5_10: React.FC = () => {
           >
             <rect x={420} y={150} width={280} height={100} rx={8} fill={colors.surface} stroke={colors.warning} strokeWidth={2} />
             <text x={560} y={180} textAnchor="middle" fill={colors.warning} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Wait a minute...
+              {t('frame5_10.waitMinute')}
             </text>
             <text x={560} y={210} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Doesn't the SVID have
+              {t('frame5_10.doesntHave', { defaultValue: "Doesn't the SVID have" })}
             </text>
             <text x={560} y={230} textAnchor="middle" fill={colors.warning} fontSize={14} fontWeight="bold" fontFamily="JetBrains Mono, monospace">
-              a private key?
+              {t('frame5_10.privateKey', { defaultValue: 'a private key?' })}
             </text>
           </motion.g>
         )}
@@ -76,10 +78,10 @@ export const Frame5_10: React.FC = () => {
           >
             <rect x={150} y={300} width={500} height={60} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={2} />
             <text x={400} y={330} textAnchor="middle" fill={colors.success} fontSize={18} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Yes! But it's fundamentally different.
+              {t('frame5_10.yes')}
             </text>
             <text x={400} y={350} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Let's see why...
+              {t('frame5_10.letsSee')}
             </text>
           </motion.g>
         )}
@@ -92,10 +94,10 @@ export const Frame5_10: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={420} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              The difference between an SVID private key
+              {t('frame5_10.diffLine1', { defaultValue: 'The difference between an SVID private key' })}
             </text>
             <text x={400} y={445} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              and a traditional shared secret is night and day.
+              {t('frame5_10.diffLine2', { defaultValue: 'and a traditional shared secret is night and day.' })}
             </text>
           </motion.g>
         )}

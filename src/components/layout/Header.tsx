@@ -1,11 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useReducedMotion } from '@/hooks';
 import { externalLinks } from '@/utils/constants';
+import { LanguageSelector } from '@/components/layout/LanguageSelector';
 
 export const Header: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation('ui');
 
   return (
     <motion.header
@@ -53,10 +56,11 @@ export const Header: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm text-textSecondary hover:text-textPrimary transition-colors"
-              aria-label="View source on GitHub"
+              aria-label={t('githubAriaLabel')}
             >
               <Github className="w-5 h-5" />
             </a>
+            <LanguageSelector />
           </nav>
         </div>
       </div>

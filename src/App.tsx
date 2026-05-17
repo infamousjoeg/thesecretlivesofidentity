@@ -1,10 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Landing, SpiffeVisualization, TrackSelector, DevEntities } from '@/pages';
+import { LanguageSelector } from '@/components/layout/LanguageSelector';
 
 export const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <div className="fixed top-4 right-4 z-[100]">
+        <LanguageSelector />
+      </div>
       <Routes>
         {/* Landing page (series overview) */}
         <Route path="/" element={<Landing />} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { AttestationSimulator } from '@/components/interactive';
 import { colors } from '@/utils/constants';
 
@@ -8,6 +9,7 @@ import { colors } from '@/utils/constants';
  * Visual: Interactive attestation flow with success, failure, and attack scenarios
  */
 export const Frame4_11: React.FC = () => {
+  const { t } = useTranslation('frames');
   return (
     <div className="w-full h-full flex flex-col">
       {/* Title */}
@@ -20,13 +22,13 @@ export const Frame4_11: React.FC = () => {
           className="text-2xl font-bold"
           style={{ color: colors.textPrimary, fontFamily: 'Space Grotesk, sans-serif' }}
         >
-          Try It: Attestation Simulator
+          {t('frame4_11.title')}
         </h2>
         <p
           className="text-sm mt-1"
           style={{ color: colors.textSecondary }}
         >
-          Explore how node attestation works in different scenarios
+          {t('frame4_11.subtitle')}
         </p>
       </motion.div>
 

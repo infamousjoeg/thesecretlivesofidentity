@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,6 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: AWS instance identity document
  */
 export const Frame8_6: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   return (
@@ -26,7 +28,7 @@ export const Frame8_6: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Platform Attestation: AWS
+          {t('frame8_6.title', { defaultValue: 'Platform Attestation: AWS' })}
         </motion.text>
 
         {/* AWS cloud */}
@@ -47,8 +49,8 @@ export const Frame8_6: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={250} y={160} width={150} height={100} rx={8} fill={colors.surface} stroke={colors.agent} strokeWidth={2} />
-            <text x={325} y={190} textAnchor="middle" fill={colors.agent} fontSize={12} fontWeight="bold">EC2 Instance</text>
-            <text x={325} y={215} textAnchor="middle" fill={colors.textMuted} fontSize={10}>+ SPIRE Agent</text>
+            <text x={325} y={190} textAnchor="middle" fill={colors.agent} fontSize={12} fontWeight="bold">{t('frame8_6.ec2Instance', { defaultValue: 'EC2 Instance' })}</text>
+            <text x={325} y={215} textAnchor="middle" fill={colors.textMuted} fontSize={10}>{t('frame8_6.spireAgentLabel', { defaultValue: '+ SPIRE Agent' })}</text>
             <text x={325} y={240} textAnchor="middle" fontSize={20}>🖥️</text>
           </motion.g>
         )}
@@ -61,10 +63,10 @@ export const Frame8_6: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={450} y={160} width={130} height={100} rx={6} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
-            <text x={515} y={185} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold">Instance</text>
-            <text x={515} y={200} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold">Identity Doc</text>
-            <text x={515} y={225} textAnchor="middle" fill={colors.textMuted} fontSize={9}>Cryptographically</text>
-            <text x={515} y={240} textAnchor="middle" fill={colors.textMuted} fontSize={9}>signed by AWS</text>
+            <text x={515} y={185} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold">{t('frame8_6.instanceIdentityDocLine1', { defaultValue: 'Instance' })}</text>
+            <text x={515} y={200} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold">{t('frame8_6.instanceIdentityDocLine2', { defaultValue: 'Identity Doc' })}</text>
+            <text x={515} y={225} textAnchor="middle" fill={colors.textMuted} fontSize={9}>{t('frame8_6.signedByAWSLine1', { defaultValue: 'Cryptographically' })}</text>
+            <text x={515} y={240} textAnchor="middle" fill={colors.textMuted} fontSize={9}>{t('frame8_6.signedByAWSLine2', { defaultValue: 'signed by AWS' })}</text>
 
             <line x1={405} y1={210} x2={445} y2={210} stroke={colors.success} strokeWidth={2} markerEnd="url(#aws-arr)" />
             <defs>
@@ -83,7 +85,7 @@ export const Frame8_6: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={220} y={300} width={360} height={110} rx={6} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
-            <text x={240} y={325} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">Document contains:</text>
+            <text x={240} y={325} fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">{t('frame8_6.documentContains', { defaultValue: 'Document contains:' })}</text>
             <text x={250} y={350} fill={colors.warning} fontSize={10} fontFamily="JetBrains Mono, monospace">• instanceId: i-1234abcd</text>
             <text x={250} y={370} fill={colors.warning} fontSize={10} fontFamily="JetBrains Mono, monospace">• accountId: 123456789</text>
             <text x={250} y={390} fill={colors.warning} fontSize={10} fontFamily="JetBrains Mono, monospace">• region: us-west-2</text>
@@ -98,7 +100,7 @@ export const Frame8_6: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={450} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              AWS cryptographically vouches for the instance identity
+              {t('frame8_6.conclusion', { defaultValue: 'AWS cryptographically vouches for the instance identity' })}
             </text>
           </motion.g>
         )}

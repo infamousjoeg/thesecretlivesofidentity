@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload, SpireAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Unix socket connection, no credentials
  */
 export const Frame5_5: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame5_5: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Workload API
+          {t('frame5_5.title')}
         </motion.text>
 
         {/* Agent */}
@@ -70,7 +72,7 @@ export const Frame5_5: React.FC = () => {
           >
             <rect x={330} y={170} width={140} height={60} rx={8} fill={colors.surface} stroke={colors.agent} strokeWidth={2} />
             <text x={400} y={195} textAnchor="middle" fill={colors.agent} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Unix Socket
+              {t('frame5_5.unixSocket')}
             </text>
             <text x={400} y={215} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="JetBrains Mono, monospace">
               /run/spire/agent.sock
@@ -99,10 +101,10 @@ export const Frame5_5: React.FC = () => {
           >
             <rect x={250} y={280} width={300} height={80} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={310} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              No credentials needed!
+              {t('frame5_5.noCredentials')}
             </text>
             <text x={400} y={335} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Workloads just connect to the socket
+              {t('frame5_5.workloadsConnect')}
             </text>
           </motion.g>
         )}
@@ -115,10 +117,10 @@ export const Frame5_5: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={420} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              The Agent uses the connection itself
+              {t('frame5_5.agentUses')}
             </text>
             <text x={400} y={445} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              to identify who's calling (process info)
+              {t('frame5_5.toIdentify')}
             </text>
           </motion.g>
         )}

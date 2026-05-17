@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,6 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Building verification before badge printer installation
  */
 export const Frame4_4: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   return (
@@ -26,7 +28,7 @@ export const Frame4_4: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Badge Metaphor
+          {t('frame4_4.title')}
         </motion.text>
 
         {/* Building visual */}
@@ -39,7 +41,7 @@ export const Frame4_4: React.FC = () => {
           <rect x={300} y={100} width={200} height={180} rx={8} fill={colors.surface} stroke={colors.agent} strokeWidth={2} />
           <rect x={370} y={80} width={60} height={30} rx={4} fill={colors.agent} />
           <text x={400} y={100} textAnchor="middle" fill="white" fontSize={10} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            BUILDING
+            {t('frame4_4.buildingLabel')}
           </text>
 
           {/* Windows */}
@@ -62,10 +64,10 @@ export const Frame4_4: React.FC = () => {
             <rect x={100} y={180} width={120} height={80} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
             <text x={160} y={210} textAnchor="middle" fontSize={24}>🏛️</text>
             <text x={160} y={235} textAnchor="middle" fill={colors.success} fontSize={10} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              City Hall
+              {t('frame4_4.cityHall')}
             </text>
             <text x={160} y={250} textAnchor="middle" fill={colors.textMuted} fontSize={9} fontFamily="IBM Plex Sans, sans-serif">
-              Verifies buildings
+              {t('frame4_4.verifiesBuildings')}
             </text>
           </motion.g>
         )}
@@ -80,7 +82,7 @@ export const Frame4_4: React.FC = () => {
             <line x1={230} y1={220} x2={290} y2={220} stroke={colors.success} strokeWidth={2} />
             <polygon points="300,220 290,215 290,225" fill={colors.success} />
             <text x={260} y={210} textAnchor="middle" fill={colors.success} fontSize={9} fontFamily="IBM Plex Sans, sans-serif">
-              Verifies
+              {t('frame4_4.verifiesLabel')}
             </text>
           </motion.g>
         )}
@@ -95,16 +97,16 @@ export const Frame4_4: React.FC = () => {
             <rect x={560} y={180} width={120} height={80} rx={8} fill={colors.surface} stroke={colors.agent} strokeWidth={2} />
             <text x={620} y={210} textAnchor="middle" fontSize={24}>🖨️</text>
             <text x={620} y={235} textAnchor="middle" fill={colors.agent} fontSize={10} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Badge Printer
+              {t('frame4_4.badgePrinterLabel')}
             </text>
             <text x={620} y={250} textAnchor="middle" fill={colors.textMuted} fontSize={9} fontFamily="IBM Plex Sans, sans-serif">
-              (SPIRE Agent)
+              {t('frame4_4.badgePrinterSub')}
             </text>
 
             <line x1={510} y1={220} x2={550} y2={220} stroke={colors.agent} strokeWidth={2} strokeDasharray="5 3" />
             <polygon points="560,220 550,215 550,225" fill={colors.agent} />
             <text x={530} y={210} textAnchor="middle" fill={colors.textMuted} fontSize={9} fontFamily="IBM Plex Sans, sans-serif">
-              Install
+              {t('frame4_4.installLabel')}
             </text>
           </motion.g>
         )}
@@ -118,16 +120,10 @@ export const Frame4_4: React.FC = () => {
           >
             <rect x={100} y={320} width={600} height={130} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={355} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Real-World Analogy
+              {t('frame4_4.realWorldAnalogy')}
             </text>
             <text x={400} y={385} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              Before installing a badge printer in a new building,
-            </text>
-            <text x={400} y={410} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              you verify the building is a <tspan fill={colors.success} fontWeight="bold">legitimate company facility</tspan>—
-            </text>
-            <text x={400} y={435} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              not just any random building claiming to be yours.
+              {t('frame4_4.analogyText')}
             </text>
           </motion.g>
         )}

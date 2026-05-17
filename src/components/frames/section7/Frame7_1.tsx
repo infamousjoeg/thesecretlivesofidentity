@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Badge with countdown timer
  */
 export const Frame7_1: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame7_1: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          SVIDs Don't Last Forever
+          {t('frame7_1.title', { defaultValue: "SVIDs Don't Last Forever" })}
         </motion.text>
 
         {/* Badge with expiration */}
@@ -69,8 +71,8 @@ export const Frame7_1: React.FC = () => {
           >
             <rect x={200} y={320} width={400} height={8} rx={4} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <rect x={200} y={320} width={100} height={8} rx={4} fill={colors.warning} />
-            <text x={200} y={355} fill={colors.textSecondary} fontSize={11}>Now</text>
-            <text x={600} y={355} textAnchor="end" fill={colors.textSecondary} fontSize={11}>Expiration</text>
+<text x={200} y={355} fill={colors.textSecondary} fontSize={11}>{t('frame7_1.nowLabel', { defaultValue: 'Now' })}</text>
+            <text x={600} y={355} textAnchor="end" fill={colors.textSecondary} fontSize={11}>{t('frame7_1.expirationLabel', { defaultValue: 'Expiration' })}</text>
           </motion.g>
         )}
 
@@ -83,10 +85,10 @@ export const Frame7_1: React.FC = () => {
           >
             <rect x={150} y={400} width={500} height={70} rx={8} fill={`${colors.warning}15`} stroke={colors.warning} strokeWidth={1} />
             <text x={400} y={430} textAnchor="middle" fill={colors.textPrimary} fontSize={16} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              SVIDs are short-lived by design
+{t('frame7_1.shortLived', { defaultValue: 'SVIDs are short-lived by design' })}
             </text>
             <text x={400} y={455} textAnchor="middle" fill={colors.textSecondary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              Minutes to hours, not months or years
+{t('frame7_1.duration', { defaultValue: 'Minutes to hours, not months or years' })}
             </text>
           </motion.g>
         )}

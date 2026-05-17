@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Menu, X, Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useTrackNavigation, useTrackKeyboardNav, useReducedMotion } from '@/hooks';
 import { tracks, type TrackId } from '@/content/tracks';
 import { TrackCompletion } from '@/components/TrackCompletion';
@@ -34,6 +35,7 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
   } = useTrackNavigation();
 
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation(['ui', 'content', 'tracks']);
   const [showSidebar, setShowSidebar] = useState(false);
   const [showCompletion, setShowCompletion] = useState(false);
 
@@ -62,12 +64,17 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
   if (!currentTrack || !track || !frameData) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background text-textMuted">
-        Loading...
+        {t('ui:loading')}
       </div>
     );
   }
 
   const { section, frame } = frameData;
+  const frameTitle = t(`content:frames.${frame.id}.title`, { defaultValue: frame.title });
+  const frameContent = t(`content:frames.${frame.id}.content`, { defaultValue: frame.content });
+  const sectionTitle = t(`content:sections.${section.id}`, { defaultValue: section.title });
+  const trackTitle = t(`tracks:${currentTrack}.title`, { defaultValue: track.title });
+  const trackSubtitle = t(`tracks:${currentTrack}.subtitle`, { defaultValue: track.subtitle });
 
   return (
     <>
@@ -75,7 +82,7 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
       <button
         onClick={() => setShowSidebar(!showSidebar)}
         className="fixed top-4 left-4 z-50 lg:hidden p-2 bg-surface rounded-lg text-textSecondary hover:text-textPrimary transition-colors"
-        aria-label={showSidebar ? 'Close menu' : 'Open menu'}
+        aria-label={showSidebar ? t('ui:closeMenu') : t('ui:openMenu')}
       >
         {showSidebar ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
@@ -96,14 +103,14 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
             className="flex items-center gap-2 text-textSecondary hover:text-textPrimary transition-colors mb-3"
           >
             <Home className="w-4 h-4" />
-            <span className="text-sm">Track Selector</span>
+            <span className="text-sm">{t('ui:trackSelector')}</span>
           </Link>
 
           <div className="flex items-center gap-2">
             <span className="text-2xl">{track.icon}</span>
             <div>
-              <h2 className="font-display font-semibold text-textPrimary">{track.title}</h2>
-              <p className="text-xs text-textMuted">{track.subtitle}</p>
+              <h2 className="font-display font-semibold text-textPrimary">{trackTitle}</h2>
+              <p className="text-xs text-textMuted">{trackSubtitle}</p>
             </div>
           </div>
         </div>
@@ -136,7 +143,8 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
                       const data = tracks[currentTrack].frames[index];
                       const sec = sections[data.sectionIndex];
                       const frm = sec?.frames[data.frameIndex];
-                      return frm?.title || `Frame ${index + 1}`;
+                      if (!frm) return `Frame ${index + 1}`;
+                      return t(`content:frames.${frm.id}.title`, { defaultValue: frm.title });
                     })()}
                   </button>
                 </li>
@@ -158,7 +166,7 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
       {/* Main Content */}
       <main
         role="main"
-        aria-label={`${track.title} track, Frame ${currentPosition + 1}: ${frame.title}`}
+        aria-label={`${trackTitle} track, Frame ${currentPosition + 1}: ${frameTitle}`}
         className="relative min-h-screen pt-20 pb-24 lg:pl-64 bg-background"
       >
         {/* Top Progress Bar */}
@@ -175,21 +183,21 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
           {/* Track and Frame indicator */}
           <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
             <span className={`px-2 py-0.5 rounded border ${trackColors[currentTrack]}`}>
-              {track.icon} {track.title}
+              {track.icon} {trackTitle}
             </span>
             <span className="text-textMuted">•</span>
             <span className="text-textMuted">
-              Frame {progress.current} of {progress.total}
+              {t('ui:frameProgress', { current: progress.current, total: progress.total })}
             </span>
             <span className="text-textMuted">•</span>
             <span className="px-2 py-0.5 bg-surface rounded text-textSecondary text-xs">
-              {section.title}
+              {sectionTitle}
             </span>
           </div>
 
           {/* Frame Title */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-textPrimary mb-6">
-            {frame.title}
+            {frameTitle}
           </h1>
 
           {/* Frame Content */}
@@ -205,7 +213,7 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
             >
               {/* Content text */}
               <p className="text-lg sm:text-xl text-textSecondary mb-8 max-w-3xl">
-                {frame.content}
+                {frameContent}
               </p>
 
               {/* Visualization area */}
@@ -217,7 +225,7 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
         {/* Navigation buttons */}
         <nav
           className="fixed bottom-0 left-0 right-0 lg:left-64 bg-background/90 backdrop-blur-md border-t border-textMuted/20 py-4 z-10"
-          aria-label="Frame navigation"
+          aria-label={t('ui:frameNavAriaLabel')}
         >
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <button
@@ -228,23 +236,20 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
                   ? 'text-textMuted cursor-not-allowed'
                   : 'text-textSecondary hover:text-textPrimary hover:bg-surface'
               }`}
-              aria-label="Previous frame"
+              aria-label={t('ui:previous')}
               aria-keyshortcuts="ArrowLeft"
             >
               <ChevronLeft className="w-5 h-5" />
-              <span className="hidden sm:inline">Previous</span>
+              <span className="hidden sm:inline">{t('ui:previous')}</span>
             </button>
 
             <div className="flex items-center gap-4">
               <span className="text-sm text-textMuted hidden sm:inline">
-                Press{' '}
-                <kbd className="px-1.5 py-0.5 bg-surface rounded text-textSecondary">
-                  ←
-                </kbd>{' '}
-                <kbd className="px-1.5 py-0.5 bg-surface rounded text-textSecondary">
-                  →
-                </kbd>{' '}
-                to navigate
+                {t('ui:keyboardHint', {
+                  left: '←',
+                  right: '→',
+                  defaultValue: 'Press ← → to navigate',
+                })}
               </span>
             </div>
 
@@ -261,11 +266,11 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
                   ? 'bg-svid text-white hover:bg-opacity-90'
                   : 'bg-server text-white hover:bg-opacity-90'
               }`}
-              aria-label={isLastFrame ? 'Complete track' : 'Next frame'}
+              aria-label={isLastFrame ? t('ui:complete') : t('ui:next')}
               aria-keyshortcuts="ArrowRight Space"
             >
               <span className="hidden sm:inline">
-                {isLastFrame ? 'Complete' : 'Next'}
+                {isLastFrame ? t('ui:complete') : t('ui:next')}
               </span>
               <ChevronRight className="w-5 h-5" />
             </button>

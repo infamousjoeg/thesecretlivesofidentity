@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,13 +12,14 @@ import { colors } from '@/utils/constants';
  * Visual: Server with its three main responsibilities
  */
 export const Frame3_4: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400]);
   const prefersReducedMotion = useReducedMotion();
 
   const responsibilities = [
-    { title: 'Registry', desc: 'Maintains workload entries', icon: '📋' },
-    { title: 'SVID Issuer', desc: 'Signs identity documents', icon: '✍️' },
-    { title: 'Trust Manager', desc: 'Manages trust bundles', icon: '🔐' },
+    { titleKey: 'frame3_4.resp1Title', descKey: 'frame3_4.resp1Description', icon: '📋' },
+    { titleKey: 'frame3_4.resp2Title', descKey: 'frame3_4.resp2Description', icon: '✍️' },
+    { titleKey: 'frame3_4.resp3Title', descKey: 'frame3_4.resp3Description', icon: '🔐' },
   ];
 
   return (
@@ -35,7 +37,7 @@ export const Frame3_4: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Server Responsibilities
+          {t('frame3_4.title')}
         </motion.text>
 
         {/* Server */}
@@ -56,7 +58,7 @@ export const Frame3_4: React.FC = () => {
         {responsibilities.map((resp, index) => (
           phase >= index + 1 && (
             <motion.g
-              key={resp.title}
+              key={resp.titleKey}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
@@ -84,10 +86,10 @@ export const Frame3_4: React.FC = () => {
                 {resp.icon}
               </text>
               <text x={150 + index * 250} y={365} textAnchor="middle" fill={colors.server} fontSize={13} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-                {resp.title}
+                {t(resp.titleKey)}
               </text>
               <text x={150 + index * 250} y={385} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-                {resp.desc}
+                {t(resp.descKey)}
               </text>
             </motion.g>
           )
@@ -105,7 +107,7 @@ export const Frame3_4: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            The Server is the brain of the operation—it knows who should get which identity.
+            {t('frame3_4.conclusion')}
           </motion.text>
         )}
       </svg>

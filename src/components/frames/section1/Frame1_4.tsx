@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -10,6 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Pager going off, GitHub logo, time ticking
  */
 export const Frame1_4: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 800, 800]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -72,13 +74,13 @@ export const Frame1_4: React.FC = () => {
             />
             <rect x={160} y={260} width={180} height={80} rx={4} fill="#1E1E1E" />
             <text x={250} y={290} textAnchor="middle" fill={colors.attacker} fontSize={12} fontFamily="JetBrains Mono, monospace">
-              🚨 SECURITY ALERT
+              🚨 {t('frame1_4.securityAlert')}
             </text>
             <text x={250} y={315} textAnchor="middle" fill={colors.textSecondary} fontSize={10} fontFamily="JetBrains Mono, monospace">
-              API key exposed in
+              {t('frame1_4.apiKeyExposedLine1', { defaultValue: 'API key exposed' })}
             </text>
             <text x={250} y={330} textAnchor="middle" fill={colors.textSecondary} fontSize={10} fontFamily="JetBrains Mono, monospace">
-              public repository
+              {t('frame1_4.apiKeyExposedLine2', { defaultValue: 'in public repository' })}
             </text>
           </motion.g>
         )}
@@ -102,10 +104,10 @@ export const Frame1_4: React.FC = () => {
               + API_KEY="sk_live_..."
             </text>
             <text x={470} y={330} fill={colors.attacker} fontSize={10} fontFamily="JetBrains Mono, monospace">
-              ⚠️ Secret detected
+              {t('frame1_4.secretDetected', { defaultValue: '⚠️ Secret detected' })}
             </text>
             <text x={470} y={355} fill={colors.textMuted} fontSize={9} fontFamily="IBM Plex Sans, sans-serif">
-              Exposed 6 hours ago
+              {t('frame1_4.exposedHoursAgo', { hours: 6 })}
             </text>
           </motion.g>
         )}
@@ -126,7 +128,7 @@ export const Frame1_4: React.FC = () => {
               fontWeight={600}
               fontFamily="Space Grotesk, sans-serif"
             >
-              6 hours of exposure. Who has the key?
+              {t('frame1_4.exposureMessage', { hours: 6 })}
             </text>
             <text
               x={400}
@@ -136,7 +138,7 @@ export const Frame1_4: React.FC = () => {
               fontSize={14}
               fontFamily="IBM Plex Sans, sans-serif"
             >
-              Bots scan GitHub every second for leaked secrets.
+              {t('frame1_4.botsNote')}
             </text>
           </motion.g>
         )}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent, Workload, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: HR verifying employment before printing badge
  */
 export const Frame5_3: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 700, 700, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame5_3: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Badge Metaphor
+          {t('frame5_3.title')}
         </motion.text>
 
         {/* HR Desk (Agent) */}
@@ -40,7 +42,7 @@ export const Frame5_3: React.FC = () => {
         >
           <rect x={100} y={180} width={200} height={100} rx={8} fill={colors.surface} stroke={colors.agent} strokeWidth={2} />
           <text x={200} y={175} textAnchor="middle" fill={colors.agent} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            HR Security Desk
+            {t('frame5_3.hrSecurityDesk')}
           </text>
           <SpireAgent
             label=""
@@ -73,9 +75,9 @@ export const Frame5_3: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={300} y={160} width={150} height={80} rx={6} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
-            <text x={375} y={180} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">Employee Database</text>
-            <text x={375} y={200} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">Checking...</text>
-            <text x={375} y={220} textAnchor="middle" fill={colors.success} fontSize={11} fontFamily="JetBrains Mono, monospace">✓ Found in system</text>
+            <text x={375} y={180} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">{t('frame5_3.employeeDatabase')}</text>
+            <text x={375} y={200} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="JetBrains Mono, monospace">{t('frame5_3.checking')}</text>
+            <text x={375} y={220} textAnchor="middle" fill={colors.success} fontSize={11} fontFamily="JetBrains Mono, monospace">{t('frame5_3.foundInSystem')}</text>
           </motion.g>
         )}
 
@@ -106,7 +108,7 @@ export const Frame5_3: React.FC = () => {
           >
             <rect x={200} y={430} width={400} height={40} rx={8} fill={`${colors.agent}15`} stroke={colors.agent} strokeWidth={1} />
             <text x={400} y={455} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="Space Grotesk, sans-serif">
-              HR verifies employment before printing badge
+              {t('frame5_3.metaphorText')}
             </text>
           </motion.g>
         )}

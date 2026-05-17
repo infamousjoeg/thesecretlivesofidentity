@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Old and new SVIDs both valid during transition
  */
 export const Frame7_5: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame7_5: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Overlap Period
+          {t('frame7_5.title', { defaultValue: 'The Overlap Period' })}
         </motion.text>
 
         {/* Timeline */}
@@ -53,7 +55,7 @@ export const Frame7_5: React.FC = () => {
             style={{ transformOrigin: 'left' }}
           >
             <rect x={100} y={180} width={400} height={40} rx={6} fill={`${colors.warning}30`} stroke={colors.warning} strokeWidth={2} />
-            <text x={300} y={205} textAnchor="middle" fill={colors.warning} fontSize={13} fontWeight="bold">Old SVID</text>
+            <text x={300} y={205} textAnchor="middle" fill={colors.warning} fontSize={13} fontWeight="bold">{t('frame7_5.oldSVID', { defaultValue: 'Old SVID' })}</text>
             <Badge spiffeId="old" position={{ x: 150, y: 200 }} state="expiring" size={30} animate={!prefersReducedMotion} />
           </motion.g>
         )}
@@ -67,7 +69,7 @@ export const Frame7_5: React.FC = () => {
             style={{ transformOrigin: 'left' }}
           >
             <rect x={300} y={240} width={400} height={40} rx={6} fill={`${colors.success}30`} stroke={colors.success} strokeWidth={2} />
-            <text x={500} y={265} textAnchor="middle" fill={colors.success} fontSize={13} fontWeight="bold">New SVID</text>
+            <text x={500} y={265} textAnchor="middle" fill={colors.success} fontSize={13} fontWeight="bold">{t('frame7_5.newSVID', { defaultValue: 'New SVID' })}</text>
             <Badge spiffeId="new" position={{ x: 650, y: 260 }} state="valid" size={30} animate={!prefersReducedMotion} />
           </motion.g>
         )}
@@ -80,7 +82,7 @@ export const Frame7_5: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <rect x={300} y={175} width={200} height={110} rx={4} fill="none" stroke={colors.svid} strokeWidth={2} strokeDasharray="8 4" />
-            <text x={400} y={160} textAnchor="middle" fill={colors.svid} fontSize={12} fontWeight="bold">OVERLAP</text>
+            <text x={400} y={160} textAnchor="middle" fill={colors.svid} fontSize={12} fontWeight="bold">{t('frame7_5.overlap', { defaultValue: 'OVERLAP' })}</text>
           </motion.g>
         )}
 
@@ -93,10 +95,10 @@ export const Frame7_5: React.FC = () => {
           >
             <rect x={150} y={380} width={500} height={80} rx={8} fill={`${colors.svid}15`} stroke={colors.svid} strokeWidth={1} />
             <text x={400} y={415} textAnchor="middle" fill={colors.textPrimary} fontSize={15} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              New SVIDs issued before old ones expire
+{t('frame7_5.description', { defaultValue: 'New SVIDs issued before old ones expire' })}
             </text>
             <text x={400} y={445} textAnchor="middle" fill={colors.textSecondary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              No gap = No interruption
+{t('frame7_5.noGap', { defaultValue: 'No gap = No interruption' })}
             </text>
           </motion.g>
         )}

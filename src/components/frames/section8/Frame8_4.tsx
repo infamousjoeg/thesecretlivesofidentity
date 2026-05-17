@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { TrustBundle } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Trust bundle exchange flow
  */
 export const Frame8_4: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame8_4: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          How Federation Works
+          {t('frame8_4.title', { defaultValue: 'How Federation Works' })}
         </motion.text>
 
         {/* Domain A */}
@@ -39,7 +41,7 @@ export const Frame8_4: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <rect x={100} y={120} width={200} height={150} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
-          <text x={200} y={150} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold">Domain A</text>
+          <text x={200} y={150} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold">{t('frame8_4.domainALabel', { defaultValue: 'Domain A' })}</text>
           <TrustBundle position={{ x: 200, y: 210 }} size={40} animate={!prefersReducedMotion} />
         </motion.g>
 
@@ -50,7 +52,7 @@ export const Frame8_4: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <rect x={500} y={120} width={200} height={150} rx={8} fill={colors.surface} stroke={colors.svid} strokeWidth={2} />
-          <text x={600} y={150} textAnchor="middle" fill={colors.svid} fontSize={14} fontWeight="bold">Domain B</text>
+          <text x={600} y={150} textAnchor="middle" fill={colors.svid} fontSize={14} fontWeight="bold">{t('frame8_4.domainBLabel', { defaultValue: 'Domain B' })}</text>
           <TrustBundle position={{ x: 600, y: 210 }} size={40} animate={!prefersReducedMotion} />
         </motion.g>
 
@@ -63,7 +65,7 @@ export const Frame8_4: React.FC = () => {
           >
             <rect x={150} y={300} width={500} height={40} rx={6} fill={`${colors.trustBundle}15`} stroke={colors.trustBundle} strokeWidth={1} />
             <text x={400} y={325} textAnchor="middle" fill={colors.trustBundle} fontSize={12}>
-              1. Domains exchange trust bundles (public keys)
+              {t('frame8_4.step1', { defaultValue: '1. Domains exchange trust bundles (public keys)' })}
             </text>
           </motion.g>
         )}
@@ -77,7 +79,7 @@ export const Frame8_4: React.FC = () => {
           >
             <rect x={150} y={355} width={500} height={40} rx={6} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={380} textAnchor="middle" fill={colors.success} fontSize={12}>
-              2. Each domain learns to verify the other's SVIDs
+              {t('frame8_4.step2', { defaultValue: "2. Each domain learns to verify the other's SVIDs" })}
             </text>
           </motion.g>
         )}
@@ -91,7 +93,7 @@ export const Frame8_4: React.FC = () => {
           >
             <rect x={150} y={410} width={500} height={40} rx={6} fill={`${colors.svid}15`} stroke={colors.svid} strokeWidth={1} />
             <text x={400} y={435} textAnchor="middle" fill={colors.svid} fontSize={12}>
-              3. Cross-domain workloads can now authenticate!
+              {t('frame8_4.step3', { defaultValue: '3. Cross-domain workloads can now authenticate!' })}
             </text>
           </motion.g>
         )}

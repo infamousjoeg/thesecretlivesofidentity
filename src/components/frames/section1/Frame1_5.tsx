@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload, Connection } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Payment service connected to many other services, showing blast radius
  */
 export const Frame1_5: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -111,7 +113,7 @@ export const Frame1_5: React.FC = () => {
               fontWeight="bold"
               fontFamily="Space Grotesk, sans-serif"
             >
-              47 services affected
+              {t('frame1_5.servicesAffected', { count: 47 })}
             </text>
           </motion.g>
         )}

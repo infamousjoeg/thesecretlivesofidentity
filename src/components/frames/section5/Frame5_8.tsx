@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -13,6 +14,7 @@ import { colors } from '@/utils/constants';
 export const Frame5_8: React.FC = () => {
   const { phase } = useAnimationPhase([0, 800, 800, 600]);
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation('frames');
 
   return (
     <Stage>
@@ -29,7 +31,7 @@ export const Frame5_8: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Magic Moment
+          {t('frame5_8.title')}
         </motion.text>
 
         {/* Workload before */}
@@ -47,7 +49,7 @@ export const Frame5_8: React.FC = () => {
           />
           {phase < 2 && (
             <text x={250} y={260} textAnchor="middle" fill={colors.textMuted} fontSize={12}>
-              No identity
+              {t('frame5_8.before')}
             </text>
           )}
         </motion.g>
@@ -119,10 +121,10 @@ export const Frame5_8: React.FC = () => {
           >
             <rect x={150} y={400} width={500} height={70} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={2} />
             <text x={400} y={430} textAnchor="middle" fill={colors.success} fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Cryptographically signed identity
+              {t('frame5_8.after')}
             </text>
             <text x={400} y={455} textAnchor="middle" fill={colors.textSecondary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              Without ever providing a secret to get it!
+              {t('frame5_8.note')}
             </text>
           </motion.g>
         )}

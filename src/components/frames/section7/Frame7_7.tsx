@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,6 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Policies reference SPIFFE ID, not SVIDs
  */
 export const Frame7_7: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   return (
@@ -26,7 +28,7 @@ export const Frame7_7: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Why Stability Matters
+          {t('frame7_7.title', { defaultValue: 'Why Stability Matters' })}
         </motion.text>
 
         {/* Policy box */}
@@ -37,7 +39,7 @@ export const Frame7_7: React.FC = () => {
         >
           <rect x={200} y={100} width={400} height={150} rx={8} fill={colors.surface} stroke={colors.warning} strokeWidth={2} />
           <text x={400} y={130} textAnchor="middle" fill={colors.warning} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            Authorization Policy
+            {t('frame7_7.policyLabel', { defaultValue: 'Authorization Policy' })}
           </text>
           <rect x={230} y={150} width={340} height={80} rx={4} fill={`${colors.warning}10`} />
           <text x={250} y={175} fill={colors.textSecondary} fontSize={12} fontFamily="JetBrains Mono, monospace">
@@ -59,8 +61,8 @@ export const Frame7_7: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={200} y={280} width={400} height={60} rx={6} fill={`${colors.svid}15`} stroke={colors.svid} strokeWidth={1} strokeDasharray="6 3" />
-            <text x={400} y={305} textAnchor="middle" fill={colors.svid} fontSize={12}>SVID rotates: v1 → v2 → v3 → v4...</text>
-            <text x={400} y={325} textAnchor="middle" fill={colors.textMuted} fontSize={11}>Keys change, certificates change</text>
+            <text x={400} y={305} textAnchor="middle" fill={colors.svid} fontSize={12}>{t('frame7_7.svidRotates', { defaultValue: 'SVID rotates: v1 → v2 → v3 → v4...' })}</text>
+            <text x={400} y={325} textAnchor="middle" fill={colors.textMuted} fontSize={11}>{t('frame7_7.keysChange', { defaultValue: 'Keys change, certificates change' })}</text>
           </motion.g>
         )}
 
@@ -73,7 +75,7 @@ export const Frame7_7: React.FC = () => {
           >
             <rect x={250} y={360} width={300} height={50} rx={8} fill={colors.success} />
             <text x={400} y={390} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">
-              Policy still works! ✓
+              {t('frame7_7.policyWorks', { defaultValue: 'Policy still works! ✓' })}
             </text>
           </motion.g>
         )}
@@ -86,10 +88,10 @@ export const Frame7_7: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={450} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Policies reference SPIFFE IDs, not SVIDs
+{t('frame7_7.policiesReference', { defaultValue: 'Policies reference SPIFFE IDs, not SVIDs' })}
             </text>
             <text x={400} y={475} textAnchor="middle" fill={colors.textSecondary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              Rotation doesn't break authorization
+{t('frame7_7.rotationNote', { defaultValue: "Rotation doesn't break authorization" })}
             </text>
           </motion.g>
         )}

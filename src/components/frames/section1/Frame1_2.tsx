@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Workloads connected by lines with key/lock icons representing API keys
  */
 export const Frame1_2: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -100,7 +102,7 @@ export const Frame1_2: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Secrets everywhere: distributed, stored, rotated...
+            {t('frame1_2.subtitle')} {t('frame1_2.distributed')} {t('frame1_2.stored')} {t('frame1_2.rotated')} {t('frame1_2.stolen')}
           </motion.text>
         )}
       </svg>
