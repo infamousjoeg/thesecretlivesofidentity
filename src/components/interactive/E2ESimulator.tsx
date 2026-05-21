@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload, Badge, TrustBundle } from '@/components/entities';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -7,25 +8,25 @@ import { colors } from '@/utils/constants';
 
 interface Step {
   id: number;
-  title: string;
-  description: string;
+  titleKey: string;
+  descKey: string;
   visual: 'initial' | 'client-hello' | 'server-hello' | 'verify-client' | 'verify-server' | 'success' | 'failure';
 }
 
 const successSteps: Step[] = [
-  { id: 0, title: 'Ready to Connect', description: 'Client wants to talk to Server. Both have SVIDs.', visual: 'initial' },
-  { id: 1, title: 'Client Hello', description: 'Client presents its SVID certificate to Server.', visual: 'client-hello' },
-  { id: 2, title: 'Server Hello', description: 'Server presents its SVID certificate to Client.', visual: 'server-hello' },
-  { id: 3, title: 'Client Verifies', description: 'Client checks Server SVID against its Trust Bundle.', visual: 'verify-server' },
-  { id: 4, title: 'Server Verifies', description: 'Server checks Client SVID against its Trust Bundle.', visual: 'verify-client' },
-  { id: 5, title: 'mTLS Established!', description: 'Both sides verified. Encrypted channel ready.', visual: 'success' },
+  { id: 0, titleKey: 'success_step0_title', descKey: 'success_step0_desc', visual: 'initial' },
+  { id: 1, titleKey: 'success_step1_title', descKey: 'success_step1_desc', visual: 'client-hello' },
+  { id: 2, titleKey: 'success_step2_title', descKey: 'success_step2_desc', visual: 'server-hello' },
+  { id: 3, titleKey: 'success_step3_title', descKey: 'success_step3_desc', visual: 'verify-server' },
+  { id: 4, titleKey: 'success_step4_title', descKey: 'success_step4_desc', visual: 'verify-client' },
+  { id: 5, titleKey: 'success_step5_title', descKey: 'success_step5_desc', visual: 'success' },
 ];
 
 const failureSteps: Step[] = [
-  { id: 0, title: 'Ready to Connect', description: 'Client wants to talk to Server. But is the Server trusted?', visual: 'initial' },
-  { id: 1, title: 'Client Hello', description: 'Client presents its SVID certificate to Server.', visual: 'client-hello' },
-  { id: 2, title: 'Server Hello', description: 'Server presents its SVID certificate to Client.', visual: 'server-hello' },
-  { id: 3, title: 'Verification Fails!', description: "Server's CA is not in Client's Trust Bundle!", visual: 'failure' },
+  { id: 0, titleKey: 'failure_step0_title', descKey: 'failure_step0_desc', visual: 'initial' },
+  { id: 1, titleKey: 'failure_step1_title', descKey: 'failure_step1_desc', visual: 'client-hello' },
+  { id: 2, titleKey: 'failure_step2_title', descKey: 'failure_step2_desc', visual: 'server-hello' },
+  { id: 3, titleKey: 'failure_step3_title', descKey: 'failure_step3_desc', visual: 'failure' },
 ];
 
 /**
@@ -33,6 +34,7 @@ const failureSteps: Step[] = [
  * Shows step-by-step mutual TLS with success and failure branches
  */
 export const E2ESimulator: React.FC = () => {
+  const { t } = useTranslation('frames');
   const [mode, setMode] = useState<'success' | 'failure'>('success');
   const [step, setStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -94,7 +96,7 @@ export const E2ESimulator: React.FC = () => {
               : 'bg-surface border border-textMuted/30 text-textSecondary hover:border-textMuted/50'
           }`}
         >
-          ✓ Same Trust Domain
+          {t('e2eSimulator.sameTrustDomain', { defaultValue: '✓ Same Trust Domain' })}
         </button>
         <button
           onClick={() => handleModeChange('failure')}
@@ -104,7 +106,7 @@ export const E2ESimulator: React.FC = () => {
               : 'bg-surface border border-textMuted/30 text-textSecondary hover:border-textMuted/50'
           }`}
         >
-          ✗ Different Trust Domain
+          {t('e2eSimulator.differentTrustDomain', { defaultValue: '✗ Different Trust Domain' })}
         </button>
       </div>
 
@@ -114,7 +116,7 @@ export const E2ESimulator: React.FC = () => {
           {/* Client side */}
           <g transform="translate(100, 100)">
             <Workload
-              label="Client"
+              label={t('e2eSimulator.clientLabel', { defaultValue: 'Client' })}
               position={{ x: 0, y: 0 }}
               size={60}
               attested={true}
@@ -127,9 +129,9 @@ export const E2ESimulator: React.FC = () => {
               animate={!prefersReducedMotion}
             />
             <TrustBundle
-              label="Trust Bundle"
+              label={t('e2eSimulator.trustBundleLabel', { defaultValue: 'Trust Bundle' })}
               position={{ x: 0, y: 160 }}
-              certCount={mode === 'success' ? 1 : 1}
+              certCount={1}
               size={40}
             />
             <text
@@ -139,14 +141,14 @@ export const E2ESimulator: React.FC = () => {
               fill={colors.textMuted}
               fontSize={10}
             >
-              {mode === 'success' ? 'Contains: acme.com CA' : 'Contains: acme.com CA'}
+              {t('e2eSimulator.containsAcmeCa', { defaultValue: 'Contains: acme.com CA' })}
             </text>
           </g>
 
           {/* Server side */}
           <g transform="translate(700, 100)">
             <Workload
-              label="Server"
+              label={t('e2eSimulator.serverLabel', { defaultValue: 'Server' })}
               position={{ x: 0, y: 0 }}
               size={60}
               attested={true}
@@ -159,7 +161,7 @@ export const E2ESimulator: React.FC = () => {
               animate={!prefersReducedMotion}
             />
             <TrustBundle
-              label="Trust Bundle"
+              label={t('e2eSimulator.trustBundleLabel', { defaultValue: 'Trust Bundle' })}
               position={{ x: 0, y: 160 }}
               certCount={1}
               size={40}
@@ -171,7 +173,9 @@ export const E2ESimulator: React.FC = () => {
               fill={colors.textMuted}
               fontSize={10}
             >
-              {mode === 'success' ? 'Contains: acme.com CA' : 'Contains: other.com CA'}
+              {mode === 'success'
+                ? t('e2eSimulator.containsAcmeCa', { defaultValue: 'Contains: acme.com CA' })
+                : t('e2eSimulator.containsOtherCa', { defaultValue: 'Contains: other.com CA' })}
             </text>
           </g>
 
@@ -253,7 +257,9 @@ export const E2ESimulator: React.FC = () => {
                 >
                   <circle cx={-100} cy={50} r={25} fill={`${colors.success}30`} stroke={colors.success} strokeWidth={2} />
                   <text x={-100} y={55} textAnchor="middle" fill={colors.success} fontSize={16}>✓</text>
-                  <text x={-100} y={90} textAnchor="middle" fill={colors.success} fontSize={10}>Client verifies</text>
+                  <text x={-100} y={90} textAnchor="middle" fill={colors.success} fontSize={10}>
+                    {t('e2eSimulator.clientVerifies', { defaultValue: 'Client verifies' })}
+                  </text>
                 </motion.g>
               )}
 
@@ -267,7 +273,9 @@ export const E2ESimulator: React.FC = () => {
                   <text x={-100} y={55} textAnchor="middle" fill={colors.success} fontSize={16}>✓</text>
                   <circle cx={100} cy={50} r={25} fill={`${colors.success}30`} stroke={colors.success} strokeWidth={2} />
                   <text x={100} y={55} textAnchor="middle" fill={colors.success} fontSize={16}>✓</text>
-                  <text x={0} y={90} textAnchor="middle" fill={colors.success} fontSize={10}>Both verify!</text>
+                  <text x={0} y={90} textAnchor="middle" fill={colors.success} fontSize={10}>
+                    {t('e2eSimulator.bothVerify', { defaultValue: 'Both verify!' })}
+                  </text>
                 </motion.g>
               )}
 
@@ -296,7 +304,7 @@ export const E2ESimulator: React.FC = () => {
                     transition={{ duration: 1.5, repeat: Infinity }}
                   />
                   <text x={0} y={40} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold">
-                    🔒 Encrypted mTLS Channel
+                    {t('e2eSimulator.encryptedChannel', { defaultValue: '🔒 Encrypted mTLS Channel' })}
                   </text>
                 </motion.g>
               )}
@@ -310,10 +318,10 @@ export const E2ESimulator: React.FC = () => {
                   <circle cx={0} cy={0} r={40} fill={`${colors.attacker}30`} stroke={colors.attacker} strokeWidth={3} />
                   <text x={0} y={8} textAnchor="middle" fill={colors.attacker} fontSize={30}>✗</text>
                   <text x={0} y={60} textAnchor="middle" fill={colors.attacker} fontSize={12} fontWeight="bold">
-                    Connection Refused
+                    {t('e2eSimulator.connectionRefused', { defaultValue: 'Connection Refused' })}
                   </text>
                   <text x={0} y={80} textAnchor="middle" fill={colors.textMuted} fontSize={10}>
-                    Server CA not trusted
+                    {t('e2eSimulator.serverCaNotTrusted', { defaultValue: 'Server CA not trusted' })}
                   </text>
                 </motion.g>
               )}
@@ -360,8 +368,12 @@ export const E2ESimulator: React.FC = () => {
 
       {/* Step description */}
       <div className="mt-4 text-center">
-        <h4 className="text-lg font-bold text-textPrimary">{currentStep.title}</h4>
-        <p className="text-textSecondary">{currentStep.description}</p>
+        <h4 className="text-lg font-bold text-textPrimary">
+          {t(`e2eSimulator.${currentStep.titleKey}`, { defaultValue: currentStep.titleKey })}
+        </h4>
+        <p className="text-textSecondary">
+          {t(`e2eSimulator.${currentStep.descKey}`, { defaultValue: currentStep.descKey })}
+        </p>
       </div>
 
       {/* Controls */}
@@ -371,27 +383,29 @@ export const E2ESimulator: React.FC = () => {
           disabled={step === 0}
           className="px-3 py-2 bg-surface border border-textMuted/30 text-textSecondary rounded-lg font-medium hover:border-textMuted/50 disabled:opacity-50"
         >
-          ← Back
+          {t('e2eSimulator.back', { defaultValue: '← Back' })}
         </button>
         <button
           onClick={handlePlay}
           disabled={isPlaying}
           className="px-4 py-2 bg-success text-white rounded-lg font-medium hover:bg-success/90 disabled:opacity-50"
         >
-          {step >= steps.length - 1 ? '↺ Replay' : '▶ Auto Play'}
+          {step >= steps.length - 1
+            ? t('e2eSimulator.replay', { defaultValue: '↺ Replay' })
+            : t('e2eSimulator.autoPlay', { defaultValue: '▶ Auto Play' })}
         </button>
         <button
           onClick={handleStepForward}
           disabled={step >= steps.length - 1}
           className="px-3 py-2 bg-surface border border-textMuted/30 text-textSecondary rounded-lg font-medium hover:border-textMuted/50 disabled:opacity-50"
         >
-          Next →
+          {t('e2eSimulator.next', { defaultValue: 'Next →' })}
         </button>
         <button
           onClick={handleReset}
           className="px-3 py-2 bg-surface border border-textMuted/30 text-textSecondary rounded-lg font-medium hover:border-textMuted/50"
         >
-          Reset
+          {t('e2eSimulator.reset', { defaultValue: 'Reset' })}
         </button>
       </div>
     </div>

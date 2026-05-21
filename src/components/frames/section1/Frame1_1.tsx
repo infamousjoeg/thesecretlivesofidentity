@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -10,6 +11,7 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
  * Visual: Multiple gray workloads with question marks appearing one by one
  */
 export const Frame1_1: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500, 500, 500]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -80,7 +82,7 @@ export const Frame1_1: React.FC = () => {
               fontSize={16}
               fontFamily="IBM Plex Sans, sans-serif"
             >
-              "Who are you?"
+              {t('frame1_1.question1')}
             </text>
             <text
               x={400}
@@ -90,7 +92,7 @@ export const Frame1_1: React.FC = () => {
               fontSize={16}
               fontFamily="IBM Plex Sans, sans-serif"
             >
-              "How can I trust you?"
+              {t('frame1_1.question2')}
             </text>
           </motion.g>
         )}

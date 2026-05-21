@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: SPIFFE as the foundation for zero trust
  */
 export const Frame6_11: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame6_11: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Zero Trust Foundation
+          {t('frame6_11.title', { defaultValue: 'Zero Trust Foundation' })}
         </motion.text>
 
         {/* Zero Trust principle */}
@@ -76,8 +78,9 @@ export const Frame6_11: React.FC = () => {
             <line x1={460} y1={240} x2={540} y2={240} stroke={colors.success} strokeWidth={2} markerEnd="url(#arr6-11)" />
             <line x1={540} y1={260} x2={460} y2={260} stroke={colors.success} strokeWidth={2} markerEnd="url(#arr6-11)" />
 
-            <text x={300} y={220} textAnchor="middle" fill={colors.success} fontSize={10}>verify</text>
-            <text x={500} y={220} textAnchor="middle" fill={colors.success} fontSize={10}>verify</text>
+{/* verify label */}
+            <text x={300} y={220} textAnchor="middle" fill={colors.success} fontSize={10}>{t('frame6_11.verify', { defaultValue: 'verify' })}</text>
+            <text x={500} y={220} textAnchor="middle" fill={colors.success} fontSize={10}>{t('frame6_11.verify', { defaultValue: 'verify' })}</text>
 
             <defs>
               <marker id="arr6-11" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
@@ -96,10 +99,10 @@ export const Frame6_11: React.FC = () => {
           >
             <rect x={100} y={380} width={600} height={90} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
             <text x={400} y={415} textAnchor="middle" fill={colors.textPrimary} fontSize={16} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              SPIFFE provides the identity foundation for zero trust
+{t('frame6_11.spiffeProvides', { defaultValue: 'SPIFFE provides the identity foundation for zero trust' })}
             </text>
             <text x={400} y={445} textAnchor="middle" fill={colors.textSecondary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              Verify explicitly. Never assume trust based on network location.
+{t('frame6_11.conclusion', { defaultValue: 'Verify explicitly. Never assume trust based on network location.' })}
             </text>
           </motion.g>
         )}

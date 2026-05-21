@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Company badge system metaphor
  */
 export const Frame2_7: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame2_7: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Think of it Like a Company
+          {t('frame2_7.title')}
         </motion.text>
 
         {/* Company building outline */}
@@ -75,10 +77,10 @@ export const Frame2_7: React.FC = () => {
           >
             <rect x={320} y={280} width={160} height={60} rx={8} fill={colors.agent} />
             <text x={400} y={305} textAnchor="middle" fill="white" fontSize={11} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Security Desk
+              {t('frame2_7.securityDesk')}
             </text>
             <text x={400} y={325} textAnchor="middle" fill="white" fontSize={10} opacity={0.8} fontFamily="IBM Plex Sans, sans-serif">
-              Issues badges
+              {t('frame2_7.issuesBadges')}
             </text>
           </motion.g>
         )}
@@ -92,10 +94,12 @@ export const Frame2_7: React.FC = () => {
           >
             <rect x={150} y={420} width={500} height={60} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={448} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              Everyone inside shares the <tspan fill={colors.svid} fontWeight="bold">same badge system</tspan>
+              {t('frame2_7.insideShared').split('same badge system').map((part, i) =>
+                i === 0 ? <tspan key={i}>{part}</tspan> : <tspan key={i}><tspan fill={colors.svid} fontWeight="bold">same badge system</tspan>{part}</tspan>
+              )}
             </text>
             <text x={400} y={468} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              issued by the same security authority
+              {t('frame2_7.issuedBy')}
             </text>
           </motion.g>
         )}

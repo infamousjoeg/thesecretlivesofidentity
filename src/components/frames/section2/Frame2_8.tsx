@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { TrustDomain, Workload, Connection } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Two trust domains - same domain auto-trust, different requires federation
  */
 export const Frame2_8: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 800, 800]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame2_8: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Why Trust Domains Matter
+          {t('frame2_8.title')}
         </motion.text>
 
         {/* Domain 1 - acme.com */}
@@ -82,7 +84,7 @@ export const Frame2_8: React.FC = () => {
             />
             <rect x={130} y={270} width={140} height={30} rx={4} fill={`${colors.success}20`} />
             <text x={200} y={290} textAnchor="middle" fill={colors.success} fontSize={10} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Auto-trust
+              {t('frame2_8.autoTrust')}
             </text>
           </motion.g>
         )}
@@ -97,7 +99,7 @@ export const Frame2_8: React.FC = () => {
             <line x1={340} y1={200} x2={460} y2={200} stroke={colors.warning} strokeWidth={2} strokeDasharray="8 4" />
             <rect x={365} y={180} width={70} height={24} rx={4} fill={colors.background} stroke={colors.warning} strokeWidth={1} />
             <text x={400} y={196} textAnchor="middle" fill={colors.warning} fontSize={9} fontFamily="Space Grotesk, sans-serif">
-              Federation?
+              {t('frame2_8.federation')}
             </text>
           </motion.g>
         )}
@@ -112,19 +114,19 @@ export const Frame2_8: React.FC = () => {
             {/* Same domain */}
             <rect x={80} y={360} width={260} height={70} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={1} />
             <text x={210} y={390} textAnchor="middle" fill={colors.success} fontSize={13} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Same Trust Domain
+              {t('frame2_8.sameDomain')}
             </text>
             <text x={210} y={415} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Automatic mutual trust
+              {t('frame2_8.automaticTrust')}
             </text>
 
             {/* Different domains */}
             <rect x={460} y={360} width={260} height={70} rx={8} fill={colors.surface} stroke={colors.warning} strokeWidth={1} />
             <text x={590} y={390} textAnchor="middle" fill={colors.warning} fontSize={13} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Different Domains
+              {t('frame2_8.differentDomains')}
             </text>
             <text x={590} y={415} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Requires explicit federation
+              {t('frame2_8.requiresFederation')}
             </text>
           </motion.g>
         )}
@@ -141,7 +143,7 @@ export const Frame2_8: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Federation = explicitly agreeing to trust another domain's identities
+            {t('frame2_8.federationNote')}
           </motion.text>
         )}
       </svg>

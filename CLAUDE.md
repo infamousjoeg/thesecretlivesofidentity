@@ -37,6 +37,9 @@ The entire visualization uses a **corporate badge system metaphor**:
 | React Router | 6.x | Routing |
 | Lucide React | 0.x | Icons |
 | Playwright | 1.x | Visual testing via MCP |
+| i18next | 23.x | i18n core |
+| react-i18next | 14.x | React bindings for i18next |
+| i18next-browser-languagedetector | 8.x | Auto-detect user language |
 
 ---
 
@@ -45,7 +48,7 @@ The entire visualization uses a **corporate badge system metaphor**:
 ```
 src/
 ├── components/
-│   ├── layout/           # Navigation, Header, Footer, ProgressBar
+│   ├── layout/           # Navigation, Header, Footer, ProgressBar, LanguageSelector
 │   ├── visualization/    # Frame, Stage, AnimatedText, TransitionWrapper
 │   ├── entities/         # SVG components: Workload, Server, Agent, Badge, etc.
 │   ├── interactive/      # Simulators: Attestation, SelectorMatcher, Rotation, E2E
@@ -56,11 +59,20 @@ src/
 ├── content/
 │   └── spiffe/           # Section metadata and frame data
 ├── hooks/                # useFrameNavigation, useKeyboardNav, useAnimationPhase
+├── locales/              # i18n translation files
+│   ├── en/               # English (source language)
+│   │   ├── ui.json       # Navigation, buttons, accessibility strings
+│   │   ├── landing.json  # Landing page text
+│   │   ├── tracks.json   # Track selector cards
+│   │   ├── content.json  # All 95 frame titles + body text
+│   │   └── frames.json   # Animation strings inside frame components
+│   └── pt-BR/            # Brazilian Portuguese (mirror structure)
 ├── store/                # Zustand store
 ├── styles/               # Global CSS, Tailwind config
 ├── types/                # TypeScript interfaces
 ├── utils/                # Animation presets, constants
 ├── pages/                # Landing, SpiffeVisualization
+├── i18n.ts               # i18next initialization and language registry
 ├── App.tsx
 └── main.tsx
 ```
@@ -423,6 +435,88 @@ export const InteractiveComponent: React.FC = () => {
 
 ---
 
+## Internationalization (i18n)
+
+The project uses **i18next** with **react-i18next** to support multiple languages. All user-visible strings must go through the translation system — never hardcode English text directly into JSX or SVG.
+
+### Namespace Layout
+
+| Namespace | File | Contents |
+|-----------|------|----------|
+| `ui` | `src/locales/<lang>/ui.json` | Navigation labels, buttons, keyboard hints, ARIA strings |
+| `landing` | `src/locales/<lang>/landing.json` | Landing page hero, track descriptions, about section |
+| `tracks` | `src/locales/<lang>/tracks.json` | Track selector card titles, durations, goals |
+| `content` | `src/locales/<lang>/content.json` | All 95 frame titles and body text, section names |
+| `frames` | `src/locales/<lang>/frames.json` | Animation strings inside SVG/JSX frame components |
+
+### Initialization
+
+i18next is configured in `src/i18n.ts` and imported once in `src/main.tsx` before `<App />` renders. Language is detected from `localStorage` key `spiffe-language`, then from `navigator.language`, then falls back to `'en'`.
+
+### Using Translations in Components
+
+```typescript
+import { useTranslation } from 'react-i18next';
+
+// Single namespace
+const { t } = useTranslation('frames');
+<text>{t('frame1_4.exposedLabel')}</text>
+
+// Multiple namespaces — prefix with namespace name + colon
+const { t } = useTranslation(['ui', 'content']);
+<span>{t('ui:nextFrame')}</span>
+<span>{t('content:frames.1-4.title')}</span>
+```
+
+### The `defaultValue` Pattern
+
+Always supply a `defaultValue` when the key may not exist in every language yet. This prevents raw key strings from showing in the UI:
+
+```typescript
+// ✅ Good — English text shows if key is missing
+t('frame5_10.doesntHave', { defaultValue: "Doesn't the SVID have" })
+
+// ❌ Bad — shows raw key string on missing translation
+t('frame5_10.doesntHave')
+```
+
+### Key Naming Conventions
+
+| Layer | Convention | Example |
+|-------|-----------|---------|
+| UI strings | `camelCase` | `nextFrame`, `chooseLanguage` |
+| Frame content | `frames.<id>.title` / `.content` | `frames.1-4.title` |
+| Section names | `sections.<kebab-id>` | `sections.identity-crisis` |
+| Frame animations | `frame<S>_<F>.<descriptiveKey>` | `frame5_11.check1_label` |
+
+### Adding a New Language
+
+1. Create `src/locales/<code>/` and copy all five JSON files from `src/locales/en/`
+2. Translate every value (keys must stay identical)
+3. In `src/i18n.ts`, import the five new files and add them to `resources` and `supportedLanguages`:
+```typescript
+import enUI from '@/locales/en/ui.json';
+import deUI from '@/locales/de/ui.json';
+// ... other namespaces
+
+const resources = {
+  en: { ui: enUI, ... },
+  de: { ui: deUI, ... },   // ← new entry
+};
+
+export const supportedLanguages = [
+  { code: 'en', label: 'English' },
+  { code: 'de', label: 'Deutsch' },   // ← new entry
+];
+```
+4. Run `npm run build` and fix any TypeScript errors
+
+### LanguageSelector Component
+
+`src/components/layout/LanguageSelector.tsx` renders the language picker dropdown. It is mounted in `src/App.tsx` with `fixed top-4 right-4 z-[100]` so it appears on every page without requiring individual page-level imports.
+
+---
+
 ## Visual Testing with Playwright MCP
 
 ### Overview
@@ -648,6 +742,8 @@ Edit `src/utils/animations.ts` - changes propagate everywhere that imports the c
 - ❌ Ignoring reduced motion preference
 - ❌ Class components
 - ❌ Direct DOM manipulation
+- ❌ Hardcoded English strings in JSX or SVG `<text>` elements — always use `t()` with a `defaultValue`
+- ❌ Missing `defaultValue` on `t()` calls — raw key strings will render if a translation is absent
 
 ### Design
 
@@ -668,6 +764,8 @@ Edit `src/utils/animations.ts` - changes propagate everywhere that imports the c
 | SVG over Canvas | Accessibility, easier styling, crisp at all sizes |
 | Tailwind over CSS Modules | Rapid iteration, consistent design system |
 | Vite over CRA | Faster builds, better ESM support |
+| i18next over react-intl | Simpler key-based API, namespace support, `defaultValue` fallback pattern |
+| 5 namespaces over 1 file | Keeps locale files small; enables lazy loading per route in the future |
 
 ---
 
@@ -684,6 +782,8 @@ Before considering a section complete:
 - [ ] Loads in < 3s on throttled connection
 - [ ] Badge metaphor is consistent
 - [ ] Technical accuracy verified
+- [ ] All new strings added to both `en/frames.json` and `pt-BR/frames.json`
+- [ ] No raw key strings visible when language is set to `pt-BR`
 
 ---
 

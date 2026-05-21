@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,13 +10,14 @@ import { colors } from '@/utils/constants';
  * Visual: Different platform attestation methods
  */
 export const Frame4_7: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 400]);
 
   const attestors = [
-    { name: 'AWS', icon: '☁️', proof: 'Instance Identity Document', desc: 'Signed metadata about EC2 instance' },
-    { name: 'Kubernetes', icon: '⎈', proof: 'Service Account Token', desc: 'K8s-signed node identity' },
-    { name: 'GCP', icon: '🔷', proof: 'Instance Metadata', desc: 'GCP instance identity token' },
-    { name: 'Azure', icon: '◈', proof: 'Managed Identity', desc: 'Azure VM identity token' },
+    { nameKey: 'frame4_7.awsAttestor', icon: '☁️', proofKey: 'frame4_7.awsProof', descKey: 'frame4_7.awsDescription' },
+    { nameKey: 'frame4_7.k8sAttestor', icon: '⎈', proofKey: 'frame4_7.k8sProof', descKey: 'frame4_7.k8sDescription' },
+    { nameKey: 'frame4_7.gcpAttestor', icon: '🔷', proofKey: 'frame4_7.gcpProof', descKey: 'frame4_7.gcpDescription' },
+    { nameKey: 'frame4_7.azureAttestor', icon: '◈', proofKey: 'frame4_7.azureProof', descKey: 'frame4_7.azureDescription' },
   ];
 
   return (
@@ -33,7 +35,7 @@ export const Frame4_7: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Attestation Types
+          {t('frame4_7.title')}
         </motion.text>
 
         <motion.text
@@ -46,14 +48,14 @@ export const Frame4_7: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Different platforms provide different proofs
+          {t('frame4_7.description')}
         </motion.text>
 
         {/* Attestors */}
         {attestors.map((att, index) => (
           phase >= index + 1 && (
             <motion.g
-              key={att.name}
+              key={att.nameKey}
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
@@ -80,14 +82,14 @@ export const Frame4_7: React.FC = () => {
                 {att.icon}
               </text>
               <text x={150} y={160 + index * 90} textAnchor="middle" fill="white" fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-                {att.name}
+                {t(att.nameKey)}
               </text>
 
               <text x={220} y={130 + index * 90} fill={colors.textPrimary} fontSize={13} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-                {att.proof}
+                {t(att.proofKey)}
               </text>
               <text x={220} y={155 + index * 90} fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-                {att.desc}
+                {t(att.descKey)}
               </text>
             </motion.g>
           )
@@ -105,7 +107,7 @@ export const Frame4_7: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            SPIRE's plugin architecture supports many more attestation methods.
+            {t('frame4_7.conclusion')}
           </motion.text>
         )}
       </svg>

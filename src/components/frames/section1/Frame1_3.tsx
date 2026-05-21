@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Attacker } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,14 +12,15 @@ import { colors } from '@/utils/constants';
  * Visual: Showing the problems - distribution, storage, rotation, theft
  */
 export const Frame1_3: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 800, 800, 800, 800]);
   const prefersReducedMotion = useReducedMotion();
 
   const problems = [
-    { icon: '📦', label: 'Distributed', desc: 'Copied to every service', x: 150, y: 150 },
-    { icon: '💾', label: 'Stored', desc: 'Saved in configs, env vars', x: 650, y: 150 },
-    { icon: '🔄', label: 'Rotated', desc: 'Manual coordination', x: 150, y: 350 },
-    { icon: '🎯', label: 'Stolen', desc: 'One leak = breach', x: 650, y: 350 },
+    { icon: '📦', labelKey: 'frame1_3.problems.distributed.label', descKey: 'frame1_3.problems.distributed.description', x: 150, y: 150 },
+    { icon: '💾', labelKey: 'frame1_3.problems.stored.label', descKey: 'frame1_3.problems.stored.description', x: 650, y: 150 },
+    { icon: '🔄', labelKey: 'frame1_3.problems.rotated.label', descKey: 'frame1_3.problems.rotated.description', x: 150, y: 350 },
+    { icon: '🎯', labelKey: 'frame1_3.problems.stolen.label', descKey: 'frame1_3.problems.stolen.description', x: 650, y: 350 },
   ];
 
   return (
@@ -51,7 +53,7 @@ export const Frame1_3: React.FC = () => {
             fontSize={11}
             fontFamily="JetBrains Mono, monospace"
           >
-            SECRET
+            {t('frame1_3.secretLabel', { defaultValue: 'SECRET' })}
           </text>
         </motion.g>
 
@@ -59,7 +61,7 @@ export const Frame1_3: React.FC = () => {
         {problems.map((problem, index) => (
           phase >= index + 1 && (
             <motion.g
-              key={problem.label}
+              key={problem.labelKey}
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
@@ -86,7 +88,7 @@ export const Frame1_3: React.FC = () => {
                 fontWeight={600}
                 fontFamily="Space Grotesk, sans-serif"
               >
-                {problem.label}
+                {t(problem.labelKey)}
               </text>
               <text
                 x={problem.x}
@@ -96,7 +98,7 @@ export const Frame1_3: React.FC = () => {
                 fontSize={10}
                 fontFamily="IBM Plex Sans, sans-serif"
               >
-                {problem.desc}
+                {t(problem.descKey)}
               </text>
 
               {/* Line to center */}

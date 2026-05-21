@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { TrustBundle } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Multiple trust domains
  */
 export const Frame8_1: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame8_1: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Beyond Single Domains
+          {t('frame8_1.title', { defaultValue: 'Beyond Single Domains' })}
         </motion.text>
 
         {/* Single domain */}
@@ -43,7 +45,9 @@ export const Frame8_1: React.FC = () => {
             acme.com
           </text>
           <TrustBundle position={{ x: 400, y: 180 }} size={50} animate={!prefersReducedMotion} />
-          <text x={400} y={235} textAnchor="middle" fill={colors.textMuted} fontSize={11}>Your trust domain</text>
+          <text x={400} y={235} textAnchor="middle" fill={colors.textMuted} fontSize={11}>
+            {t('frame8_1.yourTrustDomain', { defaultValue: 'Your trust domain' })}
+          </text>
         </motion.g>
 
         {/* Multiple domains */}
@@ -85,7 +89,7 @@ export const Frame8_1: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={450} textAnchor="middle" fill={colors.textPrimary} fontSize={15} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              How do different trust domains communicate?
+              {t('frame8_1.question', { defaultValue: 'How do different trust domains communicate?' })}
             </text>
           </motion.g>
         )}

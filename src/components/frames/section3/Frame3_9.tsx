@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { RegistrationEntry } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -10,6 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Registration entry as HR record
  */
 export const Frame3_9: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500]);
 
   return (
@@ -27,7 +29,7 @@ export const Frame3_9: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Registration Entries
+          {t('frame3_9.title')}
         </motion.text>
 
         <motion.text
@@ -40,7 +42,7 @@ export const Frame3_9: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The HR records of the identity system
+          {t('frame3_9.subtitle')}
         </motion.text>
 
         {/* HR metaphor */}
@@ -53,35 +55,35 @@ export const Frame3_9: React.FC = () => {
             <rect x={100} y={110} width={260} height={200} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={2} />
             <rect x={100} y={110} width={260} height={35} rx={8} fill={colors.textMuted} />
             <text x={230} y={133} textAnchor="middle" fill="white" fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              HR EMPLOYEE RECORD
+              {t('frame3_9.hrRecord')}
             </text>
             <text x={130} y={170} fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Name:
+              {t('frame3_9.fieldName')}
             </text>
             <text x={200} y={170} fill={colors.textPrimary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
               Alice Smith
             </text>
             <text x={130} y={195} fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Department:
+              {t('frame3_9.fieldDepartment')}
             </text>
             <text x={220} y={195} fill={colors.textPrimary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
               Engineering
             </text>
             <text x={130} y={220} fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Role:
+              {t('frame3_9.fieldBadgeId')}
             </text>
             <text x={200} y={220} fill={colors.textPrimary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Developer
+              EMP-12345
             </text>
             <line x1={120} y1={240} x2={340} y2={240} stroke={colors.textMuted} strokeWidth={1} strokeDasharray="4 2" />
             <text x={130} y={265} fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Employee ID:
+              {t('frame3_9.fieldAccess')}
             </text>
             <text x={240} y={265} fill={colors.success} fontSize={11} fontWeight="bold" fontFamily="JetBrains Mono, monospace">
               EMP-12345
             </text>
             <text x={230} y={295} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              Properties → ID
+              {t('frame3_9.propsToId')}
             </text>
           </motion.g>
         )}

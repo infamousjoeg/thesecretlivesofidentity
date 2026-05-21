@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer, SpireAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Server and Agent side by side
  */
 export const Frame3_2: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame3_2: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          SPIRE: Two Components
+          {t('frame3_2.title')}
         </motion.text>
 
         {/* SPIRE Server */}
@@ -46,13 +48,13 @@ export const Frame3_2: React.FC = () => {
               animate={!prefersReducedMotion}
             />
             <text x={250} y={310} textAnchor="middle" fill={colors.server} fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              SPIRE Server
+              {t('frame3_2.serverLabel')}
             </text>
             <text x={250} y={335} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Central authority
+              {t('frame3_2.serverDescription')}
             </text>
             <text x={250} y={355} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              "Headquarters"
+              {t('frame3_2.serverMetaphor')}
             </text>
           </motion.g>
         )}
@@ -75,10 +77,10 @@ export const Frame3_2: React.FC = () => {
               SPIRE Agent
             </text>
             <text x={550} y={335} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Runs on each node
+              {t('frame3_2.agentRunsOn')}
             </text>
             <text x={550} y={355} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              "Local security desk"
+              {t('frame3_2.agentMetaphor')}
             </text>
           </motion.g>
         )}
@@ -92,7 +94,7 @@ export const Frame3_2: React.FC = () => {
           >
             <rect x={200} y={400} width={400} height={60} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={437} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              Let's meet each one...
+              {t('frame3_2.intro')}
             </text>
           </motion.g>
         )}

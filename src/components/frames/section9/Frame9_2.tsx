@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge, SpireAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Complete badge metaphor recap
  */
 export const Frame9_2: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame9_2: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Badge Summary
+          {t('frame9_2.title', { defaultValue: 'The Badge Summary' })}
         </motion.text>
 
         {/* Employee ID - SPIFFE ID */}
@@ -39,9 +41,9 @@ export const Frame9_2: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <rect x={100} y={120} width={200} height={100} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={2} />
-          <text x={200} y={150} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold">Your Employee ID</text>
-          <text x={200} y={175} textAnchor="middle" fill={colors.success} fontSize={12}>(SPIFFE ID)</text>
-          <text x={200} y={205} textAnchor="middle" fill={colors.textSecondary} fontSize={12}>Never changes</text>
+          <text x={200} y={150} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold">{t('frame9_2.employeeIdLabel', { defaultValue: 'Your Employee ID' })}</text>
+          <text x={200} y={175} textAnchor="middle" fill={colors.success} fontSize={12}>{t('frame9_2.employeeIdSub', { defaultValue: '(SPIFFE ID)' })}</text>
+          <text x={200} y={205} textAnchor="middle" fill={colors.textSecondary} fontSize={12}>{t('frame9_2.employeeIdDesc', { defaultValue: 'Never changes' })}</text>
         </motion.g>
 
         {/* Badge - SVID */}
@@ -52,9 +54,9 @@ export const Frame9_2: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={350} y={120} width={200} height={100} rx={8} fill={`${colors.svid}15`} stroke={colors.svid} strokeWidth={2} />
-            <text x={450} y={150} textAnchor="middle" fill={colors.svid} fontSize={14} fontWeight="bold">Your Badge</text>
-            <text x={450} y={175} textAnchor="middle" fill={colors.svid} fontSize={12}>(SVID)</text>
-            <text x={450} y={205} textAnchor="middle" fill={colors.textSecondary} fontSize={12}>Expires & auto-renews</text>
+            <text x={450} y={150} textAnchor="middle" fill={colors.svid} fontSize={14} fontWeight="bold">{t('frame9_2.badgeLabel', { defaultValue: 'Your Badge' })}</text>
+            <text x={450} y={175} textAnchor="middle" fill={colors.svid} fontSize={12}>{t('frame9_2.badgeSub', { defaultValue: '(SVID)' })}</text>
+            <text x={450} y={205} textAnchor="middle" fill={colors.textSecondary} fontSize={12}>{t('frame9_2.badgeDesc', { defaultValue: 'Expires & auto-renews' })}</text>
             <Badge spiffeId="" position={{ x: 520, y: 170 }} state="valid" size={30} animate={!prefersReducedMotion} />
           </motion.g>
         )}
@@ -67,9 +69,9 @@ export const Frame9_2: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={550} y={120} width={200} height={100} rx={8} fill={`${colors.agent}15`} stroke={colors.agent} strokeWidth={2} />
-            <text x={650} y={150} textAnchor="middle" fill={colors.agent} fontSize={14} fontWeight="bold">Security Desk</text>
-            <text x={650} y={175} textAnchor="middle" fill={colors.agent} fontSize={12}>(SPIRE Agent)</text>
-            <text x={650} y={205} textAnchor="middle" fill={colors.textSecondary} fontSize={12}>Handles it all</text>
+            <text x={650} y={150} textAnchor="middle" fill={colors.agent} fontSize={14} fontWeight="bold">{t('frame9_2.securityDeskLabel', { defaultValue: 'Security Desk' })}</text>
+            <text x={650} y={175} textAnchor="middle" fill={colors.agent} fontSize={12}>{t('frame9_2.securityDeskSub', { defaultValue: '(SPIRE Agent)' })}</text>
+            <text x={650} y={205} textAnchor="middle" fill={colors.textSecondary} fontSize={12}>{t('frame9_2.securityDeskDesc', { defaultValue: 'Handles it all' })}</text>
             <SpireAgent label="" position={{ x: 720, y: 170 }} active={true} animate={!prefersReducedMotion} size={30} />
           </motion.g>
         )}
@@ -86,7 +88,7 @@ export const Frame9_2: React.FC = () => {
             {/* Employee */}
             <circle cx={250} cy={355} r={30} fill={`${colors.svid}20`} stroke={colors.svid} strokeWidth={2} />
             <text x={250} y={365} textAnchor="middle" fontSize={24}>👤</text>
-            <text x={250} y={410} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>You (Workload)</text>
+            <text x={250} y={410} textAnchor="middle" fill={colors.textSecondary} fontSize={10}>{t('frame9_2.workloadLabel', { defaultValue: 'You (Workload)' })}</text>
 
             {/* Arrow to desk */}
             <line x1={290} y1={355} x2={350} y2={355} stroke={colors.textMuted} strokeWidth={2} markerEnd="url(#sum-arr)" />
@@ -120,7 +122,7 @@ export const Frame9_2: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <text x={400} y={470} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              The Agent handles everything—you just work
+              {t('frame9_2.conclusion', { defaultValue: 'The Agent handles everything—you just work' })}
             </text>
           </motion.g>
         )}

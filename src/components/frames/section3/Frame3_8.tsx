@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer, Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Server with question marks about workloads
  */
 export const Frame3_8: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame3_8: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          But Wait: Who Gets Identity?
+          {t('frame3_8.title')}
         </motion.text>
 
         {/* Server thinking */}
@@ -45,10 +47,10 @@ export const Frame3_8: React.FC = () => {
           <circle cx={470} cy={130} r={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
           <circle cx={450} cy={150} r={5} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
           <text x={520} y={95} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-            Which workloads
+            {t('frame3_8.question1')}
           </text>
           <text x={520} y={110} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-            get which IDs?
+            {t('frame3_8.question2')}
           </text>
         </motion.g>
 
@@ -75,10 +77,10 @@ export const Frame3_8: React.FC = () => {
           >
             <rect x={150} y={390} width={500} height={80} rx={8} fill={colors.surface} stroke={colors.warning} strokeWidth={2} />
             <text x={400} y={420} textAnchor="middle" fill={colors.warning} fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              How does the Server know?
+              {t('frame3_8.question')}
             </text>
             <text x={400} y={450} textAnchor="middle" fill={colors.textMuted} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              It needs a mapping: workload properties → SPIFFE ID
+              {t('frame3_8.answer')}
             </text>
           </motion.g>
         )}

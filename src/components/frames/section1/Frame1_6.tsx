@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -10,14 +11,15 @@ import { colors } from '@/utils/constants';
  * Visual: Checklist of rotation steps, growing complexity
  */
 export const Frame1_6: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500, 500, 800]);
   const prefersReducedMotion = useReducedMotion();
 
   const steps = [
-    { text: '1. Generate new API key', icon: '🔑', status: 'pending' },
-    { text: '2. Update 47 services', icon: '📦', status: 'pending' },
-    { text: '3. Coordinate restart', icon: '🔄', status: 'pending' },
-    { text: '4. Pray nothing breaks', icon: '🙏', status: 'pending' },
+    { textKey: 'frame1_6.step1', icon: '🔑', status: 'pending' },
+    { textKey: 'frame1_6.step2', icon: '📦', status: 'pending', showManual: true },
+    { textKey: 'frame1_6.step3', icon: '🔄', status: 'pending' },
+    { textKey: 'frame1_6.step4', icon: '🙏', status: 'pending' },
   ];
 
   return (
@@ -33,7 +35,7 @@ export const Frame1_6: React.FC = () => {
           fontWeight="bold"
           fontFamily="Space Grotesk, sans-serif"
         >
-          Incident Response Checklist
+          {t('frame1_6.title')}
         </text>
 
         {/* Clock ticking */}
@@ -43,7 +45,7 @@ export const Frame1_6: React.FC = () => {
         >
           <circle cx={680} cy={60} r={35} fill={colors.surface} stroke={colors.attacker} strokeWidth={2} />
           <text x={680} y={55} textAnchor="middle" fill={colors.attacker} fontSize={12} fontFamily="JetBrains Mono, monospace">
-            ELAPSED
+            {t('frame1_6.elapsed')}
           </text>
           <motion.text
             x={680}
@@ -64,7 +66,7 @@ export const Frame1_6: React.FC = () => {
         {steps.map((step, index) => (
           phase >= index + 1 && (
             <motion.g
-              key={step.text}
+              key={step.textKey}
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
@@ -105,11 +107,11 @@ export const Frame1_6: React.FC = () => {
                 fontSize={16}
                 fontFamily="IBM Plex Sans, sans-serif"
               >
-                {step.text}
+                {t(step.textKey, { count: 47 })}
               </text>
 
               {/* Complexity indicator */}
-              {index === 1 && (
+              {step.showManual && (
                 <text
                   x={560}
                   y={138 + index * 80}
@@ -117,7 +119,7 @@ export const Frame1_6: React.FC = () => {
                   fontSize={12}
                   fontFamily="JetBrains Mono, monospace"
                 >
-                  (manual!)
+                  {t('frame1_6.manual')}
                 </text>
               )}
             </motion.g>
@@ -141,7 +143,7 @@ export const Frame1_6: React.FC = () => {
               fontWeight="600"
               fontFamily="Space Grotesk, sans-serif"
             >
-              Meanwhile, attackers have had the key for 10+ hours...
+              {t('frame1_6.attackersNote')}
             </text>
           </motion.g>
         )}

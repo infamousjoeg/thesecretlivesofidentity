@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: SVID rotating but SPIFFE ID unchanged
  */
 export const Frame7_6: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame7_6: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          SPIFFE ID Stays Stable
+          {t('frame7_6.title', { defaultValue: 'SPIFFE ID Stays Stable' })}
         </motion.text>
 
         {/* Stable SPIFFE ID */}
@@ -43,7 +45,7 @@ export const Frame7_6: React.FC = () => {
             spiffe://acme/payments/api
           </text>
           <text x={400} y={160} textAnchor="middle" fill={colors.success} fontSize={13} fontWeight="bold">
-            ↑ Never changes
+            {t('frame7_6.neverChanges', { defaultValue: '↑ Never changes' })}
           </text>
         </motion.g>
 
@@ -55,7 +57,7 @@ export const Frame7_6: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <Badge spiffeId="SVID v1" position={{ x: 200, y: 280 }} state="expired" size={60} animate={!prefersReducedMotion} />
-            <text x={200} y={330} textAnchor="middle" fill={colors.textMuted} fontSize={11}>expired</text>
+            <text x={200} y={330} textAnchor="middle" fill={colors.textMuted} fontSize={11}>{t('frame7_6.expiredLabel', { defaultValue: 'expired' })}</text>
           </motion.g>
         )}
 
@@ -66,7 +68,7 @@ export const Frame7_6: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <Badge spiffeId="SVID v2" position={{ x: 350, y: 280 }} state="expired" size={60} animate={!prefersReducedMotion} />
-            <text x={350} y={330} textAnchor="middle" fill={colors.textMuted} fontSize={11}>expired</text>
+            <text x={350} y={330} textAnchor="middle" fill={colors.textMuted} fontSize={11}>{t('frame7_6.expiredLabel', { defaultValue: 'expired' })}</text>
           </motion.g>
         )}
 
@@ -77,7 +79,7 @@ export const Frame7_6: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <Badge spiffeId="SVID v3" position={{ x: 500, y: 280 }} state="valid" size={60} animate={!prefersReducedMotion} />
-            <text x={500} y={330} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold">current</text>
+            <text x={500} y={330} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold">{t('frame7_6.currentLabel', { defaultValue: 'current' })}</text>
           </motion.g>
         )}
 
@@ -88,7 +90,7 @@ export const Frame7_6: React.FC = () => {
             transition={{ duration: 0.4 }}
           >
             <Badge spiffeId="SVID v4" position={{ x: 650, y: 280 }} state="valid" size={60} animate={!prefersReducedMotion} />
-            <text x={650} y={330} textAnchor="middle" fill={colors.textMuted} fontSize={11}>next</text>
+            <text x={650} y={330} textAnchor="middle" fill={colors.textMuted} fontSize={11}>{t('frame7_6.nextLabel', { defaultValue: 'next' })}</text>
           </motion.g>
         )}
 
@@ -100,7 +102,7 @@ export const Frame7_6: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <path d="M 200 350 Q 400 400 650 350" fill="none" stroke={colors.svid} strokeWidth={2} markerEnd="url(#arr7-6)" />
-            <text x={400} y={390} textAnchor="middle" fill={colors.svid} fontSize={12}>SVIDs rotate over time</text>
+            <text x={400} y={390} textAnchor="middle" fill={colors.svid} fontSize={12}>{t('frame7_6.svidsRotate', { defaultValue: 'SVIDs rotate over time' })}</text>
             <defs>
               <marker id="arr7-6" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
                 <path d="M0,0 L0,6 L8,3 z" fill={colors.svid} />
@@ -118,7 +120,7 @@ export const Frame7_6: React.FC = () => {
           >
             <rect x={200} y={420} width={400} height={55} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={453} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Your identity (SPIFFE ID) never changes
+{t('frame7_6.identityStable', { defaultValue: 'Your identity (SPIFFE ID) never changes' })}
             </text>
           </motion.g>
         )}

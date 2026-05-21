@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Two employees showing badges to each other
  */
 export const Frame6_3: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 700, 700, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame6_3: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Badge Metaphor
+          {t('frame6_3.title', { defaultValue: 'The Badge Metaphor' })}
         </motion.text>
 
         {/* Two people with badges */}
@@ -41,12 +43,16 @@ export const Frame6_3: React.FC = () => {
           {/* Person A */}
           <circle cx={200} cy={180} r={40} fill={colors.surface} stroke={colors.agent} strokeWidth={2} />
           <text x={200} y={190} textAnchor="middle" fontSize={30}>👤</text>
-          <text x={200} y={250} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="bold">Alice</text>
+          <text x={200} y={250} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="bold">
+            {t('frame6_3.aliceLabel', { defaultValue: 'Alice' })}
+          </text>
 
           {/* Person B */}
           <circle cx={600} cy={180} r={40} fill={colors.surface} stroke={colors.svid} strokeWidth={2} />
           <text x={600} y={190} textAnchor="middle" fontSize={30}>👤</text>
-          <text x={600} y={250} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="bold">Bob</text>
+          <text x={600} y={250} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="bold">
+            {t('frame6_3.bobLabel', { defaultValue: 'Bob' })}
+          </text>
         </motion.g>
 
         {/* Badges being shown */}
@@ -96,13 +102,13 @@ export const Frame6_3: React.FC = () => {
           >
             <rect x={150} y={320} width={500} height={130} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={360} textAnchor="middle" fill={colors.textPrimary} fontSize={16} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Like two employees meeting
+              {t('frame6_3.description', { defaultValue: 'Like two employees meeting' })}
             </text>
             <text x={400} y={395} textAnchor="middle" fill={colors.textSecondary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              Both show their badges before
+              {t('frame6_3.metaphorTextLine1', { defaultValue: 'Both show their badges before' })}
             </text>
             <text x={400} y={420} textAnchor="middle" fill={colors.textSecondary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              discussing anything sensitive
+              {t('frame6_3.metaphorTextLine2', { defaultValue: 'discussing anything sensitive' })}
             </text>
           </motion.g>
         )}

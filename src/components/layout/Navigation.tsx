@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Menu, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useSectionList, useFrameNavigation, useReducedMotion } from '@/hooks';
 
 export const Navigation: React.FC = () => {
@@ -8,6 +9,7 @@ export const Navigation: React.FC = () => {
   const sectionList = useSectionList();
   const { currentSection, goToSection } = useFrameNavigation();
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation(['ui', 'content']);
 
   const handleSectionClick = (index: number) => {
     goToSection(index);
@@ -20,7 +22,7 @@ export const Navigation: React.FC = () => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-20 left-4 z-40 p-2 bg-surface rounded-lg border border-textMuted/20 lg:hidden"
-        aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+        aria-label={isOpen ? t('ui:closeNav') : t('ui:openNav')}
         aria-expanded={isOpen}
       >
         {isOpen ? (
@@ -33,11 +35,11 @@ export const Navigation: React.FC = () => {
       {/* Desktop sidebar */}
       <nav
         className="hidden lg:block fixed left-0 top-20 bottom-0 w-64 bg-surface/50 backdrop-blur-sm border-r border-textMuted/20 overflow-y-auto"
-        aria-label="Section navigation"
+        aria-label={t('ui:sectionNavAriaLabel')}
       >
         <div className="p-4">
           <h2 className="text-xs font-semibold text-textMuted uppercase tracking-wider mb-4">
-            Sections
+            {t('ui:sections')}
           </h2>
           <ul className="space-y-1">
             {sectionList.map((section, index) => (
@@ -54,7 +56,7 @@ export const Navigation: React.FC = () => {
                   <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-xs font-medium">
                     {index + 1}
                   </span>
-                  <span className="flex-1 truncate">{section.title}</span>
+                  <span className="flex-1 truncate">{t(`content:sections.${section.id}`, { defaultValue: section.title })}</span>
                   <ChevronRight
                     className={`w-4 h-4 flex-shrink-0 transition-transform ${
                       currentSection === index ? 'rotate-90' : ''
@@ -87,11 +89,11 @@ export const Navigation: React.FC = () => {
               animate={prefersReducedMotion ? undefined : { opacity: 1, x: 0 }}
               exit={prefersReducedMotion ? undefined : { opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
-              aria-label="Section navigation"
+              aria-label={t('ui:sectionNavAriaLabel')}
             >
               <div className="p-4 pt-8">
                 <h2 className="text-xs font-semibold text-textMuted uppercase tracking-wider mb-4">
-                  Sections
+                  {t('ui:sections')}
                 </h2>
                 <ul className="space-y-1">
                   {sectionList.map((section, index) => (
@@ -107,9 +109,9 @@ export const Navigation: React.FC = () => {
                         <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center text-sm font-medium bg-textMuted/10 rounded">
                           {index + 1}
                         </span>
-                        <span className="flex-1">{section.title}</span>
+                        <span className="flex-1">{t(`content:sections.${section.id}`, { defaultValue: section.title })}</span>
                         <span className="text-xs text-textMuted">
-                          {section.frameCount} frames
+                          {t('ui:framesCount', { count: section.frameCount })}
                         </span>
                       </button>
                     </li>

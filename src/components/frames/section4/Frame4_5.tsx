@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Platform vouching for the Agent
  */
 export const Frame4_5: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame4_5: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Platform as Witness
+          {t('frame4_5.title')}
         </motion.text>
 
         {/* Platform cloud */}
@@ -40,10 +42,10 @@ export const Frame4_5: React.FC = () => {
         >
           <ellipse cx={400} cy={200} rx={250} ry={100} fill={`${colors.success}10`} stroke={colors.success} strokeWidth={2} />
           <text x={400} y={140} textAnchor="middle" fill={colors.success} fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            PLATFORM
+            {t('frame4_5.platformLabel')}
           </text>
           <text x={400} y={165} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-            (AWS, Kubernetes, GCP, Azure, etc.)
+            {t('frame4_5.platformSub')}
           </text>
 
           {/* Agent inside platform */}
@@ -61,13 +63,7 @@ export const Frame4_5: React.FC = () => {
             <circle cx={270} cy={220} r={10} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
             <circle cx={295} cy={235} r={6} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
             <text x={180} y={195} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              "I vouch for this
-            </text>
-            <text x={180} y={212} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Agent. It's running
-            </text>
-            <text x={180} y={229} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              on my node."
+              {t('frame4_5.platformSays')}
             </text>
           </motion.g>
         )}
@@ -81,13 +77,13 @@ export const Frame4_5: React.FC = () => {
           >
             <rect x={150} y={340} width={500} height={120} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={375} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              The Agent doesn't claim its own identity
+              {t('frame4_5.agentDoesNotClaim')}
             </text>
             <text x={400} y={405} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              The platform provides <tspan fill={colors.success} fontWeight="bold">signed proof</tspan> that:
+              {t('frame4_5.platformProvides')}
             </text>
             <text x={400} y={435} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              "Yes, this Agent really is running on node X in account Y"
+              {t('frame4_5.proof1')}
             </text>
           </motion.g>
         )}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer, SpireAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Server and Agent with question about trust
  */
 export const Frame4_1: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame4_1: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Bootstrap Problem
+          {t('frame4_1.title')}
         </motion.text>
 
         {/* Server */}
@@ -53,7 +55,7 @@ export const Frame4_1: React.FC = () => {
           >
             <SpireAgent label="Agent" position={{ x: 550, y: 200 }} size={80} active={false} animate={!prefersReducedMotion} />
             <text x={550} y={280} textAnchor="middle" fill={colors.agent} fontSize={14} fontFamily="Space Grotesk, sans-serif">
-              New SPIRE Agent
+              {t('frame4_1.newAgentLabel')}
             </text>
 
             {/* Question marks */}
@@ -71,13 +73,10 @@ export const Frame4_1: React.FC = () => {
           >
             <rect x={330} y={160} width={140} height={80} rx={8} fill={colors.surface} stroke={colors.warning} strokeWidth={2} />
             <text x={400} y={190} textAnchor="middle" fill={colors.warning} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Can I trust
-            </text>
-            <text x={400} y={210} textAnchor="middle" fill={colors.warning} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              this Agent?
+              {t('frame4_1.serverQuestion')}
             </text>
             <text x={400} y={230} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              — Server
+              {t('frame4_1.serverQuestionCredit')}
             </text>
           </motion.g>
         )}
@@ -91,13 +90,13 @@ export const Frame4_1: React.FC = () => {
           >
             <rect x={150} y={340} width={500} height={100} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={375} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              Before the Agent can issue badges to workloads,
+              {t('frame4_1.before')}
             </text>
             <text x={400} y={400} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              the <tspan fill={colors.server} fontWeight="bold">Server</tspan> needs to trust the <tspan fill={colors.agent} fontWeight="bold">Agent</tspan> itself.
+              {t('frame4_1.beforeConclusion')}
             </text>
             <text x={400} y={425} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              How?
+              {t('frame4_1.how')}
             </text>
           </motion.g>
         )}

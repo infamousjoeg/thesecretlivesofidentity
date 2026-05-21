@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Server as corporate headquarters
  */
 export const Frame3_3: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame3_3: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The SPIRE Server
+          {t('frame3_3.title')}
         </motion.text>
 
         {/* Headquarters metaphor */}
@@ -42,7 +44,7 @@ export const Frame3_3: React.FC = () => {
           <rect x={250} y={100} width={300} height={250} rx={12} fill={`${colors.server}10`} stroke={colors.server} strokeWidth={2} strokeDasharray="10 5" />
           <rect x={340} y={80} width={120} height={35} rx={8} fill={colors.background} stroke={colors.server} strokeWidth={2} />
           <text x={400} y={103} textAnchor="middle" fill={colors.server} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            HEADQUARTERS
+            {t('frame3_3.hq')}
           </text>
 
           {/* Server in center */}
@@ -63,10 +65,10 @@ export const Frame3_3: React.FC = () => {
           >
             <rect x={80} y={130} width={140} height={50} rx={6} fill={colors.surface} stroke={colors.server} strokeWidth={1} />
             <text x={150} y={155} textAnchor="middle" fill={colors.server} fontSize={11} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Central Authority
+              {t('frame3_3.centralAuthority')}
             </text>
             <text x={150} y={172} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              Single source of truth
+              {t('frame3_3.singleSource')}
             </text>
           </motion.g>
         )}
@@ -79,10 +81,10 @@ export const Frame3_3: React.FC = () => {
           >
             <rect x={580} y={130} width={140} height={50} rx={6} fill={colors.surface} stroke={colors.server} strokeWidth={1} />
             <text x={650} y={155} textAnchor="middle" fill={colors.server} fontSize={11} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Knows Everything
+              {t('frame3_3.knowsEverything')}
             </text>
             <text x={650} y={172} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              All workload identities
+              {t('frame3_3.allWorkloadIds')}
             </text>
           </motion.g>
         )}
@@ -95,10 +97,10 @@ export const Frame3_3: React.FC = () => {
           >
             <rect x={580} y={250} width={140} height={50} rx={6} fill={colors.surface} stroke={colors.server} strokeWidth={1} />
             <text x={650} y={275} textAnchor="middle" fill={colors.server} fontSize={11} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Signs Identities
+              {t('frame3_3.signsIdentities')}
             </text>
             <text x={650} y={292} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              Issues official SVIDs
+              {t('frame3_3.issuesOfficialSVIDs')}
             </text>
           </motion.g>
         )}
@@ -112,10 +114,12 @@ export const Frame3_3: React.FC = () => {
           >
             <rect x={200} y={390} width={400} height={70} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={420} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              Think of it like <tspan fill={colors.server} fontWeight="bold">corporate headquarters</tspan>—
+              {t('frame3_3.metaphor').split('corporate headquarters').map((part, i) =>
+                i === 0 ? <tspan key={i}>{part}</tspan> : <tspan key={i}><tspan fill={colors.server} fontWeight="bold">corporate headquarters</tspan>{part}</tspan>
+              )}
             </text>
             <text x={400} y={445} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              the central authority that decides who gets an official badge
+              {t('frame3_3.metaphorConclusion')}
             </text>
           </motion.g>
         )}

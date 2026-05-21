@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent, Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Attested Agent with workloads needing identity
  */
 export const Frame5_1: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame5_1: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Node Trusted. Now What?
+          {t('frame5_1.title')}
         </motion.text>
 
         {/* Attested Agent */}
@@ -46,7 +48,7 @@ export const Frame5_1: React.FC = () => {
             size={70}
           />
           <text x={400} y={200} textAnchor="middle" fill={colors.success} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-            ✓ Node Attested
+            {t('frame5_1.nodeTrustedLabel')}
           </text>
         </motion.g>
 
@@ -84,7 +86,7 @@ export const Frame5_1: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={450} textAnchor="middle" fill={colors.textPrimary} fontSize={16} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Workloads on this node need their own identities
+              {t('frame5_1.workloadsNeed')}
             </text>
           </motion.g>
         )}

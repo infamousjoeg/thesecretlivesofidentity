@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: SVID as the document proving identity
  */
 export const Frame2_10: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame2_10: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          SVID: Your Identity Document
+          {t('frame2_10.title')}
         </motion.text>
 
         <motion.text
@@ -42,7 +44,7 @@ export const Frame2_10: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          SPIFFE Verifiable Identity Document
+          {t('frame2_10.fullName')}
         </motion.text>
 
         {/* Large SVID Badge */}
@@ -70,7 +72,7 @@ export const Frame2_10: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={330} textAnchor="middle" fill={colors.textSecondary} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              An SVID contains:
+              {t('frame2_10.contains')}
             </text>
           </motion.g>
         )}
@@ -84,17 +86,17 @@ export const Frame2_10: React.FC = () => {
           >
             <g transform="translate(250, 350)">
               {[
-                { icon: '🏷️', text: 'The SPIFFE ID' },
-                { icon: '🔑', text: 'A public key' },
-                { icon: '⏰', text: 'Expiration time' },
-                { icon: '✍️', text: 'Authority signature' },
+                { icon: '🏷️', textKey: 'frame2_10.item1' },
+                { icon: '🔑', textKey: 'frame2_10.item2' },
+                { icon: '⏰', textKey: 'frame2_10.item3' },
+                { icon: '✍️', textKey: 'frame2_10.item4' },
               ].map((item, i) => (
-                <g key={item.text} transform={`translate(${(i % 2) * 180}, ${Math.floor(i / 2) * 40})`}>
+                <g key={item.textKey} transform={`translate(${(i % 2) * 180}, ${Math.floor(i / 2) * 40})`}>
                   <text x={0} y={0} fontSize={16}>
                     {item.icon}
                   </text>
                   <text x={25} y={0} fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-                    {item.text}
+                    {t(item.textKey)}
                   </text>
                 </g>
               ))}
@@ -111,7 +113,7 @@ export const Frame2_10: React.FC = () => {
           >
             <rect x={200} y={440} width={400} height={45} rx={8} fill={`${colors.svid}15`} stroke={colors.svid} strokeWidth={1} />
             <text x={400} y={468} textAnchor="middle" fill={colors.svid} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              The physical badge that proves your identity
+              {t('frame2_10.summary')}
             </text>
           </motion.g>
         )}

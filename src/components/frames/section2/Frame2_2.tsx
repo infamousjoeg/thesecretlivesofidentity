@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
@@ -10,13 +11,14 @@ import { colors } from '@/utils/constants';
  * Visual: Three pillars of SPIFFE
  */
 export const Frame2_2: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500]);
   const prefersReducedMotion = useReducedMotion();
 
   const pillars = [
-    { icon: '🏷️', title: 'NAME', desc: 'A way to name workloads', color: colors.server },
-    { icon: '📜', title: 'PROVE', desc: 'A way to prove that name', color: colors.svid },
-    { icon: '✓', title: 'VERIFY', desc: 'A way to verify proofs', color: colors.success },
+    { icon: '🏷️', titleKey: 'frame2_2.pillar1Title', descKey: 'frame2_2.pillar1Description', color: colors.server },
+    { icon: '📜', titleKey: 'frame2_2.pillar2Title', descKey: 'frame2_2.pillar2Description', color: colors.svid },
+    { icon: '✓', titleKey: 'frame2_2.pillar3Title', descKey: 'frame2_2.pillar3Description', color: colors.success },
   ];
 
   return (
@@ -34,24 +36,24 @@ export const Frame2_2: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Three Core Ideas
+          {t('frame2_2.title')}
         </motion.text>
 
         {/* Three pillars */}
         {pillars.map((pillar, index) => (
           phase >= index + 1 && (
             <motion.g
-              key={pillar.title}
+              key={pillar.titleKey}
               initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
               {/* Pillar */}
               <rect
-                x={140 + index * 220}
-                y={150}
-                width={160}
-                height={250}
+                x={130 + index * 220}
+                y={100}
+                width={180}
+                height={310}
                 rx={8}
                 fill={colors.surface}
                 stroke={pillar.color}
@@ -60,19 +62,19 @@ export const Frame2_2: React.FC = () => {
 
               {/* Top cap */}
               <rect
-                x={140 + index * 220}
-                y={150}
-                width={160}
-                height={50}
+                x={130 + index * 220}
+                y={100}
+                width={180}
+                height={55}
                 rx={8}
                 fill={pillar.color}
               />
 
               {/* Number */}
-              <circle cx={170 + index * 220} cy={175} r={15} fill="white" opacity={0.9} />
+              <circle cx={162 + index * 220} cy={127} r={17} fill="white" opacity={0.9} />
               <text
-                x={170 + index * 220}
-                y={181}
+                x={162 + index * 220}
+                y={134}
                 textAnchor="middle"
                 fill={pillar.color}
                 fontSize={16}
@@ -85,7 +87,7 @@ export const Frame2_2: React.FC = () => {
               {/* Icon */}
               <text
                 x={220 + index * 220}
-                y={260}
+                y={225}
                 textAnchor="middle"
                 fontSize={48}
               >
@@ -95,26 +97,36 @@ export const Frame2_2: React.FC = () => {
               {/* Title */}
               <text
                 x={220 + index * 220}
-                y={320}
+                y={290}
                 textAnchor="middle"
                 fill={colors.textPrimary}
                 fontSize={18}
                 fontWeight="bold"
                 fontFamily="Space Grotesk, sans-serif"
               >
-                {pillar.title}
+                {t(pillar.titleKey)}
               </text>
 
-              {/* Description */}
+              {/* Description — two lines to fit longer translations inside card */}
               <text
                 x={220 + index * 220}
-                y={350}
+                y={330}
                 textAnchor="middle"
                 fill={colors.textMuted}
                 fontSize={12}
                 fontFamily="IBM Plex Sans, sans-serif"
               >
-                {pillar.desc}
+                {t(`${pillar.descKey}Line1`, { defaultValue: t(pillar.descKey) })}
+              </text>
+              <text
+                x={220 + index * 220}
+                y={348}
+                textAnchor="middle"
+                fill={colors.textMuted}
+                fontSize={12}
+                fontFamily="IBM Plex Sans, sans-serif"
+              >
+                {t(`${pillar.descKey}Line2`, { defaultValue: '' })}
               </text>
             </motion.g>
           )
@@ -161,7 +173,7 @@ export const Frame2_2: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Together, these enable secure workload identity.
+            {t('frame2_2.together')}
           </motion.text>
         )}
       </svg>

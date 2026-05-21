@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer, SpireAgent, Workload, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Complete flow from admin to workload
  */
 export const Frame3_12: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500, 500]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame3_12: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The Full Picture
+          {t('frame3_12.title')}
         </motion.text>
 
         {/* Step 1: Admin creates entries */}
@@ -41,7 +43,7 @@ export const Frame3_12: React.FC = () => {
           <rect x={50} y={70} width={100} height={60} rx={6} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
           <text x={100} y={95} textAnchor="middle" fontSize={20}>👤</text>
           <text x={100} y={115} textAnchor="middle" fill={colors.textMuted} fontSize={9} fontFamily="Space Grotesk, sans-serif">
-            Admin
+            {t('frame3_12.adminLabel')}
           </text>
           <circle cx={100} cy={55} r={14} fill={phase >= 1 ? colors.success : colors.textMuted} />
           <text x={100} y={60} textAnchor="middle" fill="white" fontSize={11} fontWeight="bold">1</text>
@@ -57,7 +59,7 @@ export const Frame3_12: React.FC = () => {
             <line x1={160} y1={100} x2={220} y2={100} stroke={colors.success} strokeWidth={2} />
             <polygon points="230,100 220,95 220,105" fill={colors.success} />
             <text x={195} y={90} textAnchor="middle" fill={colors.success} fontSize={8} fontFamily="IBM Plex Sans, sans-serif">
-              creates entries
+              {t('frame3_12.createsEntries')}
             </text>
           </motion.g>
         )}
@@ -86,7 +88,7 @@ export const Frame3_12: React.FC = () => {
             <line x1={360} y1={100} x2={420} y2={100} stroke={colors.success} strokeWidth={2} />
             <polygon points="430,100 420,95 420,105" fill={colors.success} />
             <text x={395} y={90} textAnchor="middle" fill={colors.success} fontSize={8} fontFamily="IBM Plex Sans, sans-serif">
-              syncs entries
+              {t('frame3_12.syncsEntries')}
             </text>
           </motion.g>
         )}
@@ -115,7 +117,7 @@ export const Frame3_12: React.FC = () => {
             <line x1={560} y1={100} x2={620} y2={100} stroke={colors.success} strokeWidth={2} />
             <polygon points="630,100 620,95 620,105" fill={colors.success} />
             <text x={595} y={90} textAnchor="middle" fill={colors.success} fontSize={8} fontFamily="IBM Plex Sans, sans-serif">
-              attests workload
+              {t('frame3_12.attestsWorkload')}
             </text>
           </motion.g>
         )}
@@ -152,10 +154,15 @@ export const Frame3_12: React.FC = () => {
           >
             <rect x={80} y={280} width={640} height={180} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={310} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              The Complete Flow
+              {t('frame3_12.flowTitle')}
             </text>
 
-            {['Admin creates entries', 'Server stores entries', 'Agent checks workloads', 'Matching workloads get SVIDs'].map((step, i) => (
+            {[
+              t('frame3_12.step1'),
+              t('frame3_12.step2'),
+              t('frame3_12.step3'),
+              t('frame3_12.step4'),
+            ].map((step, i) => (
               <g key={step}>
                 <circle cx={120} cy={345 + i * 25} r={10} fill={colors.success} />
                 <text x={120} y={349 + i * 25} textAnchor="middle" fill="white" fontSize={10} fontWeight="bold">
@@ -168,13 +175,13 @@ export const Frame3_12: React.FC = () => {
             ))}
 
             <text x={550} y={370} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              All automatic.
+              {t('frame3_12.automatic')}
             </text>
             <text x={550} y={390} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              No secrets distributed.
+              {t('frame3_12.noSecrets')}
             </text>
             <text x={550} y={410} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              No manual intervention.
+              {t('frame3_12.noManual')}
             </text>
           </motion.g>
         )}

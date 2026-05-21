@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,6 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Breaking down the SPIFFE ID into components
  */
 export const Frame2_4: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500]);
 
   return (
@@ -26,7 +28,7 @@ export const Frame2_4: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          SPIFFE ID Anatomy
+          {t('frame2_4.title')}
         </motion.text>
 
         {/* Full SPIFFE ID */}
@@ -60,10 +62,10 @@ export const Frame2_4: React.FC = () => {
               spiffe://
             </text>
             <text x={175} y={275} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              The scheme
+              {t('frame2_4.schemeLabel')}
             </text>
             <text x={175} y={290} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              (always spiffe)
+              {t('frame2_4.schemeNote')}
             </text>
 
             {/* Arrow pointing up */}
@@ -84,10 +86,10 @@ export const Frame2_4: React.FC = () => {
               acme.com
             </text>
             <text x={370} y={275} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Trust domain
+              {t('frame2_4.trustDomainLabel')}
             </text>
             <text x={370} y={290} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              (your organization)
+              {t('frame2_4.trustDomainNote')}
             </text>
 
             {/* Arrow pointing up */}
@@ -108,10 +110,10 @@ export const Frame2_4: React.FC = () => {
               /payments/api
             </text>
             <text x={595} y={275} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Path
+              {t('frame2_4.pathLabel')}
             </text>
             <text x={595} y={290} textAnchor="middle" fill={colors.textMuted} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              (identifies workload)
+              {t('frame2_4.pathNote')}
             </text>
 
             {/* Arrow pointing up */}
@@ -127,13 +129,15 @@ export const Frame2_4: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <rect x={150} y={340} width={500} height={100} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
-            <text x={400} y={380} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              <tspan x={400} dy={0}>The SPIFFE ID is a URI that uniquely identifies</tspan>
-              <tspan x={400} dy={20}>a workload within its trust domain.</tspan>
+            <rect x={150} y={330} width={500} height={130} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
+            <text x={400} y={365} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
+              {t('frame2_4.descriptionLine1', { defaultValue: t('frame2_4.description') })}
             </text>
-            <text x={400} y={425} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Like an email address for services: user@company.com
+            <text x={400} y={385} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
+              {t('frame2_4.descriptionLine2', { defaultValue: '' })}
+            </text>
+            <text x={400} y={440} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
+              {t('frame2_4.analogy')}
             </text>
           </motion.g>
         )}

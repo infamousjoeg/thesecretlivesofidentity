@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, FileText, Target, ChevronRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useReducedMotion } from '@/hooks';
 import { tracks, trackOrder, type TrackId } from '@/content/tracks';
 
@@ -14,7 +15,14 @@ interface TrackCardProps {
 const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) => {
   const navigate = useNavigate();
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation('tracks');
   const track = tracks[trackId];
+
+  const title = t(`${trackId}.title`, { defaultValue: track.title });
+  const subtitle = t(`${trackId}.subtitle`, { defaultValue: track.subtitle });
+  const duration = t(`${trackId}.duration`, { defaultValue: track.duration });
+  const description = t(`${trackId}.description`, { defaultValue: track.description });
+  const goal = t(`${trackId}.goal`, { defaultValue: track.goal });
 
   // Color schemes for each track
   const colorSchemes = {
@@ -67,13 +75,13 @@ const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) 
           navigate(`/spiffe/${trackId}`);
         }
       }}
-      aria-label={`${track.title} track: ${track.subtitle}. ${track.duration}, ${track.frames.length} frames`}
+      aria-label={`${title} track: ${subtitle}. ${duration}, ${track.frames.length} frames`}
     >
       {/* Recommended badge */}
       {isRecommended && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
           <span className="px-3 py-1 text-xs font-medium bg-server text-white rounded-full whitespace-nowrap">
-            Recommended
+            {t('recommended', { ns: 'ui' })}
           </span>
         </div>
       )}
@@ -85,17 +93,17 @@ const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) 
 
       {/* Title & Subtitle */}
       <h3 className="text-2xl sm:text-3xl font-display font-bold text-textPrimary mb-1">
-        {track.title}
+        {title}
       </h3>
       <p className={`text-lg font-medium ${scheme.icon} mb-4`}>
-        {track.subtitle}
+        {subtitle}
       </p>
 
       {/* Stats */}
       <div className="flex items-center gap-4 text-sm text-textSecondary mb-4">
         <div className="flex items-center gap-1.5">
           <Clock className="w-4 h-4" />
-          <span>{track.duration}</span>
+          <span>{duration}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <FileText className="w-4 h-4" />
@@ -105,13 +113,13 @@ const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) 
 
       {/* Description */}
       <p className="text-textSecondary mb-4 flex-1">
-        {track.description}
+        {description}
       </p>
 
       {/* Goal */}
       <div className="flex items-start gap-2 text-sm text-textMuted mb-6 bg-surface/50 rounded-lg p-3">
         <Target className="w-4 h-4 mt-0.5 flex-shrink-0" />
-        <span className="italic">&ldquo;{track.goal}&rdquo;</span>
+        <span className="italic">&ldquo;{goal}&rdquo;</span>
       </div>
 
       {/* CTA Button */}
@@ -129,7 +137,7 @@ const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) 
           navigate(`/spiffe/${trackId}`);
         }}
       >
-        <span>Start {track.title}</span>
+        <span>{t('trackSelector.startTrack', { title, defaultValue: `Start ${title}` })}</span>
         <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
       </button>
     </motion.div>
@@ -138,6 +146,7 @@ const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) 
 
 export const TrackSelector: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation('tracks');
 
   return (
     <div className="min-h-screen bg-background">
@@ -149,7 +158,7 @@ export const TrackSelector: React.FC = () => {
             className="flex items-center gap-2 text-textSecondary hover:text-textPrimary transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span className="hidden sm:inline">Back to Home</span>
+            <span className="hidden sm:inline">{t('backToHome', { ns: 'ui' })}</span>
           </Link>
         </div>
       </header>
@@ -164,14 +173,10 @@ export const TrackSelector: React.FC = () => {
           transition={{ duration: 0.4 }}
         >
           <h1 className="text-4xl sm:text-5xl font-display font-bold text-textPrimary mb-4">
-            Learn{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-server via-agent to-svid">
-              SPIFFE
-            </span>
+            {t('trackSelector.title')}
           </h1>
           <p className="text-lg sm:text-xl text-textSecondary max-w-2xl mx-auto">
-            Choose your learning path based on how much time you have.
-            Each track builds on the previous one.
+            {t('trackSelector.subtitle')}
           </p>
         </motion.div>
 
@@ -194,7 +199,7 @@ export const TrackSelector: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.4 }}
         >
-          You can switch tracks anytime. Progress is saved automatically.
+          {t('trackSelector.hint')}
         </motion.p>
       </main>
     </div>

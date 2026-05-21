@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent, Workload, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Agent now trusted and can issue badges
  */
 export const Frame4_9: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame4_9: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          After Attestation
+          {t('frame4_9.title')}
         </motion.text>
 
         {/* Attested Agent */}
@@ -41,7 +43,7 @@ export const Frame4_9: React.FC = () => {
           <rect x={250} y={90} width={300} height={200} rx={12} fill={`${colors.agent}10`} stroke={colors.agent} strokeWidth={2} />
           <rect x={350} y={70} width={100} height={30} rx={6} fill={colors.background} stroke={colors.agent} strokeWidth={2} />
           <text x={400} y={90} textAnchor="middle" fill={colors.agent} fontSize={11} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            NODE
+            {t('frame4_9.nodeLabel')}
           </text>
 
           <SpireAgent label="Agent" position={{ x: 400, y: 160 }} size={60} active={true} animate={!prefersReducedMotion} />
@@ -71,13 +73,13 @@ export const Frame4_9: React.FC = () => {
           >
             <rect x={580} y={130} width={160} height={80} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
             <text x={660} y={160} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Agent can now:
+              {t('frame4_9.agentCan')}
             </text>
             <text x={660} y={185} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Issue badges to
+              {t('frame4_9.canDo')}
             </text>
             <text x={660} y={200} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              local workloads
+              {/* part of canDo */}
             </text>
           </motion.g>
         )}
@@ -109,10 +111,10 @@ export const Frame4_9: React.FC = () => {
           >
             <rect x={150} y={420} width={500} height={60} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={450} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              The Agent's <tspan fill={colors.agent} fontWeight="bold">own SVID</tspan> proves it's authorized to speak for this node.
+              {t('frame4_9.agentSVIDNote')}
             </text>
             <text x={400} y={470} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Next: How workloads get their identities...
+              {t('frame4_9.next')}
             </text>
           </motion.g>
         )}

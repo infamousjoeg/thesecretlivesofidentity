@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,28 +10,29 @@ import { colors } from '@/utils/constants';
  * Visual: Multiple real-world SPIFFE ID examples
  */
 export const Frame2_5: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 400]);
 
   const examples = [
     {
       id: 'spiffe://acme.com/payments/processor',
       domain: 'acme.com',
-      desc: 'Payment processing service',
+      descKey: 'frame2_5.example1Description',
     },
     {
       id: 'spiffe://prod.mycompany.io/api/users',
       domain: 'prod.mycompany.io',
-      desc: 'User API in production',
+      descKey: 'frame2_5.example2Description',
     },
     {
       id: 'spiffe://k8s.example.org/ns/default/sa/frontend',
       domain: 'k8s.example.org',
-      desc: 'K8s service account based',
+      descKey: 'frame2_5.example3Description',
     },
     {
       id: 'spiffe://aws.acme.com/region/us-east-1/service/db',
       domain: 'aws.acme.com',
-      desc: 'AWS region-specific database',
+      descKey: 'frame2_5.example4Description',
     },
   ];
 
@@ -49,7 +51,7 @@ export const Frame2_5: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Real-World Examples
+          {t('frame2_5.title')}
         </motion.text>
 
         {/* Examples */}
@@ -91,7 +93,7 @@ export const Frame2_5: React.FC = () => {
                 fontSize={11}
                 fontFamily="IBM Plex Sans, sans-serif"
               >
-                {example.desc}
+                {t(example.descKey)}
               </text>
 
               {/* Trust domain highlight */}
@@ -132,7 +134,7 @@ export const Frame2_5: React.FC = () => {
               fontSize={14}
               fontFamily="IBM Plex Sans, sans-serif"
             >
-              The path structure is flexible—define it to match your organization.
+              {t('frame2_5.pathNote')}
             </text>
           </motion.g>
         )}

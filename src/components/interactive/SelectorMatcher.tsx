@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { colors } from '@/utils/constants';
 
@@ -13,7 +14,7 @@ interface Question {
     selectors: string[];
     isCorrect: boolean;
   }[];
-  explanation: string;
+  explanationKey: string;
 }
 
 const questions: Question[] = [
@@ -27,7 +28,7 @@ const questions: Question[] = [
       { label: 'Entry B', selectors: ['k8s:ns:frontend', 'k8s:sa:web-app'], isCorrect: false },
       { label: 'Entry C', selectors: ['k8s:ns:payments', 'k8s:sa:billing'], isCorrect: false },
     ],
-    explanation: 'Entry A matches both selectors: namespace "payments" AND service account "payment-service"',
+    explanationKey: 'q1_explanation',
   },
   {
     workload: {
@@ -39,7 +40,7 @@ const questions: Question[] = [
       { label: 'Entry B', selectors: ['docker:label:app=cache', 'unix:uid:1000'], isCorrect: true },
       { label: 'Entry C', selectors: ['docker:label:app=cache', 'unix:uid:0'], isCorrect: false },
     ],
-    explanation: 'Entry B matches both: Docker label "app=cache" AND Unix UID 1000',
+    explanationKey: 'q2_explanation',
   },
   {
     workload: {
@@ -51,7 +52,7 @@ const questions: Question[] = [
       { label: 'Entry B', selectors: ['k8s:ns:data', 'k8s:pod-label:job=backup'], isCorrect: true },
       { label: 'Entry C', selectors: ['k8s:ns:data', 'k8s:pod-label:job=restore'], isCorrect: false },
     ],
-    explanation: 'Entry B requires both namespace AND the correct pod label. Entry A is too permissive!',
+    explanationKey: 'q3_explanation',
   },
 ];
 
@@ -60,6 +61,7 @@ const questions: Question[] = [
  * Users match workloads to registration entries based on selectors
  */
 export const SelectorMatcher: React.FC = () => {
+  const { t } = useTranslation('frames');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
@@ -110,21 +112,21 @@ export const SelectorMatcher: React.FC = () => {
             {score === questions.length ? '🎉' : score >= questions.length / 2 ? '👍' : '📚'}
           </div>
           <h3 className="text-xl font-bold text-textPrimary mb-2">
-            Quiz Complete!
+            {t('selectorMatcher.quizComplete', { defaultValue: 'Quiz Complete!' })}
           </h3>
           <p className="text-textSecondary mb-4">
-            You got {score} out of {questions.length} correct
+            {t('selectorMatcher.scoreResult', { score, total: questions.length, defaultValue: `You got ${score} out of ${questions.length} correct` })}
           </p>
           <p className="text-sm text-textMuted mb-6">
             {score === questions.length
-              ? "Perfect! You understand workload attestation selectors."
-              : "Selectors must match ALL properties for attestation to succeed."}
+              ? t('selectorMatcher.perfectScore', { defaultValue: 'Perfect! You understand workload attestation selectors.' })
+              : t('selectorMatcher.partialScore', { defaultValue: 'Selectors must match ALL properties for attestation to succeed.' })}
           </p>
           <button
             onClick={handleRestart}
             className="px-6 py-2 bg-success text-white rounded-lg font-medium hover:bg-success/90"
           >
-            Try Again
+            {t('selectorMatcher.tryAgain', { defaultValue: 'Try Again' })}
           </button>
         </motion.div>
       </div>
@@ -136,10 +138,10 @@ export const SelectorMatcher: React.FC = () => {
       {/* Progress */}
       <div className="flex items-center justify-between mb-4">
         <span className="text-sm text-textMuted">
-          Question {currentQuestion + 1} of {questions.length}
+          {t('selectorMatcher.questionOf', { current: currentQuestion + 1, total: questions.length, defaultValue: `Question ${currentQuestion + 1} of ${questions.length}` })}
         </span>
         <span className="text-sm text-success font-medium">
-          Score: {score}
+          {t('selectorMatcher.scoreLabel', { score, defaultValue: `Score: ${score}` })}
         </span>
       </div>
 
@@ -166,7 +168,7 @@ export const SelectorMatcher: React.FC = () => {
               fontSize={14}
               fontWeight="bold"
             >
-              Workload: {question.workload.name}
+              {t('selectorMatcher.workloadLabel', { defaultValue: 'Workload:' })} {question.workload.name}
             </text>
             <text
               x={150}
@@ -175,7 +177,7 @@ export const SelectorMatcher: React.FC = () => {
               fill={colors.textSecondary}
               fontSize={11}
             >
-              Properties:
+              {t('selectorMatcher.propertiesLabel', { defaultValue: 'Properties:' })}
             </text>
             {question.workload.properties.map((prop, i) => (
               <text
@@ -210,7 +212,7 @@ export const SelectorMatcher: React.FC = () => {
               fill={colors.textMuted}
               fontSize={10}
             >
-              matches?
+              {t('selectorMatcher.matchesQuestion', { defaultValue: 'matches?' })}
             </text>
             <defs>
               <marker
@@ -318,8 +320,10 @@ export const SelectorMatcher: React.FC = () => {
             }`}
           >
             <p className="text-sm text-textPrimary">
-              {question.entries[selectedAnswer!].isCorrect ? '✓ Correct! ' : '✗ Not quite. '}
-              {question.explanation}
+              {question.entries[selectedAnswer!].isCorrect
+                ? t('selectorMatcher.correct', { defaultValue: '✓ Correct! ' })
+                : t('selectorMatcher.notQuite', { defaultValue: '✗ Not quite. ' })}
+              {t(`selectorMatcher.${question.explanationKey}`, { defaultValue: '' })}
             </p>
           </motion.div>
         )}
@@ -333,14 +337,16 @@ export const SelectorMatcher: React.FC = () => {
             disabled={selectedAnswer === null}
             className="px-6 py-2 bg-success text-white rounded-lg font-medium hover:bg-success/90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Check Answer
+            {t('selectorMatcher.checkAnswer', { defaultValue: 'Check Answer' })}
           </button>
         ) : (
           <button
             onClick={handleNext}
             className="px-6 py-2 bg-success text-white rounded-lg font-medium hover:bg-success/90"
           >
-            {currentQuestion < questions.length - 1 ? 'Next Question →' : 'See Results'}
+            {currentQuestion < questions.length - 1
+              ? t('selectorMatcher.nextQuestion', { defaultValue: 'Next Question →' })
+              : t('selectorMatcher.seeResults', { defaultValue: 'See Results' })}
           </button>
         )}
       </div>

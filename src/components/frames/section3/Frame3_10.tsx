@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,13 +10,14 @@ import { colors } from '@/utils/constants';
  * Visual: Various selector types
  */
 export const Frame3_10: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 400]);
 
   const selectors = [
-    { type: 'Kubernetes', examples: ['k8s:ns:production', 'k8s:pod-label:app=api', 'k8s:sa:payments'], color: colors.server },
-    { type: 'Unix', examples: ['unix:uid:1000', 'unix:gid:docker', 'unix:path:/usr/bin/app'], color: colors.agent },
-    { type: 'Docker', examples: ['docker:label:env=prod', 'docker:image-id:abc123'], color: colors.svid },
-    { type: 'AWS', examples: ['aws:iid:account:123', 'aws:iid:region:us-east-1'], color: colors.trustBundle },
+    { typeKey: 'frame3_10.k8sLabel', examples: ['k8s:ns:production', 'k8s:pod-label:app=api', 'k8s:sa:payments'], color: colors.server },
+    { typeKey: 'frame3_10.unixLabel', examples: ['unix:uid:1000', 'unix:gid:docker', 'unix:path:/usr/bin/app'], color: colors.agent },
+    { typeKey: 'frame3_10.dockerLabel', examples: ['docker:label:env=prod', 'docker:image-id:abc123'], color: colors.svid },
+    { typeKey: 'frame3_10.awsLabel', examples: ['aws:iid:account:123', 'aws:iid:region:us-east-1'], color: colors.trustBundle },
   ];
 
   return (
@@ -33,7 +35,7 @@ export const Frame3_10: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Selectors: The Criteria
+          {t('frame3_10.title')}
         </motion.text>
 
         <motion.text
@@ -46,14 +48,14 @@ export const Frame3_10: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Selectors describe workload properties the Agent can verify
+          {t('frame3_10.description')}
         </motion.text>
 
         {/* Selector types */}
         {selectors.map((sel, index) => (
           phase >= index + 1 && (
             <motion.g
-              key={sel.type}
+              key={sel.typeKey}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
@@ -77,7 +79,7 @@ export const Frame3_10: React.FC = () => {
                 fill={sel.color}
               />
               <text x={160} y={145 + index * 90} textAnchor="middle" fill="white" fontSize={13} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-                {sel.type}
+                {t(sel.typeKey)}
               </text>
               {sel.examples.map((ex, i) => (
                 <text
@@ -107,7 +109,7 @@ export const Frame3_10: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            Different platforms expose different properties—selectors are extensible.
+            {t('frame3_10.conclusion')}
           </motion.text>
         )}
       </svg>

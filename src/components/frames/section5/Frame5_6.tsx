@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent, Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -13,6 +14,7 @@ import { colors } from '@/utils/constants';
 export const Frame5_6: React.FC = () => {
   const { phase } = useAnimationPhase([0, 500, 500, 500, 600]);
   const prefersReducedMotion = useReducedMotion();
+  const { t } = useTranslation('frames');
 
   return (
     <Stage>
@@ -29,7 +31,7 @@ export const Frame5_6: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          How the Agent Decides
+          {t('frame5_6.title')}
         </motion.text>
 
         {/* Workload */}
@@ -134,10 +136,10 @@ export const Frame5_6: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <text x={400} y={420} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Agent examines: What process? What user?
+              {t('frame5_6.examines')}
             </text>
             <text x={400} y={445} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              What container? What K8s metadata?
+              {t('frame5_6.examines2')}
             </text>
           </motion.g>
         )}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,6 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Hardware root of trust
  */
 export const Frame8_9: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   return (
@@ -26,7 +28,7 @@ export const Frame8_9: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Platform Attestation: TPM
+          {t('frame8_9.title', { defaultValue: 'Platform Attestation: TPM' })}
         </motion.text>
 
         {/* Physical machine */}
@@ -36,7 +38,7 @@ export const Frame8_9: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <rect x={200} y={120} width={400} height={250} rx={12} fill={colors.surface} stroke={colors.textMuted} strokeWidth={3} />
-          <text x={400} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={14} fontWeight="bold">Physical Server</text>
+          <text x={400} y={155} textAnchor="middle" fill={colors.textSecondary} fontSize={14} fontWeight="bold">{t('frame8_9.physicalServer', { defaultValue: 'Physical Server' })}</text>
           <text x={400} y={180} textAnchor="middle" fontSize={30}>🖥️</text>
         </motion.g>
 
@@ -48,8 +50,8 @@ export const Frame8_9: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={320} y={210} width={160} height={80} rx={8} fill={colors.success} />
-            <text x={400} y={240} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">TPM Chip</text>
-            <text x={400} y={265} textAnchor="middle" fill="white" fontSize={11}>Hardware Security</text>
+            <text x={400} y={240} textAnchor="middle" fill="white" fontSize={14} fontWeight="bold">{t('frame8_9.tpmChip', { defaultValue: 'TPM Chip' })}</text>
+            <text x={400} y={265} textAnchor="middle" fill="white" fontSize={11}>{t('frame8_9.hardwareSecurity', { defaultValue: 'Hardware Security' })}</text>
             <text x={400} y={280} textAnchor="middle" fill="white" fontSize={20}>🔐</text>
           </motion.g>
         )}
@@ -62,11 +64,11 @@ export const Frame8_9: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <rect x={520} y={200} width={200} height={120} rx={6} fill={colors.surface} stroke={colors.success} strokeWidth={1} />
-            <text x={620} y={225} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold">TPM Provides:</text>
-            <text x={540} y={250} fill={colors.textSecondary} fontSize={10}>• Unique device identity</text>
-            <text x={540} y={270} fill={colors.textSecondary} fontSize={10}>• Tamper evidence</text>
-            <text x={540} y={290} fill={colors.textSecondary} fontSize={10}>• Sealed secrets</text>
-            <text x={540} y={310} fill={colors.textSecondary} fontSize={10}>• Boot attestation</text>
+            <text x={620} y={225} textAnchor="middle" fill={colors.success} fontSize={11} fontWeight="bold">{t('frame8_9.tpmProvides', { defaultValue: 'TPM Provides:' })}</text>
+            <text x={540} y={250} fill={colors.textSecondary} fontSize={10}>• {t('frame8_9.bullet1', { defaultValue: 'Unique device identity' })}</text>
+            <text x={540} y={270} fill={colors.textSecondary} fontSize={10}>• {t('frame8_9.bullet2', { defaultValue: 'Tamper evidence' })}</text>
+            <text x={540} y={290} fill={colors.textSecondary} fontSize={10}>• {t('frame8_9.bullet3', { defaultValue: 'Sealed secrets' })}</text>
+            <text x={540} y={310} fill={colors.textSecondary} fontSize={10}>• {t('frame8_9.bullet4', { defaultValue: 'Boot attestation' })}</text>
           </motion.g>
         )}
 
@@ -79,10 +81,10 @@ export const Frame8_9: React.FC = () => {
           >
             <rect x={150} y={400} width={500} height={70} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={2} />
             <text x={400} y={430} textAnchor="middle" fill={colors.textPrimary} fontSize={15} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              Hardware root of trust
+              {t('frame8_9.hardwareRootOfTrust', { defaultValue: 'Hardware root of trust' })}
             </text>
             <text x={400} y={455} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Proves the physical machine's identity—strongest attestation
+              {t('frame8_9.conclusion', { defaultValue: "Proves the physical machine's identity—strongest attestation" })}
             </text>
           </motion.g>
         )}

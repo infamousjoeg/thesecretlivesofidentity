@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent, Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Agent as local security desk with workloads
  */
 export const Frame3_5: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame3_5: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The SPIRE Agent
+          {t('frame3_5.title')}
         </motion.text>
 
         {/* Node boundary */}
@@ -41,7 +43,7 @@ export const Frame3_5: React.FC = () => {
           <rect x={200} y={80} width={400} height={300} rx={12} fill={`${colors.agent}08`} stroke={colors.agent} strokeWidth={2} strokeDasharray="10 5" />
           <rect x={340} y={60} width={120} height={35} rx={8} fill={colors.background} stroke={colors.agent} strokeWidth={2} />
           <text x={400} y={83} textAnchor="middle" fill={colors.agent} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-            NODE
+            {t('frame3_5.nodeLabel')}
           </text>
         </motion.g>
 
@@ -61,7 +63,7 @@ export const Frame3_5: React.FC = () => {
             />
             <rect x={330} y={230} width={140} height={30} rx={4} fill={colors.agent} />
             <text x={400} y={250} textAnchor="middle" fill="white" fontSize={11} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Local Security Desk
+              {t('frame3_5.localSecurityDesk')}
             </text>
           </motion.g>
         )}
@@ -88,10 +90,12 @@ export const Frame3_5: React.FC = () => {
           >
             <rect x={150} y={400} width={500} height={70} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={430} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              The Agent runs on <tspan fill={colors.agent} fontWeight="bold">every node</tspan>—
+              {t('frame3_5.metaphor').split('every node').map((part, i) =>
+                i === 0 ? <tspan key={i}>{part}</tspan> : <tspan key={i}><tspan fill={colors.agent} fontWeight="bold">every node</tspan>{part}</tspan>
+              )}
             </text>
             <text x={400} y={455} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              issuing badges to local workloads on behalf of headquarters
+              {t('frame3_5.metaphorConclusion')}
             </text>
           </motion.g>
         )}

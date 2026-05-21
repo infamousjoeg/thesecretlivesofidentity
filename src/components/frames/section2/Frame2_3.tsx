@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Workload with its SPIFFE ID label
  */
 export const Frame2_3: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 800]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame2_3: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          The SPIFFE ID
+          {t('frame2_3.title')}
         </motion.text>
 
         {/* Workload */}
@@ -72,7 +74,7 @@ export const Frame2_3: React.FC = () => {
               fontSize={12}
               fontFamily="IBM Plex Sans, sans-serif"
             >
-              SPIFFE ID
+              {t('frame2_3.label')}
             </text>
             <text
               x={400}
@@ -134,7 +136,7 @@ export const Frame2_3: React.FC = () => {
               fontWeight="600"
               fontFamily="Space Grotesk, sans-serif"
             >
-              A unique, permanent name in URI format
+              {t('frame2_3.description')}
             </text>
           </motion.g>
         )}

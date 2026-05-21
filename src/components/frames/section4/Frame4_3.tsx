@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireServer, SpireAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Definition and purpose of node attestation
  */
 export const Frame4_3: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame4_3: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Node Attestation
+          {t('frame4_3.title')}
         </motion.text>
 
         {/* Definition */}
@@ -40,10 +42,7 @@ export const Frame4_3: React.FC = () => {
         >
           <rect x={150} y={90} width={500} height={60} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={2} />
           <text x={400} y={125} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-            <tspan fontWeight="bold">Node Attestation</tspan>: Proving an Agent is running on
-          </text>
-          <text x={400} y={145} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-            a legitimate, authorized node
+            {t('frame4_3.definition')}
           </text>
         </motion.g>
 
@@ -57,7 +56,7 @@ export const Frame4_3: React.FC = () => {
             {/* Platform */}
             <rect x={350} y={200} width={300} height={150} rx={12} fill={`${colors.success}10`} stroke={colors.success} strokeWidth={2} strokeDasharray="10 5" />
             <text x={500} y={225} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              PLATFORM (AWS / K8s / GCP)
+              {t('frame4_3.platformLabel')}
             </text>
 
             {/* Agent inside platform */}
@@ -70,7 +69,7 @@ export const Frame4_3: React.FC = () => {
             <line x1={350} y1={270} x2={210} y2={270} stroke={colors.success} strokeWidth={2} />
             <polygon points="200,270 215,263 215,277" fill={colors.success} />
             <text x={280} y={260} textAnchor="middle" fill={colors.success} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              "This Agent is legit"
+              {t('frame4_3.platformSays')}
             </text>
           </motion.g>
         )}
@@ -84,16 +83,16 @@ export const Frame4_3: React.FC = () => {
           >
             <rect x={100} y={380} width={600} height={90} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={410} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              The platform provides <tspan fill={colors.success} fontWeight="bold">cryptographic proof</tspan> that:
+              {t('frame4_3.provides')}
             </text>
             <text x={300} y={440} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              ✓ The node exists
+              {t('frame4_3.proof1')}
             </text>
             <text x={500} y={440} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              ✓ The Agent runs on it
+              {t('frame4_3.proof2')}
             </text>
             <text x={400} y={460} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              ✓ It matches expected properties
+              {t('frame4_3.proof3')}
             </text>
           </motion.g>
         )}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Simple workload API call, getting identity
  */
 export const Frame5_4: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 800, 800, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame5_4: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Developer Experience
+          {t('frame5_4.title')}
         </motion.text>
 
         {/* Subtitle */}
@@ -44,7 +46,7 @@ export const Frame5_4: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          Beautifully Simple
+          {t('frame5_4.beautifullySimple')}
         </motion.text>
 
         {/* Workload */}
@@ -70,7 +72,7 @@ export const Frame5_4: React.FC = () => {
           >
             <rect x={320} y={200} width={280} height={100} rx={8} fill={colors.surface} stroke={colors.svid} strokeWidth={2} />
             <text x={460} y={225} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              Code:
+              {t('frame5_4.codeLabel')}
             </text>
             <text x={340} y={250} fill={colors.svid} fontSize={13} fontFamily="JetBrains Mono, monospace">
               svid = workload_api.
@@ -113,10 +115,10 @@ export const Frame5_4: React.FC = () => {
           >
             <rect x={150} y={380} width={500} height={80} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={410} textAnchor="middle" fill={colors.textPrimary} fontSize={16} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Call the Workload API, get your identity
+              {t('frame5_4.callWorkloadAPI')}
             </text>
             <text x={400} y={435} textAnchor="middle" fill={colors.textSecondary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-              No credentials needed. No secrets to manage.
+              {t('frame5_4.noCredentials')}
             </text>
           </motion.g>
         )}

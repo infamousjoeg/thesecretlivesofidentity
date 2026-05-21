@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload, Badge, SpireServer } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Introduction of SPIFFE - workloads with real cryptographic identity
  */
 export const Frame1_10: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600, 800]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -42,7 +44,7 @@ export const Frame1_10: React.FC = () => {
             fontSize={14}
             fontFamily="IBM Plex Sans, sans-serif"
           >
-            Secure Production Identity Framework for Everyone
+            {t('frame1_10.fullName')}
           </text>
         </motion.g>
 
@@ -54,7 +56,7 @@ export const Frame1_10: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <SpireServer
-              label="Identity Authority"
+              label={t('frame1_10.identityAuthority')}
               position={{ x: 400, y: 200 }}
               animate={!prefersReducedMotion}
               size={80}
@@ -70,7 +72,7 @@ export const Frame1_10: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <Workload
-              label="Service A"
+              label={t('frame1_10.serviceA', { defaultValue: 'Service A' })}
               position={{ x: 200, y: 380 }}
               attested={true}
               showBadge={false}
@@ -85,7 +87,7 @@ export const Frame1_10: React.FC = () => {
             />
 
             <Workload
-              label="Service B"
+              label={t('frame1_10.serviceB', { defaultValue: 'Service B' })}
               position={{ x: 600, y: 380 }}
               attested={true}
               showBadge={false}
@@ -108,8 +110,8 @@ export const Frame1_10: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <line x1={340} y1={240} x2={200} y2={290} stroke={colors.success} strokeWidth={2} strokeDasharray="6 3" />
-            <line x1={460} y1={240} x2={600} y2={290} stroke={colors.success} strokeWidth={2} strokeDasharray="6 3" />
+            <line x1={340} y1={220} x2={200} y2={290} stroke={colors.success} strokeWidth={2} strokeDasharray="6 3" />
+            <line x1={460} y1={225} x2={600} y2={290} stroke={colors.success} strokeWidth={2} strokeDasharray="6 3" />
           </motion.g>
         )}
 
@@ -122,10 +124,10 @@ export const Frame1_10: React.FC = () => {
           >
             <rect x={200} y={440} width={400} height={50} rx={8} fill={`${colors.success}15`} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={465} textAnchor="middle" fill={colors.success} fontSize={14} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Cryptographic identity without shared secrets
+              {t('frame1_10.tagline')}
             </text>
             <text x={400} y={485} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Let's see how it works...
+              {t('frame1_10.letsSee')}
             </text>
           </motion.g>
         )}

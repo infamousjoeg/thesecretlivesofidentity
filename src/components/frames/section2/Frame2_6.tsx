@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { TrustDomain, Workload } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Trust domain as a security boundary
  */
 export const Frame2_6: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -29,7 +31,7 @@ export const Frame2_6: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          Trust Domains: The Boundary
+          {t('frame2_6.title')}
         </motion.text>
 
         {/* Trust domain */}
@@ -42,7 +44,7 @@ export const Frame2_6: React.FC = () => {
             domain="acme.com"
             position={{ x: 400, y: 270 }}
             width={500}
-            height={300}
+            height={280}
             animate={!prefersReducedMotion}
           />
         </motion.g>
@@ -71,10 +73,12 @@ export const Frame2_6: React.FC = () => {
           >
             <rect x={150} y={420} width={500} height={60} rx={8} fill={colors.surface} stroke={colors.success} strokeWidth={1} />
             <text x={400} y={448} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              A trust domain is a <tspan fill={colors.success} fontWeight="bold">zone of trust</tspan>
+              {t('frame2_6.description1').split('zone of trust').map((part, i) => (
+                i === 0 ? <tspan key={i}>{part}</tspan> : <tspan key={i}><tspan fill={colors.success} fontWeight="bold">zone of trust</tspan>{part}</tspan>
+              ))}
             </text>
             <text x={400} y={468} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              managed by a single identity authority
+              {t('frame2_6.description2')}
             </text>
           </motion.g>
         )}
@@ -86,11 +90,11 @@ export const Frame2_6: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
-            <rect x={600} y={100} width={140} height={50} rx={6} fill={colors.server} opacity={0.8} />
-            <text x={670} y={130} textAnchor="middle" fill="white" fontSize={12} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
-              Identity Authority
+            <rect x={585} y={70} width={170} height={50} rx={6} fill={colors.server} opacity={0.8} />
+            <text x={670} y={100} textAnchor="middle" fill="white" fontSize={12} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
+              {t('frame2_6.identityAuthority')}
             </text>
-            <line x1={670} y1={150} x2={550} y2={200} stroke={colors.server} strokeWidth={2} strokeDasharray="5 3" />
+            <line x1={584} y1={95} x2={490} y2={130} stroke={colors.server} strokeWidth={2} strokeDasharray="5 3" />
           </motion.g>
         )}
       </svg>

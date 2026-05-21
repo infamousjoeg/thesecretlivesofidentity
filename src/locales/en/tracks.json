@@ -1,0 +1,29 @@
+{
+  "trackSelector": {
+    "title": "Learn SPIFFE",
+    "subtitle": "Choose your learning path based on how much time you have. Each track builds on the previous one.",
+    "startTrack": "Start {{title}}",
+    "hint": "You can switch tracks anytime. Progress is saved automatically."
+  },
+  "bronze": {
+    "title": "Bronze",
+    "subtitle": "What is SPIFFE?",
+    "duration": "~6 minutes",
+    "description": "The identity crisis and SPIFFE concepts. Perfect for a quick introduction.",
+    "goal": "Now I can explain SPIFFE to someone"
+  },
+  "silver": {
+    "title": "Silver",
+    "subtitle": "How SPIFFE Works",
+    "duration": "~17 minutes",
+    "description": "SPIRE architecture, attestation flows, and using identity. Understand the system.",
+    "goal": "Now I understand how the system works"
+  },
+  "gold": {
+    "title": "Gold",
+    "subtitle": "SPIFFE Deep Dive",
+    "duration": "~25 minutes",
+    "description": "Complete course with identity lifecycle, advanced concepts, and federation.",
+    "goal": "Now I can implement and debug"
+  }
+}

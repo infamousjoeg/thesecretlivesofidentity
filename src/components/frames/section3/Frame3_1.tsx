@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { colors } from '@/utils/constants';
@@ -9,6 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: SPIFFE spec document leading to SPIRE implementation
  */
 export const Frame3_1: React.FC = () => {
+  const { t } = useTranslation('frames');
   const { phase } = useAnimationPhase([0, 600, 600]);
 
   return (
@@ -26,7 +28,7 @@ export const Frame3_1: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          SPIFFE Needs an Implementation
+          {t('frame3_1.title')}
         </motion.text>
 
         {/* SPIFFE Spec */}
@@ -41,22 +43,22 @@ export const Frame3_1: React.FC = () => {
             SPIFFE
           </text>
           <text x={250} y={185} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-            Specification
+            {t('frame3_1.specLabel')}
           </text>
           <text x={250} y={210} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-            • SPIFFE ID format
+            • {t('frame3_1.specBullet1')}
           </text>
           <text x={250} y={235} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-            • SVID structure
+            • {t('frame3_1.specBullet2')}
           </text>
           <text x={250} y={260} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-            • Trust bundle format
+            • Trust Bundle format
           </text>
           <text x={250} y={285} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-            • Workload API spec
+            • {t('frame3_1.specBullet3')}
           </text>
           <text x={250} y={340} textAnchor="middle" fill={colors.textSecondary} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-            "Here's WHAT to build"
+            "{t('frame3_1.specTagline')}"
           </text>
         </motion.g>
 
@@ -85,22 +87,22 @@ export const Frame3_1: React.FC = () => {
               SPIRE
             </text>
             <text x={550} y={185} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
-              Implementation
+              {t('frame3_1.implLabel')}
             </text>
             <text x={550} y={210} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              • SPIRE Server
+              • {t('frame3_1.implBullet1')}
             </text>
             <text x={550} y={235} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              • SPIRE Agent
+              • {t('frame3_1.implBullet2')}
             </text>
             <text x={550} y={260} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              • Attestation plugins
+              • {t('frame3_1.implBullet3')}
             </text>
             <text x={550} y={285} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
               • Management tools
             </text>
             <text x={550} y={340} textAnchor="middle" fill={colors.textSecondary} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
-              "Here's HOW to do it"
+              "{t('frame3_1.implTagline')}"
             </text>
           </motion.g>
         )}
@@ -114,7 +116,9 @@ export const Frame3_1: React.FC = () => {
           >
             <rect x={200} y={410} width={400} height={60} rx={8} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />
             <text x={400} y={445} textAnchor="middle" fill={colors.textPrimary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              SPIRE is the <tspan fill={colors.agent} fontWeight="bold">reference implementation</tspan> of SPIFFE
+              {t('frame3_1.conclusion').split('reference implementation').map((part, i) =>
+                i === 0 ? <tspan key={i}>{part}</tspan> : <tspan key={i}><tspan fill={colors.agent} fontWeight="bold">reference implementation</tspan>{part}</tspan>
+              )}
             </text>
           </motion.g>
         )}
