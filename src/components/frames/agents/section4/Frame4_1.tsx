@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
-import { Principal, AIAgent, PermissionSlip } from '@/components/entities/agents';
+import { Principal, AIAgent, PermissionSlip } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { colors } from '@/utils/constants';
@@ -33,8 +33,8 @@ export const Frame4_1: React.FC = () => {
 
         {/* Principal (owner of authority) and Agent (actor) */}
         <motion.g {...reveal(0)}>
-          <Principal label="Alex (you)" position={{ x: 130, y: 250 }} active animate={!prefersReducedMotion} />
-          <AIAgent label="Travel Agent" position={{ x: 670, y: 250 }} active={phase >= 2} animate={!prefersReducedMotion} />
+          <Principal label={t('frame4_1.principalLabel', { defaultValue: 'Alex (you)' })} position={{ x: 130, y: 250 }} active animate={!prefersReducedMotion} />
+          <AIAgent label={t('frame4_1.agentLabel', { defaultValue: 'Travel Agent' })} position={{ x: 670, y: 250 }} active={phase >= 2} animate={!prefersReducedMotion} />
         </motion.g>
 
         {/* The hero: a signed permission slip, centre stage */}

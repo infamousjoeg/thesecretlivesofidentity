@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
-import { Principal, AIAgent, SubAgent } from '@/components/entities/agents';
+import { Principal, AIAgent, SubAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { colors } from '@/utils/constants';
@@ -43,10 +43,10 @@ export const Frame6_4: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          <Principal label="Principal" position={{ x: 115, y: 130 }} active animate={!prefersReducedMotion} />
-          <AIAgent label="Agent A" position={{ x: 325, y: 130 }} active animate={!prefersReducedMotion} />
-          <AIAgent label="Agent B" position={{ x: 535, y: 130 }} active animate={!prefersReducedMotion} />
-          <SubAgent label="Agent C" position={{ x: 700, y: 140 }} active animate={!prefersReducedMotion} />
+          <Principal label={t('frame6_4.principalLabel', { defaultValue: 'Principal' })} position={{ x: 115, y: 130 }} active animate={!prefersReducedMotion} />
+          <AIAgent label={t('frame6_4.agentALabel', { defaultValue: 'Agent A' })} position={{ x: 325, y: 130 }} active animate={!prefersReducedMotion} />
+          <AIAgent label={t('frame6_4.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 535, y: 130 }} active animate={!prefersReducedMotion} />
+          <SubAgent label={t('frame6_4.agentCLabel', { defaultValue: 'Agent C' })} position={{ x: 700, y: 140 }} active animate={!prefersReducedMotion} />
         </motion.g>
 
         {phase >= 1 &&

@@ -23,7 +23,7 @@ export const Frame2_5: React.FC = () => {
         <Principal label={t('frame2_5.you', { defaultValue: 'You' })} position={{ x: 175, y: 240 }} size={78} active animate={!prefersReducedMotion} />
 
         {/* Human's identity badge, being grabbed */}
-        <Badge position={{ x: 400, y: 235 }} size={118} spiffeId="human://alex" expiresIn={3600} animate={false} />
+        <Badge position={{ x: 400, y: 235 }} size={128} spiffeId="human://alex" expiresIn={3600} animate={false} />
 
         <AIAgent label={t('frame2_5.agent', { defaultValue: 'AI Agent' })} position={{ x: 645, y: 240 }} size={80} active animate={!prefersReducedMotion} />
 

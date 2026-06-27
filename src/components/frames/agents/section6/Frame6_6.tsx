@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
-import { Verifier } from '@/components/entities/agents';
+import { Verifier } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { colors } from '@/utils/constants';
@@ -40,7 +40,7 @@ export const Frame6_6: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          <Verifier label="Verifier" position={{ x: 165, y: 220 }} size={120} state={verified ? 'accept' : 'idle'} animate={verified && !prefersReducedMotion} />
+          <Verifier label={t('frame6_6.verifierLabel', { defaultValue: 'Verifier' })} position={{ x: 165, y: 220 }} size={120} state={verified ? 'accept' : 'idle'} animate={verified && !prefersReducedMotion} />
         </motion.g>
 
         {/* Checklist */}

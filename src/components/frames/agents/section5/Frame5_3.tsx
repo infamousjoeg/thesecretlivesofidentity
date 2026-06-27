@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
-import { Principal, AIAgent, SubAgent, PermissionSlip } from '@/components/entities/agents';
+import { Principal, AIAgent, SubAgent, PermissionSlip } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { colors } from '@/utils/constants';
@@ -37,9 +37,9 @@ export const Frame5_3: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          <Principal label="Principal" position={{ x: 110, y: 140 }} active animate={!prefersReducedMotion} />
-          <AIAgent label="Agent A" position={{ x: 400, y: 140 }} active={phase >= 1} animate={!prefersReducedMotion} />
-          <SubAgent label="Agent B" position={{ x: 680, y: 150 }} active={phase >= 2} animate={!prefersReducedMotion} />
+          <Principal label={t('frame5_3.principalLabel', { defaultValue: 'Principal' })} position={{ x: 110, y: 140 }} active animate={!prefersReducedMotion} />
+          <AIAgent label={t('frame5_3.agentALabel', { defaultValue: 'Agent A' })} position={{ x: 400, y: 140 }} active={phase >= 1} animate={!prefersReducedMotion} />
+          <SubAgent label={t('frame5_3.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 680, y: 150 }} active={phase >= 2} animate={!prefersReducedMotion} />
         </motion.g>
 
         {/* Hop 1: broad slip */}

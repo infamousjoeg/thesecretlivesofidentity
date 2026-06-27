@@ -28,7 +28,7 @@ export const Frame2_6: React.FC = () => {
           <text x={200} y={120} textAnchor="middle" fill={colors.textPrimary} fontSize={17} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
             {t('frame2_6.q1', { defaultValue: 'Who is the agent?' })}
           </text>
-          <Badge position={{ x: 200, y: 265 }} size={110} spiffeId="spiffe://acme/agent" expiresIn={3600} animate={!prefersReducedMotion} />
+          <Badge position={{ x: 200, y: 265 }} size={128} spiffeId="spiffe://acme/agent" expiresIn={3600} animate={!prefersReducedMotion} />
           <g transform="translate(200, 380)">
             <rect x={-70} y={0} width={140} height={30} rx={15} fill={`${colors.svid}1A`} stroke={colors.svid} strokeWidth={1.25} />
             <text x={0} y={20} textAnchor="middle" fill={colors.svid} fontSize={14} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">

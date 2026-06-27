@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
-import { PermissionSlip, Verifier } from '@/components/entities/agents';
+import { PermissionSlip, Verifier } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { colors } from '@/utils/constants';
@@ -48,7 +48,7 @@ export const Frame4_2: React.FC = () => {
         {/* Verifier confirms the signature */}
         {phase >= 2 && (
           <motion.g {...reveal(0)}>
-            <Verifier label="Resource" position={{ x: 600, y: 180 }} size={100} state="accept" animate={!prefersReducedMotion} />
+            <Verifier label={t('frame4_2.resourceLabel', { defaultValue: 'Resource' })} position={{ x: 600, y: 180 }} size={100} state="accept" animate={!prefersReducedMotion} />
           </motion.g>
         )}
       </svg>

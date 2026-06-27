@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
-import { PermissionSlip, ToolResource } from '@/components/entities/agents';
+import { PermissionSlip, ToolResource } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { colors } from '@/utils/constants';
@@ -47,7 +47,7 @@ export const Frame4_5: React.FC = () => {
         {phase >= 1 && (
           <motion.g {...reveal(0)}>
             <line x1={300} y1={210} x2={520} y2={155} stroke={colors.success} strokeWidth={2.5} markerEnd="url(#a4-5-ok)" />
-            <ToolResource label="Calendar service" position={{ x: 600, y: 150 }} size={86} kind="API" locked={false} animate={!prefersReducedMotion} />
+            <ToolResource label={t('frame4_5.calendarLabel', { defaultValue: 'Calendar service' })} position={{ x: 600, y: 150 }} size={86} kind="API" locked={false} animate={!prefersReducedMotion} />
             <text x={600} y={228} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
               {t('frame4_5.opens', { defaultValue: 'Audience matches → opens' })}
             </text>
@@ -58,7 +58,7 @@ export const Frame4_5: React.FC = () => {
         {phase >= 2 && (
           <motion.g {...reveal(0)}>
             <line x1={300} y1={300} x2={520} y2={355} stroke={colors.attacker} strokeWidth={2.5} strokeDasharray="7 5" markerEnd="url(#a4-5-no)" />
-            <ToolResource label="Bank service" position={{ x: 600, y: 360 }} size={86} kind="API" locked animate={!prefersReducedMotion} />
+            <ToolResource label={t('frame4_5.bankLabel', { defaultValue: 'Bank service' })} position={{ x: 600, y: 360 }} size={86} kind="API" locked animate={!prefersReducedMotion} />
             <text x={600} y={438} textAnchor="middle" fill={colors.attacker} fontSize={12} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
               {t('frame4_5.refuses', { defaultValue: 'Wrong audience → refused' })}
             </text>

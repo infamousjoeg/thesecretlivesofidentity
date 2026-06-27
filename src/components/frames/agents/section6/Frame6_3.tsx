@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
-import { Principal, AIAgent, SubAgent } from '@/components/entities/agents';
+import { Principal, AIAgent, SubAgent } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { colors } from '@/utils/constants';
@@ -37,17 +37,17 @@ export const Frame6_3: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          <Principal label="Principal" position={{ x: 180, y: 130 }} active animate={!prefersReducedMotion} />
+          <Principal label={t('frame6_3.principalLabel', { defaultValue: 'Principal' })} position={{ x: 180, y: 130 }} active animate={!prefersReducedMotion} />
           {phase >= 1 && (
             <motion.g {...reveal(0)}>
               <line x1={228} y1={130} x2={352} y2={130} stroke={colors.textMuted} strokeWidth={2} markerEnd="url(#a6-3-arrow)" />
-              <AIAgent label="Agent A" position={{ x: 400, y: 130 }} active animate={!prefersReducedMotion} />
+              <AIAgent label={t('frame6_3.agentALabel', { defaultValue: 'Agent A' })} position={{ x: 400, y: 130 }} active animate={!prefersReducedMotion} />
             </motion.g>
           )}
           {phase >= 2 && (
             <motion.g {...reveal(0)}>
               <line x1={452} y1={130} x2={576} y2={135} stroke={colors.textMuted} strokeWidth={2} markerEnd="url(#a6-3-arrow)" />
-              <SubAgent label="Agent B" position={{ x: 630, y: 140 }} active animate={!prefersReducedMotion} />
+              <SubAgent label={t('frame6_3.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 630, y: 140 }} active animate={!prefersReducedMotion} />
             </motion.g>
           )}
         </motion.g>

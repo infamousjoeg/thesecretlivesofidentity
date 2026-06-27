@@ -26,7 +26,7 @@ export const Frame2_4: React.FC = () => {
             <circle cx={0} cy={0} r={16} fill={colors.svid} />
             <text x={0} y={5} textAnchor="middle" fill={colors.background} fontSize={15} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">1</text>
           </g>
-          <Badge position={{ x: 225, y: 235 }} size={116} spiffeId="spiffe://acme/agent" expiresIn={3600} animate={!prefersReducedMotion} />
+          <Badge position={{ x: 225, y: 235 }} size={128} spiffeId="spiffe://acme/agent" expiresIn={3600} animate={!prefersReducedMotion} />
           <text x={225} y={350} textAnchor="middle" fill={colors.svid} fontSize={15} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
             {t('frame2_4.identity', { defaultValue: 'Identity' })}
           </text>
@@ -71,8 +71,9 @@ export const Frame2_4: React.FC = () => {
             x={400}
             y={420}
             textAnchor="middle"
-            fill={colors.textPrimary}
+            fill={colors.agentAI}
             fontSize={15}
+            fontWeight="bold"
             fontFamily="IBM Plex Sans, sans-serif"
           >
             {t('frame2_4.caption', { defaultValue: 'You cannot delegate to something you cannot even name.' })}

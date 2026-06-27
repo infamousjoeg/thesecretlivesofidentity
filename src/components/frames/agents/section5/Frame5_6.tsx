@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
-import { AIAgent, SubAgent, PermissionSlip } from '@/components/entities/agents';
+import { AIAgent, SubAgent, PermissionSlip } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { colors } from '@/utils/constants';
@@ -31,7 +31,7 @@ export const Frame5_6: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          <AIAgent label="Agent A" position={{ x: 150, y: 150 }} active animate={!prefersReducedMotion} />
+          <AIAgent label={t('frame5_6.agentALabel', { defaultValue: 'Agent A' })} position={{ x: 150, y: 150 }} active animate={!prefersReducedMotion} />
           <PermissionSlip position={{ x: 150, y: 340 }} size={94} state="valid" scopes={['Read file']} animate={false} />
           <text x={150} y={428} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
             {t('frame5_6.holds', { defaultValue: 'Holds: read-only' })}
@@ -41,7 +41,7 @@ export const Frame5_6: React.FC = () => {
         {/* Sub-agent waiting */}
         {phase >= 1 && (
           <motion.g {...reveal(0)}>
-            <SubAgent label="Agent B" position={{ x: 660, y: 160 }} animate={!prefersReducedMotion} />
+            <SubAgent label={t('frame5_6.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 660, y: 160 }} animate={!prefersReducedMotion} />
           </motion.g>
         )}
 
