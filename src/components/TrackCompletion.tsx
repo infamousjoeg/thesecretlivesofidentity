@@ -4,10 +4,48 @@ import { useTranslation } from 'react-i18next';
 import { Trophy, ArrowRight, RotateCcw, Home, X } from 'lucide-react';
 import { useTrackNavigation, useReducedMotion } from '@/hooks';
 import { getNextTrack, type TrackId } from '@/content/tracks';
+import type { ModuleId } from '@/content/modules';
 
 interface TrackCompletionProps {
   onClose: () => void;
 }
+
+interface ResourceLink {
+  label: string;
+  href: string;
+}
+
+interface ModuleCompletionMeta {
+  /** Final celebratory line shown when the Gold track is completed. */
+  finalMessage: string;
+  /** External resources surfaced on the Gold completion screen. */
+  resources: ResourceLink[];
+}
+
+// Per-module resources for the Gold "you finished everything" screen.
+// Keyed by moduleId so finishing the agents track never shows SPIFFE links.
+const moduleCompletionMeta: Record<ModuleId, ModuleCompletionMeta> = {
+  spiffe: {
+    finalMessage: "You've completed the entire SPIFFE visualization!",
+    resources: [
+      { label: 'spiffe.io', href: 'https://spiffe.io' },
+      { label: 'SPIRE on GitHub', href: 'https://github.com/spiffe/spire' },
+      { label: 'Join Slack', href: 'https://slack.spiffe.io' },
+    ],
+  },
+  agents: {
+    finalMessage: "You've completed the entire AI Agent Identity visualization!",
+    resources: [
+      { label: 'WIMSE Working Group', href: 'https://datatracker.ietf.org/wg/wimse/about/' },
+      {
+        label: 'MCP Authorization',
+        href: 'https://modelcontextprotocol.io/specification/2025-06-18/basic/authorization',
+      },
+      { label: 'A2A Protocol', href: 'https://a2a-protocol.org/' },
+      { label: 'SPIFFE', href: 'https://spiffe.io' },
+    ],
+  },
+};
 
 // English fallback completion copy by track (SPIFFE defaults).
 // The live copy is resolved per-module from the `<prefix>-tracks` namespace
@@ -33,6 +71,7 @@ export const TrackCompletion: React.FC<TrackCompletionProps> = ({ onClose }) => 
   const prefersReducedMotion = useReducedMotion();
   const prefix = moduleConfig?.i18nPrefix ?? 'spiffe';
   const tracksNs = `${prefix}-tracks`;
+  const completionMeta = moduleCompletionMeta[moduleConfig?.id ?? 'spiffe'];
   const { t } = useTranslation([tracksNs, 'ui']);
 
   if (!currentTrack || !tracks) return null;
@@ -155,35 +194,22 @@ export const TrackCompletion: React.FC<TrackCompletionProps> = ({ onClose }) => 
             transition={{ delay: 0.4 }}
           >
             <p className="text-textSecondary mb-4">
-              You've completed the entire SPIFFE visualization!
+              {completionMeta.finalMessage}
             </p>
-            <div className="flex justify-center gap-4 text-sm text-textMuted">
-              <a
-                href="https://spiffe.io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-textPrimary transition-colors"
-              >
-                spiffe.io
-              </a>
-              <span>•</span>
-              <a
-                href="https://github.com/spiffe/spire"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-textPrimary transition-colors"
-              >
-                SPIRE on GitHub
-              </a>
-              <span>•</span>
-              <a
-                href="https://slack.spiffe.io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-textPrimary transition-colors"
-              >
-                Join Slack
-              </a>
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-textMuted">
+              {completionMeta.resources.map((resource, index) => (
+                <React.Fragment key={resource.href}>
+                  {index > 0 && <span>•</span>}
+                  <a
+                    href={resource.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-textPrimary transition-colors"
+                  >
+                    {resource.label}
+                  </a>
+                </React.Fragment>
+              ))}
             </div>
           </motion.div>
         )}
