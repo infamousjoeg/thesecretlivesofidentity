@@ -118,11 +118,10 @@ export const Verifier: React.FC<VerifierProps> = ({
             <motion.line
               x1={left + 12}
               x2={left + W - 12}
-              y1={top + 12}
-              y2={top + 12}
               stroke={colors.verifier}
               strokeWidth={1.5}
               opacity={0.7}
+              initial={{ y1: top + 12, y2: top + 12 }}
               animate={{ y1: [top + 12, top + H * 0.46 + 4, top + 12], y2: [top + 12, top + H * 0.46 + 4, top + 12] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             />
