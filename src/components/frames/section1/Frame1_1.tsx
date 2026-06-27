@@ -11,7 +11,7 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
  * Visual: Multiple gray workloads with question marks appearing one by one
  */
 export const Frame1_1: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500, 500, 500]);
   const prefersReducedMotion = useReducedMotion();
 

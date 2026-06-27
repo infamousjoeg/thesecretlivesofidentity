@@ -11,7 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Checklist of rotation steps, growing complexity
  */
 export const Frame1_6: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500, 500, 800]);
   const prefersReducedMotion = useReducedMotion();
 

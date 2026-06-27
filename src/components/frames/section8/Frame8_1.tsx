@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Multiple trust domains
  */
 export const Frame8_1: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 

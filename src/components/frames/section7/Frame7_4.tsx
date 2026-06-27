@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Auto-renewing badge at security desk
  */
 export const Frame7_4: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 700, 700, 600]);
   const prefersReducedMotion = useReducedMotion();
 

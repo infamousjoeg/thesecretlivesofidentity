@@ -18,7 +18,7 @@ interface SVIDState {
  * Shows time-lapse of SVID lifecycle with speed controls
  */
 export const RotationSimulator: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [currentSVID, setCurrentSVID] = useState<SVIDState>({

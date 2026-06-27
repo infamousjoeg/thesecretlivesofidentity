@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Highlighting that shared secrets AS identity is the root issue
  */
 export const Frame1_8: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 800, 800, 800]);
   const prefersReducedMotion = useReducedMotion();
 

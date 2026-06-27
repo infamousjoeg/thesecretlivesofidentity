@@ -115,10 +115,17 @@ export const attestationTypes = {
 };
 
 // Routes
+// `modules` is keyed by module id so future modules (e.g. `agents`) slot in
+// without changing call sites. `spiffe` is kept as a convenience alias so any
+// existing references continue to resolve.
 export const routes = {
   landing: '/',
-  spiffe: '/spiffe',
   devEntities: '/dev/entities',
+  modules: {
+    spiffe: '/spiffe',
+    agents: '/agents',
+  } as Record<string, string>,
+  spiffe: '/spiffe',
 };
 
 // External links

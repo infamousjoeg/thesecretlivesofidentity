@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Simple workload API call, getting identity
  */
 export const Frame5_4: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 800, 800, 600]);
   const prefersReducedMotion = useReducedMotion();
 

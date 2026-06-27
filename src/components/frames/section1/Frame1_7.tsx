@@ -11,7 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Pile of secrets/credentials growing, operational burden
  */
 export const Frame1_7: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 300, 300, 300, 300, 300, 600]);
   const prefersReducedMotion = useReducedMotion();
 

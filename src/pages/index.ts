@@ -1,4 +1,4 @@
 export { Landing } from './Landing';
-export { SpiffeVisualization } from './SpiffeVisualization';
+export { ModuleVisualization } from './ModuleVisualization';
 export { TrackSelector } from './TrackSelector';
 export { DevEntities } from './DevEntities';

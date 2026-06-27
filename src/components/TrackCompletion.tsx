@@ -1,15 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Trophy, ArrowRight, RotateCcw, Home, X } from 'lucide-react';
 import { useTrackNavigation, useReducedMotion } from '@/hooks';
-import { getNextTrack, tracks, type TrackId } from '@/content/tracks';
+import { getNextTrack, type TrackId } from '@/content/tracks';
 
 interface TrackCompletionProps {
   onClose: () => void;
 }
 
-// Completion messages by track
-const completionMessages: Record<TrackId, { title: string; message: string }> = {
+// English fallback completion copy by track (SPIFFE defaults).
+// The live copy is resolved per-module from the `<prefix>-tracks` namespace
+// via `completion.<track>.title` / `.message`, with these as defaultValue.
+const fallbackCompletion: Record<TrackId, { title: string; message: string }> = {
   bronze: {
     title: 'Bronze Complete!',
     message: 'You now understand what SPIFFE is and why it matters. You can explain the core concepts to anyone.',
@@ -25,15 +28,25 @@ const completionMessages: Record<TrackId, { title: string; message: string }> = 
 };
 
 export const TrackCompletion: React.FC<TrackCompletionProps> = ({ onClose }) => {
-  const { currentTrack, goToPosition, continueToNextTrack, goToTrackSelector } =
+  const { moduleConfig, currentTrack, tracks, goToPosition, continueToNextTrack, goToTrackSelector } =
     useTrackNavigation();
   const prefersReducedMotion = useReducedMotion();
+  const prefix = moduleConfig?.i18nPrefix ?? 'spiffe';
+  const tracksNs = `${prefix}-tracks`;
+  const { t } = useTranslation([tracksNs, 'ui']);
 
-  if (!currentTrack) return null;
+  if (!currentTrack || !tracks) return null;
 
   const nextTrackId = getNextTrack(currentTrack);
   const nextTrack = nextTrackId ? tracks[nextTrackId] : null;
-  const completion = completionMessages[currentTrack];
+  const completion = {
+    title: t(`${tracksNs}:completion.${currentTrack}.title`, {
+      defaultValue: fallbackCompletion[currentTrack].title,
+    }),
+    message: t(`${tracksNs}:completion.${currentTrack}.message`, {
+      defaultValue: fallbackCompletion[currentTrack].message,
+    }),
+  };
 
   return (
     <motion.div

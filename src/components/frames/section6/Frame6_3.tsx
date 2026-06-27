@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Two employees showing badges to each other
  */
 export const Frame6_3: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 700, 700, 600]);
   const prefersReducedMotion = useReducedMotion();
 

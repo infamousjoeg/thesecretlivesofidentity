@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Corporate badge analogy - Employee ID vs Physical Badge
  */
 export const Frame2_9: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 

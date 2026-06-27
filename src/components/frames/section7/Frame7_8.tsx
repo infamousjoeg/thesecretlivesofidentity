@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: API key rotation nightmare vs SVID simplicity
  */
 export const Frame7_8: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   return (

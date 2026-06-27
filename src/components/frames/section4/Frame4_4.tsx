@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Building verification before badge printer installation
  */
 export const Frame4_4: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   return (

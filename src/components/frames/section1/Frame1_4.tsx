@@ -11,7 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Pager going off, GitHub logo, time ticking
  */
 export const Frame1_4: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 500, 800, 800]);
   const prefersReducedMotion = useReducedMotion();
 

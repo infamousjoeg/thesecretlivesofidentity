@@ -61,7 +61,7 @@ const questions: Question[] = [
  * Users match workloads to registration entries based on selectors
  */
 export const SelectorMatcher: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);

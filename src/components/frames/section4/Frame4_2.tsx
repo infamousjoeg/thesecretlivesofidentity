@@ -11,7 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Comparison of traditional credential approach vs platform attestation
  */
 export const Frame4_2: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600]);
 
   return (

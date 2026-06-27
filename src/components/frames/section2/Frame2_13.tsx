@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Acknowledging where the badge metaphor breaks down
  */
 export const Frame2_13: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 800]);
 
   const differences = [

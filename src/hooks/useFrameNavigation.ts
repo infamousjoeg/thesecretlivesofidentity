@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useVisualizationStore, useProgress } from '@/store/visualizationStore';
-import { sections } from '@/content/spiffe';
 
 /**
  * Hook providing navigation state and helpers for frames
  */
 export const useFrameNavigation = () => {
   const {
+    activeSections,
     currentSection,
     currentFrame,
     nextFrame,
@@ -22,8 +22,8 @@ export const useFrameNavigation = () => {
   const progress = useProgress();
 
   const navigationState = useMemo(() => {
-    const totalSections = sections.length;
-    const section = sections[currentSection];
+    const totalSections = activeSections.length;
+    const section = activeSections[currentSection];
     const totalFramesInSection = section ? section.frames.length : 0;
 
     const isFirstFrame = currentSection === 0 && currentFrame === 0;
@@ -45,7 +45,7 @@ export const useFrameNavigation = () => {
       isLastFrameOfSection,
       progress,
     };
-  }, [currentSection, currentFrame, progress]);
+  }, [activeSections, currentSection, currentFrame, progress]);
 
   const currentSectionData = getCurrentSection();
   const currentFrameData = getCurrentFrame();
@@ -64,15 +64,16 @@ export const useFrameNavigation = () => {
 };
 
 /**
- * Hook to get section list for navigation menu
+ * Hook to get section list for navigation menu (from the active module).
  */
 export const useSectionList = () => {
+  const activeSections = useVisualizationStore((s) => s.activeSections);
   return useMemo(() => {
-    return sections.map((section, index) => ({
+    return activeSections.map((section, index) => ({
       id: section.id,
       title: section.title,
       index,
       frameCount: section.frames.length,
     }));
-  }, []);
+  }, [activeSections]);
 };
