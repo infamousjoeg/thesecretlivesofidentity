@@ -300,12 +300,13 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
         </text>
       </g>
 
-      {/* NARROWED ribbon (top-right corner) */}
+      {/* NARROWED ribbon (top-right corner) — sits BELOW the header band so it
+          never clips the "PERMISSION SLIP" header text. */}
       {narrowed && (
-        <g transform={`translate(${left + W - 1}, ${top + 16})`}>
-          <path d="M 0 0 L 0 34 L -34 0 Z" fill={colors.slipSeal} opacity={0.92} />
+        <g transform={`translate(${left + W - 1}, ${top + 41})`}>
+          <path d="M 0 0 L 0 30 L -30 0 Z" fill={colors.slipSeal} opacity={0.92} />
           <text
-            transform="rotate(-45) translate(-17, -6)"
+            transform="rotate(-45) translate(-15, -5)"
             textAnchor="middle"
             fill="#FFFFFF"
             fontSize={6}
