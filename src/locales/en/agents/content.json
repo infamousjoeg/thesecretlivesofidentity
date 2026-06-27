@@ -1,0 +1,255 @@
+{
+  "sections": {
+    "agent-identity-crisis": "The Agent Identity Crisis",
+    "who-is-this-agent": "Who Is This Agent?",
+    "on-whose-behalf": "On Whose Behalf?",
+    "the-permission-slip": "The Permission Slip",
+    "narrowing-the-scope": "Narrowing The Scope",
+    "agent-to-agent": "Agent-To-Agent",
+    "reaching-for-tools": "Reaching For Tools",
+    "what-goes-wrong": "What Goes Wrong",
+    "conclusion": "Conclusion"
+  },
+  "frames": {
+    "1-1": {
+      "title": "Software That Acts For You",
+      "content": "AI agents now take actions on your behalf: booking trips, sending messages, moving money, changing systems. They do not just answer questions anymore. They do things."
+    },
+    "1-2": {
+      "title": "The Tempting Shortcut",
+      "content": "The fastest way to let an agent act is to hand it your password or a master key. It works on the first try. It is also the start of every horror story."
+    },
+    "1-3": {
+      "title": "One Key To Rule Them All",
+      "content": "Give every agent the same all-powerful key and any single one of them can do anything, anywhere, for as long as the key lives. There is no containment."
+    },
+    "1-4": {
+      "title": "Acting As You vs Acting For You",
+      "content": "If an agent uses your credentials, every system believes you did it. There is no way to tell the agent apart from you, or one agent apart from another."
+    },
+    "1-5": {
+      "title": "The Blast Radius",
+      "content": "A confused or compromised agent holding your master key can drain accounts, delete data, or message your contacts. One mistake, effectively unlimited damage."
+    },
+    "1-6": {
+      "title": "No Receipts",
+      "content": "Shared keys leave no trail of who asked for what. When something goes wrong, you cannot prove which agent acted, or what it was ever supposed to be allowed to do."
+    },
+    "1-7": {
+      "title": "A Better Way",
+      "content": "What if an agent received a signed slip authorizing one narrow task for a short time, instead of your master key? That idea is where this whole story is headed."
+    },
+    "2-1": {
+      "title": "An Agent Is A Workload",
+      "content": "Before we delegate anything, step back. An AI agent is just software running somewhere. It is a workload, like any service or program in your systems."
+    },
+    "2-2": {
+      "title": "A Callback To SPIFFE",
+      "content": "In the SPIFFE module we saw that workloads need their own verifiable identity, proven without sharing secrets. An agent is a workload, so it is no exception."
+    },
+    "2-3": {
+      "title": "The Agent Needs Its Own Name",
+      "content": "Give the agent its own identity, separate from yours. Now systems can tell the travel agent apart from you, and apart from the billing agent next to it."
+    },
+    "2-4": {
+      "title": "Identity Before Authority",
+      "content": "Identity answers who are you. Authority answers what may you do. You have to establish identity first. You cannot safely delegate to something you cannot even name."
+    },
+    "2-5": {
+      "title": "Do Not Borrow The Human's Identity",
+      "content": "An agent must never simply reuse your login. If it does, every action looks like yours, and the entire chain of accountability quietly collapses."
+    },
+    "2-6": {
+      "title": "Two Questions, Two Answers",
+      "content": "From here on, keep two ideas apart: who the agent is, which is its identity, and on whose behalf it is acting, which is delegation. Next we tackle the second one."
+    },
+    "3-1": {
+      "title": "Principal And Agent",
+      "content": "A principal is the person or service who owns the authority. The agent is the one who acts. Delegation links them: the agent acts on behalf of the principal."
+    },
+    "3-2": {
+      "title": "The Errand Metaphor",
+      "content": "Think of sending an assistant on an errand. You do not hand over your house keys and bank card. You write a short note authorizing one specific task."
+    },
+    "3-3": {
+      "title": "Acting On Behalf Of",
+      "content": "Delegation means the agent does something the principal is allowed to do, with the principal's permission, while everyone can still see it was the agent doing it."
+    },
+    "3-4": {
+      "title": "Subject And Actor",
+      "content": "Tokens capture this with two parts: the subject, meaning on whose behalf the action happens, and the actor, meaning who is actually acting. Both are recorded."
+    },
+    "3-5": {
+      "title": "Why Both Matter",
+      "content": "The subject says whose authority is being used. The actor says who to hold responsible. Keep both and an audit can answer who really did this, and for whom."
+    },
+    "3-6": {
+      "title": "Delegation Is Not Impersonation",
+      "content": "Impersonation hides the agent and pretends to be you. Delegation keeps the agent visible and named. We always want delegation, and never impersonation."
+    },
+    "3-7": {
+      "title": "The Shape Of A Slip",
+      "content": "So a delegation is really a signed note: this agent, acting for this principal, may do this task. Next, we give that note real structure and real properties."
+    },
+    "4-1": {
+      "title": "The Hero Concept",
+      "content": "The permission slip is the heart of agent identity. In real systems it is an access token: a signed, scoped, short-lived authorization to act."
+    },
+    "4-2": {
+      "title": "Signed",
+      "content": "The slip is signed by an authority the verifier trusts. A resource can then check that it is genuine, and that it was not forged or altered along the way."
+    },
+    "4-3": {
+      "title": "Scoped",
+      "content": "The slip names exactly what is allowed: read this one calendar, not do anything. Scope is the explicit list of permitted actions, and nothing beyond it."
+    },
+    "4-4": {
+      "title": "Short-Lived",
+      "content": "The slip expires, often within minutes. A stolen slip becomes useless soon after, and nobody has to hunt down and rotate forgotten long-lived keys."
+    },
+    "4-5": {
+      "title": "Bound To A Purpose",
+      "content": "A good slip also says where it may be used, called its audience. A slip meant for the calendar service should simply not work at the bank."
+    },
+    "4-6": {
+      "title": "What Is Inside",
+      "content": "Putting it together, a slip carries who it is for (the subject), who is acting (the actor), what is allowed (the scope), where (the audience), and until when (expiry)."
+    },
+    "4-7": {
+      "title": "The Slip Is Not The Identity",
+      "content": "Important: the slip is the authorization, not the agent's identity. The agent keeps its name. Slips come and go as tasks change and time passes."
+    },
+    "4-8": {
+      "title": "Where The Metaphor Ends",
+      "content": "Real systems do not pass paper notes. They use cryptographic tokens, issued and checked by machines in milliseconds. The slip is a model, but its properties are real."
+    },
+    "5-1": {
+      "title": "Least Privilege",
+      "content": "Give an agent the least it needs to do the job, and nothing more. A narrow slip is the simplest way to limit what can possibly go wrong."
+    },
+    "5-2": {
+      "title": "Start Narrow",
+      "content": "Do not begin with a broad slip and plan to trim it later. Begin with exactly the scope the task requires, so there is never extra authority lying around."
+    },
+    "5-3": {
+      "title": "Each Hop Shrinks",
+      "content": "When an agent passes work to another, the new slip should be narrower, never broader. Authority only ever decreases as you move down the chain."
+    },
+    "5-4": {
+      "title": "Token Exchange",
+      "content": "A system can trade a broad slip for a narrower one scoped to a single downstream task. The original authority stays behind, and only a slice is handed onward."
+    },
+    "5-5": {
+      "title": "Audience Binding",
+      "content": "Narrowing also means naming the destination. A downscoped slip is stamped for one specific service, so it cannot be replayed somewhere it was never meant to go."
+    },
+    "5-6": {
+      "title": "You Cannot Grant What You Lack",
+      "content": "An agent can never hand on more than it holds. A read-only slip cannot be turned into a write slip further down the chain. Authority does not grow by being passed."
+    },
+    "5-7": {
+      "title": "The Shrinking Slip",
+      "content": "Picture each hop tearing the slip a little smaller. By the time it reaches the last helper, it permits just one tiny action. That shrinking is exactly the goal."
+    },
+    "6-1": {
+      "title": "Agents Call Agents",
+      "content": "Real tasks fan out. A planning agent asks a booking agent, which asks a payment agent. Each one is a separate workload with its own identity."
+    },
+    "6-2": {
+      "title": "Sub-Delegation",
+      "content": "The first agent sub-delegates. It gives the next agent a narrower slip for just its part of the job, still on behalf of the same original principal."
+    },
+    "6-3": {
+      "title": "The Actor Chain",
+      "content": "Each slip records the chain of actors: the principal, then agent A, then agent B. Everyone who touched the request is listed, in order, on the slip."
+    },
+    "6-4": {
+      "title": "On Whose Behalf, Still",
+      "content": "No matter how many hops occur, the subject stays the same principal. The chain shows the path, while the principal remains accountable for the authority used."
+    },
+    "6-5": {
+      "title": "The Audit Trail",
+      "content": "Because every hop is named and scoped, you get a complete record: who acted, for whom, with what permission, and when. That record is the audit trail."
+    },
+    "6-6": {
+      "title": "Trust, But Verify",
+      "content": "Any agent receiving a slip can verify the whole chain: each link signed, each narrower than the last, none expired, and each bound to the right audience."
+    },
+    "6-7": {
+      "title": "Accountability By Design",
+      "content": "Delegation chains turn some agent did something into agent B, acting for you through agent A, read your calendar at 2 PM. That clarity is the entire point."
+    },
+    "7-1": {
+      "title": "Agents Need Tools",
+      "content": "An agent is only useful when it can actually do things: query a database, send mail, call an API. It reaches all of these through tools."
+    },
+    "7-2": {
+      "title": "MCP, Briefly",
+      "content": "The Model Context Protocol, or MCP, is a common way for agents to connect to tools and data through MCP servers. Treat each server as a guarded resource."
+    },
+    "7-3": {
+      "title": "Servers Are Protected Resources",
+      "content": "An MCP server holding your email or files is a protected resource. It should demand a valid slip before doing anything, exactly like any other guarded API."
+    },
+    "7-4": {
+      "title": "User Consent",
+      "content": "Before an agent gets a slip for your data, you approve it: yes, the travel agent may read my calendar. Consent is explicit, and it is yours to give or refuse."
+    },
+    "7-5": {
+      "title": "Bound To One Server",
+      "content": "The slip the agent receives is stamped for that specific MCP server. It cannot be reused to reach a different tool that you never approved."
+    },
+    "7-6": {
+      "title": "Scoped To The Task",
+      "content": "Consent and scope work together. You approve a narrow permission, and the slip carries exactly that. The tool ends up seeing only what you allowed."
+    },
+    "7-7": {
+      "title": "Same Slip, New Setting",
+      "content": "Notice nothing new was needed. An MCP tool is just another resource that checks a signed, scoped, short-lived slip naming who is acting for whom."
+    },
+    "8-1": {
+      "title": "When Slips Are Too Broad",
+      "content": "The most common failure is an over-broad slip: an agent gets do anything when it only needed read one file. Now a small bug can become a large breach."
+    },
+    "8-2": {
+      "title": "The Confused Deputy",
+      "content": "An agent with real authority can be tricked into misusing it for someone else. The agent is not evil. It is a confused deputy acting on a bad instruction."
+    },
+    "8-3": {
+      "title": "How Confusion Happens",
+      "content": "A malicious input tells the agent to also delete the records. If its slip is broad enough, it obeys. A properly narrow slip would have simply refused."
+    },
+    "8-4": {
+      "title": "Scope Is The Defense",
+      "content": "Tight scope blunts the confused deputy. Even when tricked, the agent can only do what its slip allows. It literally cannot perform actions it was never granted."
+    },
+    "8-5": {
+      "title": "Revocation",
+      "content": "Sometimes you must cut access right now. Revocation cancels a slip before it expires, so a misbehaving or compromised agent is stopped immediately."
+    },
+    "8-6": {
+      "title": "Short Lifetimes Limit Damage",
+      "content": "Even without revocation, short-lived slips mean a leaked one stops working soon. Time itself becomes a cap on how far any single failure can spread."
+    },
+    "8-7": {
+      "title": "Defense In Depth",
+      "content": "Put it together: narrow scope, short lifetime, audience binding, revocation, and a clear audit trail. No single control is enough, but together they contain failure."
+    },
+    "9-1": {
+      "title": "What We Have Learned",
+      "content": "An agent is a workload with its own identity. It acts on behalf of a principal using signed, scoped, short-lived permission slips, never your master key."
+    },
+    "9-2": {
+      "title": "The Slip Summary",
+      "content": "Every slip says who it is for, who is acting, what is allowed, where, and until when. Each hop narrows it, and every hop is written into the audit trail."
+    },
+    "9-3": {
+      "title": "Why It Matters",
+      "content": "Delegation done right gives agents just enough power to help, while keeping you accountable and keeping the blast radius small when things eventually go wrong."
+    },
+    "9-4": {
+      "title": "Get Started",
+      "content": "Go deeper with WIMSE for workload identity, the MCP authorization spec, A2A for agent-to-agent, and SPIFFE for the identity foundation. Build agents that carry slips, not master keys."
+    }
+  }
+}

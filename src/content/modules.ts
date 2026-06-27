@@ -23,6 +23,8 @@ import {
 } from '@/content/tracks';
 import { sections as spiffeSections } from '@/content/spiffe';
 import { spiffeFrames } from '@/components/frames/spiffe';
+import { sections as agentsSections } from '@/content/agents';
+import { agentsFrames } from '@/components/frames/agents';
 
 export type ModuleId = 'spiffe' | 'agents';
 
@@ -118,11 +120,81 @@ const spiffeModule: ModuleConfig = {
 };
 
 // ---------------------------------------------------------------------------
+// AI Agent Identity module
+// ---------------------------------------------------------------------------
+
+/**
+ * Track content end points (1-indexed global frame numbers), 60 frames total.
+ * Bronze: end of Section 3 ("On Whose Behalf?")     -> frame 20
+ * Silver: end of Section 6 ("Agent-To-Agent")        -> frame 42
+ * Gold:   all 60 frames (including "Get Started")
+ */
+const agentsTrackContentEnd: Record<TrackId, number> = {
+  bronze: 20,
+  silver: 42,
+  gold: 60,
+};
+
+/** The "Get Started" CTA frame (9-4), appended to Bronze/Silver. */
+const agentsGetStartedFrame: TrackFrame = {
+  sectionIndex: 8, // Section 9 (0-indexed)
+  frameIndex: 3, // Frame 9-4 (0-indexed within section)
+  frameId: '9-4',
+};
+
+/** English defaults; overridden at render via the `agents-tracks` namespace. */
+const agentsTrackMeta: Record<TrackId, TrackMeta> = {
+  bronze: {
+    icon: '🥉',
+    title: 'Bronze',
+    subtitle: 'Why Agents Need Identity',
+    duration: '~5 minutes',
+    description: 'The agent identity crisis, why an agent needs its own identity, and what it means to act on someone\'s behalf.',
+    goal: 'Now I can explain why agents should not share your master key',
+  },
+  silver: {
+    icon: '🥈',
+    title: 'Silver',
+    subtitle: 'How Delegation Works',
+    duration: '~12 minutes',
+    description: 'Permission slips, narrowing scope at every hop, and agent-to-agent delegation chains with a full audit trail.',
+    goal: 'Now I understand how scoped delegation works',
+  },
+  gold: {
+    icon: '🥇',
+    title: 'Gold',
+    subtitle: 'Agent Identity Deep Dive',
+    duration: '~18 minutes',
+    description: 'The complete course: reaching for tools with MCP, the confused-deputy problem, revocation, and defense in depth.',
+    goal: 'Now I can reason about agent authorization end to end',
+  },
+};
+
+const agentsModule: ModuleConfig = {
+  id: 'agents',
+  basePath: '/agents',
+  i18nPrefix: 'agents',
+  sections: agentsSections,
+  tracks: buildTracks({
+    sections: agentsSections,
+    trackContentEnd: agentsTrackContentEnd,
+    getStartedFrame: agentsGetStartedFrame,
+    trackMeta: agentsTrackMeta,
+  }),
+  trackOrder: defaultTrackOrder,
+  recommendedTrack: 'silver',
+  trackContentEnd: agentsTrackContentEnd,
+  getStartedFrame: agentsGetStartedFrame,
+  frameComponents: agentsFrames,
+};
+
+// ---------------------------------------------------------------------------
 // Registry
 // ---------------------------------------------------------------------------
 
 export const modules: Partial<Record<ModuleId, ModuleConfig>> = {
   spiffe: spiffeModule,
+  agents: agentsModule,
 };
 
 /** Resolve a module config by id. Returns undefined for unknown ids. */

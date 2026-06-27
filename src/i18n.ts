@@ -21,6 +21,12 @@ import es419SpiffeContent from '@/locales/es-419/spiffe/content.json';
 import es419SpiffeFrames from '@/locales/es-419/spiffe/frames.json';
 import es419SpiffeTracks from '@/locales/es-419/spiffe/tracks.json';
 
+// AI Agent Identity module namespaces (English source only for now;
+// pt-BR and es-419 fall back to English via fallbackLng until Phase D).
+import enAgentsContent from '@/locales/en/agents/content.json';
+import enAgentsFrames from '@/locales/en/agents/frames.json';
+import enAgentsTracks from '@/locales/en/agents/tracks.json';
+
 export const supportedLanguages = [
   { code: 'en', label: 'English', flag: '🇺🇸' },
   { code: 'pt-BR', label: 'Português', flag: '🇧🇷' },
@@ -51,6 +57,9 @@ i18n
         'spiffe-content': enSpiffeContent,
         'spiffe-frames': enSpiffeFrames,
         'spiffe-tracks': enSpiffeTracks,
+        'agents-content': enAgentsContent,
+        'agents-frames': enAgentsFrames,
+        'agents-tracks': enAgentsTracks,
       },
       'pt-BR': {
         ui: ptBRUi,
@@ -69,7 +78,16 @@ i18n
     },
     fallbackLng: 'en',
     defaultNS: 'ui',
-    ns: ['ui', 'landing', 'spiffe-content', 'spiffe-frames', 'spiffe-tracks'],
+    ns: [
+      'ui',
+      'landing',
+      'spiffe-content',
+      'spiffe-frames',
+      'spiffe-tracks',
+      'agents-content',
+      'agents-frames',
+      'agents-tracks',
+    ],
     detection: {
       order: ['localStorage', 'navigator'],
       lookupLocalStorage: 'spiffe-language',
