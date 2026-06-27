@@ -16,6 +16,15 @@ export default {
         trustBundle: '#8B5CF6',
         attacker: '#EF4444',
 
+        // Agent Identity module (AI Agent delegation)
+        principal: '#6366F1', // Indigo — owner of the authority (signs slips)
+        agentAI: '#06B6D4', // Cyan — the AI agent acting on the principal's behalf
+        subAgent: '#22D3EE', // Light cyan — a delegated secondary agent
+        permissionSlip: '#F59E0B', // Gold — the signed/scoped/short-lived authorization slip
+        slipSeal: '#9F1239', // Burgundy wax — the slip's signature/seal (not attacker red)
+        verifier: '#3B82F6', // Authority blue — checkpoint/guard inspecting a slip
+        toolResource: '#14B8A6', // Teal — protected tool / MCP server
+
         // Background
         background: '#0F172A',
         surface: '#1E293B',

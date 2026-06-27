@@ -9,6 +9,17 @@ export const colors = {
   trustBundle: '#8B5CF6',
   attacker: '#EF4444',
 
+  // --- Agent Identity module (AI Agent delegation) ---
+  // Cool indigo→cyan→teal family reads as the agent ecosystem and stays
+  // clear of server blue / SPIRE-agent green / svid gold / trustBundle purple.
+  principal: '#6366F1', // Indigo — the human/service that OWNS the authority (the "boss" who signs slips)
+  agentAI: '#06B6D4', // Cyan — the AI agent that ACTS on the principal's behalf (clearly software; not the green SPIRE agent)
+  subAgent: '#22D3EE', // Light cyan — a delegated secondary agent; a smaller sibling of the agent
+  permissionSlip: '#F59E0B', // Gold — the signed/scoped/short-lived authorization slip (same credential family as svid)
+  slipSeal: '#9F1239', // Burgundy wax — the signature/seal stamped on a slip; deliberately NOT attacker red
+  verifier: '#3B82F6', // Authority blue — the checkpoint/guard that inspects a slip (shares the server blue family)
+  toolResource: '#14B8A6', // Teal — the protected tool / MCP server an agent wants to reach
+
   // Background
   background: '#0F172A',
   surface: '#1E293B',
@@ -32,6 +43,13 @@ export const entitySizes = {
   badge: 120,
   trustBundle: 60,
   attacker: 60,
+  // Agent Identity module
+  principal: 70,
+  agentAI: 70,
+  subAgent: 56,
+  permissionSlip: 120,
+  verifier: 90,
+  toolResource: 90,
 };
 
 // Stage dimensions
