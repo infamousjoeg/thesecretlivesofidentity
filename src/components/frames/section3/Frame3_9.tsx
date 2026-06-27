@@ -11,7 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Registration entry as HR record
  */
 export const Frame3_9: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500]);
 
   return (

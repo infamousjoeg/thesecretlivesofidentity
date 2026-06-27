@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Hardware root of trust
  */
 export const Frame8_9: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   return (

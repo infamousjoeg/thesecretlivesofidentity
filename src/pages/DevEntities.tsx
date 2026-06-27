@@ -10,6 +10,12 @@ import {
   Connection,
   Message,
   Attacker,
+  Principal,
+  AIAgent,
+  SubAgent,
+  PermissionSlip,
+  Verifier,
+  ToolResource,
 } from '@/components/entities';
 
 /**
@@ -455,6 +461,251 @@ export const DevEntities: React.FC = () => {
               position={{ x: 700, y: 300 }}
               animate={false}
             />
+          </svg>
+        </div>
+      </div>
+
+      {/* ============================================================ */}
+      {/* Agent Identity module entities                                */}
+      {/* ============================================================ */}
+      <div className="mt-16 mb-6">
+        <h2 className="text-2xl font-display font-bold text-textPrimary mb-1">
+          Agent Identity
+        </h2>
+        <p className="text-textSecondary text-sm">
+          The signed, scoped, time-limited <span className="text-permissionSlip font-medium">permission-slip / work-order</span> metaphor.
+          A principal owns the authority; an AI agent acts on their behalf carrying a slip; a verifier inspects it; a tool resource opens only for a valid one.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {/* Principal */}
+        <EntityCard title="Principal (Owner)" status="verified">
+          <svg viewBox="0 0 200 200" className="w-full h-40">
+            <Principal label="Alex (you)" position={{ x: 100, y: 95 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* Principal - Active */}
+        <EntityCard title="Principal (Granting)" status="verified">
+          <svg viewBox="0 0 200 200" className="w-full h-40">
+            <Principal label="Alex (you)" active={true} position={{ x: 100, y: 95 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* AI Agent - Idle */}
+        <EntityCard title="AI Agent (Idle)" status="verified">
+          <svg viewBox="0 0 200 200" className="w-full h-40">
+            <AIAgent label="Travel Agent" position={{ x: 100, y: 90 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* AI Agent - Active */}
+        <EntityCard title="AI Agent (Active)" status="verified">
+          <svg viewBox="0 0 200 200" className="w-full h-40">
+            <AIAgent label="Travel Agent" active={true} position={{ x: 100, y: 90 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* Agent + SubAgent */}
+        <EntityCard title="Agent → Sub-Agent" status="verified">
+          <svg viewBox="0 0 220 200" className="w-full h-40">
+            <AIAgent label="Booking Agent" active={true} size={64} position={{ x: 70, y: 90 }} animate={false} />
+            <SubAgent label="Payment" active={true} position={{ x: 165, y: 95 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* SubAgent - Idle */}
+        <EntityCard title="Sub-Agent (Idle)" status="verified">
+          <svg viewBox="0 0 200 200" className="w-full h-40">
+            <SubAgent label="Payment Agent" position={{ x: 105, y: 95 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* PermissionSlip - Valid (HERO) */}
+        <EntityCard title="Permission Slip (Valid)" status="verified" critical>
+          <svg viewBox="0 0 200 280" className="w-full h-56">
+            <PermissionSlip
+              onBehalfOf="Alex (you)"
+              actor="Travel Agent"
+              scopes={['Read calendar', 'Send email', 'Book hotel']}
+              audience="calendar-api"
+              state="valid"
+              expiresIn={300}
+              position={{ x: 100, y: 140 }}
+              animate={false}
+            />
+          </svg>
+        </EntityCard>
+
+        {/* PermissionSlip - Expiring */}
+        <EntityCard title="Permission Slip (Expiring)" status="verified" critical>
+          <svg viewBox="0 0 200 280" className="w-full h-56">
+            <PermissionSlip
+              onBehalfOf="Alex (you)"
+              actor="Travel Agent"
+              scopes={['Read calendar', 'Send email']}
+              audience="calendar-api"
+              state="expiring"
+              expiresIn={45}
+              position={{ x: 100, y: 140 }}
+              animate={false}
+            />
+          </svg>
+        </EntityCard>
+
+        {/* PermissionSlip - Expired */}
+        <EntityCard title="Permission Slip (Expired)" status="verified" critical>
+          <svg viewBox="0 0 200 280" className="w-full h-56">
+            <PermissionSlip
+              onBehalfOf="Alex (you)"
+              actor="Travel Agent"
+              scopes={['Read calendar', 'Send email']}
+              audience="calendar-api"
+              state="expired"
+              expiresIn={0}
+              position={{ x: 100, y: 140 }}
+              animate={false}
+            />
+          </svg>
+        </EntityCard>
+
+        {/* PermissionSlip - Narrowed sub-slip (fewer permissions) */}
+        <EntityCard title="Sub-Slip (Narrowed)" status="verified" critical>
+          <svg viewBox="0 0 200 280" className="w-full h-56">
+            <PermissionSlip
+              onBehalfOf="Alex (you)"
+              actor="Payment Agent"
+              scopes={['Read calendar']}
+              revokedScopes={['Send email', 'Book hotel']}
+              audience="payment-api"
+              state="valid"
+              expiresIn={120}
+              narrowed={true}
+              position={{ x: 100, y: 140 }}
+              animate={false}
+            />
+          </svg>
+        </EntityCard>
+
+        {/* Parent vs narrowed comparison */}
+        <EntityCard title="Parent vs Narrowed" status="verified" critical>
+          <svg viewBox="0 0 320 280" className="w-full h-56">
+            <PermissionSlip
+              onBehalfOf="Alex"
+              actor="Booking Agent"
+              scopes={['Read calendar', 'Send email', 'Book hotel']}
+              audience="booking-api"
+              state="valid"
+              size={96}
+              position={{ x: 82, y: 140 }}
+              animate={false}
+            />
+            <PermissionSlip
+              onBehalfOf="Alex"
+              actor="Payment Agent"
+              scopes={['Charge card']}
+              revokedScopes={['Read calendar', 'Send email']}
+              audience="payment-api"
+              state="valid"
+              size={96}
+              narrowed={true}
+              position={{ x: 235, y: 140 }}
+              animate={false}
+            />
+          </svg>
+        </EntityCard>
+
+        {/* Verifier - Idle */}
+        <EntityCard title="Verifier (Scanning)" status="verified">
+          <svg viewBox="0 0 220 200" className="w-full h-40">
+            <Verifier label="Verifier" state="idle" position={{ x: 90, y: 95 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* Verifier - Accept */}
+        <EntityCard title="Verifier (Accept)" status="verified">
+          <svg viewBox="0 0 220 200" className="w-full h-40">
+            <Verifier label="Verifier" state="accept" position={{ x: 90, y: 95 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* Verifier - Reject */}
+        <EntityCard title="Verifier (Reject)" status="verified">
+          <svg viewBox="0 0 220 200" className="w-full h-40">
+            <Verifier label="Verifier" state="reject" position={{ x: 90, y: 95 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* ToolResource - Locked */}
+        <EntityCard title="Tool Resource (Locked)" status="verified">
+          <svg viewBox="0 0 200 220" className="w-full h-44">
+            <ToolResource label="Calendar API" kind="MCP" locked={true} position={{ x: 100, y: 100 }} animate={false} />
+          </svg>
+        </EntityCard>
+
+        {/* ToolResource - Unlocked */}
+        <EntityCard title="Tool Resource (Unlocked)" status="verified">
+          <svg viewBox="0 0 200 220" className="w-full h-44">
+            <ToolResource label="Calendar API" kind="MCP" locked={false} position={{ x: 100, y: 100 }} animate={false} />
+          </svg>
+        </EntityCard>
+      </div>
+
+      {/* Composite delegation scene */}
+      <div className="mt-12">
+        <h2 className="text-xl font-display font-semibold text-textPrimary mb-4">
+          Delegation Chain Demo
+        </h2>
+        <div className="bg-surface rounded-xl border border-textMuted/20 p-4">
+          <svg viewBox="0 0 820 360" className="w-full" style={{ height: '22rem' }}>
+            {/* Principal */}
+            <Principal label="Alex (you)" active={true} position={{ x: 70, y: 120 }} animate={false} />
+
+            {/* hands a slip to the agent */}
+            <Connection from={{ x: 110, y: 120 }} to={{ x: 190, y: 120 }} status="established" animate={false} />
+
+            {/* AI Agent carrying a slip */}
+            <AIAgent label="Travel Agent" active={true} position={{ x: 230, y: 115 }} animate={false} />
+            <PermissionSlip
+              onBehalfOf="Alex"
+              actor="Travel Agent"
+              scopes={['Read calendar', 'Book hotel']}
+              audience="booking-api"
+              state="valid"
+              size={84}
+              position={{ x: 340, y: 130 }}
+              animate={false}
+            />
+
+            {/* sub-delegation to a sub-agent with a narrowed slip */}
+            <Connection from={{ x: 230, y: 175 }} to={{ x: 230, y: 250 }} status="established" showArrow={false} animate={false} />
+            <SubAgent label="Payment" active={true} position={{ x: 230, y: 285 }} animate={false} />
+            <PermissionSlip
+              onBehalfOf="Alex"
+              actor="Payment Agent"
+              scopes={['Charge card']}
+              revokedScopes={['Read calendar', 'Book hotel']}
+              audience="payment-api"
+              state="valid"
+              size={76}
+              narrowed={true}
+              position={{ x: 340, y: 280 }}
+              animate={false}
+            />
+
+            {/* Verifier guarding the tool */}
+            <Verifier label="Verifier" state="accept" position={{ x: 560, y: 120 }} animate={false} />
+            <Connection from={{ x: 388, y: 130 }} to={{ x: 512, y: 120 }} status="established" label="present slip" animate={false} />
+
+            {/* Tool resource, unlocked by a valid slip */}
+            <ToolResource label="Calendar API" kind="MCP" locked={false} position={{ x: 720, y: 120 }} animate={false} />
+            <Connection from={{ x: 610, y: 120 }} to={{ x: 678, y: 120 }} status="established" animate={false} />
+
+            {/* Attacker with an over-broad ask, blocked */}
+            <Attacker label="Confused Deputy" blocked={true} position={{ x: 700, y: 290 }} animate={false} />
+            <Verifier label="" state="reject" size={64} position={{ x: 560, y: 285 }} animate={false} />
+            <Connection from={{ x: 660, y: 285 }} to={{ x: 600, y: 285 }} status="rejected" animate={false} />
           </svg>
         </div>
       </div>

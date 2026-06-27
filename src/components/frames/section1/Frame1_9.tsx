@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Transition from question to hope - workloads proving identity differently
  */
 export const Frame1_9: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 800, 800, 800]);
   const prefersReducedMotion = useReducedMotion();
 

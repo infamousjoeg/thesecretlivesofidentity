@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Various selector types
  */
 export const Frame3_10: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 400]);
 
   const selectors = [

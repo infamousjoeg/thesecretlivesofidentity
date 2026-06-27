@@ -11,7 +11,7 @@ import { colors } from '@/utils/constants';
  * Visual: Resources and next steps
  */
 export const Frame9_4: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 600]);
   const { totalFrames } = useTrackNavigation();
 

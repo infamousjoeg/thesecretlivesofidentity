@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Badge proves identity, but access list determines entry
  */
 export const Frame6_8: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 

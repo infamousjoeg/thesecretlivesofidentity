@@ -34,7 +34,7 @@ const failureSteps: Step[] = [
  * Shows step-by-step mutual TLS with success and failure branches
  */
 export const E2ESimulator: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const [mode, setMode] = useState<'success' | 'failure'>('success');
   const [step, setStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);

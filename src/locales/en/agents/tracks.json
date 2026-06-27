@@ -1,0 +1,43 @@
+{
+  "trackSelector": {
+    "title": "Learn Agent Identity",
+    "subtitle": "Choose your learning path based on how much time you have. Each track builds on the previous one.",
+    "startTrack": "Start {{title}}",
+    "hint": "You can switch tracks anytime. Progress is saved automatically."
+  },
+  "bronze": {
+    "title": "Bronze",
+    "subtitle": "Why Agents Need Identity",
+    "duration": "~5 minutes",
+    "description": "The agent identity crisis, why an agent needs its own identity, and what it means to act on someone's behalf.",
+    "goal": "Now I can explain why agents should not share your master key"
+  },
+  "silver": {
+    "title": "Silver",
+    "subtitle": "How Delegation Works",
+    "duration": "~12 minutes",
+    "description": "Permission slips, narrowing scope at every hop, and agent-to-agent delegation chains with a full audit trail.",
+    "goal": "Now I understand how scoped delegation works"
+  },
+  "gold": {
+    "title": "Gold",
+    "subtitle": "Agent Identity Deep Dive",
+    "duration": "~18 minutes",
+    "description": "The complete course: reaching for tools with MCP, the confused-deputy problem, revocation, and defense in depth.",
+    "goal": "Now I can reason about agent authorization end to end"
+  },
+  "completion": {
+    "bronze": {
+      "title": "Bronze Complete!",
+      "message": "You can now explain why an AI agent should carry its own identity and a scoped permission slip, never your master key."
+    },
+    "silver": {
+      "title": "Silver Complete!",
+      "message": "You understand delegation: signed, scoped, short-lived slips that narrow at every hop, with a full actor chain and audit trail."
+    },
+    "gold": {
+      "title": "Gold Complete!",
+      "message": "You can reason about agent authorization end to end, from tools and MCP to the confused-deputy problem, revocation, and defense in depth."
+    }
+  }
+}

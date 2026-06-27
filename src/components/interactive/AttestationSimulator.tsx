@@ -18,7 +18,7 @@ interface AttestationStep {
  * Shows three scenarios: success, failure, and attack
  */
 export const AttestationSimulator: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const [scenario, setScenario] = useState<Scenario>('success');
   const [step, setStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);

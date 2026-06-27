@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Multiple real-world SPIFFE ID examples
  */
 export const Frame2_5: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 400]);
 
   const examples = [

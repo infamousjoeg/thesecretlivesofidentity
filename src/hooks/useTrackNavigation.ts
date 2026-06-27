@@ -1,36 +1,46 @@
 /**
- * useTrackNavigation - Track-aware navigation hook
+ * useTrackNavigation - Module + track-aware navigation hook
  *
- * Manages navigation within a specific learning track (Bronze/Silver/Gold).
- * Syncs track position with URL and provides navigation actions.
+ * Manages navigation within a specific module's learning track
+ * (Bronze/Silver/Gold). Reads the active module and track from the URL,
+ * syncs track position with the store, and provides navigation actions.
+ * All URLs are derived from the module's `basePath`, and progress is
+ * persisted under a per-module storage key so it never bleeds across modules.
  */
 
 import { useCallback, useEffect, useMemo } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useVisualizationStore } from '@/store/visualizationStore';
-import { tracks, getTrackFrameData, getNextTrack, getContinuationPosition, type TrackId } from '@/content/tracks';
-
-// Storage key for persisting progress
-const STORAGE_KEY = 'spiffe-track-progress';
+import {
+  getTrackFrameData,
+  getNextTrack,
+  getContinuationPosition,
+  type TrackId,
+} from '@/content/tracks';
+import { getModule } from '@/content/modules';
 
 interface TrackProgress {
   [trackId: string]: number; // trackId -> last frame position
 }
 
-function loadProgress(): TrackProgress {
+function storageKey(moduleId: string): string {
+  return `${moduleId}-track-progress`;
+}
+
+function loadProgress(moduleId: string): TrackProgress {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(storageKey(moduleId));
     return stored ? JSON.parse(stored) : {};
   } catch {
     return {};
   }
 }
 
-function saveProgress(trackId: TrackId, position: number): void {
+function saveProgress(moduleId: string, trackId: TrackId, position: number): void {
   try {
-    const progress = loadProgress();
+    const progress = loadProgress(moduleId);
     progress[trackId] = position;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    localStorage.setItem(storageKey(moduleId), JSON.stringify(progress));
   } catch {
     // Ignore storage errors
   }
@@ -38,22 +48,27 @@ function saveProgress(trackId: TrackId, position: number): void {
 
 export function useTrackNavigation() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const params = useParams<{ frameIndex?: string }>();
+  const params = useParams<{ module?: string; track?: string; frameIndex?: string }>();
 
   const { goToFrame, animationPhase, setAnimationPhase, resetAnimationPhase } =
     useVisualizationStore();
 
-  // Determine current track from URL path
-  const currentTrack = useMemo((): TrackId | null => {
-    const path = location.pathname;
-    if (path.includes('/spiffe/bronze')) return 'bronze';
-    if (path.includes('/spiffe/silver')) return 'silver';
-    if (path.includes('/spiffe/gold')) return 'gold';
-    return null;
-  }, [location.pathname]);
+  // Resolve the active module from the URL.
+  const moduleId = params.module;
+  const moduleConfig = useMemo(() => getModule(moduleId), [moduleId]);
+  const basePath = moduleConfig?.basePath ?? '';
 
-  // Current position within track (0-indexed)
+  // Determine current track from the :track param (validated against the module).
+  const currentTrack = useMemo((): TrackId | null => {
+    if (!moduleConfig) return null;
+    const candidate = params.track as TrackId | undefined;
+    if (candidate && moduleConfig.trackOrder.includes(candidate)) {
+      return candidate;
+    }
+    return null;
+  }, [moduleConfig, params.track]);
+
+  // Current position within track (0-indexed).
   const currentPosition = useMemo(() => {
     const frameIndex = params.frameIndex;
     if (frameIndex) {
@@ -64,101 +79,115 @@ export function useTrackNavigation() {
     return 0;
   }, [params.frameIndex]);
 
-  // Get track info
-  const track = currentTrack ? tracks[currentTrack] : null;
+  // Get track info.
+  const tracks = moduleConfig?.tracks ?? null;
+  const track = currentTrack && tracks ? tracks[currentTrack] : null;
   const totalFrames = track?.frames.length ?? 0;
 
-  // Get current frame data
+  // Get current frame data.
   const frameData = useMemo(() => {
-    if (!currentTrack) return null;
-    return getTrackFrameData(currentTrack, currentPosition);
-  }, [currentTrack, currentPosition]);
+    if (!moduleConfig || !currentTrack) return null;
+    return getTrackFrameData(
+      moduleConfig.sections,
+      moduleConfig.tracks,
+      currentTrack,
+      currentPosition
+    );
+  }, [moduleConfig, currentTrack, currentPosition]);
 
-  // Boundary checks
+  // Boundary checks.
   const isFirstFrame = currentPosition === 0;
   const isLastFrame = currentPosition >= totalFrames - 1;
 
-  // Sync internal store with track position
+  // Sync internal store with track position.
   useEffect(() => {
     if (frameData) {
       goToFrame(frameData.trackFrame.sectionIndex, frameData.trackFrame.frameIndex);
     }
   }, [frameData, goToFrame]);
 
-  // Save progress when position changes
+  // Save progress when position changes.
   useEffect(() => {
-    if (currentTrack && currentPosition >= 0) {
-      saveProgress(currentTrack, currentPosition);
+    if (moduleId && currentTrack && currentPosition >= 0) {
+      saveProgress(moduleId, currentTrack, currentPosition);
     }
-  }, [currentTrack, currentPosition]);
+  }, [moduleId, currentTrack, currentPosition]);
 
-  // Navigate to specific position within track
+  // Navigate to specific position within track.
   const goToPosition = useCallback(
     (position: number) => {
-      if (!currentTrack) return;
+      if (!currentTrack || !basePath) return;
       const clampedPosition = Math.max(0, Math.min(position, totalFrames - 1));
       // URL uses 1-indexed
-      navigate(`/spiffe/${currentTrack}/${clampedPosition + 1}`);
+      navigate(`${basePath}/${currentTrack}/${clampedPosition + 1}`);
       resetAnimationPhase();
     },
-    [currentTrack, totalFrames, navigate, resetAnimationPhase]
+    [currentTrack, basePath, totalFrames, navigate, resetAnimationPhase]
   );
 
-  // Next frame
+  // Next frame.
   const nextFrame = useCallback(() => {
     if (!isLastFrame) {
       goToPosition(currentPosition + 1);
     }
   }, [isLastFrame, currentPosition, goToPosition]);
 
-  // Previous frame
+  // Previous frame.
   const prevFrame = useCallback(() => {
     if (!isFirstFrame) {
       goToPosition(currentPosition - 1);
     }
   }, [isFirstFrame, currentPosition, goToPosition]);
 
-  // Switch to a different track
+  // Switch to a different track.
   const switchTrack = useCallback(
     (trackId: TrackId, startPosition: number = 0) => {
+      if (!tracks || !basePath) return;
       const targetTrack = tracks[trackId];
       const clampedPosition = Math.max(0, Math.min(startPosition, targetTrack.frames.length - 1));
-      navigate(`/spiffe/${trackId}/${clampedPosition + 1}`);
+      navigate(`${basePath}/${trackId}/${clampedPosition + 1}`);
       resetAnimationPhase();
     },
-    [navigate, resetAnimationPhase]
+    [tracks, basePath, navigate, resetAnimationPhase]
   );
 
-  // Go to track selector
+  // Go to track selector.
   const goToTrackSelector = useCallback(() => {
-    navigate('/spiffe');
-  }, [navigate]);
+    if (basePath) navigate(basePath);
+  }, [basePath, navigate]);
 
-  // Continue to next track (for completion screen)
-  // Skips to the first NEW frame not in the current track
+  // Continue to next track (for completion screen).
+  // Skips to the first NEW frame not in the current track.
   const continueToNextTrack = useCallback(() => {
-    if (!currentTrack) return;
+    if (!currentTrack || !tracks) return;
     const nextTrackId = getNextTrack(currentTrack);
     if (nextTrackId) {
-      // Find where new content begins in the next track
-      const continuationPos = getContinuationPosition(currentTrack, nextTrackId);
+      const continuationPos = getContinuationPosition(tracks, currentTrack);
       switchTrack(nextTrackId, continuationPos);
     }
-  }, [currentTrack, switchTrack]);
+  }, [currentTrack, tracks, switchTrack]);
 
-  // Get saved progress for a track
-  const getSavedProgress = useCallback((trackId: TrackId): number => {
-    const progress = loadProgress();
-    return progress[trackId] ?? 0;
-  }, []);
+  // Get saved progress for a track.
+  const getSavedProgress = useCallback(
+    (trackId: TrackId): number => {
+      if (!moduleId) return 0;
+      const progress = loadProgress(moduleId);
+      return progress[trackId] ?? 0;
+    },
+    [moduleId]
+  );
 
-  // Check if track has saved progress
-  const hasSavedProgress = useCallback((trackId: TrackId): boolean => {
-    const progress = loadProgress();
-    return (progress[trackId] ?? 0) > 0;
-  }, []);
+  // Check if track has saved progress.
+  const hasSavedProgress = useCallback(
+    (trackId: TrackId): boolean => {
+      if (!moduleId) return false;
+      const progress = loadProgress(moduleId);
+      return (progress[trackId] ?? 0) > 0;
+    },
+    [moduleId]
+  );
 
-  // Progress info
+  // Progress info.
   const progress = useMemo(
     () => ({
       current: currentPosition + 1, // 1-indexed for display
@@ -169,10 +198,16 @@ export function useTrackNavigation() {
   );
 
   return {
+    // Module
+    moduleId,
+    moduleConfig,
+    basePath,
+
     // Current state
     currentTrack,
     currentPosition,
     track,
+    tracks,
     totalFrames,
     frameData,
 

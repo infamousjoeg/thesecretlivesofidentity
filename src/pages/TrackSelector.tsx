@@ -1,28 +1,32 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, FileText, Target, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useReducedMotion } from '@/hooks';
-import { tracks, trackOrder, type TrackId } from '@/content/tracks';
+import type { TrackId } from '@/content/tracks';
+import { getModule, type ModuleConfig } from '@/content/modules';
 
 interface TrackCardProps {
+  config: ModuleConfig;
   trackId: TrackId;
   index: number;
   isRecommended?: boolean;
 }
 
-const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) => {
+const TrackCard: React.FC<TrackCardProps> = ({ config, trackId, index, isRecommended }) => {
   const navigate = useNavigate();
   const prefersReducedMotion = useReducedMotion();
-  const { t } = useTranslation('tracks');
-  const track = tracks[trackId];
+  const tracksNs = `${config.i18nPrefix}-tracks`;
+  const { t } = useTranslation([tracksNs, 'ui']);
+  const track = config.tracks[trackId];
+  const trackHref = `${config.basePath}/${trackId}`;
 
-  const title = t(`${trackId}.title`, { defaultValue: track.title });
-  const subtitle = t(`${trackId}.subtitle`, { defaultValue: track.subtitle });
-  const duration = t(`${trackId}.duration`, { defaultValue: track.duration });
-  const description = t(`${trackId}.description`, { defaultValue: track.description });
-  const goal = t(`${trackId}.goal`, { defaultValue: track.goal });
+  const title = t(`${tracksNs}:${trackId}.title`, { defaultValue: track.title });
+  const subtitle = t(`${tracksNs}:${trackId}.subtitle`, { defaultValue: track.subtitle });
+  const duration = t(`${tracksNs}:${trackId}.duration`, { defaultValue: track.duration });
+  const description = t(`${tracksNs}:${trackId}.description`, { defaultValue: track.description });
+  const goal = t(`${tracksNs}:${trackId}.goal`, { defaultValue: track.goal });
 
   // Color schemes for each track
   const colorSchemes = {
@@ -66,13 +70,13 @@ const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) 
         ${scheme.glow} hover:shadow-xl
         cursor-pointer
       `}
-      onClick={() => navigate(`/spiffe/${trackId}`)}
+      onClick={() => navigate(trackHref)}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          navigate(`/spiffe/${trackId}`);
+          navigate(trackHref);
         }
       }}
       aria-label={`${title} track: ${subtitle}. ${duration}, ${track.frames.length} frames`}
@@ -134,7 +138,7 @@ const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) 
         `}
         onClick={(e) => {
           e.stopPropagation();
-          navigate(`/spiffe/${trackId}`);
+          navigate(trackHref);
         }}
       >
         <span>{t('trackSelector.startTrack', { title, defaultValue: `Start ${title}` })}</span>
@@ -146,7 +150,15 @@ const TrackCard: React.FC<TrackCardProps> = ({ trackId, index, isRecommended }) 
 
 export const TrackSelector: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
-  const { t } = useTranslation('tracks');
+  const { module } = useParams<{ module?: string }>();
+  const config = getModule(module);
+  const tracksNs = `${config?.i18nPrefix ?? 'spiffe'}-tracks`;
+  const { t } = useTranslation([tracksNs, 'ui']);
+
+  // Unknown module -> landing.
+  if (!config) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -173,21 +185,22 @@ export const TrackSelector: React.FC = () => {
           transition={{ duration: 0.4 }}
         >
           <h1 className="text-4xl sm:text-5xl font-display font-bold text-textPrimary mb-4">
-            {t('trackSelector.title')}
+            {t(`${tracksNs}:trackSelector.title`)}
           </h1>
           <p className="text-lg sm:text-xl text-textSecondary max-w-2xl mx-auto">
-            {t('trackSelector.subtitle')}
+            {t(`${tracksNs}:trackSelector.subtitle`)}
           </p>
         </motion.div>
 
         {/* Track Cards */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {trackOrder.map((trackId, index) => (
+          {config.trackOrder.map((trackId, index) => (
             <TrackCard
               key={trackId}
+              config={config}
               trackId={trackId}
               index={index}
-              isRecommended={trackId === 'silver'}
+              isRecommended={trackId === config.recommendedTrack}
             />
           ))}
         </div>
@@ -199,7 +212,7 @@ export const TrackSelector: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.4 }}
         >
-          {t('trackSelector.hint')}
+          {t(`${tracksNs}:trackSelector.hint`)}
         </motion.p>
       </main>
     </div>

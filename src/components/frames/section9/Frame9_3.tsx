@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Comparison of before/after SPIFFE
  */
 export const Frame9_3: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   return (

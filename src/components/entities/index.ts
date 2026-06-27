@@ -9,3 +9,13 @@ export { RegistrationEntry } from './RegistrationEntry';
 export { Connection } from './Connection';
 export { Message } from './Message';
 export { Attacker } from './Attacker';
+
+// Agent Identity module entities
+export {
+  Principal,
+  AIAgent,
+  SubAgent,
+  PermissionSlip,
+  Verifier,
+  ToolResource,
+} from './agents';

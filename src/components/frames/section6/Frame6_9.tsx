@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: SPIFFE + various authorization systems
  */
 export const Frame6_9: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 600]);
 
   return (

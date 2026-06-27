@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Agent as local security desk with workloads
  */
 export const Frame3_5: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 500, 500, 500]);
   const prefersReducedMotion = useReducedMotion();
 

@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Policies reference SPIFFE ID, not SVIDs
  */
 export const Frame7_7: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
 
   return (

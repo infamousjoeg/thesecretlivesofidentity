@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Workloads connected by lines with key/lock icons representing API keys
  */
 export const Frame1_2: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 

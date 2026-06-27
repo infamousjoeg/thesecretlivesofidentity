@@ -12,7 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Step-by-step attestation flow
  */
 export const Frame4_6: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 400, 400, 400, 400, 400]);
   const prefersReducedMotion = useReducedMotion();
 

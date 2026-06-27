@@ -1,0 +1,43 @@
+{
+  "trackSelector": {
+    "title": "Aprende la Identidad de los Agentes",
+    "subtitle": "Elige tu ruta de aprendizaje según el tiempo que tengas. Cada nivel se apoya en el anterior.",
+    "startTrack": "Comenzar {{title}}",
+    "hint": "Puedes cambiar de nivel en cualquier momento. El progreso se guarda automáticamente."
+  },
+  "bronze": {
+    "title": "Bronce",
+    "subtitle": "Por qué los agentes necesitan identidad",
+    "duration": "~5 minutos",
+    "description": "La crisis de identidad de los agentes, por qué un agente necesita su propia identidad, y qué significa actuar en nombre de alguien.",
+    "goal": "Ahora puedo explicar por qué los agentes no deben compartir tu clave maestra"
+  },
+  "silver": {
+    "title": "Plata",
+    "subtitle": "Cómo funciona la delegación",
+    "duration": "~12 minutos",
+    "description": "Permisos, acotar el alcance en cada salto, y cadenas de delegación de agente a agente con un registro de auditoría completo.",
+    "goal": "Ahora entiendo cómo funciona la delegación acotada"
+  },
+  "gold": {
+    "title": "Oro",
+    "subtitle": "Inmersión profunda en la identidad de los agentes",
+    "duration": "~18 minutos",
+    "description": "El curso completo: el acceso a herramientas con MCP, el problema del delegado confundido, la revocación y la defensa en profundidad.",
+    "goal": "Ahora puedo razonar sobre la autorización de agentes de extremo a extremo"
+  },
+  "completion": {
+    "bronze": {
+      "title": "¡Bronce completado!",
+      "message": "Ahora puedes explicar por qué un agente de IA debe llevar su propia identidad y un permiso acotado, nunca tu clave maestra."
+    },
+    "silver": {
+      "title": "¡Plata completado!",
+      "message": "Entiendes la delegación: permisos firmados, acotados y de corta duración que se acotan en cada salto, con una cadena de actores y un registro de auditoría completos."
+    },
+    "gold": {
+      "title": "¡Oro completado!",
+      "message": "Puedes razonar sobre la autorización de agentes de extremo a extremo, desde las herramientas y MCP hasta el problema del delegado confundido, la revocación y la defensa en profundidad."
+    }
+  }
+}

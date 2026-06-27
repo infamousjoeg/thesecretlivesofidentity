@@ -49,6 +49,7 @@ test-results/
 
 # Playwright MCP
 .playwright-mcp/
+validator-artifacts/
 
 # Claude
 .claude

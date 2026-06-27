@@ -9,7 +9,7 @@ import { colors } from '@/utils/constants';
  * Visual: Interactive quiz matching workloads to registration entries
  */
 export const Frame5_12: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   return (
     <div className="w-full h-full flex flex-col">
       {/* Title */}

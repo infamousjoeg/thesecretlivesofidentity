@@ -14,7 +14,7 @@ import { colors } from '@/utils/constants';
 export const Frame5_9: React.FC = () => {
   const { phase } = useAnimationPhase([0, 500, 500, 500, 600]);
   const prefersReducedMotion = useReducedMotion();
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
 
   return (
     <Stage>

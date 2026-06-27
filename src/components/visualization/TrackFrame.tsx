@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Menu, X, Home } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useTrackNavigation, useTrackKeyboardNav, useReducedMotion } from '@/hooks';
-import { tracks, type TrackId } from '@/content/tracks';
+import type { TrackId } from '@/content/tracks';
 import { TrackCompletion } from '@/components/TrackCompletion';
-import { sections } from '@/content/spiffe';
 
 interface TrackFrameProps {
   children: React.ReactNode;
@@ -21,9 +20,11 @@ const trackColors: Record<TrackId, string> = {
 
 export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
   const {
+    moduleConfig,
     currentTrack,
     currentPosition,
     track,
+    tracks,
     totalFrames,
     frameData,
     isFirstFrame,
@@ -34,8 +35,12 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
     goToPosition,
   } = useTrackNavigation();
 
+  const navigate = useNavigate();
   const prefersReducedMotion = useReducedMotion();
-  const { t } = useTranslation(['ui', 'content', 'tracks']);
+  const prefix = moduleConfig?.i18nPrefix ?? 'spiffe';
+  const contentNs = `${prefix}-content`;
+  const tracksNs = `${prefix}-tracks`;
+  const { t } = useTranslation(['ui', contentNs, tracksNs]);
   const [showSidebar, setShowSidebar] = useState(false);
   const [showCompletion, setShowCompletion] = useState(false);
 
@@ -54,14 +59,15 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
     onLast: () => goToPosition(totalFrames - 1),
     onEscape: () => {
       if (showCompletion) {
-        setShowCompletion(false);
+        // Dismissing the completion modal returns the learner home.
+        navigate('/');
       } else if (showSidebar) {
         setShowSidebar(false);
       }
     },
   });
 
-  if (!currentTrack || !track || !frameData) {
+  if (!moduleConfig || !currentTrack || !track || !tracks || !frameData) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background text-textMuted">
         {t('ui:loading')}
@@ -70,11 +76,11 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
   }
 
   const { section, frame } = frameData;
-  const frameTitle = t(`content:frames.${frame.id}.title`, { defaultValue: frame.title });
-  const frameContent = t(`content:frames.${frame.id}.content`, { defaultValue: frame.content });
-  const sectionTitle = t(`content:sections.${section.id}`, { defaultValue: section.title });
-  const trackTitle = t(`tracks:${currentTrack}.title`, { defaultValue: track.title });
-  const trackSubtitle = t(`tracks:${currentTrack}.subtitle`, { defaultValue: track.subtitle });
+  const frameTitle = t(`${contentNs}:frames.${frame.id}.title`, { defaultValue: frame.title });
+  const frameContent = t(`${contentNs}:frames.${frame.id}.content`, { defaultValue: frame.content });
+  const sectionTitle = t(`${contentNs}:sections.${section.id}`, { defaultValue: section.title });
+  const trackTitle = t(`${tracksNs}:${currentTrack}.title`, { defaultValue: track.title });
+  const trackSubtitle = t(`${tracksNs}:${currentTrack}.subtitle`, { defaultValue: track.subtitle });
 
   return (
     <>
@@ -99,7 +105,7 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
         {/* Sidebar Header */}
         <div className="p-4 border-b border-textMuted/20">
           <Link
-            to="/spiffe"
+            to={moduleConfig.basePath}
             className="flex items-center gap-2 text-textSecondary hover:text-textPrimary transition-colors mb-3"
           >
             <Home className="w-4 h-4" />
@@ -119,11 +125,11 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
         <nav className="p-2">
           <ul className="space-y-1">
             {track.frames.map((_, index) => {
-              const frameInfo = tracks[currentTrack].frames[index];
+              const frameInfo = track.frames[index];
               const isActive = index === currentPosition;
 
               return (
-                <li key={frameInfo.frameId}>
+                <li key={`${frameInfo.frameId}-${index}`}>
                   <button
                     onClick={() => {
                       goToPosition(index);
@@ -140,11 +146,11 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
                     <span className="text-xs text-textMuted mr-2">{index + 1}.</span>
                     {/* Get frame title from content */}
                     {(() => {
-                      const data = tracks[currentTrack].frames[index];
-                      const sec = sections[data.sectionIndex];
+                      const data = track.frames[index];
+                      const sec = moduleConfig.sections[data.sectionIndex];
                       const frm = sec?.frames[data.frameIndex];
                       if (!frm) return `Frame ${index + 1}`;
-                      return t(`content:frames.${frm.id}.title`, { defaultValue: frm.title });
+                      return t(`${contentNs}:frames.${frm.id}.title`, { defaultValue: frm.title });
                     })()}
                   </button>
                 </li>

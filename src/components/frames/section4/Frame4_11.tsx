@@ -9,7 +9,7 @@ import { colors } from '@/utils/constants';
  * Visual: Interactive attestation flow with success, failure, and attack scenarios
  */
 export const Frame4_11: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   return (
     <div className="w-full h-full flex flex-col">
       {/* Title */}

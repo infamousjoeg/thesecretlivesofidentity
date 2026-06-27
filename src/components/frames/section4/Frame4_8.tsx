@@ -10,7 +10,7 @@ import { colors } from '@/utils/constants';
  * Visual: Teaser for advanced concepts
  */
 export const Frame4_8: React.FC = () => {
-  const { t } = useTranslation('frames');
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600]);
 
   return (
