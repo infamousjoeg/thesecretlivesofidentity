@@ -37,7 +37,7 @@ export const Frame5_4: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          <PermissionSlip position={{ x: 150, y: 250 }} size={118} state="valid" scopes={['Read calendar', 'Send invite']} animate={false} />
+          <PermissionSlip position={{ x: 150, y: 250 }} size={118} state="valid" scopes={[t('frame5_4.scopeReadCalendar', { defaultValue: 'Read calendar' }), t('frame5_4.scopeSendInvite', { defaultValue: 'Send invite' })]} animate={false} />
           <text x={150} y={385} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
             {t('frame5_4.broad', { defaultValue: 'Broad slip' })}
           </text>
@@ -64,7 +64,7 @@ export const Frame5_4: React.FC = () => {
         {phase >= 2 && (
           <motion.g {...reveal(0)}>
             <line x1={482} y1={245} x2={575} y2={245} stroke={colors.permissionSlip} strokeWidth={2.5} markerEnd="url(#a5-4-arrow)" />
-            <PermissionSlip position={{ x: 660, y: 250 }} size={108} state="valid" narrowed scopes={['Read calendar']} revokedScopes={['Send invite']} animate={!prefersReducedMotion} />
+            <PermissionSlip position={{ x: 660, y: 250 }} size={108} state="valid" narrowed scopes={[t('frame5_4.scopeReadCalendar', { defaultValue: 'Read calendar' })]} revokedScopes={[t('frame5_4.scopeSendInvite', { defaultValue: 'Send invite' })]} animate={!prefersReducedMotion} />
             <text x={660} y={375} textAnchor="middle" fill={colors.permissionSlip} fontSize={12} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
               {t('frame5_4.narrow', { defaultValue: 'Narrow slip for one task' })}
             </text>

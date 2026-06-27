@@ -1,0 +1,255 @@
+{
+  "sections": {
+    "agent-identity-crisis": "La Crisis de Identidad de los Agentes",
+    "who-is-this-agent": "¿Quién es este agente?",
+    "on-whose-behalf": "¿En nombre de quién?",
+    "the-permission-slip": "El Permiso",
+    "narrowing-the-scope": "Acotar el Alcance",
+    "agent-to-agent": "De Agente a Agente",
+    "reaching-for-tools": "El Acceso a las Herramientas",
+    "what-goes-wrong": "Qué Puede Salir Mal",
+    "conclusion": "Conclusión"
+  },
+  "frames": {
+    "1-1": {
+      "title": "Software que actúa por ti",
+      "content": "Los agentes de IA ahora realizan acciones en tu nombre: reservan viajes, envían mensajes, mueven dinero, modifican sistemas. Ya no solo responden preguntas. Hacen cosas."
+    },
+    "1-2": {
+      "title": "El atajo tentador",
+      "content": "La forma más rápida de dejar que un agente actúe es darle tu contraseña o una clave maestra. Funciona al primer intento. También es el comienzo de cada historia de terror."
+    },
+    "1-3": {
+      "title": "Una clave para gobernarlas a todas",
+      "content": "Dale a cada agente la misma clave todopoderosa y cualquiera de ellos podrá hacer cualquier cosa, en cualquier lugar, mientras la clave exista. No hay contención."
+    },
+    "1-4": {
+      "title": "Actuar como tú frente a actuar por ti",
+      "content": "Si un agente usa tus credenciales, todos los sistemas creen que fuiste tú. No hay forma de distinguir al agente de ti, ni a un agente de otro."
+    },
+    "1-5": {
+      "title": "El radio de explosión",
+      "content": "Un agente confundido o comprometido que tenga tu clave maestra puede vaciar cuentas, borrar datos o escribir a tus contactos. Un solo error, un daño prácticamente ilimitado."
+    },
+    "1-6": {
+      "title": "Sin comprobantes",
+      "content": "Las claves compartidas no dejan rastro de quién pidió qué. Cuando algo sale mal, no puedes probar qué agente actuó, ni qué se suponía que tenía permitido hacer."
+    },
+    "1-7": {
+      "title": "Una mejor forma",
+      "content": "¿Y si un agente recibiera un permiso firmado que autoriza una sola tarea acotada por un tiempo corto, en lugar de tu clave maestra? Hacia esa idea se dirige toda esta historia."
+    },
+    "2-1": {
+      "title": "Un agente es una carga de trabajo",
+      "content": "Antes de delegar nada, demos un paso atrás. Un agente de IA es solo software que se ejecuta en algún lugar. Es una carga de trabajo, como cualquier servicio o programa de tus sistemas."
+    },
+    "2-2": {
+      "title": "Un guiño a SPIFFE",
+      "content": "En el módulo de SPIFFE vimos que las cargas de trabajo necesitan su propia identidad verificable, probada sin compartir secretos. Un agente es una carga de trabajo, así que no es la excepción."
+    },
+    "2-3": {
+      "title": "El agente necesita su propio nombre",
+      "content": "Dale al agente su propia identidad, separada de la tuya. Ahora los sistemas pueden distinguir al agente de viajes de ti, y del agente de facturación que está a su lado."
+    },
+    "2-4": {
+      "title": "La identidad antes que la autoridad",
+      "content": "La identidad responde quién eres. La autoridad responde qué puedes hacer. Primero hay que establecer la identidad. No puedes delegar con seguridad en algo que ni siquiera puedes nombrar."
+    },
+    "2-5": {
+      "title": "No tomes prestada la identidad de la persona",
+      "content": "Un agente nunca debe simplemente reutilizar tu sesión. Si lo hace, cada acción parece tuya, y toda la cadena de responsabilidad se derrumba en silencio."
+    },
+    "2-6": {
+      "title": "Dos preguntas, dos respuestas",
+      "content": "De aquí en adelante, mantén separadas dos ideas: quién es el agente, que es su identidad, y en nombre de quién actúa, que es la delegación. A continuación abordamos la segunda."
+    },
+    "3-1": {
+      "title": "Principal y agente",
+      "content": "Un principal es la persona o servicio que posee la autoridad. El agente es quien actúa. La delegación los une: el agente actúa en nombre del principal."
+    },
+    "3-2": {
+      "title": "La metáfora del encargo",
+      "content": "Piensa en enviar a un asistente a hacer un encargo. No le entregas las llaves de tu casa ni tu tarjeta bancaria. Escribes una nota breve que autoriza una sola tarea específica."
+    },
+    "3-3": {
+      "title": "Actuar en nombre de",
+      "content": "La delegación significa que el agente hace algo que el principal tiene permitido hacer, con el permiso del principal, mientras todos pueden ver que fue el agente quien lo hizo."
+    },
+    "3-4": {
+      "title": "Sujeto y actor",
+      "content": "Los tokens capturan esto con dos partes: el sujeto, es decir, en nombre de quién ocurre la acción, y el actor, es decir, quién está actuando realmente. Ambos quedan registrados."
+    },
+    "3-5": {
+      "title": "Por qué importan ambos",
+      "content": "El sujeto dice qué autoridad se está usando. El actor dice a quién responsabilizar. Conserva ambos y una auditoría podrá responder quién hizo esto realmente, y para quién."
+    },
+    "3-6": {
+      "title": "Delegación no es suplantación",
+      "content": "La suplantación oculta al agente y finge ser tú. La delegación mantiene al agente visible e identificado. Siempre queremos delegación, y nunca suplantación."
+    },
+    "3-7": {
+      "title": "La forma de un permiso",
+      "content": "Así que una delegación es en realidad una nota firmada: este agente, actuando por este principal, puede hacer esta tarea. A continuación, le damos a esa nota una estructura real y propiedades reales."
+    },
+    "4-1": {
+      "title": "El concepto protagonista",
+      "content": "El permiso es el corazón de la identidad del agente. En los sistemas reales es un token de acceso: una autorización para actuar, firmada, acotada y de corta duración."
+    },
+    "4-2": {
+      "title": "Firmado",
+      "content": "El permiso está firmado por una autoridad en la que el verificador confía. Un recurso puede entonces comprobar que es genuino, y que no fue falsificado ni alterado en el camino."
+    },
+    "4-3": {
+      "title": "Acotado",
+      "content": "El permiso nombra exactamente lo que se permite: leer este único calendario, no hacer cualquier cosa. El alcance es la lista explícita de acciones permitidas, y nada más allá de ella."
+    },
+    "4-4": {
+      "title": "De corta duración",
+      "content": "El permiso expira, a menudo en cuestión de minutos. Un permiso robado queda inútil poco después, y nadie tiene que rastrear y rotar claves olvidadas de larga duración."
+    },
+    "4-5": {
+      "title": "Vinculado a un propósito",
+      "content": "Un buen permiso también dice dónde puede usarse, lo que se llama su audiencia. Un permiso destinado al servicio de calendario simplemente no debería funcionar en el banco."
+    },
+    "4-6": {
+      "title": "Lo que contiene",
+      "content": "En conjunto, un permiso lleva para quién es (el sujeto), quién actúa (el actor), qué se permite (el alcance), dónde (la audiencia) y hasta cuándo (la expiración)."
+    },
+    "4-7": {
+      "title": "El permiso no es la identidad",
+      "content": "Importante: el permiso es la autorización, no la identidad del agente. El agente conserva su nombre. Los permisos van y vienen a medida que cambian las tareas y pasa el tiempo."
+    },
+    "4-8": {
+      "title": "Dónde termina la metáfora",
+      "content": "Los sistemas reales no se pasan notas de papel. Usan tokens criptográficos, emitidos y verificados por máquinas en milisegundos. El permiso es un modelo, pero sus propiedades son reales."
+    },
+    "5-1": {
+      "title": "Privilegio mínimo",
+      "content": "Dale a un agente lo mínimo que necesita para hacer el trabajo, y nada más. Un permiso acotado es la forma más simple de limitar lo que podría salir mal."
+    },
+    "5-2": {
+      "title": "Empieza acotado",
+      "content": "No empieces con un permiso amplio con la idea de recortarlo después. Empieza con exactamente el alcance que la tarea requiere, para que nunca haya autoridad de más dando vueltas."
+    },
+    "5-3": {
+      "title": "Cada salto se reduce",
+      "content": "Cuando un agente pasa trabajo a otro, el nuevo permiso debe ser más acotado, nunca más amplio. La autoridad solo disminuye a medida que se baja por la cadena."
+    },
+    "5-4": {
+      "title": "Intercambio de tokens",
+      "content": "Un sistema puede cambiar un permiso amplio por uno más acotado, limitado a una sola tarea posterior. La autoridad original se queda atrás, y solo se entrega una porción."
+    },
+    "5-5": {
+      "title": "Vínculo de audiencia",
+      "content": "Acotar también significa nombrar el destino. Un permiso reducido lleva el sello de un servicio específico, así que no puede reutilizarse en un lugar al que nunca estuvo destinado."
+    },
+    "5-6": {
+      "title": "No puedes otorgar lo que no tienes",
+      "content": "Un agente nunca puede entregar más de lo que tiene. Un permiso de solo lectura no puede convertirse en un permiso de escritura más adelante en la cadena. La autoridad no crece al pasarse."
+    },
+    "5-7": {
+      "title": "El permiso que se encoge",
+      "content": "Imagina que cada salto recorta el permiso un poco más. Para cuando llega al último ayudante, solo permite una pequeña acción. Ese encogimiento es justamente el objetivo."
+    },
+    "6-1": {
+      "title": "Los agentes llaman a otros agentes",
+      "content": "Las tareas reales se ramifican. Un agente de planificación le pide a un agente de reservas, que a su vez le pide a un agente de pagos. Cada uno es una carga de trabajo distinta con su propia identidad."
+    },
+    "6-2": {
+      "title": "Subdelegación",
+      "content": "El primer agente subdelega. Le da al siguiente agente un permiso más acotado solo para su parte del trabajo, todavía en nombre del mismo principal original."
+    },
+    "6-3": {
+      "title": "La cadena de actores",
+      "content": "Cada permiso registra la cadena de actores: el principal, luego el agente A, luego el agente B. Todos los que tocaron la solicitud quedan listados, en orden, en el permiso."
+    },
+    "6-4": {
+      "title": "En nombre de quién, todavía",
+      "content": "Sin importar cuántos saltos ocurran, el sujeto sigue siendo el mismo principal. La cadena muestra el recorrido, mientras el principal sigue siendo responsable de la autoridad usada."
+    },
+    "6-5": {
+      "title": "El registro de auditoría",
+      "content": "Como cada salto está identificado y acotado, obtienes un registro completo: quién actuó, para quién, con qué permiso y cuándo. Ese registro es el rastro de auditoría."
+    },
+    "6-6": {
+      "title": "Confía, pero verifica",
+      "content": "Cualquier agente que recibe un permiso puede verificar toda la cadena: cada eslabón firmado, cada uno más acotado que el anterior, ninguno expirado, y cada uno vinculado a la audiencia correcta."
+    },
+    "6-7": {
+      "title": "Responsabilidad por diseño",
+      "content": "Las cadenas de delegación convierten algún agente hizo algo en el agente B, actuando por ti a través del agente A, leyó tu calendario a las 2 PM. Esa claridad es todo el punto."
+    },
+    "7-1": {
+      "title": "Los agentes necesitan herramientas",
+      "content": "Un agente solo es útil cuando puede hacer cosas de verdad: consultar una base de datos, enviar correo, llamar a una API. Llega a todas ellas a través de herramientas."
+    },
+    "7-2": {
+      "title": "MCP, en breve",
+      "content": "El Model Context Protocol, o MCP, es una forma común de que los agentes se conecten a herramientas y datos a través de servidores MCP. Trata cada servidor como un recurso protegido."
+    },
+    "7-3": {
+      "title": "Los servidores son recursos protegidos",
+      "content": "Un servidor MCP que guarda tu correo o tus archivos es un recurso protegido. Debe exigir un permiso válido antes de hacer nada, exactamente como cualquier otra API protegida."
+    },
+    "7-4": {
+      "title": "Consentimiento del usuario",
+      "content": "Antes de que un agente obtenga un permiso para tus datos, tú lo apruebas: sí, el agente de viajes puede leer mi calendario. El consentimiento es explícito, y eres tú quien lo da o lo niega."
+    },
+    "7-5": {
+      "title": "Vinculado a un solo servidor",
+      "content": "El permiso que recibe el agente lleva el sello de ese servidor MCP específico. No puede reutilizarse para llegar a una herramienta distinta que nunca aprobaste."
+    },
+    "7-6": {
+      "title": "Acotado a la tarea",
+      "content": "El consentimiento y el alcance trabajan juntos. Apruebas un permiso acotado, y el permiso lleva exactamente eso. La herramienta termina viendo solo lo que permitiste."
+    },
+    "7-7": {
+      "title": "Mismo permiso, nuevo contexto",
+      "content": "Nota que no hizo falta nada nuevo. Una herramienta MCP es solo otro recurso que comprueba un permiso firmado, acotado y de corta duración que nombra quién actúa por quién."
+    },
+    "8-1": {
+      "title": "Cuando los permisos son demasiado amplios",
+      "content": "El fallo más común es un permiso demasiado amplio: un agente recibe hacer cualquier cosa cuando solo necesitaba leer un archivo. Ahora un pequeño error puede convertirse en una gran brecha."
+    },
+    "8-2": {
+      "title": "El delegado confundido",
+      "content": "A un agente con autoridad real se le puede engañar para que la use mal en favor de otro. El agente no es malvado. Es un delegado confundido que actúa según una instrucción maliciosa."
+    },
+    "8-3": {
+      "title": "Cómo ocurre la confusión",
+      "content": "Una entrada maliciosa le dice al agente que además borre los registros. Si su permiso es lo bastante amplio, obedece. Un permiso debidamente acotado simplemente lo habría rechazado."
+    },
+    "8-4": {
+      "title": "El alcance es la defensa",
+      "content": "Un alcance ajustado neutraliza al delegado confundido. Incluso engañado, el agente solo puede hacer lo que su permiso permite. Literalmente no puede realizar acciones que nunca se le otorgaron."
+    },
+    "8-5": {
+      "title": "Revocación",
+      "content": "A veces hay que cortar el acceso de inmediato. La revocación cancela un permiso antes de que expire, de modo que un agente que se porta mal o está comprometido se detiene al instante."
+    },
+    "8-6": {
+      "title": "Las vidas cortas limitan el daño",
+      "content": "Incluso sin revocación, los permisos de corta duración hacen que uno filtrado deje de funcionar pronto. El tiempo mismo se convierte en un límite de hasta dónde puede propagarse un solo fallo."
+    },
+    "8-7": {
+      "title": "Defensa en profundidad",
+      "content": "Júntalo todo: alcance acotado, vida corta, vínculo de audiencia, revocación y un registro de auditoría claro. Ningún control por sí solo basta, pero juntos contienen el fallo."
+    },
+    "9-1": {
+      "title": "Lo que hemos aprendido",
+      "content": "Un agente es una carga de trabajo con su propia identidad. Actúa en nombre de un principal usando permisos firmados, acotados y de corta duración, nunca tu clave maestra."
+    },
+    "9-2": {
+      "title": "El resumen del permiso",
+      "content": "Cada permiso dice para quién es, quién actúa, qué se permite, dónde y hasta cuándo. Cada salto lo acota, y cada salto queda escrito en el registro de auditoría."
+    },
+    "9-3": {
+      "title": "Por qué importa",
+      "content": "La delegación bien hecha da a los agentes el poder justo para ayudar, mientras te mantiene como responsable y mantiene pequeño el radio de explosión cuando, tarde o temprano, las cosas salen mal."
+    },
+    "9-4": {
+      "title": "Comenzar",
+      "content": "Profundiza con WIMSE para la identidad de cargas de trabajo, la especificación de autorización de MCP, A2A para la comunicación de agente a agente, y SPIFFE para la base de identidad. Construye agentes que lleven permisos, no claves maestras."
+    }
+  }
+}

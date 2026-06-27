@@ -40,7 +40,7 @@ export const Frame5_5: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         >
-          <PermissionSlip position={{ x: 210, y: 250 }} size={138} state="valid" narrowed audience="orders-api" scopes={['Place order']} animate={!prefersReducedMotion} />
+          <PermissionSlip position={{ x: 210, y: 250 }} size={138} state="valid" narrowed audience="orders-api" scopes={[t('frame5_5.scopePlaceOrder', { defaultValue: 'Place order' })]} animate={!prefersReducedMotion} />
         </motion.g>
 
         {/* Correct destination */}

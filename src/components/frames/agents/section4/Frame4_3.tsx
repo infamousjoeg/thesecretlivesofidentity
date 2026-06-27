@@ -35,8 +35,11 @@ export const Frame4_3: React.FC = () => {
             position={{ x: 250, y: 250 }}
             size={160}
             state="valid"
-            scopes={['Read calendar']}
-            revokedScopes={['Delete events', 'Send email']}
+            scopes={[t('frame4_3.scopeReadCalendar', { defaultValue: 'Read calendar' })]}
+            revokedScopes={[
+              t('frame4_3.scopeDeleteEvents', { defaultValue: 'Delete events' }),
+              t('frame4_3.scopeSendEmail', { defaultValue: 'Send email' }),
+            ]}
             animate={!prefersReducedMotion}
           />
         </motion.g>

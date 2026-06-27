@@ -21,11 +21,16 @@ import es419SpiffeContent from '@/locales/es-419/spiffe/content.json';
 import es419SpiffeFrames from '@/locales/es-419/spiffe/frames.json';
 import es419SpiffeTracks from '@/locales/es-419/spiffe/tracks.json';
 
-// AI Agent Identity module namespaces (English source only for now;
-// pt-BR and es-419 fall back to English via fallbackLng until Phase D).
+// AI Agent Identity module namespaces
 import enAgentsContent from '@/locales/en/agents/content.json';
 import enAgentsFrames from '@/locales/en/agents/frames.json';
 import enAgentsTracks from '@/locales/en/agents/tracks.json';
+import ptBRAgentsContent from '@/locales/pt-BR/agents/content.json';
+import ptBRAgentsFrames from '@/locales/pt-BR/agents/frames.json';
+import ptBRAgentsTracks from '@/locales/pt-BR/agents/tracks.json';
+import es419AgentsContent from '@/locales/es-419/agents/content.json';
+import es419AgentsFrames from '@/locales/es-419/agents/frames.json';
+import es419AgentsTracks from '@/locales/es-419/agents/tracks.json';
 
 export const supportedLanguages = [
   { code: 'en', label: 'English', flag: '🇺🇸' },
@@ -67,6 +72,9 @@ i18n
         'spiffe-content': ptBRSpiffeContent,
         'spiffe-frames': ptBRSpiffeFrames,
         'spiffe-tracks': ptBRSpiffeTracks,
+        'agents-content': ptBRAgentsContent,
+        'agents-frames': ptBRAgentsFrames,
+        'agents-tracks': ptBRAgentsTracks,
       },
       'es-419': {
         ui: es419Ui,
@@ -74,6 +82,9 @@ i18n
         'spiffe-content': es419SpiffeContent,
         'spiffe-frames': es419SpiffeFrames,
         'spiffe-tracks': es419SpiffeTracks,
+        'agents-content': es419AgentsContent,
+        'agents-frames': es419AgentsFrames,
+        'agents-tracks': es419AgentsTracks,
       },
     },
     fallbackLng: 'en',

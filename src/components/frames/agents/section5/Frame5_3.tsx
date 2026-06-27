@@ -50,7 +50,10 @@ export const Frame5_3: React.FC = () => {
               position={{ x: 250, y: 350 }}
               size={104}
               state="valid"
-              scopes={['Read calendar', 'Send invite']}
+              scopes={[
+                t('frame5_3.scopeReadCalendar', { defaultValue: 'Read calendar' }),
+                t('frame5_3.scopeSendInvite', { defaultValue: 'Send invite' }),
+              ]}
               animate={false}
             />
             <line x1={250} y1={195} x2={250} y2={262} stroke={colors.permissionSlip} strokeWidth={1} strokeDasharray="3 3" opacity={0.5} />
@@ -66,8 +69,8 @@ export const Frame5_3: React.FC = () => {
               size={84}
               state="valid"
               narrowed
-              scopes={['Read calendar']}
-              revokedScopes={['Send invite']}
+              scopes={[t('frame5_3.scopeReadCalendar', { defaultValue: 'Read calendar' })]}
+              revokedScopes={[t('frame5_3.scopeSendInvite', { defaultValue: 'Send invite' })]}
               animate={!prefersReducedMotion}
             />
             <line x1={540} y1={205} x2={540} y2={295} stroke={colors.permissionSlip} strokeWidth={1} strokeDasharray="3 3" opacity={0.5} />

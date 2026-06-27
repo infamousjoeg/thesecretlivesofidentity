@@ -1,0 +1,43 @@
+{
+  "trackSelector": {
+    "title": "Aprender Identidade de Agentes",
+    "subtitle": "Escolha seu caminho de aprendizado conforme o tempo que você tem. Cada trilha complementa a anterior.",
+    "startTrack": "Iniciar {{title}}",
+    "hint": "Você pode trocar de trilha a qualquer momento. O progresso é salvo automaticamente."
+  },
+  "bronze": {
+    "title": "Bronze",
+    "subtitle": "Por Que Agentes Precisam de Identidade",
+    "duration": "~5 minutos",
+    "description": "A crise de identidade de agentes, por que um agente precisa da própria identidade, e o que significa agir em nome de alguém.",
+    "goal": "Agora consigo explicar por que agentes não devem compartilhar sua chave-mestra"
+  },
+  "silver": {
+    "title": "Prata",
+    "subtitle": "Como a Delegação Funciona",
+    "duration": "~12 minutos",
+    "description": "Comprovantes de permissão, restringindo o escopo a cada salto, e cadeias de delegação de agente para agente com uma trilha de auditoria completa.",
+    "goal": "Agora entendo como funciona a delegação com escopo"
+  },
+  "gold": {
+    "title": "Ouro",
+    "subtitle": "Mergulho Profundo em Identidade de Agentes",
+    "duration": "~18 minutos",
+    "description": "O curso completo: acessar ferramentas com MCP, o problema do delegado confuso, revogação e defesa em profundidade.",
+    "goal": "Agora consigo raciocinar sobre autorização de agentes de ponta a ponta"
+  },
+  "completion": {
+    "bronze": {
+      "title": "Bronze Concluído!",
+      "message": "Agora você consegue explicar por que um agente de IA deve carregar sua própria identidade e um comprovante de permissão com escopo, nunca sua chave-mestra."
+    },
+    "silver": {
+      "title": "Prata Concluído!",
+      "message": "Você entende a delegação: comprovantes assinados, com escopo e de curta duração que se restringem a cada salto, com uma cadeia de atores e trilha de auditoria completas."
+    },
+    "gold": {
+      "title": "Ouro Concluído!",
+      "message": "Você consegue raciocinar sobre autorização de agentes de ponta a ponta, das ferramentas e do MCP ao problema do delegado confuso, à revogação e à defesa em profundidade."
+    }
+  }
+}

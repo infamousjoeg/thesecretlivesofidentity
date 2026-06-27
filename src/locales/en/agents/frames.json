@@ -176,7 +176,10 @@
     "allowed": "Read calendar",
     "allowedSub": "Exactly what the task needs",
     "denied": "Everything else",
-    "deniedSub": "Not on the slip = not allowed"
+    "deniedSub": "Not on the slip = not allowed",
+    "scopeReadCalendar": "Read calendar",
+    "scopeDeleteEvents": "Delete events",
+    "scopeSendEmail": "Send email"
   },
   "frame4_4": {
     "time": "time"
@@ -203,37 +206,50 @@
   "frame5_1": {
     "broad": "More power than needed",
     "narrow": "Just enough — least privilege",
-    "vs": "vs"
+    "vs": "vs",
+    "scopeReadCalendar": "Read calendar",
+    "scopeSendEmail": "Send email",
+    "scopeDeleteEvents": "Delete events"
   },
   "frame5_2": {
     "wrong": "Start broad, trim later",
     "wrongSub": "Extra authority lying around",
     "right": "Start narrow",
-    "rightSub": "Exactly what the task requires"
+    "rightSub": "Exactly what the task requires",
+    "scopeReadCalendar": "Read calendar",
+    "scopeSendEmail": "Send email",
+    "scopeDeleteEvents": "Delete events"
   },
   "frame5_3": {
     "principalLabel": "Principal",
     "agentALabel": "Agent A",
     "agentBLabel": "Agent B",
-    "caption": "Authority only ever decreases down the chain"
+    "caption": "Authority only ever decreases down the chain",
+    "scopeReadCalendar": "Read calendar",
+    "scopeSendInvite": "Send invite"
   },
   "frame5_4": {
     "broad": "Broad slip",
     "exchange": "TOKEN EXCHANGE",
     "downscope": "down-scope",
     "narrow": "Narrow slip for one task",
-    "staysBehind": "Original authority stays behind"
+    "staysBehind": "Original authority stays behind",
+    "scopeReadCalendar": "Read calendar",
+    "scopeSendInvite": "Send invite"
   },
   "frame5_5": {
     "stamped": "Stamped destination → works",
-    "replay": "Replay elsewhere → blocked"
+    "replay": "Replay elsewhere → blocked",
+    "scopePlaceOrder": "Place order"
   },
   "frame5_6": {
     "agentALabel": "Agent A",
     "holds": "Holds: read-only",
     "agentBLabel": "Agent B",
     "cannot": "Can't grant what you don't have",
-    "noUpgrade": "read-only never becomes write"
+    "noUpgrade": "read-only never becomes write",
+    "scopeReadFile": "Read file",
+    "scopeWriteFile": "Write file"
   },
   "frame6_1": {
     "calls": "calls",
@@ -244,7 +260,8 @@
     "agentALabel": "Agent A",
     "agentBLabel": "Agent B",
     "subDelegates": "sub-delegates",
-    "samePrincipal": "Still on behalf of the same principal"
+    "samePrincipal": "Still on behalf of the same principal",
+    "scopeChargeCard": "Charge card"
   },
   "frame6_3": {
     "principalLabel": "Principal",
@@ -483,5 +500,20 @@
     "feedbackRevoked": "✓ Blocked. The slip was revoked, so the verifier rejects it immediately — access was cut before expiry.",
     "feedbackDamage": "✗ Confused deputy! The over-broad slip granted \"Delete records\", so the verifier accepted the malicious instruction and the data was destroyed. The agent was tricked — its slip betrayed it.",
     "feedbackBlocked": "✓ Blocked. The narrow slip never granted \"Delete records\", so even though the agent was tricked, the verifier refused. Tight scope is the defense."
+  },
+  "permissionSlip": {
+    "title": "PERMISSION SLIP",
+    "onBehalfOf": "ON BEHALF OF",
+    "acting": "ACTING",
+    "goodFor": "GOOD FOR:",
+    "actionsCount": "{{count}} action(s)",
+    "validAt": "VALID AT",
+    "expiresIn": "EXPIRES IN",
+    "narrowed": "NARROWED",
+    "expired": "EXPIRED",
+    "expiredShort": "EXP",
+    "defaultOnBehalfOf": "Alex (you)",
+    "defaultActor": "Travel Agent",
+    "defaultScope": "Read calendar"
   }
 }

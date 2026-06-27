@@ -32,7 +32,7 @@ export const Frame5_6: React.FC = () => {
           transition={{ duration: 0.4 }}
         >
           <AIAgent label={t('frame5_6.agentALabel', { defaultValue: 'Agent A' })} position={{ x: 150, y: 150 }} active animate={!prefersReducedMotion} />
-          <PermissionSlip position={{ x: 150, y: 340 }} size={94} state="valid" scopes={['Read file']} animate={false} />
+          <PermissionSlip position={{ x: 150, y: 340 }} size={94} state="valid" scopes={[t('frame5_6.scopeReadFile', { defaultValue: 'Read file' })]} animate={false} />
           <text x={150} y={428} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
             {t('frame5_6.holds', { defaultValue: 'Holds: read-only' })}
           </text>
@@ -53,7 +53,7 @@ export const Frame5_6: React.FC = () => {
             transition={{ duration: 0.45 }}
           >
             <g opacity={0.55}>
-              <PermissionSlip position={{ x: 400, y: 240 }} size={100} state="valid" scopes={['Write file']} animate={false} />
+              <PermissionSlip position={{ x: 400, y: 240 }} size={100} state="valid" scopes={[t('frame5_6.scopeWriteFile', { defaultValue: 'Write file' })]} animate={false} />
             </g>
             {/* prohibition sign */}
             <circle cx={400} cy={240} r={62} fill="none" stroke={colors.attacker} strokeWidth={6} opacity={0.9} />

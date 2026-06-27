@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position, BadgeState } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -47,9 +48,9 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
   position,
   size = entitySizes.permissionSlip,
   state = 'valid',
-  onBehalfOf = 'Alex (you)',
-  actor = 'Travel Agent',
-  scopes = ['Read calendar'],
+  onBehalfOf,
+  actor,
+  scopes,
   revokedScopes = [],
   audience = 'calendar-api',
   expiresIn = 300,
@@ -57,6 +58,12 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
   narrowed = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('agents-frames');
+  // Human-readable prop values fall back to localized defaults when a call site
+  // omits them, so the slip never shows hardcoded English in pt-BR / es-419.
+  const displayOnBehalfOf = onBehalfOf ?? t('permissionSlip.defaultOnBehalfOf', { defaultValue: 'Alex (you)' });
+  const displayActor = actor ?? t('permissionSlip.defaultActor', { defaultValue: 'Travel Agent' });
+  const displayScopes = scopes ?? [t('permissionSlip.defaultScope', { defaultValue: 'Read calendar' })];
   const uniqueId = id || Math.random().toString(36).substr(2, 9);
   // The slip is drawn at a canonical base size and then uniformly scaled, so
   // every field stays legible and correctly spaced at any `size`.
@@ -95,7 +102,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
   }
 
   // Combined scope rows: granted (ticked) first, then revoked (struck). Cap to keep it legible.
-  const grantedRows = scopes.map((s) => ({ text: s, granted: true }));
+  const grantedRows = displayScopes.map((s) => ({ text: s, granted: true }));
   const revokedRows = revokedScopes.map((s) => ({ text: s, granted: false }));
   const rows = [...grantedRows, ...revokedRows].slice(0, 3);
   const rowStartY = top + 112;
@@ -104,7 +111,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Permission slip on behalf of ${onBehalfOf}, ${state}${narrowed ? ', narrowed' : ''}`}
+      aria-label={`Permission slip on behalf of ${displayOnBehalfOf}, ${state}${narrowed ? ', narrowed' : ''}`}
     >
       <defs>
         <linearGradient id={`slip-paper-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%">
@@ -193,35 +200,36 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
         fontFamily="Space Grotesk, sans-serif"
         letterSpacing="0.5"
       >
-        PERMISSION SLIP
+        {t('permissionSlip.title', { defaultValue: 'PERMISSION SLIP' })}
       </text>
 
       {/* ON BEHALF OF */}
       <text x={left + 10} y={top + 52} fill={palette.ink} fontSize={6} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
-        ON BEHALF OF
+        {t('permissionSlip.onBehalfOf', { defaultValue: 'ON BEHALF OF' })}
       </text>
       <line x1={left + 10} y1={top + 64} x2={left + W - 10} y2={top + 64} stroke={palette.ink} strokeWidth={0.5} opacity={0.3} />
       <text x={left + 12} y={top + 62} fill={palette.ink} fontSize={9} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
-        {onBehalfOf}
+        {displayOnBehalfOf}
       </text>
 
-      {/* ACTING (actor) */}
-      <text x={left + 10} y={top + 78} fill={palette.ink} fontSize={6} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
-        ACTING
+      {/* ACTING (actor) — label over value, mirroring the ON BEHALF OF block so
+          longer translations and longer actor names never overflow the line. */}
+      <text x={left + 10} y={top + 75} fill={palette.ink} fontSize={6} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+        {t('permissionSlip.acting', { defaultValue: 'ACTING' })}
       </text>
-      <text x={left + 40} y={top + 78} fill={palette.ink} fontSize={7.5} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
-        {actor}
+      <text x={left + 12} y={top + 84} fill={palette.ink} fontSize={7.5} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
+        {displayActor}
       </text>
 
       {/* divider */}
-      <line x1={left + 10} y1={top + 86} x2={left + W - 10} y2={top + 86} stroke={palette.ink} strokeWidth={0.5} opacity={0.25} />
+      <line x1={left + 10} y1={top + 90} x2={left + W - 10} y2={top + 90} stroke={palette.ink} strokeWidth={0.5} opacity={0.25} />
 
       {/* GOOD FOR + scope count */}
-      <text x={left + 10} y={top + 99} fill={palette.ink} fontSize={7} fontWeight="bold" fontFamily="Space Grotesk, sans-serif" letterSpacing="0.5">
-        GOOD FOR:
+      <text x={left + 10} y={top + 101} fill={palette.ink} fontSize={7} fontWeight="bold" fontFamily="Space Grotesk, sans-serif" letterSpacing="0.5">
+        {t('permissionSlip.goodFor', { defaultValue: 'GOOD FOR:' })}
       </text>
-      <text x={left + W - 10} y={top + 99} textAnchor="end" fill={palette.ink} fontSize={6.5} opacity={0.7} fontFamily="JetBrains Mono, monospace">
-        {scopes.length} action{scopes.length === 1 ? '' : 's'}
+      <text x={left + W - 10} y={top + 101} textAnchor="end" fill={palette.ink} fontSize={6.5} opacity={0.7} fontFamily="JetBrains Mono, monospace">
+        {t('permissionSlip.actionsCount', { count: displayScopes.length, defaultValue: '{{count}} action(s)' })}
       </text>
 
       {/* Scope checklist rows */}
@@ -262,7 +270,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
 
       {/* VALID AT (audience) */}
       <text x={left + 10} y={top + H - 34} fill={palette.ink} fontSize={6} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
-        VALID AT
+        {t('permissionSlip.validAt', { defaultValue: 'VALID AT' })}
       </text>
       <text x={left + 10} y={top + H - 25} fill={palette.ink} fontSize={7.5} fontWeight="600" fontFamily="JetBrains Mono, monospace">
         {audience}
@@ -271,11 +279,11 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
       {/* EXPIRES countdown */}
       <g transform={`translate(${left + 10}, ${top + H - 14})`}>
         <text x={0} y={0} fill={palette.ink} fontSize={6} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
-          EXPIRES IN
+          {t('permissionSlip.expiresIn', { defaultValue: 'EXPIRES IN' })}
         </text>
         <rect x={42} y={-8} width={34} height={12} rx={2} fill={state === 'expired' ? '#9CA3AF' : palette.headerDark} />
         <text x={59} y={1} textAnchor="middle" fill="#FFFFFF" fontSize={8} fontWeight="bold" fontFamily="JetBrains Mono, monospace">
-          {state === 'expired' ? 'EXP' : formatTime(countdown)}
+          {state === 'expired' ? t('permissionSlip.expiredShort', { defaultValue: 'EXP' }) : formatTime(countdown)}
         </text>
       </g>
 
@@ -314,7 +322,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
             fontFamily="Space Grotesk, sans-serif"
             letterSpacing="0.5"
           >
-            NARROWED
+            {t('permissionSlip.narrowed', { defaultValue: 'NARROWED' })}
           </text>
         </g>
       )}
@@ -324,7 +332,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
         <g transform="rotate(-14)">
           <rect x={-38} y={-13} width={76} height={26} rx={3} fill="none" stroke={colors.attacker} strokeWidth={3} opacity={0.85} />
           <text x={0} y={6} textAnchor="middle" fill={colors.attacker} fontSize={15} fontWeight="bold" fontFamily="Space Grotesk, sans-serif" opacity={0.85}>
-            EXPIRED
+            {t('permissionSlip.expired', { defaultValue: 'EXPIRED' })}
           </text>
         </g>
       )}

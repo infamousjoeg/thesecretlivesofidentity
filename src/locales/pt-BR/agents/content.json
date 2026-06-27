@@ -1,0 +1,255 @@
+{
+  "sections": {
+    "agent-identity-crisis": "A Crise de Identidade de Agentes",
+    "who-is-this-agent": "Quem É Este Agente?",
+    "on-whose-behalf": "Em Nome de Quem?",
+    "the-permission-slip": "O Comprovante de Permissão",
+    "narrowing-the-scope": "Restringindo o Escopo",
+    "agent-to-agent": "Agente para Agente",
+    "reaching-for-tools": "Acessando Ferramentas",
+    "what-goes-wrong": "O Que Dá Errado",
+    "conclusion": "Conclusão"
+  },
+  "frames": {
+    "1-1": {
+      "title": "Software Que Age por Você",
+      "content": "Agentes de IA agora realizam ações em seu nome: reservam viagens, enviam mensagens, movimentam dinheiro, alteram sistemas. Eles não apenas respondem perguntas. Eles fazem coisas."
+    },
+    "1-2": {
+      "title": "O Atalho Tentador",
+      "content": "O jeito mais rápido de deixar um agente agir é entregar sua senha ou uma chave-mestra. Funciona na primeira tentativa. É também o começo de toda história de terror."
+    },
+    "1-3": {
+      "title": "Uma Chave para Governar Todas",
+      "content": "Dê a cada agente a mesma chave todo-poderosa e qualquer um deles pode fazer qualquer coisa, em qualquer lugar, enquanto a chave existir. Não há contenção."
+    },
+    "1-4": {
+      "title": "Agir Como Você vs Agir por Você",
+      "content": "Se um agente usa suas credenciais, todo sistema acredita que foi você. Não há como distinguir o agente de você, nem um agente de outro."
+    },
+    "1-5": {
+      "title": "O Raio de Dano",
+      "content": "Um agente confuso ou comprometido com sua chave-mestra pode esvaziar contas, apagar dados ou enviar mensagens aos seus contatos. Um erro, dano praticamente ilimitado."
+    },
+    "1-6": {
+      "title": "Sem Rastros",
+      "content": "Chaves compartilhadas não deixam rastro de quem pediu o quê. Quando algo dá errado, você não consegue provar qual agente agiu, nem o que ele deveria ter permissão de fazer."
+    },
+    "1-7": {
+      "title": "Um Jeito Melhor",
+      "content": "E se um agente recebesse um comprovante assinado autorizando uma única tarefa restrita por pouco tempo, em vez da sua chave-mestra? É para essa ideia que toda esta história caminha."
+    },
+    "2-1": {
+      "title": "Um Agente É um Workload",
+      "content": "Antes de delegar qualquer coisa, recue um passo. Um agente de IA é apenas software rodando em algum lugar. É um workload, como qualquer serviço ou programa nos seus sistemas."
+    },
+    "2-2": {
+      "title": "Uma Referência ao SPIFFE",
+      "content": "No módulo SPIFFE vimos que workloads precisam de sua própria identidade verificável, provada sem compartilhar segredos. Um agente é um workload, então não é exceção."
+    },
+    "2-3": {
+      "title": "O Agente Precisa do Próprio Nome",
+      "content": "Dê ao agente sua própria identidade, separada da sua. Agora os sistemas conseguem distinguir o agente de viagens de você, e do agente de cobrança ao lado."
+    },
+    "2-4": {
+      "title": "Identidade Antes da Autoridade",
+      "content": "Identidade responde quem é você. Autoridade responde o que você pode fazer. Você precisa estabelecer a identidade primeiro. Não dá para delegar com segurança a algo que você nem consegue nomear."
+    },
+    "2-5": {
+      "title": "Não Pegue Emprestada a Identidade do Humano",
+      "content": "Um agente nunca deve simplesmente reutilizar o seu login. Se reutilizar, toda ação parece sua, e toda a cadeia de responsabilização desaba silenciosamente."
+    },
+    "2-6": {
+      "title": "Duas Perguntas, Duas Respostas",
+      "content": "De agora em diante, mantenha duas ideias separadas: quem o agente é, que é sua identidade, e em nome de quem ele está agindo, que é a delegação. A seguir, enfrentamos a segunda."
+    },
+    "3-1": {
+      "title": "Principal e Agente",
+      "content": "Um principal é a pessoa ou serviço que detém a autoridade. O agente é quem age. A delegação os liga: o agente age em nome do principal."
+    },
+    "3-2": {
+      "title": "A Metáfora do Recado",
+      "content": "Pense em mandar um assistente fazer um recado. Você não entrega as chaves de casa e o cartão do banco. Você escreve um bilhete curto autorizando uma tarefa específica."
+    },
+    "3-3": {
+      "title": "Agindo em Nome de",
+      "content": "Delegação significa que o agente faz algo que o principal tem permissão de fazer, com a permissão do principal, enquanto todos ainda veem que foi o agente quem fez."
+    },
+    "3-4": {
+      "title": "Sujeito e Ator",
+      "content": "Tokens capturam isso com duas partes: o sujeito, ou seja, em nome de quem a ação acontece, e o ator, ou seja, quem está de fato agindo. Ambos são registrados."
+    },
+    "3-5": {
+      "title": "Por Que Ambos Importam",
+      "content": "O sujeito diz de quem é a autoridade usada. O ator diz quem responsabilizar. Mantenha ambos e uma auditoria pode responder quem realmente fez isso, e para quem."
+    },
+    "3-6": {
+      "title": "Delegação Não É Personificação",
+      "content": "A personificação esconde o agente e finge ser você. A delegação mantém o agente visível e nomeado. Queremos sempre delegação, e nunca personificação."
+    },
+    "3-7": {
+      "title": "O Formato de um Comprovante",
+      "content": "Então uma delegação é, na verdade, um comprovante assinado: este agente, agindo por este principal, pode fazer esta tarefa. A seguir, damos a esse comprovante estrutura e propriedades reais."
+    },
+    "4-1": {
+      "title": "O Conceito Central",
+      "content": "O comprovante de permissão é o coração da identidade de agente. Em sistemas reais, é um token de acesso: uma autorização assinada, com escopo e de curta duração para agir."
+    },
+    "4-2": {
+      "title": "Assinado",
+      "content": "O comprovante é assinado por uma autoridade na qual o verificador confia. Um recurso pode então conferir que ele é genuíno e que não foi forjado nem alterado no caminho."
+    },
+    "4-3": {
+      "title": "Com Escopo",
+      "content": "O comprovante nomeia exatamente o que é permitido: ler esta agenda, não fazer qualquer coisa. Escopo é a lista explícita de ações permitidas, e nada além dela."
+    },
+    "4-4": {
+      "title": "De Curta Duração",
+      "content": "O comprovante expira, muitas vezes em minutos. Um comprovante roubado logo se torna inútil, e ninguém precisa caçar e rotacionar chaves de longa duração esquecidas."
+    },
+    "4-5": {
+      "title": "Vinculado a um Propósito",
+      "content": "Um bom comprovante também diz onde pode ser usado, o chamado público-alvo. Um comprovante destinado ao serviço de agenda simplesmente não deve funcionar no banco."
+    },
+    "4-6": {
+      "title": "O Que Há Dentro",
+      "content": "Juntando tudo, um comprovante carrega para quem é (o sujeito), quem está agindo (o ator), o que é permitido (o escopo), onde (o público-alvo) e até quando (a expiração)."
+    },
+    "4-7": {
+      "title": "O Comprovante Não É a Identidade",
+      "content": "Importante: o comprovante é a autorização, não a identidade do agente. O agente mantém seu nome. Comprovantes vêm e vão conforme as tarefas mudam e o tempo passa."
+    },
+    "4-8": {
+      "title": "Onde a Metáfora Termina",
+      "content": "Sistemas reais não trocam bilhetes de papel. Eles usam tokens criptográficos, emitidos e verificados por máquinas em milissegundos. O comprovante é um modelo, mas suas propriedades são reais."
+    },
+    "5-1": {
+      "title": "Privilégio Mínimo",
+      "content": "Dê a um agente o mínimo de que ele precisa para fazer o trabalho, e nada mais. Um comprovante restrito é a forma mais simples de limitar o que pode dar errado."
+    },
+    "5-2": {
+      "title": "Comece Restrito",
+      "content": "Não comece com um comprovante amplo planejando reduzi-lo depois. Comece exatamente com o escopo que a tarefa exige, para que nunca haja autoridade extra sobrando."
+    },
+    "5-3": {
+      "title": "Cada Salto Encolhe",
+      "content": "Quando um agente passa trabalho a outro, o novo comprovante deve ser mais restrito, nunca mais amplo. A autoridade só diminui conforme se desce na cadeia."
+    },
+    "5-4": {
+      "title": "Troca de Token",
+      "content": "Um sistema pode trocar um comprovante amplo por um mais restrito, com escopo para uma única tarefa posterior. A autoridade original fica para trás, e apenas uma fatia é repassada."
+    },
+    "5-5": {
+      "title": "Vínculo de Público-Alvo",
+      "content": "Restringir também significa nomear o destino. Um comprovante de escopo reduzido é carimbado para um serviço específico, então não pode ser reutilizado onde nunca foi destinado a ir."
+    },
+    "5-6": {
+      "title": "Você Não Pode Conceder o Que Não Tem",
+      "content": "Um agente nunca pode repassar mais do que possui. Um comprovante somente leitura não pode virar um comprovante de gravação mais adiante na cadeia. A autoridade não cresce ao ser repassada."
+    },
+    "5-7": {
+      "title": "O Comprovante Que Encolhe",
+      "content": "Imagine cada salto rasgando o comprovante um pouco menor. Quando chega ao último ajudante, ele permite apenas uma pequena ação. Esse encolhimento é exatamente o objetivo."
+    },
+    "6-1": {
+      "title": "Agentes Chamam Agentes",
+      "content": "Tarefas reais se ramificam. Um agente de planejamento aciona um agente de reservas, que aciona um agente de pagamentos. Cada um é um workload separado com sua própria identidade."
+    },
+    "6-2": {
+      "title": "Subdelegação",
+      "content": "O primeiro agente subdelega. Ele dá ao próximo agente um comprovante mais restrito apenas para a sua parte do trabalho, ainda em nome do mesmo principal original."
+    },
+    "6-3": {
+      "title": "A Cadeia de Atores",
+      "content": "Cada comprovante registra a cadeia de atores: o principal, depois o agente A, depois o agente B. Todos que tocaram na requisição são listados, em ordem, no comprovante."
+    },
+    "6-4": {
+      "title": "Em Nome de Quem, Ainda",
+      "content": "Não importa quantos saltos ocorram, o sujeito continua sendo o mesmo principal. A cadeia mostra o caminho, enquanto o principal permanece responsável pela autoridade usada."
+    },
+    "6-5": {
+      "title": "A Trilha de Auditoria",
+      "content": "Como cada salto é nomeado e tem escopo, você obtém um registro completo: quem agiu, para quem, com qual permissão e quando. Esse registro é a trilha de auditoria."
+    },
+    "6-6": {
+      "title": "Confie, Mas Verifique",
+      "content": "Qualquer agente que recebe um comprovante pode verificar a cadeia inteira: cada elo assinado, cada um mais restrito que o anterior, nenhum expirado, e cada um vinculado ao público-alvo certo."
+    },
+    "6-7": {
+      "title": "Responsabilização por Design",
+      "content": "Cadeias de delegação transformam algum agente fez algo em o agente B, agindo por você através do agente A, leu sua agenda às 14h. Essa clareza é todo o objetivo."
+    },
+    "7-1": {
+      "title": "Agentes Precisam de Ferramentas",
+      "content": "Um agente só é útil quando pode realmente fazer coisas: consultar um banco de dados, enviar e-mails, chamar uma API. Ele alcança tudo isso por meio de ferramentas."
+    },
+    "7-2": {
+      "title": "MCP, em Resumo",
+      "content": "O Model Context Protocol, ou MCP, é uma forma comum de os agentes se conectarem a ferramentas e dados por meio de servidores MCP. Trate cada servidor como um recurso protegido."
+    },
+    "7-3": {
+      "title": "Servidores São Recursos Protegidos",
+      "content": "Um servidor MCP que guarda seus e-mails ou arquivos é um recurso protegido. Ele deve exigir um comprovante válido antes de fazer qualquer coisa, exatamente como qualquer outra API protegida."
+    },
+    "7-4": {
+      "title": "Consentimento do Usuário",
+      "content": "Antes de um agente obter um comprovante para seus dados, você aprova: sim, o agente de viagens pode ler minha agenda. O consentimento é explícito, e cabe a você concedê-lo ou recusá-lo."
+    },
+    "7-5": {
+      "title": "Vinculado a um Único Servidor",
+      "content": "O comprovante que o agente recebe é carimbado para aquele servidor MCP específico. Ele não pode ser reutilizado para alcançar uma ferramenta diferente que você nunca aprovou."
+    },
+    "7-6": {
+      "title": "Com Escopo para a Tarefa",
+      "content": "Consentimento e escopo trabalham juntos. Você aprova uma permissão restrita, e o comprovante carrega exatamente isso. A ferramenta acaba vendo apenas o que você permitiu."
+    },
+    "7-7": {
+      "title": "Mesmo Comprovante, Novo Cenário",
+      "content": "Repare que nada de novo foi preciso. Uma ferramenta MCP é apenas mais um recurso que verifica um comprovante assinado, com escopo e de curta duração, nomeando quem age por quem."
+    },
+    "8-1": {
+      "title": "Quando Comprovantes São Amplos Demais",
+      "content": "A falha mais comum é um comprovante amplo demais: um agente recebe fazer qualquer coisa quando só precisava de ler um arquivo. Agora um pequeno bug pode virar uma grande violação."
+    },
+    "8-2": {
+      "title": "O Delegado Confuso",
+      "content": "Um agente com autoridade real pode ser enganado a usá-la mal em favor de outra pessoa. O agente não é mau. É um delegado confuso agindo sob uma instrução maliciosa."
+    },
+    "8-3": {
+      "title": "Como a Confusão Acontece",
+      "content": "Uma entrada maliciosa diz ao agente para também excluir os registros. Se seu comprovante for amplo o suficiente, ele obedece. Um comprovante devidamente restrito simplesmente teria recusado."
+    },
+    "8-4": {
+      "title": "O Escopo É a Defesa",
+      "content": "Um escopo restrito neutraliza o delegado confuso. Mesmo enganado, o agente só pode fazer o que seu comprovante permite. Ele literalmente não consegue executar ações que nunca lhe foram concedidas."
+    },
+    "8-5": {
+      "title": "Revogação",
+      "content": "Às vezes você precisa cortar o acesso imediatamente. A revogação cancela um comprovante antes que ele expire, então um agente mal-comportado ou comprometido é interrompido na hora."
+    },
+    "8-6": {
+      "title": "Vidas Curtas Limitam o Dano",
+      "content": "Mesmo sem revogação, comprovantes de curta duração fazem com que um vazado pare de funcionar logo. O próprio tempo se torna um limite para o alcance de qualquer falha isolada."
+    },
+    "8-7": {
+      "title": "Defesa em Profundidade",
+      "content": "Junte tudo: escopo restrito, curta duração, vínculo de público-alvo, revogação e uma trilha de auditoria clara. Nenhum controle isolado basta, mas juntos eles contêm a falha."
+    },
+    "9-1": {
+      "title": "O Que Aprendemos",
+      "content": "Um agente é um workload com sua própria identidade. Ele age em nome de um principal usando comprovantes de permissão assinados, com escopo e de curta duração, nunca a sua chave-mestra."
+    },
+    "9-2": {
+      "title": "O Resumo do Comprovante",
+      "content": "Todo comprovante diz para quem é, quem está agindo, o que é permitido, onde e até quando. Cada salto o restringe, e cada salto é escrito na trilha de auditoria."
+    },
+    "9-3": {
+      "title": "Por Que Isso Importa",
+      "content": "A delegação bem feita dá aos agentes poder suficiente para ajudar, enquanto mantém você responsável e mantém o raio de dano pequeno quando as coisas eventualmente dão errado."
+    },
+    "9-4": {
+      "title": "Comece Agora",
+      "content": "Aprofunde-se com o WIMSE para identidade de workload, a especificação de autorização do MCP, o A2A para agente para agente, e o SPIFFE para a base de identidade. Construa agentes que carregam comprovantes, não chaves-mestras."
+    }
+  }
+}

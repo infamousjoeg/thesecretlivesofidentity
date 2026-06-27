@@ -32,7 +32,11 @@ export const Frame5_1: React.FC = () => {
               position={{ x: 230, y: 245 }}
               size={150}
               state="valid"
-              scopes={['Read calendar', 'Send email', 'Delete events']}
+              scopes={[
+                t('frame5_1.scopeReadCalendar', { defaultValue: 'Read calendar' }),
+                t('frame5_1.scopeSendEmail', { defaultValue: 'Send email' }),
+                t('frame5_1.scopeDeleteEvents', { defaultValue: 'Delete events' }),
+              ]}
               animate={false}
             />
             <rect x={140} y={358} width={180} height={30} rx={6} fill={`${colors.warning}1A`} stroke={colors.warning} strokeWidth={1.25} />
@@ -49,8 +53,11 @@ export const Frame5_1: React.FC = () => {
               position={{ x: 560, y: 245 }}
               size={150}
               state="valid"
-              scopes={['Read calendar']}
-              revokedScopes={['Send email', 'Delete events']}
+              scopes={[t('frame5_1.scopeReadCalendar', { defaultValue: 'Read calendar' })]}
+              revokedScopes={[
+                t('frame5_1.scopeSendEmail', { defaultValue: 'Send email' }),
+                t('frame5_1.scopeDeleteEvents', { defaultValue: 'Delete events' }),
+              ]}
               animate={!prefersReducedMotion}
             />
             <rect x={470} y={358} width={180} height={30} rx={6} fill={`${colors.success}1A`} stroke={colors.success} strokeWidth={1.25} />

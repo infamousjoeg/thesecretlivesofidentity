@@ -60,10 +60,10 @@ export const Frame6_2: React.FC = () => {
               size={104}
               state="valid"
               narrowed
-              onBehalfOf="Principal"
-              actor="Agent B"
+              onBehalfOf={t('frame6_2.principalLabel', { defaultValue: 'Principal' })}
+              actor={t('frame6_2.agentBLabel', { defaultValue: 'Agent B' })}
               audience="payments-api"
-              scopes={['Charge card']}
+              scopes={[t('frame6_2.scopeChargeCard', { defaultValue: 'Charge card' })]}
               animate={!prefersReducedMotion}
             />
             {/* thread linking the slip's subject back to the principal */}

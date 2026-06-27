@@ -36,7 +36,11 @@ export const Frame5_2: React.FC = () => {
               position={{ x: 205, y: 270 }}
               size={140}
               state="valid"
-              scopes={['Read calendar', 'Send email', 'Delete events']}
+              scopes={[
+                t('frame5_2.scopeReadCalendar', { defaultValue: 'Read calendar' }),
+                t('frame5_2.scopeSendEmail', { defaultValue: 'Send email' }),
+                t('frame5_2.scopeDeleteEvents', { defaultValue: 'Delete events' }),
+              ]}
               animate={false}
             />
             <text x={205} y={420} textAnchor="middle" fill={colors.attacker} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
@@ -56,7 +60,7 @@ export const Frame5_2: React.FC = () => {
               position={{ x: 595, y: 270 }}
               size={140}
               state="valid"
-              scopes={['Read calendar']}
+              scopes={[t('frame5_2.scopeReadCalendar', { defaultValue: 'Read calendar' })]}
               animate={!prefersReducedMotion}
             />
             <text x={595} y={420} textAnchor="middle" fill={colors.success} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
