@@ -20,13 +20,20 @@ export const Frame2_2: React.FC = () => {
   return (
     <Stage>
       <svg viewBox="0 0 800 500" className="w-full h-full">
-        {/* Callback tag */}
-        <g transform="translate(400, 80)">
-          <rect x={-150} y={-20} width={300} height={36} rx={18} fill={`${colors.server}1A`} stroke={colors.server} strokeWidth={1.25} />
-          <text x={0} y={4} textAnchor="middle" fill={colors.server} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">
-            {t('frame2_2.callback', { defaultValue: '↩ From the SPIFFE module' })}
-          </text>
-        </g>
+        {/* Callback tag — links back to the SPIFFE module in a new tab */}
+        <a href="/spiffe" target="_blank" rel="noopener noreferrer" style={{ cursor: 'pointer' }} className="group">
+          <g transform="translate(400, 80)">
+            <rect x={-150} y={-20} width={300} height={36} rx={18} fill={`${colors.server}1A`} stroke={colors.server} strokeWidth={1.25} className="transition-opacity group-hover:opacity-80" />
+            <text x={-8} y={4} textAnchor="middle" fill={colors.server} fontSize={13} fontFamily="IBM Plex Sans, sans-serif" className="group-hover:underline" style={{ textDecorationColor: colors.server }}>
+              {t('frame2_2.callback', { defaultValue: '↩ From the SPIFFE module' })}
+            </text>
+            {/* External-link affordance */}
+            <g transform="translate(124, -4)" stroke={colors.server} strokeWidth={1.25} fill="none" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 1 h6 v6" />
+              <path d="M9 1 L2 8" />
+            </g>
+          </g>
+        </a>
 
         <SpireServer label={t('frame2_2.server', { defaultValue: 'Identity authority' })} position={{ x: 175, y: 270 }} size={100} active animate={!prefersReducedMotion} />
 

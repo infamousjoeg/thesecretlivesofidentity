@@ -25,6 +25,10 @@
     "opa": {
       "title": "OPA",
       "description": "Policy-based authorization decisions"
+    },
+    "wimse": {
+      "title": "WIMSE",
+      "description": "Cross-boundary workload identity federation"
     }
   }
 }

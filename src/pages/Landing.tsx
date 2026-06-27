@@ -47,6 +47,7 @@ const upcomingTopicsMeta: TopicItem[] = [
   { id: 'mtls', icon: Handshake },
   { id: 'oauth', customIcon: OpenIDLogo },
   { id: 'opa', customIcon: OPALogo },
+  { id: 'wimse', customIcon: WIMSELogo },
 ];
 
 export const Landing: React.FC = () => {
@@ -149,46 +150,6 @@ export const Landing: React.FC = () => {
                 <path d="M88.7 238.5H117c2.7 0 5 2.2 5 5v28.3c0 2.7-2.2 5-5 5H88.7c-2.7 0-5-2.2-5-5v-28.3c0-2.7 2.2-5 5-5zm258 76.7h-28.3c-2.7 0-5 2.2-5 5v28.3c0 2.8 2.2 5 5 5h28.3c2.7 0 5-2.2 5-5v-28.3c0-2.8-2.3-5-5-5z" className="spiffe-lime"/>
                 <path d="M270.2 315.2h-258c-2.7 0-5 2.2-5 5v28.3c0 2.7 2.2 5 5 5h258c2.7 0 5-2.2 5-5v-28.3c-.1-2.8-2.3-5-5-5z" className="spiffe-cyan"/>
               </svg>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Featured: AI Agent Identity */}
-      <section className="pb-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-surface to-background border border-textMuted/20 p-8 sm:p-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="relative z-10">
-              <span className="inline-block px-3 py-1 text-sm font-medium bg-agent/20 text-agent rounded-full mb-4">
-                {t('liveBadge', { defaultValue: 'Live now' })}
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-display font-bold text-textPrimary mb-4">
-                {t('agentsTitle', { defaultValue: 'AI Agent Identity' })}
-              </h2>
-              <p className="text-lg text-textSecondary max-w-xl mb-6">
-                {t('agentsDescription', {
-                  defaultValue:
-                    'Your AI agents act on your behalf. Learn how they prove who they are and earn scoped permission to use tools, without ever holding your master key. From zero to understanding in 60 frames.',
-                })}
-              </p>
-              <Link
-                to="/agents"
-                className="inline-flex items-center gap-2 text-agent hover:text-agent/80 font-medium transition-colors"
-              >
-                <span>{t('exploreAgents', { defaultValue: 'Explore agent identity' })}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-
-            {/* Agent Identity Logo */}
-            <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-20 hidden lg:block">
-              <WIMSELogo className="w-48 h-48" />
             </div>
           </motion.div>
         </div>

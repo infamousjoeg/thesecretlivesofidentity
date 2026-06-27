@@ -22,5 +22,13 @@
   "inspiredBy": "Inspired by",
   "inspiredByLink": "The Secret Lives of Data",
   "license": "Apache 2.0",
-  "chooseLanguage": "Choose language"
+  "chooseLanguage": "Choose language",
+  "close": "Close",
+  "sharePrompt": "Share your achievement",
+  "shareLinkedIn": "Share on LinkedIn",
+  "shareTwitter": "Share on Twitter",
+  "shareBluesky": "Share on Bluesky",
+  "copyLink": "Copy link",
+  "copied": "Copied!",
+  "shareText": "I just completed the {{track}} track of {{module}} on The Secret Lives of Identity"
 }

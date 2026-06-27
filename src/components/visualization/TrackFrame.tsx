@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Menu, X, Home } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useTrackNavigation, useTrackKeyboardNav, useReducedMotion } from '@/hooks';
 import type { TrackId } from '@/content/tracks';
@@ -35,6 +35,7 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
     goToPosition,
   } = useTrackNavigation();
 
+  const navigate = useNavigate();
   const prefersReducedMotion = useReducedMotion();
   const prefix = moduleConfig?.i18nPrefix ?? 'spiffe';
   const contentNs = `${prefix}-content`;
@@ -58,7 +59,8 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
     onLast: () => goToPosition(totalFrames - 1),
     onEscape: () => {
       if (showCompletion) {
-        setShowCompletion(false);
+        // Dismissing the completion modal returns the learner home.
+        navigate('/');
       } else if (showSidebar) {
         setShowSidebar(false);
       }

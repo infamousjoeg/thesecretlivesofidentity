@@ -448,7 +448,8 @@
     "spiffeTitle": "SPIFFE: Base de Identidade",
     "title": "Comece Agora",
     "closing": "Construa agentes que carregam comprovantes, não chaves-mestras.",
-    "thanks": "Obrigado por aprender com a gente! ✨"
+    "thanks": "Obrigado por aprender com a gente! ✨",
+    "spiffeCallback": "↩ Revisitar o módulo SPIFFE"
   },
   "delegationBuilder": {
     "scopeRead": "Ler agenda",

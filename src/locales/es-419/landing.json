@@ -25,6 +25,10 @@
     "opa": {
       "title": "OPA",
       "description": "Decisiones de autorización basadas en políticas"
+    },
+    "wimse": {
+      "title": "WIMSE",
+      "description": "Federación de identidad de cargas de trabajo entre dominios"
     }
   }
 }

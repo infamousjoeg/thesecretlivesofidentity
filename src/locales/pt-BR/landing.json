@@ -25,6 +25,10 @@
     "opa": {
       "title": "OPA",
       "description": "Decisões de autorização baseadas em políticas"
+    },
+    "wimse": {
+      "title": "WIMSE",
+      "description": "Federação de identidade de workload entre fronteiras"
     }
   }
 }

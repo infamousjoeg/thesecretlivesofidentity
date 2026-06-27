@@ -448,7 +448,8 @@
     "spiffeTitle": "SPIFFE — Identity Foundation",
     "title": "Get Started",
     "closing": "Build agents that carry slips, not master keys.",
-    "thanks": "Thanks for learning with us! ✨"
+    "thanks": "Thanks for learning with us! ✨",
+    "spiffeCallback": "↩ Revisit the SPIFFE module"
   },
   "delegationBuilder": {
     "scopeRead": "Read calendar",

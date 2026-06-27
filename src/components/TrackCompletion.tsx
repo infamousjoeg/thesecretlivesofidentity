@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Trophy, ArrowRight, RotateCcw, Home, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Trophy, ArrowRight, RotateCcw, Home, X, Linkedin, Twitter, Copy, Check, Share2 } from 'lucide-react';
 import { useTrackNavigation, useReducedMotion } from '@/hooks';
 import { getNextTrack, type TrackId } from '@/content/tracks';
 import type { ModuleId } from '@/content/modules';
@@ -16,6 +17,8 @@ interface ResourceLink {
 }
 
 interface ModuleCompletionMeta {
+  /** Human-readable module name, used in share copy. */
+  moduleTitle: string;
   /** Final celebratory line shown when the Gold track is completed. */
   finalMessage: string;
   /** External resources surfaced on the Gold completion screen. */
@@ -26,6 +29,7 @@ interface ModuleCompletionMeta {
 // Keyed by moduleId so finishing the agents track never shows SPIFFE links.
 const moduleCompletionMeta: Record<ModuleId, ModuleCompletionMeta> = {
   spiffe: {
+    moduleTitle: 'SPIFFE/SPIRE',
     finalMessage: "You've completed the entire SPIFFE visualization!",
     resources: [
       { label: 'spiffe.io', href: 'https://spiffe.io' },
@@ -34,6 +38,7 @@ const moduleCompletionMeta: Record<ModuleId, ModuleCompletionMeta> = {
     ],
   },
   agents: {
+    moduleTitle: 'AI Agent Identity',
     finalMessage: "You've completed the entire AI Agent Identity visualization!",
     resources: [
       { label: 'WIMSE Working Group', href: 'https://datatracker.ietf.org/wg/wimse/about/' },
@@ -68,11 +73,16 @@ const fallbackCompletion: Record<TrackId, { title: string; message: string }> = 
 export const TrackCompletion: React.FC<TrackCompletionProps> = ({ onClose }) => {
   const { moduleConfig, currentTrack, tracks, goToPosition, continueToNextTrack, goToTrackSelector } =
     useTrackNavigation();
+  const navigate = useNavigate();
   const prefersReducedMotion = useReducedMotion();
   const prefix = moduleConfig?.i18nPrefix ?? 'spiffe';
   const tracksNs = `${prefix}-tracks`;
   const completionMeta = moduleCompletionMeta[moduleConfig?.id ?? 'spiffe'];
   const { t } = useTranslation([tracksNs, 'ui']);
+  const [copied, setCopied] = useState(false);
+
+  // Dismissing the modal (X, backdrop, Escape) returns the learner home.
+  const dismissToHome = () => navigate('/');
 
   if (!currentTrack || !tracks) return null;
 
@@ -87,13 +97,40 @@ export const TrackCompletion: React.FC<TrackCompletionProps> = ({ onClose }) => 
     }),
   };
 
+  // Share metadata — URL is the active module's public entry, derived from basePath.
+  const trackTitle = t(`${tracksNs}:${currentTrack}.title`, {
+    defaultValue: tracks[currentTrack].title,
+  });
+  const shareUrl = `${window.location.origin}${moduleConfig?.basePath ?? ''}`;
+  const shareText = t('ui:shareText', {
+    track: trackTitle,
+    module: completionMeta.moduleTitle,
+    defaultValue:
+      'I just completed the {{track}} track of {{module}} on The Secret Lives of Identity',
+  });
+  const encodedUrl = encodeURIComponent(shareUrl);
+  const encodedText = encodeURIComponent(shareText);
+  const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+  const blueskyUrl = `https://bsky.app/intent/compose?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`;
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard unavailable; ignore.
+    }
+  };
+
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
       initial={prefersReducedMotion ? undefined : { opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      onClick={onClose}
+      onClick={dismissToHome}
     >
       <motion.div
         className="relative w-full max-w-lg bg-surface rounded-2xl p-8 shadow-2xl"
@@ -104,9 +141,9 @@ export const TrackCompletion: React.FC<TrackCompletionProps> = ({ onClose }) => 
       >
         {/* Close button */}
         <button
-          onClick={onClose}
+          onClick={dismissToHome}
           className="absolute top-4 right-4 p-2 text-textMuted hover:text-textPrimary transition-colors"
-          aria-label="Close"
+          aria-label={t('ui:close', { defaultValue: 'Close' })}
         >
           <X className="w-5 h-5" />
         </button>
@@ -164,6 +201,58 @@ export const TrackCompletion: React.FC<TrackCompletionProps> = ({ onClose }) => 
             <Home className="w-5 h-5" />
             <span>Back to Track Selector</span>
           </button>
+        </div>
+
+        {/* Social Sharing */}
+        <div className="mt-8 pt-6 border-t border-textMuted/20">
+          <p className="flex items-center justify-center gap-2 text-sm text-textMuted mb-4">
+            <Share2 className="w-4 h-4" />
+            <span>{t('ui:sharePrompt', { defaultValue: 'Share your achievement' })}</span>
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={linkedInUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-textMuted/30 text-textSecondary hover:text-textPrimary hover:border-server/50 transition-colors"
+              aria-label={t('ui:shareLinkedIn', { defaultValue: 'Share on LinkedIn' })}
+            >
+              <Linkedin className="w-4 h-4" />
+              <span className="text-sm">LinkedIn</span>
+            </a>
+            <a
+              href={twitterUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-textMuted/30 text-textSecondary hover:text-textPrimary hover:border-server/50 transition-colors"
+              aria-label={t('ui:shareTwitter', { defaultValue: 'Share on Twitter' })}
+            >
+              <Twitter className="w-4 h-4" />
+              <span className="text-sm">Twitter</span>
+            </a>
+            <a
+              href={blueskyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-textMuted/30 text-textSecondary hover:text-textPrimary hover:border-server/50 transition-colors"
+              aria-label={t('ui:shareBluesky', { defaultValue: 'Share on Bluesky' })}
+            >
+              <Share2 className="w-4 h-4" />
+              <span className="text-sm">Bluesky</span>
+            </a>
+            <button
+              onClick={handleCopyLink}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-textMuted/30 text-textSecondary hover:text-textPrimary hover:border-server/50 transition-colors"
+              aria-label={t('ui:copyLink', { defaultValue: 'Copy link' })}
+            >
+              {copied ? <Check className="w-4 h-4 text-success" /> : <Copy className="w-4 h-4" />}
+              <span className="text-sm">
+                {copied
+                  ? t('ui:copied', { defaultValue: 'Copied!' })
+                  : t('ui:copyLink', { defaultValue: 'Copy link' })}
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Next Track Preview (if available) */}

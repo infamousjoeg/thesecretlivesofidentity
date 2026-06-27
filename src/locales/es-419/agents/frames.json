@@ -448,7 +448,8 @@
     "spiffeTitle": "SPIFFE, Base de Identidad",
     "title": "Comenzar",
     "closing": "Construye agentes que lleven permisos, no claves maestras.",
-    "thanks": "¡Gracias por aprender con nosotros! ✨"
+    "thanks": "¡Gracias por aprender con nosotros! ✨",
+    "spiffeCallback": "↩ Vuelve al módulo SPIFFE"
   },
   "delegationBuilder": {
     "scopeRead": "Leer calendario",
