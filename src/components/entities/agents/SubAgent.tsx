@@ -154,7 +154,7 @@ export const SubAgent: React.FC<SubAgentProps> = ({
           y={headTop + headH + size * 0.44}
           textAnchor="middle"
           fill={active ? colors.textPrimary : colors.textSecondary}
-          fontSize={11}
+          fontSize={13}
           fontWeight={500}
           fontFamily="IBM Plex Sans, sans-serif"
         >

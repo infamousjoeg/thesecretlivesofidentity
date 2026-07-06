@@ -34,7 +34,7 @@ export const Frame1_4: React.FC = () => {
             <text x={400} y={239} textAnchor="middle" fill="#FFFFFF" fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif" letterSpacing="1">
               {t('frame1_4.mask', { defaultValue: 'YOU' })}
             </text>
-            <text x={400} y={196} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
+            <text x={400} y={194} textAnchor="middle" fill={colors.textSecondary} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
               {t('frame1_4.maskNote', { defaultValue: 'wearing your credentials' })}
             </text>
           </motion.g>

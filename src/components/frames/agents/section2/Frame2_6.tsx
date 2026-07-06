@@ -50,7 +50,7 @@ export const Frame2_6: React.FC = () => {
                 {t('frame2_6.delegation', { defaultValue: 'Delegation' })}
               </text>
             </g>
-            <text x={600} y={448} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontStyle="italic" fontFamily="IBM Plex Sans, sans-serif">
+            <text x={600} y={448} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontStyle="italic" fontFamily="IBM Plex Sans, sans-serif">
               {t('frame2_6.next', { defaultValue: 'Next: we tackle this one →' })}
             </text>
           </motion.g>

@@ -22,7 +22,7 @@ export const Frame3_3: React.FC = () => {
       <svg viewBox="0 0 800 500" className="w-full h-full">
         {/* Principal stands behind, the source of authority */}
         <Principal label={t('frame3_3.principal', { defaultValue: 'Principal' })} position={{ x: 130, y: 250 }} size={66} active animate={!prefersReducedMotion} />
-        <text x={130} y={330} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
+        <text x={130} y={330} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
           {t('frame3_3.allows', { defaultValue: 'allows the action' })}
         </text>
 

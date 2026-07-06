@@ -40,7 +40,7 @@ export const Frame2_4: React.FC = () => {
           <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
             <line x1={335} y1={230} x2={455} y2={230} stroke={colors.permissionSlip} strokeWidth={2.5} />
             <path d="M 455 230 l -12 -7 l 0 14 z" fill={colors.permissionSlip} />
-            <text x={395} y={215} textAnchor="middle" fill={colors.textMuted} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
+            <text x={395} y={215} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
               {t('frame2_4.then', { defaultValue: 'then' })}
             </text>
           </motion.g>

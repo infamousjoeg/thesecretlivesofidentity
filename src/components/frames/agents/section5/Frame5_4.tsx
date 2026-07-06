@@ -54,7 +54,7 @@ export const Frame5_4: React.FC = () => {
             <text x={400} y={262} textAnchor="middle" fill={colors.permissionSlip} fontSize={34} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
               ⇄
             </text>
-            <text x={400} y={292} textAnchor="middle" fill={colors.textSecondary} fontSize={10} fontFamily="IBM Plex Sans, sans-serif">
+            <text x={400} y={292} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
               {t('frame5_4.downscope', { defaultValue: 'down-scope' })}
             </text>
           </motion.g>

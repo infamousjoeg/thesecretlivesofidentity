@@ -133,21 +133,25 @@ export const TrackCompletion: React.FC<TrackCompletionProps> = ({ onClose }) => 
       onClick={dismissToHome}
     >
       <motion.div
-        className="relative w-full max-w-lg bg-surface rounded-2xl p-8 shadow-2xl"
+        className="relative w-full max-w-lg bg-surface rounded-2xl shadow-2xl flex flex-col max-h-dvh-modal"
         initial={prefersReducedMotion ? undefined : { scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
+        {/* Close button — sits above the scroll area so it is always reachable,
+            even when the modal content scrolls on short viewports. */}
         <button
           onClick={dismissToHome}
-          className="absolute top-4 right-4 p-2 text-textMuted hover:text-textPrimary transition-colors"
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-surface/80 text-textMuted hover:text-textPrimary transition-colors"
           aria-label={t('ui:close', { defaultValue: 'Close' })}
         >
           <X className="w-5 h-5" />
         </button>
 
+        {/* Scrollable content — capped to the viewport via max-h-dvh-modal on the
+            parent so every control (buttons, share row, "Up next") stays reachable. */}
+        <div className="overflow-y-auto p-6 sm:p-8">
         {/* Trophy Icon */}
         <div className="flex justify-center mb-6">
           <motion.div
@@ -302,6 +306,7 @@ export const TrackCompletion: React.FC<TrackCompletionProps> = ({ onClose }) => 
             </div>
           </motion.div>
         )}
+        </div>
       </motion.div>
     </motion.div>
   );

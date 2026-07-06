@@ -40,7 +40,7 @@ export const Frame4_4: React.FC = () => {
           animate={prefersReducedMotion ? { opacity: 0.5 } : { pathLength: 1, opacity: 0.5 }}
           transition={{ duration: 0.8 }}
         />
-        <text x={690} y={404} fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
+        <text x={690} y={404} fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
           {t('frame4_4.time', { defaultValue: 'time' })}
         </text>
 

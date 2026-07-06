@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import { Navigate, useParams } from 'react-router-dom';
 import { TrackFrame } from '@/components/visualization';
 import { useTrackNavigation } from '@/hooks';
@@ -29,7 +28,7 @@ export const ModuleVisualization: React.FC = () => {
     }
   }, [moduleConfig, setActiveModule]);
 
-  const { frameData, currentTrack, currentPosition } = useTrackNavigation();
+  const { frameData } = useTrackNavigation();
 
   // Unknown module -> landing.
   if (!moduleConfig) {
@@ -48,15 +47,17 @@ export const ModuleVisualization: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <AnimatePresence mode="wait">
-        <TrackFrame key={`${currentTrack}-${currentPosition}`}>
-          {FrameComponent ? (
-            <FrameComponent />
-          ) : (
-            <PlaceholderFrame frameId={frameId || 'unknown'} />
-          )}
-        </TrackFrame>
-      </AnimatePresence>
+      {/* TrackFrame (shell: progress bar + sidebar + nav) stays mounted across
+          frames so the progress bar animates smoothly from its previous width.
+          Frame CONTENT transitions are handled by TrackFrame's own internal
+          AnimatePresence, keyed by track + position. */}
+      <TrackFrame>
+        {FrameComponent ? (
+          <FrameComponent />
+        ) : (
+          <PlaceholderFrame frameId={frameId || 'unknown'} />
+        )}
+      </TrackFrame>
     </div>
   );
 };

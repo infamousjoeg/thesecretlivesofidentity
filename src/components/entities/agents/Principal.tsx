@@ -130,7 +130,7 @@ export const Principal: React.FC<PrincipalProps> = ({
           y={r + 22}
           textAnchor="middle"
           fill={active ? colors.textPrimary : colors.textSecondary}
-          fontSize={12}
+          fontSize={13}
           fontWeight={500}
           fontFamily="IBM Plex Sans, sans-serif"
         >

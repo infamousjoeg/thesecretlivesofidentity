@@ -33,7 +33,7 @@ export const Frame4_7: React.FC = () => {
         >
           <AIAgent label="" position={{ x: 220, y: 215 }} active animate={!prefersReducedMotion} />
           <rect x={120} y={300} width={200} height={40} rx={8} fill={colors.surface} stroke={colors.agentAI} strokeWidth={1.5} />
-          <text x={220} y={318} textAnchor="middle" fill={colors.textSecondary} fontSize={9} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+          <text x={220} y={318} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
             {t('frame4_7.identityLabel', { defaultValue: 'PERMANENT IDENTITY' })}
           </text>
           <text x={220} y={333} textAnchor="middle" fill={colors.agentAI} fontSize={12} fontWeight="bold" fontFamily="JetBrains Mono, monospace">

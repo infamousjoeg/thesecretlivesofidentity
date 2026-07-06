@@ -109,6 +109,46 @@ export const Badge: React.FC<BadgeProps> = ({
 
   const uniqueId = id || Math.random().toString(36).substr(2, 9);
 
+  // ---------------------------------------------------------------------------
+  // Proportional vertical layout.
+  //
+  // The badge is rendered at a wide range of sizes across the modules (roughly
+  // 30 for decorative chips up to ~128 in the Agent Identity module). Anchoring
+  // the header/photo from the top with FIXED pixel offsets while anchoring the
+  // countdown/type from the bottom caused the middle text block (IDENTITY /
+  // SPIFFE-ID / divider) to collide at smaller heights. Deriving every band as
+  // a fraction of the badge height keeps comfortable spacing at every size.
+  // ---------------------------------------------------------------------------
+  const clamp = (v: number, lo: number, hi: number): number =>
+    Math.min(hi, Math.max(lo, v));
+
+  const halfW = width / 2;
+  const halfH = height / 2;
+  const top = -halfH;
+
+  const clipY = top + height * 0.05;
+  const headerY = top + height * 0.09;
+  const headerH = height * 0.15;
+  const headerTextY = headerY + headerH * 0.7;
+  const photoY = headerY + headerH + height * 0.03;
+  const photoH = height * 0.3;
+  const photoCenterY = photoY + photoH / 2;
+  const identityY = photoY + photoH + height * 0.1;
+  const idY = identityY + height * 0.075;
+  const dividerY = idY + height * 0.05;
+  const bottomY = halfH - height * 0.13; // countdown / QR band center
+  const typeY = halfH - height * 0.035;
+
+  // Font sizes scale with badge width, with legibility floors so the smallest
+  // labels stay readable (and higher-contrast) even after the responsive SVG
+  // downscale on laptop viewports.
+  const headerFont = clamp(width * 0.085, 8, 13);
+  const labelFont = clamp(width * 0.07, 8, 11); // IDENTITY
+  const idFont = clamp((width - 14) / Math.max(displayId.length, 10) / 0.62, 7, 11);
+  const typeFont = clamp(width * 0.07, 8, 11);
+  const sealScale = clamp(width / 120, 0.6, 1.25);
+  const bottomScale = clamp(width / 120, 0.6, 1.2);
+
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
@@ -196,7 +236,7 @@ export const Badge: React.FC<BadgeProps> = ({
       {/* Lanyard clip hole at top */}
       <ellipse
         cx={0}
-        cy={-height / 2 + 12}
+        cy={clipY}
         rx={10}
         ry={5}
         fill={stateColors.bg}
@@ -205,7 +245,7 @@ export const Badge: React.FC<BadgeProps> = ({
       />
       <ellipse
         cx={0}
-        cy={-height / 2 + 12}
+        cy={clipY}
         rx={6}
         ry={3}
         fill={colors.background}
@@ -214,17 +254,18 @@ export const Badge: React.FC<BadgeProps> = ({
       {/* Company/Trust Domain header bar */}
       <rect
         x={-width / 2}
-        y={-height / 2 + 20}
+        y={headerY}
         width={width}
-        height={28}
+        height={headerH}
         fill={`url(#badge-header-${uniqueId})`}
       />
       <text
         x={0}
-        y={-height / 2 + 39}
+        y={headerTextY}
         textAnchor="middle"
+        dominantBaseline="middle"
         fill="#FFFFFF"
-        fontSize={10}
+        fontSize={headerFont}
         fontWeight="bold"
         fontFamily="Space Grotesk, sans-serif"
         letterSpacing="0.5"
@@ -235,9 +276,9 @@ export const Badge: React.FC<BadgeProps> = ({
       {/* Photo area - professional badge photo style */}
       <rect
         x={-width / 2 + 15}
-        y={-height / 2 + 58}
+        y={photoY}
         width={width - 30}
-        height={55}
+        height={photoH}
         rx={4}
         fill={state === 'expired' ? '#D1D5DB' : '#DBEAFE'}
         stroke={state === 'expired' ? '#9CA3AF' : '#93C5FD'}
@@ -245,7 +286,7 @@ export const Badge: React.FC<BadgeProps> = ({
       />
 
       {/* Professional silhouette in photo */}
-      <g transform={`translate(0, ${-height / 2 + 78})`}>
+      <g transform={`translate(0, ${photoCenterY - photoH * 0.12}) scale(${photoH / 55})`}>
         {/* Head */}
         <circle
           cx={0}
@@ -260,15 +301,17 @@ export const Badge: React.FC<BadgeProps> = ({
         />
       </g>
 
-      {/* SPIFFE ID label */}
+      {/* IDENTITY label */}
       <text
         x={0}
-        y={-height / 2 + 128}
+        y={identityY}
         textAnchor="middle"
         fill={stateColors.text}
-        fontSize={6}
+        fontSize={labelFont}
+        fontWeight="600"
+        letterSpacing="1"
         fontFamily="Space Grotesk, sans-serif"
-        opacity={0.7}
+        opacity={0.85}
       >
         IDENTITY
       </text>
@@ -276,10 +319,10 @@ export const Badge: React.FC<BadgeProps> = ({
       {/* SPIFFE ID text - prominent */}
       <text
         x={0}
-        y={-height / 2 + 142}
+        y={idY}
         textAnchor="middle"
         fill={stateColors.text}
-        fontSize={7}
+        fontSize={idFont}
         fontWeight="600"
         fontFamily="JetBrains Mono, monospace"
       >
@@ -289,16 +332,16 @@ export const Badge: React.FC<BadgeProps> = ({
       {/* Divider line */}
       <line
         x1={-width / 2 + 10}
-        y1={-height / 2 + 150}
+        y1={dividerY}
         x2={width / 2 - 10}
-        y2={-height / 2 + 150}
+        y2={dividerY}
         stroke={stateColors.headerDark}
         strokeWidth={0.5}
         opacity={0.3}
       />
 
       {/* Bottom section with countdown and type */}
-      <g transform={`translate(0, ${height / 2 - 30})`}>
+      <g transform={`translate(0, ${bottomY}) scale(${bottomScale})`}>
         {/* Countdown timer */}
         {showCountdown && (
           <g transform="translate(-25, 0)">
@@ -358,20 +401,20 @@ export const Badge: React.FC<BadgeProps> = ({
       {/* Type badge at bottom */}
       <text
         x={0}
-        y={height / 2 - 8}
+        y={typeY}
         textAnchor="middle"
         fill={stateColors.text}
-        fontSize={7}
+        fontSize={typeFont}
         fontWeight="bold"
         fontFamily="Space Grotesk, sans-serif"
-        opacity={0.5}
+        opacity={0.75}
       >
         {variant.toUpperCase()}
       </text>
 
       {/* Holographic VALID seal */}
       {state === 'valid' && (
-        <g transform={`translate(${width / 2 - 24}, ${-height / 2 + 65})`}>
+        <g transform={`translate(${halfW - 22 * sealScale}, ${photoCenterY}) scale(${sealScale})`}>
           <motion.circle
             cx={0}
             cy={0}
@@ -395,7 +438,7 @@ export const Badge: React.FC<BadgeProps> = ({
             y={1}
             textAnchor="middle"
             fill="#15803D"
-            fontSize={5}
+            fontSize={6}
             fontWeight="bold"
             fontFamily="Space Grotesk, sans-serif"
           >
@@ -406,7 +449,7 @@ export const Badge: React.FC<BadgeProps> = ({
             y={8}
             textAnchor="middle"
             fill="#15803D"
-            fontSize={4}
+            fontSize={5}
             fontFamily="Space Grotesk, sans-serif"
           >
             SVID
@@ -416,7 +459,7 @@ export const Badge: React.FC<BadgeProps> = ({
 
       {/* Expiring warning seal */}
       {state === 'expiring' && (
-        <g transform={`translate(${width / 2 - 24}, ${-height / 2 + 65})`}>
+        <g transform={`translate(${halfW - 22 * sealScale}, ${photoCenterY}) scale(${sealScale})`}>
           <motion.circle
             cx={0}
             cy={0}
@@ -441,7 +484,7 @@ export const Badge: React.FC<BadgeProps> = ({
             y={1}
             textAnchor="middle"
             fill="#A16207"
-            fontSize={5}
+            fontSize={6}
             fontWeight="bold"
             fontFamily="Space Grotesk, sans-serif"
           >
@@ -452,7 +495,7 @@ export const Badge: React.FC<BadgeProps> = ({
             y={8}
             textAnchor="middle"
             fill="#A16207"
-            fontSize={4}
+            fontSize={5}
             fontFamily="Space Grotesk, sans-serif"
           >
             SOON

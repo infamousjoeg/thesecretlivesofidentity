@@ -30,12 +30,14 @@ export const Frame2_5: React.FC = () => {
         {/* Forbidden: agent reusing the human's badge */}
         {phase >= 1 && (
           <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-            <line x1={560} y1={235} x2={465} y2={235} stroke={colors.attacker} strokeWidth={2} strokeDasharray="5 4" />
-            <g transform="translate(400, 235)" stroke={colors.attacker} strokeWidth={6} strokeLinecap="round">
-              <circle cx={0} cy={0} r={70} fill="none" strokeWidth={4} />
-              <line x1={-48} y1={-48} x2={48} y2={48} />
+            <line x1={560} y1={235} x2={475} y2={235} stroke={colors.attacker} strokeWidth={2} strokeDasharray="5 4" />
+            <g transform="translate(400, 235)" stroke={colors.attacker} strokeWidth={9} strokeLinecap="round">
+              <circle cx={0} cy={0} r={70} fill="none" strokeWidth={9} />
+              <line x1={-49} y1={-49} x2={49} y2={49} />
             </g>
-            <text x={512} y={300} textAnchor="middle" fill={colors.attacker} fontSize={12} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
+            {/* Caption sits BELOW the badge/prohibition circle (badge bottom y≈331,
+                circle bottom y≈305) so no word ever overlaps the badge. */}
+            <text x={400} y={352} textAnchor="middle" fill={colors.attacker} fontSize={14} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
               {t('frame2_5.never', { defaultValue: 'never reuse your login' })}
             </text>
           </motion.g>

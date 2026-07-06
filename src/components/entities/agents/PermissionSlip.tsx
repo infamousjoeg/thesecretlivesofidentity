@@ -195,7 +195,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
         y={top + 31}
         textAnchor="middle"
         fill="#FFFFFF"
-        fontSize={10}
+        fontSize={11}
         fontWeight="bold"
         fontFamily="Space Grotesk, sans-serif"
         letterSpacing="0.5"
@@ -204,20 +204,20 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
       </text>
 
       {/* ON BEHALF OF */}
-      <text x={left + 10} y={top + 52} fill={palette.ink} fontSize={6} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+      <text x={left + 10} y={top + 52} fill={palette.ink} fontSize={7.5} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
         {t('permissionSlip.onBehalfOf', { defaultValue: 'ON BEHALF OF' })}
       </text>
       <line x1={left + 10} y1={top + 64} x2={left + W - 10} y2={top + 64} stroke={palette.ink} strokeWidth={0.5} opacity={0.3} />
-      <text x={left + 12} y={top + 62} fill={palette.ink} fontSize={9} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
+      <text x={left + 12} y={top + 62} fill={palette.ink} fontSize={9.5} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
         {displayOnBehalfOf}
       </text>
 
       {/* ACTING (actor) — label over value, mirroring the ON BEHALF OF block so
           longer translations and longer actor names never overflow the line. */}
-      <text x={left + 10} y={top + 75} fill={palette.ink} fontSize={6} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+      <text x={left + 10} y={top + 75} fill={palette.ink} fontSize={7.5} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
         {t('permissionSlip.acting', { defaultValue: 'ACTING' })}
       </text>
-      <text x={left + 12} y={top + 84} fill={palette.ink} fontSize={7.5} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
+      <text x={left + 12} y={top + 84} fill={palette.ink} fontSize={8.5} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
         {displayActor}
       </text>
 
@@ -225,10 +225,10 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
       <line x1={left + 10} y1={top + 90} x2={left + W - 10} y2={top + 90} stroke={palette.ink} strokeWidth={0.5} opacity={0.25} />
 
       {/* GOOD FOR + scope count */}
-      <text x={left + 10} y={top + 101} fill={palette.ink} fontSize={7} fontWeight="bold" fontFamily="Space Grotesk, sans-serif" letterSpacing="0.5">
+      <text x={left + 10} y={top + 101} fill={palette.ink} fontSize={8} fontWeight="bold" fontFamily="Space Grotesk, sans-serif" letterSpacing="0.5">
         {t('permissionSlip.goodFor', { defaultValue: 'GOOD FOR:' })}
       </text>
-      <text x={left + W - 10} y={top + 101} textAnchor="end" fill={palette.ink} fontSize={6.5} opacity={0.7} fontFamily="JetBrains Mono, monospace">
+      <text x={left + W - 10} y={top + 101} textAnchor="end" fill={palette.ink} fontSize={8} opacity={0.7} fontFamily="JetBrains Mono, monospace">
         {t('permissionSlip.actionsCount', { count: displayScopes.length, defaultValue: '{{count}} action(s)' })}
       </text>
 
@@ -254,7 +254,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
               x={left + 24}
               y={y + 1}
               fill={row.granted ? palette.ink : '#9CA3AF'}
-              fontSize={7.5}
+              fontSize={8.5}
               fontWeight={row.granted ? '500' : '400'}
               fontFamily="IBM Plex Sans, sans-serif"
               textDecoration={row.granted ? 'none' : 'line-through'}
@@ -269,16 +269,16 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
       <line x1={left + 10} y1={top + H - 46} x2={left + W - 10} y2={top + H - 46} stroke={palette.ink} strokeWidth={0.5} opacity={0.25} />
 
       {/* VALID AT (audience) */}
-      <text x={left + 10} y={top + H - 34} fill={palette.ink} fontSize={6} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+      <text x={left + 10} y={top + H - 34} fill={palette.ink} fontSize={7.5} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
         {t('permissionSlip.validAt', { defaultValue: 'VALID AT' })}
       </text>
-      <text x={left + 10} y={top + H - 25} fill={palette.ink} fontSize={7.5} fontWeight="600" fontFamily="JetBrains Mono, monospace">
+      <text x={left + 10} y={top + H - 25} fill={palette.ink} fontSize={8.5} fontWeight="600" fontFamily="JetBrains Mono, monospace">
         {audience}
       </text>
 
       {/* EXPIRES countdown */}
       <g transform={`translate(${left + 10}, ${top + H - 14})`}>
-        <text x={0} y={0} fill={palette.ink} fontSize={6} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+        <text x={0} y={0} fill={palette.ink} fontSize={7.5} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
           {t('permissionSlip.expiresIn', { defaultValue: 'EXPIRES IN' })}
         </text>
         <rect x={42} y={-8} width={34} height={12} rx={2} fill={state === 'expired' ? '#9CA3AF' : palette.headerDark} />
@@ -303,7 +303,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
         {/* wax seal */}
         <circle cx={2} cy={-6} r={10} fill={state === 'expired' ? '#D6D3D1' : palette.seal} opacity={state === 'expired' ? 0.6 : 1} />
         <circle cx={2} cy={-6} r={10} fill="none" stroke="#FFFFFF" strokeWidth={0.75} strokeDasharray="1.5 1.5" opacity={0.7} />
-        <text x={2} y={-3.5} textAnchor="middle" fill="#FFFFFF" fontSize={6} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
+        <text x={2} y={-3.5} textAnchor="middle" fill="#FFFFFF" fontSize={7.5} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
           ✓
         </text>
       </g>
@@ -317,7 +317,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
             transform="rotate(-45) translate(-15, -5)"
             textAnchor="middle"
             fill="#FFFFFF"
-            fontSize={6}
+            fontSize={7.5}
             fontWeight="bold"
             fontFamily="Space Grotesk, sans-serif"
             letterSpacing="0.5"

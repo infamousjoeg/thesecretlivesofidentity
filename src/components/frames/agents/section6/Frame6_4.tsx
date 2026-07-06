@@ -53,7 +53,7 @@ export const Frame6_4: React.FC = () => {
           hops.map((h, i) => (
             <motion.g key={i} {...reveal(i * 0.08)}>
               <line x1={h.from} y1={130} x2={h.to} y2={130} stroke={colors.textMuted} strokeWidth={2} markerEnd="url(#a6-4-arrow)" />
-              <text x={(h.from + h.to) / 2} y={114} textAnchor="middle" fill={colors.agentAI} fontSize={9} fontFamily="JetBrains Mono, monospace">
+              <text x={(h.from + h.to) / 2} y={114} textAnchor="middle" fill={colors.agentAI} fontSize={12} fontFamily="JetBrains Mono, monospace">
                 {t(h.label, { defaultValue: h.def })}
               </text>
             </motion.g>
@@ -64,7 +64,7 @@ export const Frame6_4: React.FC = () => {
           <motion.g {...reveal(0)}>
             <rect x={120} y={285} width={560} height={64} rx={12} fill={`${colors.principal}1A`} stroke={colors.principal} strokeWidth={1.75} />
             <Principal label="" position={{ x: 168, y: 317 }} size={44} active animate={false} />
-            <text x={206} y={312} fill={colors.textSecondary} fontSize={10} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+            <text x={206} y={312} fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
               {t('frame6_4.subjectLabel', { defaultValue: 'SUBJECT (unchanged)' })}
             </text>
             <text x={206} y={332} fill={colors.principal} fontSize={15} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">

@@ -155,7 +155,7 @@ export const AIAgent: React.FC<AIAgentProps> = ({
           y={headTop + headH + size * 0.46}
           textAnchor="middle"
           fill={active ? colors.textPrimary : colors.textSecondary}
-          fontSize={12}
+          fontSize={13}
           fontWeight={500}
           fontFamily="IBM Plex Sans, sans-serif"
         >

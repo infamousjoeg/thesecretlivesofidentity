@@ -160,7 +160,7 @@ export const Verifier: React.FC<VerifierProps> = ({
           y={top + H + 24}
           textAnchor="middle"
           fill={state === 'idle' ? colors.textSecondary : accent}
-          fontSize={12}
+          fontSize={13}
           fontWeight={500}
           fontFamily="IBM Plex Sans, sans-serif"
         >
