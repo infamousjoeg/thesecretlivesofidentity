@@ -10,12 +10,20 @@ export const Stage: React.FC<StageProps> = ({
 }) => {
   return (
     <div
-      className={`relative w-full flex items-center justify-center ${className}`}
-      style={{ minHeight: height }}
+      className={`relative mx-auto w-full max-w-4xl flex items-center justify-center ${className}`}
+      // aspectRatio gives the stage an intrinsic height derived from its
+      // (capped) width so it never collapses, while maxHeight:100% lets it
+      // shrink to fit when a height-constrained parent (the track frame's
+      // flex-1 visualization region) is shorter than that intrinsic height.
+      // preserveAspectRatio keeps the diagram centered and correctly scaled
+      // at every size — it grows to fill on tall screens and shrinks on short
+      // laptop viewports instead of overflowing and pushing the title away.
+      style={{ aspectRatio: `${width} / ${height}`, maxHeight: '100%' }}
     >
       <svg
         viewBox={`0 0 ${width} ${height}`}
-        className="w-full max-w-4xl h-auto"
+        preserveAspectRatio="xMidYMid meet"
+        className="w-full h-full"
         role="img"
         aria-label="Visualization stage"
       >
