@@ -535,6 +535,14 @@
     "feedbackDamage": "✗ Delegado confuso! O comprovante amplo demais concedeu \"Excluir registros\", então o verificador aceitou a instrução maliciosa e os dados foram destruídos. O agente foi enganado, seu comprovante o traiu.",
     "feedbackBlocked": "✓ Bloqueado. O comprovante restrito nunca concedeu \"Excluir registros\", então mesmo que o agente tenha sido enganado, o verificador recusou. Escopo restrito é a defesa."
   },
+  "entities": {
+    "forYou": "PARA VOCÊ",
+    "sub": "SUB",
+    "scan": "LENDO",
+    "accepted": "ACEITO",
+    "rejected": "REJEITADO",
+    "serverLabel": "SERVIDOR {{kind}}"
+  },
   "permissionSlip": {
     "title": "COMPROVANTE",
     "onBehalfOf": "EM NOME DE",

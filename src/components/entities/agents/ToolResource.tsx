@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -32,6 +33,7 @@ export const ToolResource: React.FC<ToolResourceProps> = ({
   locked = true,
   animate = true,
 }) => {
+  const { t } = useTranslation('agents-frames');
   const uniqueId = id || Math.random().toString(36).substr(2, 9);
   const W = size * 0.8;
   const H = size * 0.92;
@@ -81,8 +83,10 @@ export const ToolResource: React.FC<ToolResourceProps> = ({
       {/* Header plate with kind tag */}
       <rect x={left} y={top} width={W} height={20} rx={8} fill="#0B3D3A" />
       <rect x={left} y={top + 12} width={W} height={8} fill="#0B3D3A" />
-      <text x={0} y={top + 14} textAnchor="middle" fill="#5EEAD4" fontSize={size * 0.1} fontWeight="bold" fontFamily="JetBrains Mono, monospace" letterSpacing="1">
-        {kind} SERVER
+      {/* letterSpacing trimmed from 1 to 0.25 so the word-order-flipped
+          translation ("SERVIDOR MCP") stays comfortably inside the header plate. */}
+      <text x={0} y={top + 14} textAnchor="middle" fill="#5EEAD4" fontSize={size * 0.1} fontWeight="bold" fontFamily="JetBrains Mono, monospace" letterSpacing="0.25">
+        {t('entities.serverLabel', { kind, defaultValue: '{{kind}} SERVER' })}
       </text>
 
       {locked ? (
