@@ -9,7 +9,8 @@ import { colors } from '@/utils/constants';
 interface Row {
   who: string;
   forWhom: string;
-  what: string;
+  whatKey: string;
+  whatDef: string;
   when: string;
 }
 
@@ -24,9 +25,9 @@ export const Frame6_5: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
 
   const rows: Row[] = [
-    { who: 'agent-a', forWhom: 'principal', what: 'read calendar', when: '14:02:03' },
-    { who: 'agent-b', forWhom: 'principal', what: 'charge card', when: '14:02:05' },
-    { who: 'agent-c', forWhom: 'principal', what: 'send receipt', when: '14:02:06' },
+    { who: 'agent-a', forWhom: 'principal', whatKey: 'frame6_5.actionRead', whatDef: 'read calendar', when: '14:02:03' },
+    { who: 'agent-b', forWhom: 'principal', whatKey: 'frame6_5.actionCharge', whatDef: 'charge card', when: '14:02:05' },
+    { who: 'agent-c', forWhom: 'principal', whatKey: 'frame6_5.actionReceipt', whatDef: 'send receipt', when: '14:02:06' },
   ];
 
   const cols = [
@@ -69,7 +70,7 @@ export const Frame6_5: React.FC = () => {
             >
               <text x={cols[0].x} y={222 + i * 44} fill={colors.agentAI} fontSize={13} fontFamily="JetBrains Mono, monospace">{r.who}</text>
               <text x={cols[1].x} y={222 + i * 44} fill={colors.principal} fontSize={13} fontFamily="JetBrains Mono, monospace">{r.forWhom}</text>
-              <text x={cols[2].x} y={222 + i * 44} fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">{r.what}</text>
+              <text x={cols[2].x} y={222 + i * 44} fill={colors.textPrimary} fontSize={13} fontFamily="IBM Plex Sans, sans-serif">{t(r.whatKey, { defaultValue: r.whatDef })}</text>
               <text x={cols[3].x} y={222 + i * 44} fill={colors.textSecondary} fontSize={13} fontFamily="JetBrains Mono, monospace">{r.when}</text>
             </motion.g>
           ) : null

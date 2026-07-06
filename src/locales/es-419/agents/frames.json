@@ -15,6 +15,9 @@
     "warning": "…y el comienzo de cada historia de terror."
   },
   "frame1_3": {
+    "res0": "Banco",
+    "res1": "Archivos",
+    "res2": "Correo",
     "agent": "Agente",
     "caption": "Cualquier agente puede hacer cualquier cosa, en cualquier lugar. Sin contención."
   },
@@ -182,6 +185,9 @@
     "scopeSendEmail": "Enviar correo"
   },
   "frame4_4": {
+    "fresh": "Emitido",
+    "expiring": "Minutos después",
+    "expired": "Ahora inútil",
     "time": "tiempo"
   },
   "frame4_5": {
@@ -189,6 +195,13 @@
     "opens": "La audiencia coincide → se abre",
     "bankLabel": "Servicio bancario",
     "refuses": "Audiencia incorrecta → rechazado"
+  },
+  "frame4_6": {
+    "subject": "Sujeto: en nombre de quién",
+    "actor": "Actor: quién está actuando",
+    "scope": "Alcance: qué se permite",
+    "audience": "Audiencia: dónde",
+    "expiry": "Vencimiento: hasta cuándo"
   },
   "frame4_7": {
     "identityLabel": "IDENTIDAD PERMANENTE",
@@ -252,6 +265,9 @@
     "scopeWriteFile": "Escribir archivo"
   },
   "frame6_1": {
+    "plan": "Planificador",
+    "book": "Reservador",
+    "pay": "Pagador",
     "calls": "llama a",
     "caption": "Cada uno es una carga de trabajo distinta con su propia identidad"
   },
@@ -272,6 +288,9 @@
     "inOrder": "Todos los que tocaron la solicitud, en orden"
   },
   "frame6_4": {
+    "actorA": "actor: A",
+    "actorB": "actor: B",
+    "actorC": "actor: C",
     "principalLabel": "Principal",
     "agentALabel": "Agente A",
     "agentBLabel": "Agente B",
@@ -281,9 +300,20 @@
     "caption": "La cadena muestra el recorrido; el principal sigue siendo responsable"
   },
   "frame6_5": {
+    "who": "QUIÉN",
+    "forWhom": "PARA QUIÉN",
+    "what": "QUÉ",
+    "when": "CUÁNDO",
+    "actionRead": "leer calendario",
+    "actionCharge": "cobrar tarjeta",
+    "actionReceipt": "enviar recibo",
     "title": "REGISTRO DE AUDITORÍA"
   },
   "frame6_6": {
+    "signed": "Cada eslabón firmado por una autoridad confiable",
+    "narrower": "Cada permiso más acotado que el anterior",
+    "notExpired": "Ninguno vencido",
+    "audience": "Cada uno vinculado a la audiencia correcta",
     "verifierLabel": "Verificador",
     "title": "VERIFICAR TODA LA CADENA"
   },
@@ -304,6 +334,9 @@
     "caption": "Cada herramienta que alcanza es un recurso protegido."
   },
   "frame7_2": {
+    "server1": "Correo",
+    "server2": "Archivos",
+    "server3": "Calendario",
     "agentLabel": "Agente de IA",
     "hubSubtitle": "Model Context Protocol",
     "caption": "Cada servidor MCP es un recurso que hay que proteger."
