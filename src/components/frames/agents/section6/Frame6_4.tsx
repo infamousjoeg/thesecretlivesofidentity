@@ -46,7 +46,7 @@ export const Frame6_4: React.FC = () => {
           <Principal label={t('frame6_4.principalLabel', { defaultValue: 'Principal' })} position={{ x: 115, y: 130 }} active animate={!prefersReducedMotion} />
           <AIAgent label={t('frame6_4.agentALabel', { defaultValue: 'Agent A' })} position={{ x: 325, y: 130 }} active animate={!prefersReducedMotion} />
           <AIAgent label={t('frame6_4.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 535, y: 130 }} active animate={!prefersReducedMotion} />
-          <SubAgent label={t('frame6_4.agentCLabel', { defaultValue: 'Agent C' })} position={{ x: 700, y: 140 }} active animate={!prefersReducedMotion} />
+          <SubAgent label={t('frame6_4.agentCLabel', { defaultValue: 'Agent C' })} position={{ x: 700, y: 130 }} active animate={!prefersReducedMotion} />
         </motion.g>
 
         {phase >= 1 &&
@@ -68,7 +68,7 @@ export const Frame6_4: React.FC = () => {
               {t('frame6_4.subjectLabel', { defaultValue: 'SUBJECT (unchanged)' })}
             </text>
             <text x={206} y={332} fill={colors.principal} fontSize={15} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              {t('frame6_4.subjectValue', { defaultValue: 'On behalf of the same principal — every hop' })}
+              {t('frame6_4.subjectValue', { defaultValue: 'On behalf of the same principal, every hop' })}
             </text>
           </motion.g>
         )}

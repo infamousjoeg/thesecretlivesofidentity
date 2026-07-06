@@ -77,7 +77,7 @@ export const Frame9_3: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {t('frame9_3.caption', { defaultValue: 'Just enough power to help — and you stay accountable.' })}
+            {t('frame9_3.caption', { defaultValue: 'Just enough power to help, and you stay accountable.' })}
           </motion.text>
         )}
       </svg>

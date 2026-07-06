@@ -94,7 +94,7 @@ export const Frame7_3: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {t('frame7_3.caption', { defaultValue: 'No valid slip, no access — just like any guarded API.' })}
+            {t('frame7_3.caption', { defaultValue: 'No valid slip, no access, just like any guarded API.' })}
           </motion.text>
         )}
       </svg>

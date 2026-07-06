@@ -88,7 +88,7 @@ export const Frame7_4: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {t('frame7_4.caption', { defaultValue: 'Consent is explicit — yours to give or refuse.' })}
+            {t('frame7_4.caption', { defaultValue: 'Consent is explicit: yours to give or refuse.' })}
           </motion.text>
         )}
       </svg>

@@ -39,7 +39,7 @@ export const Frame5_3: React.FC = () => {
         >
           <Principal label={t('frame5_3.principalLabel', { defaultValue: 'Principal' })} position={{ x: 110, y: 140 }} active animate={!prefersReducedMotion} />
           <AIAgent label={t('frame5_3.agentALabel', { defaultValue: 'Agent A' })} position={{ x: 400, y: 140 }} active={phase >= 1} animate={!prefersReducedMotion} />
-          <SubAgent label={t('frame5_3.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 680, y: 150 }} active={phase >= 2} animate={!prefersReducedMotion} />
+          <SubAgent label={t('frame5_3.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 680, y: 140 }} active={phase >= 2} animate={!prefersReducedMotion} />
         </motion.g>
 
         {/* Hop 1: broad slip */}
@@ -63,7 +63,7 @@ export const Frame5_3: React.FC = () => {
         {/* Hop 2: narrower slip */}
         {phase >= 2 && (
           <motion.g {...reveal(0)}>
-            <line x1={455} y1={140} x2={620} y2={145} stroke={colors.permissionSlip} strokeWidth={2.5} markerEnd="url(#a5-3-arrow)" />
+            <line x1={455} y1={140} x2={620} y2={140} stroke={colors.permissionSlip} strokeWidth={2.5} markerEnd="url(#a5-3-arrow)" />
             <PermissionSlip
               position={{ x: 540, y: 360 }}
               size={84}

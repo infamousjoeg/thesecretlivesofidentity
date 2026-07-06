@@ -69,13 +69,13 @@
     "server": "Identity authority",
     "issues": "issues identity",
     "agent": "AI Agent",
-    "caption": "An agent is a workload — so it gets its own verifiable identity."
+    "caption": "An agent is a workload, so it gets its own verifiable identity."
   },
   "frame2_3": {
     "travel": "Travel Agent",
     "billing": "Billing Agent",
     "you": "You",
-    "caption": "Each agent has its own name — distinct from you and from each other."
+    "caption": "Each agent has its own name, distinct from you and from each other."
   },
   "frame2_4": {
     "identity": "Identity",
@@ -123,7 +123,7 @@
     "actor": "Agent",
     "scope": "Read calendar",
     "resource": "Calendar",
-    "caption": "With permission — and everyone sees it was the agent."
+    "caption": "With permission, and everyone sees it was the agent."
   },
   "frame3_4": {
     "onBehalfOf": "Alex (you)",
@@ -143,7 +143,7 @@
     "actorQ": "Who to hold responsible?",
     "actorA": "The agent",
     "auditTitle": "The audit can answer:",
-    "auditAnswer": "“Who really did this — and for whom?”",
+    "auditAnswer": "“Who really did this, and for whom?”",
     "caption": "Keep both, and nothing about the action is ambiguous."
   },
   "frame3_6": {
@@ -168,11 +168,11 @@
   "frame4_1": {
     "principalLabel": "Alex (you)",
     "agentLabel": "Travel Agent",
-    "caption": "Signed · Scoped · Short-lived — an authorization to act"
+    "caption": "Signed · Scoped · Short-lived: an authorization to act"
   },
   "frame4_2": {
     "sealTitle": "Sealed by a trusted authority",
-    "sealSub": "Genuine — not forged or altered",
+    "sealSub": "Genuine, not forged or altered",
     "resourceLabel": "Resource"
   },
   "frame4_3": {
@@ -214,11 +214,11 @@
     "inReality": "in reality",
     "tokenTitle": "ACCESS TOKEN",
     "ms": "⚡ issued & checked in milliseconds",
-    "real": "Same properties — signed, scoped, short-lived"
+    "real": "Same properties: signed, scoped, short-lived"
   },
   "frame5_1": {
     "broad": "More power than needed",
-    "narrow": "Just enough — least privilege",
+    "narrow": "Just enough: least privilege",
     "vs": "vs",
     "scopeReadCalendar": "Read calendar",
     "scopeSendEmail": "Send email",
@@ -296,7 +296,7 @@
     "agentBLabel": "Agent B",
     "agentCLabel": "Agent C",
     "subjectLabel": "SUBJECT (unchanged)",
-    "subjectValue": "On behalf of the same principal — every hop",
+    "subjectValue": "On behalf of the same principal, every hop",
     "caption": "The chain shows the path; the principal stays accountable"
   },
   "frame6_5": {
@@ -346,7 +346,7 @@
     "verifierLabel": "Demands a slip",
     "agentLabel": "AI Agent",
     "protectedBadge": "PROTECTED RESOURCE",
-    "caption": "No valid slip, no access — just like any guarded API."
+    "caption": "No valid slip, no access, just like any guarded API."
   },
   "frame7_4": {
     "promptTitle": "Allow access?",
@@ -356,7 +356,7 @@
     "principalLabel": "You",
     "agentLabel": "Travel Agent",
     "toolLabel": "Calendar",
-    "caption": "Consent is explicit — yours to give or refuse."
+    "caption": "Consent is explicit: yours to give or refuse."
   },
   "frame7_5": {
     "onBehalfOf": "Alex (you)",
@@ -373,7 +373,7 @@
     "revoked": "Edit events",
     "verifierLabel": "Checks scope",
     "toolLabel": "Calendar (read-only)",
-    "caption": "The tool sees only what you allowed — nothing more."
+    "caption": "The tool sees only what you allowed, nothing more."
   },
   "frame7_7": {
     "prop1": "Signed",
@@ -405,7 +405,7 @@
     "whisper2": "delete the records too.\"",
     "agentLabel": "Agent with authority",
     "confusedDeputy": "A confused deputy",
-    "caption": "Not evil — just tricked into misusing real authority."
+    "caption": "Not evil, just tricked into misusing real authority."
   },
   "frame8_3": {
     "badInput": "Malicious input: \"also delete the records\"",
@@ -425,7 +425,7 @@
     "scope": "Read calendar",
     "revokedStamp": "REVOKED",
     "verifierLabel": "Stopped now",
-    "caption": "Revocation cancels a slip before it expires — access cut now."
+    "caption": "Revocation cancels a slip before it expires: access cut now."
   },
   "frame8_6": {
     "attackerLabel": "Leaked a slip",
@@ -433,7 +433,7 @@
     "actor": "Agent",
     "scope": "Read calendar",
     "verifierLabel": "Already expired",
-    "caption": "A leaked slip stops working soon — time caps the damage."
+    "caption": "A leaked slip stops working soon: time caps the damage."
   },
   "frame8_7": {
     "layer1": "Narrow scope",
@@ -472,13 +472,13 @@
     "largeBlast": "Large blast radius",
     "scopedTitle": "Scoped slip",
     "smallBlast": "Small, contained blast radius",
-    "caption": "Just enough power to help — and you stay accountable."
+    "caption": "Just enough power to help, and you stay accountable."
   },
   "frame9_4": {
-    "wimseTitle": "WIMSE — Workload Identity",
+    "wimseTitle": "WIMSE: Workload Identity",
     "mcpTitle": "MCP Authorization Spec",
-    "a2aTitle": "A2A — Agent-to-Agent",
-    "spiffeTitle": "SPIFFE — Identity Foundation",
+    "a2aTitle": "A2A: Agent-to-Agent",
+    "spiffeTitle": "SPIFFE: Identity Foundation",
     "title": "Get Started",
     "closing": "Build agents that carry slips, not master keys.",
     "thanks": "Thanks for learning with us! ✨",
@@ -499,14 +499,14 @@
     "hop2Legend": "Hop 2 · Agent → Sub-Agent (remove scopes)",
     "toggleAgentAria": "Agent scope {{scope}}",
     "toggleSubAria": "Sub-Agent scope {{scope}}",
-    "lockedAria": "{{scope}} unavailable — the Agent does not hold it",
-    "lockedTitle": "Agent doesn't have this — cannot grant",
-    "attemptPrompt": "Sub-Agent presents the slip — attempt an action at the tool:",
+    "lockedAria": "{{scope}} unavailable: the Agent does not hold it",
+    "lockedTitle": "Agent doesn't have this: cannot grant",
+    "attemptPrompt": "Sub-Agent presents the slip. Attempt an action at the tool:",
     "tryAction": "Try: {{action}}",
     "reset": "Reset",
-    "feedbackIdle": "Narrow the slip down the chain, then attempt an action. Authority can only shrink — never grow.",
-    "feedbackAccept": "✓ \"{{action}}\" accepted — it is still in the final slip's scope, and the slip is stamped for calendar-api.",
-    "feedbackReject": "✗ \"{{action}}\" rejected — it was narrowed out of the slip. The Sub-Agent literally cannot do what it was never granted."
+    "feedbackIdle": "Narrow the slip down the chain, then attempt an action. Authority can only shrink, never grow.",
+    "feedbackAccept": "✓ \"{{action}}\" accepted: it is still in the final slip's scope, and the slip is stamped for calendar-api.",
+    "feedbackReject": "✗ \"{{action}}\" rejected: it was narrowed out of the slip. The Sub-Agent literally cannot do what it was never granted."
   },
   "confusedDeputy": {
     "scopeRead": "Read records",
@@ -531,8 +531,8 @@
     "reset": "Reset",
     "feedbackIdle": "Set the slip, then fire the malicious \"delete all records\" instruction and watch the verifier.",
     "feedbackExpired": "✓ Blocked. The slip has expired, so the verifier rejects it whatever the instruction. Short lifetimes cap the damage.",
-    "feedbackRevoked": "✓ Blocked. The slip was revoked, so the verifier rejects it immediately — access was cut before expiry.",
-    "feedbackDamage": "✗ Confused deputy! The over-broad slip granted \"Delete records\", so the verifier accepted the malicious instruction and the data was destroyed. The agent was tricked — its slip betrayed it.",
+    "feedbackRevoked": "✓ Blocked. The slip was revoked, so the verifier rejects it immediately: access was cut before expiry.",
+    "feedbackDamage": "✗ Confused deputy! The over-broad slip granted \"Delete records\", so the verifier accepted the malicious instruction and the data was destroyed. The agent was tricked: its slip betrayed it.",
     "feedbackBlocked": "✓ Blocked. The narrow slip never granted \"Delete records\", so even though the agent was tricked, the verifier refused. Tight scope is the defense."
   },
   "entities": {

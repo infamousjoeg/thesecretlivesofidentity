@@ -59,7 +59,7 @@ export const Frame8_6: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {t('frame8_6.caption', { defaultValue: 'A leaked slip stops working soon — time caps the damage.' })}
+            {t('frame8_6.caption', { defaultValue: 'A leaked slip stops working soon: time caps the damage.' })}
           </motion.text>
         )}
       </svg>

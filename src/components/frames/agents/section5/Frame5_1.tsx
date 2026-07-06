@@ -62,7 +62,7 @@ export const Frame5_1: React.FC = () => {
             />
             <rect x={470} y={358} width={180} height={30} rx={6} fill={`${colors.success}1A`} stroke={colors.success} strokeWidth={1.25} />
             <text x={560} y={378} textAnchor="middle" fill={colors.success} fontSize={12} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
-              {t('frame5_1.narrow', { defaultValue: 'Just enough — least privilege' })}
+              {t('frame5_1.narrow', { defaultValue: 'Just enough: least privilege' })}
             </text>
           </motion.g>
         )}

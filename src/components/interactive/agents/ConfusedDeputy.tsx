@@ -75,12 +75,12 @@ export const ConfusedDeputy: React.FC = () => {
     }
     if (status === 'revoked') {
       return t('confusedDeputy.feedbackRevoked', {
-        defaultValue: '✓ Blocked. The slip was revoked, so the verifier rejects it immediately — access was cut before expiry.',
+        defaultValue: '✓ Blocked. The slip was revoked, so the verifier rejects it immediately: access was cut before expiry.',
       });
     }
     if (breadth === 'broad') {
       return t('confusedDeputy.feedbackDamage', {
-        defaultValue: '✗ Confused deputy! The over-broad slip granted "Delete records", so the verifier accepted the malicious instruction and the data was destroyed. The agent was tricked — its slip betrayed it.',
+        defaultValue: '✗ Confused deputy! The over-broad slip granted "Delete records", so the verifier accepted the malicious instruction and the data was destroyed. The agent was tricked: its slip betrayed it.',
       });
     }
     return t('confusedDeputy.feedbackBlocked', {
@@ -95,9 +95,15 @@ export const ConfusedDeputy: React.FC = () => {
   });
 
   return (
-    <div className="w-full">
-      {/* Scene */}
-      <Stage>
+    // On a laptop (lg+) fill the height the track frame gives us: the scene
+    // flexes (and scales down) to fit while the controls keep their compact
+    // natural height, so the whole simulator fits WITHOUT internal scroll. On
+    // narrow screens the controls stack tall, so we drop the height clamp and
+    // let the page scroll naturally (the scene stays full-size, not collapsed).
+    <div className="w-full lg:h-full flex flex-col min-h-0">
+      {/* Scene — flexes to fill the space left by the controls */}
+      <div className="flex-1 min-h-0 flex items-center justify-center">
+      <Stage width={800} height={330}>
         <svg viewBox="0 0 800 320" className="w-full h-full">
           <defs>
             <marker id="cd-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -180,11 +186,12 @@ export const ConfusedDeputy: React.FC = () => {
           />
         </svg>
       </Stage>
+      </div>
 
       {/* Controls */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 flex-shrink-0">
         {/* Breadth */}
-        <fieldset className="rounded-lg border border-textMuted/30 p-3" style={{ backgroundColor: colors.surface }}>
+        <fieldset className="rounded-lg border border-textMuted/30 p-2.5" style={{ backgroundColor: colors.surface }}>
           <legend className="px-2 text-xs font-semibold" style={{ color: colors.textSecondary }}>
             {t('confusedDeputy.breadthLegend', { defaultValue: 'Slip scope' })}
           </legend>
@@ -211,7 +218,7 @@ export const ConfusedDeputy: React.FC = () => {
         </fieldset>
 
         {/* Status */}
-        <fieldset className="rounded-lg border border-textMuted/30 p-3" style={{ backgroundColor: colors.surface }}>
+        <fieldset className="rounded-lg border border-textMuted/30 p-2.5" style={{ backgroundColor: colors.surface }}>
           <legend className="px-2 text-xs font-semibold" style={{ color: colors.textSecondary }}>
             {t('confusedDeputy.statusLegend', { defaultValue: 'Slip status' })}
           </legend>
@@ -237,7 +244,7 @@ export const ConfusedDeputy: React.FC = () => {
       </div>
 
       {/* Fire / reset */}
-      <div className="flex gap-2 mt-4 justify-center">
+      <div className="flex flex-wrap gap-2 mt-3 justify-center flex-shrink-0">
         <button
           type="button"
           onClick={() => setFired(true)}
@@ -262,7 +269,7 @@ export const ConfusedDeputy: React.FC = () => {
         key={`${fired}-${breadth}-${status}`}
         initial={animate ? { opacity: 0, y: 6 } : { opacity: 1 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mt-4 rounded-lg p-3 text-sm"
+        className="mt-3 rounded-lg p-2.5 text-sm flex-shrink-0"
         style={{
           backgroundColor: !fired ? colors.surface : allowed ? `${colors.attacker}1A` : `${colors.success}1A`,
           border: `1px solid ${!fired ? `${colors.textMuted}40` : allowed ? colors.attacker : colors.success}`,

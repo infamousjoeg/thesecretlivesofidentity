@@ -63,7 +63,7 @@ export const Frame3_3: React.FC = () => {
             fontWeight="bold"
             fontFamily="Space Grotesk, sans-serif"
           >
-            {t('frame3_3.caption', { defaultValue: 'With permission — and everyone sees it was the agent.' })}
+            {t('frame3_3.caption', { defaultValue: 'With permission, and everyone sees it was the agent.' })}
           </motion.text>
         )}
       </svg>

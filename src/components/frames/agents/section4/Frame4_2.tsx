@@ -40,7 +40,7 @@ export const Frame4_2: React.FC = () => {
               {t('frame4_2.sealTitle', { defaultValue: 'Sealed by a trusted authority' })}
             </text>
             <text x={484} y={385} fill={colors.textSecondary} fontSize={11} fontFamily="IBM Plex Sans, sans-serif">
-              {t('frame4_2.sealSub', { defaultValue: 'Genuine — not forged or altered' })}
+              {t('frame4_2.sealSub', { defaultValue: 'Genuine, not forged or altered' })}
             </text>
           </motion.g>
         )}
