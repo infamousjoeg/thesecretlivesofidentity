@@ -67,7 +67,7 @@ export const Frame8_2: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {t('frame8_2.caption', { defaultValue: 'Not evil — just tricked into misusing real authority.' })}
+            {t('frame8_2.caption', { defaultValue: 'Not evil, just tricked into misusing real authority.' })}
           </motion.text>
         )}
       </svg>

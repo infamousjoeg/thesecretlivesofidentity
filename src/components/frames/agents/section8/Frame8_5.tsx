@@ -72,7 +72,7 @@ export const Frame8_5: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            {t('frame8_5.caption', { defaultValue: 'Revocation cancels a slip before it expires — access cut now.' })}
+            {t('frame8_5.caption', { defaultValue: 'Revocation cancels a slip before it expires: access cut now.' })}
           </motion.text>
         )}
       </svg>

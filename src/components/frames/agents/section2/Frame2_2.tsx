@@ -63,7 +63,7 @@ export const Frame2_2: React.FC = () => {
           <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
             <AIAgent label={t('frame2_2.agent', { defaultValue: 'AI Agent' })} position={{ x: 660, y: 255 }} size={78} active animate={!prefersReducedMotion} />
             <text x={400} y={455} textAnchor="middle" fill={colors.agentAI} fontSize={16} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              {t('frame2_2.caption', { defaultValue: 'An agent is a workload — so it gets its own verifiable identity.' })}
+              {t('frame2_2.caption', { defaultValue: 'An agent is a workload, so it gets its own verifiable identity.' })}
             </text>
           </motion.g>
         )}

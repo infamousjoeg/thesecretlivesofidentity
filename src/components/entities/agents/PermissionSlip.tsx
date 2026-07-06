@@ -105,7 +105,7 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
   const grantedRows = displayScopes.map((s) => ({ text: s, granted: true }));
   const revokedRows = revokedScopes.map((s) => ({ text: s, granted: false }));
   const rows = [...grantedRows, ...revokedRows].slice(0, 3);
-  const rowStartY = top + 112;
+  const rowStartY = top + 118;
   const rowGap = 14;
 
   return (
@@ -203,33 +203,34 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
         {t('permissionSlip.title', { defaultValue: 'PERMISSION SLIP' })}
       </text>
 
-      {/* ON BEHALF OF */}
+      {/* ON BEHALF OF — own band: label, then value written on a ruled line */}
       <text x={left + 10} y={top + 52} fill={palette.ink} fontSize={7.5} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
         {t('permissionSlip.onBehalfOf', { defaultValue: 'ON BEHALF OF' })}
       </text>
-      <line x1={left + 10} y1={top + 64} x2={left + W - 10} y2={top + 64} stroke={palette.ink} strokeWidth={0.5} opacity={0.3} />
-      <text x={left + 12} y={top + 62} fill={palette.ink} fontSize={9.5} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
+      <line x1={left + 10} y1={top + 65} x2={left + W - 10} y2={top + 65} stroke={palette.ink} strokeWidth={0.5} opacity={0.3} />
+      <text x={left + 12} y={top + 63} fill={palette.ink} fontSize={9.5} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
         {displayOnBehalfOf}
       </text>
 
-      {/* ACTING (actor) — label over value, mirroring the ON BEHALF OF block so
-          longer translations and longer actor names never overflow the line. */}
-      <text x={left + 10} y={top + 75} fill={palette.ink} fontSize={7.5} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+      {/* ACTING (actor) — own band, mirroring the ON BEHALF OF block so longer
+          translations and longer actor names never overflow the ruled line. */}
+      <text x={left + 10} y={top + 79} fill={palette.ink} fontSize={7.5} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
         {t('permissionSlip.acting', { defaultValue: 'ACTING' })}
       </text>
-      <text x={left + 12} y={top + 84} fill={palette.ink} fontSize={8.5} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
+      <line x1={left + 10} y1={top + 92} x2={left + W - 10} y2={top + 92} stroke={palette.ink} strokeWidth={0.5} opacity={0.3} />
+      <text x={left + 12} y={top + 90} fill={palette.ink} fontSize={9} fontWeight="600" fontFamily="IBM Plex Sans, sans-serif">
         {displayActor}
       </text>
 
-      {/* divider */}
-      <line x1={left + 10} y1={top + 90} x2={left + W - 10} y2={top + 90} stroke={palette.ink} strokeWidth={0.5} opacity={0.25} />
+      {/* section divider */}
+      <line x1={left + 10} y1={top + 99} x2={left + W - 10} y2={top + 99} stroke={palette.ink} strokeWidth={0.5} opacity={0.25} />
 
-      {/* GOOD FOR + scope count */}
-      <text x={left + 10} y={top + 101} fill={palette.ink} fontSize={8} fontWeight="bold" fontFamily="Space Grotesk, sans-serif" letterSpacing="0.5">
+      {/* GOOD FOR — section header for the ticked checklist below. The old
+          right-aligned "{{count}} action(s)" tally was removed: it collided with
+          longer translations of the label (e.g. pt-BR "VÁLIDO PARA:") and simply
+          restated what the visible checklist already shows. */}
+      <text x={left + 10} y={top + 109} fill={palette.ink} fontSize={8} fontWeight="bold" fontFamily="Space Grotesk, sans-serif" letterSpacing="0.5">
         {t('permissionSlip.goodFor', { defaultValue: 'GOOD FOR:' })}
-      </text>
-      <text x={left + W - 10} y={top + 101} textAnchor="end" fill={palette.ink} fontSize={8} opacity={0.7} fontFamily="JetBrains Mono, monospace">
-        {t('permissionSlip.actionsCount', { count: displayScopes.length, defaultValue: '{{count}} action(s)' })}
       </text>
 
       {/* Scope checklist rows */}
@@ -266,46 +267,43 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
       })}
 
       {/* footer divider */}
-      <line x1={left + 10} y1={top + H - 46} x2={left + W - 10} y2={top + H - 46} stroke={palette.ink} strokeWidth={0.5} opacity={0.25} />
+      <line x1={left + 10} y1={top + 151} x2={left + W - 10} y2={top + 151} stroke={palette.ink} strokeWidth={0.5} opacity={0.25} />
 
+      {/* Footer: audience + countdown stack down the LEFT column; the wax seal
+          sits in the RIGHT column where no text reaches — so nothing overlaps. */}
       {/* VALID AT (audience) */}
-      <text x={left + 10} y={top + H - 34} fill={palette.ink} fontSize={7.5} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+      <text x={left + 10} y={top + 160} fill={palette.ink} fontSize={7} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
         {t('permissionSlip.validAt', { defaultValue: 'VALID AT' })}
       </text>
-      <text x={left + 10} y={top + H - 25} fill={palette.ink} fontSize={8.5} fontWeight="600" fontFamily="JetBrains Mono, monospace">
+      <text x={left + 10} y={top + 170} fill={palette.ink} fontSize={7.5} fontWeight="600" fontFamily="JetBrains Mono, monospace">
         {audience}
       </text>
 
       {/* EXPIRES countdown */}
-      <g transform={`translate(${left + 10}, ${top + H - 14})`}>
-        <text x={0} y={0} fill={palette.ink} fontSize={7.5} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
-          {t('permissionSlip.expiresIn', { defaultValue: 'EXPIRES IN' })}
-        </text>
-        <rect x={42} y={-8} width={34} height={12} rx={2} fill={state === 'expired' ? '#9CA3AF' : palette.headerDark} />
-        <text x={59} y={1} textAnchor="middle" fill="#FFFFFF" fontSize={8} fontWeight="bold" fontFamily="JetBrains Mono, monospace">
-          {state === 'expired' ? t('permissionSlip.expiredShort', { defaultValue: 'EXP' }) : formatTime(countdown)}
-        </text>
-      </g>
+      <text x={left + 10} y={top + 181} fill={palette.ink} fontSize={7} opacity={0.6} fontFamily="IBM Plex Sans, sans-serif" letterSpacing="0.5">
+        {t('permissionSlip.expiresIn', { defaultValue: 'EXPIRES IN' })}
+      </text>
+      <rect x={left + 58} y={top + 174} width={30} height={12} rx={2} fill={state === 'expired' ? '#9CA3AF' : palette.headerDark} />
+      <text x={left + 73} y={top + 183} textAnchor="middle" fill="#FFFFFF" fontSize={8} fontWeight="bold" fontFamily="JetBrains Mono, monospace">
+        {state === 'expired' ? t('permissionSlip.expiredShort', { defaultValue: 'EXP' }) : formatTime(countdown)}
+      </text>
 
-      {/* Signature squiggle + wax seal */}
-      <g transform={`translate(${left + W - 26}, ${top + H - 26})`}>
-        {/* signature line */}
-        <line x1={-22} y1={6} x2={6} y2={6} stroke={palette.ink} strokeWidth={0.5} opacity={0.4} />
-        {/* handwritten signature */}
-        <path
-          d="M -20 4 q 3 -7 5 -1 q 1 4 3 -2 q 2 -5 4 1 q 1 3 4 -1"
-          fill="none"
-          stroke={state === 'expired' ? '#9CA3AF' : palette.seal}
-          strokeWidth={1.3}
-          strokeLinecap="round"
-          opacity={state === 'expired' ? 0.5 : 0.9}
-        />
-        {/* wax seal */}
-        <circle cx={2} cy={-6} r={10} fill={state === 'expired' ? '#D6D3D1' : palette.seal} opacity={state === 'expired' ? 0.6 : 1} />
-        <circle cx={2} cy={-6} r={10} fill="none" stroke="#FFFFFF" strokeWidth={0.75} strokeDasharray="1.5 1.5" opacity={0.7} />
-        <text x={2} y={-3.5} textAnchor="middle" fill="#FFFFFF" fontSize={7.5} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
+      {/* Wax seal / signature — right column, clear of every field */}
+      <g transform={`translate(${left + W - 20}, ${top + 168})`}>
+        <circle cx={0} cy={0} r={9} fill={state === 'expired' ? '#D6D3D1' : palette.seal} opacity={state === 'expired' ? 0.6 : 1} />
+        <circle cx={0} cy={0} r={9} fill="none" stroke="#FFFFFF" strokeWidth={0.75} strokeDasharray="1.5 1.5" opacity={0.7} />
+        <text x={0} y={2.6} textAnchor="middle" fill="#FFFFFF" fontSize={8.5} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
           ✓
         </text>
+        {/* tiny handwritten signature beneath the seal */}
+        <path
+          d="M -10 15 q 2 -5 4 -1 q 1 3 2 -1 q 1 -4 3 1 q 1 2 3 -1"
+          fill="none"
+          stroke={state === 'expired' ? '#9CA3AF' : palette.seal}
+          strokeWidth={1.1}
+          strokeLinecap="round"
+          opacity={state === 'expired' ? 0.5 : 0.85}
+        />
       </g>
 
       {/* NARROWED ribbon (top-right corner) — sits BELOW the header band so it

@@ -76,9 +76,16 @@ export const DelegationBuilder: React.FC = () => {
   const agentNarrowed = agentScopes.length < ALL.length;
 
   return (
-    <div className="w-full">
-      {/* Chain visualization */}
-      <Stage>
+    // On a laptop (lg+) fill the height the track frame gives us and lay out as
+    // a column: the diagram flexes (and scales down) to fit while the controls
+    // keep their compact natural height, so the whole simulator fits WITHOUT
+    // internal scroll. On narrow screens the controls stack tall, so we drop the
+    // height clamp and let the page scroll naturally (the diagram stays full-size
+    // instead of collapsing).
+    <div className="w-full lg:h-full flex flex-col min-h-0">
+      {/* Chain visualization — flexes to fill the space left by the controls */}
+      <div className="flex-1 min-h-0 flex items-center justify-center">
+      <Stage width={800} height={330}>
         <svg viewBox="0 0 800 320" className="w-full h-full">
           <defs>
             <marker id="db-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
@@ -142,15 +149,16 @@ export const DelegationBuilder: React.FC = () => {
           <ToolResource position={{ x: 725, y: 148 }} size={74} kind="MCP" label={t('delegationBuilder.toolLabel', { defaultValue: 'Calendar API' })} locked={!toolUnlocked} animate={animate} />
         </svg>
       </Stage>
+      </div>
 
       {/* Hop controls */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 flex-shrink-0">
         {/* Hop 1 */}
-        <fieldset className="rounded-lg border border-textMuted/30 p-3" style={{ backgroundColor: colors.surface }}>
+        <fieldset className="rounded-lg border border-textMuted/30 p-2.5" style={{ backgroundColor: colors.surface }}>
           <legend className="px-2 text-xs font-semibold" style={{ color: colors.textSecondary }}>
             {t('delegationBuilder.hop1Legend', { defaultValue: 'Hop 1 · You → Agent (remove scopes)' })}
           </legend>
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-1">
             {SCOPES.map((s) => {
               const kept = agentScopes.includes(s.id);
               return (
@@ -174,11 +182,11 @@ export const DelegationBuilder: React.FC = () => {
         </fieldset>
 
         {/* Hop 2 */}
-        <fieldset className="rounded-lg border border-textMuted/30 p-3" style={{ backgroundColor: colors.surface }}>
+        <fieldset className="rounded-lg border border-textMuted/30 p-2.5" style={{ backgroundColor: colors.surface }}>
           <legend className="px-2 text-xs font-semibold" style={{ color: colors.textSecondary }}>
             {t('delegationBuilder.hop2Legend', { defaultValue: 'Hop 2 · Agent → Sub-Agent (remove scopes)' })}
           </legend>
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-1">
             {SCOPES.map((s) => {
               const agentHas = agentScopes.includes(s.id);
               const kept = subScopes.includes(s.id);
@@ -186,10 +194,10 @@ export const DelegationBuilder: React.FC = () => {
                 return (
                   <div
                     key={s.id}
-                    aria-label={t('delegationBuilder.lockedAria', { scope: s.label, defaultValue: `${s.label} unavailable — the Agent does not hold it` })}
+                    aria-label={t('delegationBuilder.lockedAria', { scope: s.label, defaultValue: `${s.label} unavailable: the Agent does not hold it` })}
                     className="flex items-center justify-between rounded-md px-3 py-1.5 text-sm cursor-not-allowed opacity-60"
                     style={{ border: `1px dashed ${colors.textMuted}55`, color: colors.textMuted }}
-                    title={t('delegationBuilder.lockedTitle', { defaultValue: "Agent doesn't have this — cannot grant" })}
+                    title={t('delegationBuilder.lockedTitle', { defaultValue: "Agent doesn't have this: cannot grant" })}
                   >
                     <span className="line-through">{s.label}</span>
                     <span aria-hidden>🔒</span>
@@ -218,9 +226,9 @@ export const DelegationBuilder: React.FC = () => {
       </div>
 
       {/* Attempt actions at the tool */}
-      <div className="mt-4">
+      <div className="mt-3 flex-shrink-0">
         <p className="text-xs font-semibold mb-2" style={{ color: colors.textSecondary }}>
-          {t('delegationBuilder.attemptPrompt', { defaultValue: 'Sub-Agent presents the slip — attempt an action at the tool:' })}
+          {t('delegationBuilder.attemptPrompt', { defaultValue: 'Sub-Agent presents the slip. Attempt an action at the tool:' })}
         </p>
         <div className="flex flex-wrap gap-2">
           {SCOPES.map((s) => (
@@ -255,7 +263,7 @@ export const DelegationBuilder: React.FC = () => {
         key={attempted ?? 'none'}
         initial={animate ? { opacity: 0, y: 6 } : { opacity: 1 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mt-4 rounded-lg p-3 text-sm"
+        className="mt-3 rounded-lg p-2.5 text-sm flex-shrink-0"
         style={{
           backgroundColor: attempted == null ? colors.surface : allowed ? `${colors.success}1A` : `${colors.attacker}1A`,
           border: `1px solid ${attempted == null ? `${colors.textMuted}40` : allowed ? colors.success : colors.attacker}`,
@@ -264,10 +272,10 @@ export const DelegationBuilder: React.FC = () => {
         aria-live="polite"
       >
         {attempted == null
-          ? t('delegationBuilder.feedbackIdle', { defaultValue: 'Narrow the slip down the chain, then attempt an action. Authority can only shrink — never grow.' })
+          ? t('delegationBuilder.feedbackIdle', { defaultValue: 'Narrow the slip down the chain, then attempt an action. Authority can only shrink, never grow.' })
           : allowed
-          ? t('delegationBuilder.feedbackAccept', { action: labelOf(attempted), defaultValue: `✓ "${labelOf(attempted)}" accepted — it is still in the final slip's scope, and the slip is stamped for ${AUDIENCE}.` })
-          : t('delegationBuilder.feedbackReject', { action: labelOf(attempted), defaultValue: `✗ "${labelOf(attempted)}" rejected — it was narrowed out of the slip. The Sub-Agent literally cannot do what it was never granted.` })}
+          ? t('delegationBuilder.feedbackAccept', { action: labelOf(attempted), defaultValue: `✓ "${labelOf(attempted)}" accepted: it is still in the final slip's scope, and the slip is stamped for ${AUDIENCE}.` })
+          : t('delegationBuilder.feedbackReject', { action: labelOf(attempted), defaultValue: `✗ "${labelOf(attempted)}" rejected: it was narrowed out of the slip. The Sub-Agent literally cannot do what it was never granted.` })}
       </motion.div>
     </div>
   );

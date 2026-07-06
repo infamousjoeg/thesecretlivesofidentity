@@ -74,7 +74,7 @@ export const Frame4_8: React.FC = () => {
               {t('frame4_8.ms', { defaultValue: '⚡ issued & checked in milliseconds' })}
             </text>
             <text x={595} y={400} textAnchor="middle" fill={colors.textPrimary} fontSize={13} fontWeight="bold" fontFamily="Space Grotesk, sans-serif">
-              {t('frame4_8.real', { defaultValue: 'Same properties — signed, scoped, short-lived' })}
+              {t('frame4_8.real', { defaultValue: 'Same properties: signed, scoped, short-lived' })}
             </text>
           </motion.g>
         )}

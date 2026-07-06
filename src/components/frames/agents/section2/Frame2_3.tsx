@@ -59,7 +59,7 @@ export const Frame2_3: React.FC = () => {
             fontWeight="bold"
             fontFamily="Space Grotesk, sans-serif"
           >
-            {t('frame2_3.caption', { defaultValue: 'Each agent has its own name — distinct from you and from each other.' })}
+            {t('frame2_3.caption', { defaultValue: 'Each agent has its own name, distinct from you and from each other.' })}
           </motion.text>
         )}
       </svg>

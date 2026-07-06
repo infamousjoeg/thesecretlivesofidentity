@@ -16,7 +16,7 @@ export const Frame9_4: React.FC = () => {
 
   const resources = [
     {
-      title: t('frame9_4.wimseTitle', { defaultValue: 'WIMSE — Workload Identity' }),
+      title: t('frame9_4.wimseTitle', { defaultValue: 'WIMSE: Workload Identity' }),
       url: 'datatracker.ietf.org/wg/wimse',
       href: 'https://datatracker.ietf.org/wg/wimse/about/',
       color: colors.principal,
@@ -28,13 +28,13 @@ export const Frame9_4: React.FC = () => {
       color: colors.toolResource,
     },
     {
-      title: t('frame9_4.a2aTitle', { defaultValue: 'A2A — Agent-to-Agent' }),
+      title: t('frame9_4.a2aTitle', { defaultValue: 'A2A: Agent-to-Agent' }),
       url: 'a2a-protocol.org',
       href: 'https://a2a-protocol.org/',
       color: colors.subAgent,
     },
     {
-      title: t('frame9_4.spiffeTitle', { defaultValue: 'SPIFFE — Identity Foundation' }),
+      title: t('frame9_4.spiffeTitle', { defaultValue: 'SPIFFE: Identity Foundation' }),
       url: 'spiffe.io',
       href: 'https://spiffe.io',
       color: colors.server,

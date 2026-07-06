@@ -41,7 +41,7 @@ export const Frame5_6: React.FC = () => {
         {/* Sub-agent waiting */}
         {phase >= 1 && (
           <motion.g {...reveal(0)}>
-            <SubAgent label={t('frame5_6.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 660, y: 160 }} animate={!prefersReducedMotion} />
+            <SubAgent label={t('frame5_6.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 660, y: 150 }} animate={!prefersReducedMotion} />
           </motion.g>
         )}
 

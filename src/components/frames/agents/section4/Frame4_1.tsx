@@ -68,7 +68,7 @@ export const Frame4_1: React.FC = () => {
             fontFamily="Space Grotesk, sans-serif"
             {...reveal(0)}
           >
-            {t('frame4_1.caption', { defaultValue: 'Signed · Scoped · Short-lived — an authorization to act' })}
+            {t('frame4_1.caption', { defaultValue: 'Signed · Scoped · Short-lived: an authorization to act' })}
           </motion.text>
         )}
       </svg>

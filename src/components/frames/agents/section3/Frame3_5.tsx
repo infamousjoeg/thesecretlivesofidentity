@@ -61,7 +61,7 @@ export const Frame3_5: React.FC = () => {
               {t('frame3_5.auditTitle', { defaultValue: 'The audit can answer:' })}
             </text>
             <text x={400} y={358} textAnchor="middle" fill={colors.success} fontSize={14} fontFamily="IBM Plex Sans, sans-serif">
-              {t('frame3_5.auditAnswer', { defaultValue: '“Who really did this — and for whom?”' })}
+              {t('frame3_5.auditAnswer', { defaultValue: '“Who really did this, and for whom?”' })}
             </text>
           </motion.g>
         )}

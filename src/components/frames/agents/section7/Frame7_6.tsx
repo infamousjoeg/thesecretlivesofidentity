@@ -87,7 +87,7 @@ export const Frame7_6: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {t('frame7_6.caption', { defaultValue: 'The tool sees only what you allowed — nothing more.' })}
+            {t('frame7_6.caption', { defaultValue: 'The tool sees only what you allowed, nothing more.' })}
           </motion.text>
         )}
       </svg>

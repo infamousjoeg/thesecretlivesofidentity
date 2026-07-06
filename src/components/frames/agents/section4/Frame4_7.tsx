@@ -48,7 +48,7 @@ export const Frame4_7: React.FC = () => {
         {phase >= 1 && (
           <motion.g {...reveal(0)}>
             <PermissionSlip position={{ x: 560, y: 200 }} size={120} state="valid" animate={!prefersReducedMotion} />
-            <text x={560} y={300} textAnchor="middle" fill={colors.permissionSlip} fontSize={12} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
+            <text x={560} y={316} textAnchor="middle" fill={colors.permissionSlip} fontSize={12} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
               {t('frame4_7.current', { defaultValue: "Today's slip" })}
             </text>
           </motion.g>

@@ -46,8 +46,8 @@ export const Frame6_3: React.FC = () => {
           )}
           {phase >= 2 && (
             <motion.g {...reveal(0)}>
-              <line x1={452} y1={130} x2={576} y2={135} stroke={colors.textMuted} strokeWidth={2} markerEnd="url(#a6-3-arrow)" />
-              <SubAgent label={t('frame6_3.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 630, y: 140 }} active animate={!prefersReducedMotion} />
+              <line x1={452} y1={130} x2={576} y2={130} stroke={colors.textMuted} strokeWidth={2} markerEnd="url(#a6-3-arrow)" />
+              <SubAgent label={t('frame6_3.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 630, y: 130 }} active animate={!prefersReducedMotion} />
             </motion.g>
           )}
         </motion.g>

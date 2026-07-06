@@ -44,8 +44,8 @@ export const Frame6_2: React.FC = () => {
         {phase >= 1 && (
           <motion.g {...reveal(0)}>
             <line x1={165} y1={140} x2={345} y2={140} stroke={colors.agentAI} strokeWidth={2.5} markerEnd="url(#a6-2-arrow)" />
-            <SubAgent label={t('frame6_2.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 690, y: 150 }} active={phase >= 2} animate={!prefersReducedMotion} />
-            <line x1={455} y1={140} x2={630} y2={145} stroke={colors.agentAI} strokeWidth={2.5} markerEnd="url(#a6-2-arrow)" />
+            <SubAgent label={t('frame6_2.agentBLabel', { defaultValue: 'Agent B' })} position={{ x: 690, y: 140 }} active={phase >= 2} animate={!prefersReducedMotion} />
+            <line x1={455} y1={140} x2={630} y2={140} stroke={colors.agentAI} strokeWidth={2.5} markerEnd="url(#a6-2-arrow)" />
             <text x={545} y={125} textAnchor="middle" fill={colors.textSecondary} fontSize={11} fontStyle="italic" fontFamily="IBM Plex Sans, sans-serif">
               {t('frame6_2.subDelegates', { defaultValue: 'sub-delegates' })}
             </text>
@@ -71,10 +71,12 @@ export const Frame6_2: React.FC = () => {
           </motion.g>
         )}
 
+        {/* Caption sits in the empty band below the scene so it never crosses
+            the purple principal-thread that sweeps through the middle. */}
         {phase >= 3 && (
           <motion.text
-            x={250}
-            y={250}
+            x={255}
+            y={455}
             textAnchor="middle"
             fill={colors.principal}
             fontSize={13}
