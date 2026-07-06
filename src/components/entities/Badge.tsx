@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position, BadgeState, SVIDVariant } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -39,6 +40,7 @@ export const Badge: React.FC<BadgeProps> = ({
   showCountdown = true,
   animate = true,
 }) => {
+  const { t } = useTranslation('ui');
   const [countdown, setCountdown] = useState(expiresIn);
   const width = size;
   const height = size * 1.5; // Taller badge proportions
@@ -313,7 +315,7 @@ export const Badge: React.FC<BadgeProps> = ({
         fontFamily="Space Grotesk, sans-serif"
         opacity={0.85}
       >
-        IDENTITY
+        {t('entities.identity', { defaultValue: 'IDENTITY' })}
       </text>
 
       {/* SPIFFE ID text - prominent */}
@@ -362,7 +364,7 @@ export const Badge: React.FC<BadgeProps> = ({
               fontWeight="bold"
               fontFamily="JetBrains Mono, monospace"
             >
-              {state === 'expired' ? 'EXP' : formatTime(countdown)}
+              {state === 'expired' ? t('entities.expiredShort', { defaultValue: 'EXP' }) : formatTime(countdown)}
             </text>
           </g>
         )}
@@ -442,7 +444,7 @@ export const Badge: React.FC<BadgeProps> = ({
             fontWeight="bold"
             fontFamily="Space Grotesk, sans-serif"
           >
-            VALID
+            {t('entities.valid', { defaultValue: 'VALID' })}
           </text>
           <text
             x={0}
@@ -488,7 +490,7 @@ export const Badge: React.FC<BadgeProps> = ({
             fontWeight="bold"
             fontFamily="Space Grotesk, sans-serif"
           >
-            EXPIRING
+            {t('entities.expiring', { defaultValue: 'EXPIRING' })}
           </text>
           <text
             x={0}
@@ -498,7 +500,7 @@ export const Badge: React.FC<BadgeProps> = ({
             fontSize={5}
             fontFamily="Space Grotesk, sans-serif"
           >
-            SOON
+            {t('entities.soon', { defaultValue: 'SOON' })}
           </text>
         </g>
       )}
@@ -553,7 +555,7 @@ export const Badge: React.FC<BadgeProps> = ({
               fontWeight="bold"
               fontFamily="Space Grotesk, sans-serif"
             >
-              EXPIRED
+              {t('entities.expired', { defaultValue: 'EXPIRED' })}
             </text>
           </g>
         </g>

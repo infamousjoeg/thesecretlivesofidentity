@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position, Selector } from '@/types';
 import { colors } from '@/utils/constants';
 
@@ -26,6 +27,7 @@ export const RegistrationEntry: React.FC<RegistrationEntryProps> = ({
   highlighted = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('ui');
   // Parse selectors - can be Selector[] or string[]
   const selectors: Selector[] = propSelectors?.map((s) => {
     if (typeof s === 'string') {
@@ -104,7 +106,7 @@ export const RegistrationEntry: React.FC<RegistrationEntryProps> = ({
         fontWeight="bold"
         fontFamily="Space Grotesk, sans-serif"
       >
-        IF:
+        {t('entities.if', { defaultValue: 'IF:' })}
       </text>
 
       {/* Selectors */}
@@ -155,7 +157,7 @@ export const RegistrationEntry: React.FC<RegistrationEntryProps> = ({
         fontWeight="bold"
         fontFamily="Space Grotesk, sans-serif"
       >
-        THEN:
+        {t('entities.then', { defaultValue: 'THEN:' })}
       </text>
 
       {/* SPIFFE ID result */}

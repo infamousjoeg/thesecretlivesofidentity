@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -19,12 +20,14 @@ interface SpireServerProps {
  */
 export const SpireServer: React.FC<SpireServerProps> = ({
   id: _id,
-  label = 'SPIRE Server',
+  label,
   position,
   size = entitySizes.server,
   active = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('ui');
+  const displayLabel = label ?? t('entities.spireServer', { defaultValue: 'SPIRE Server' });
   const halfWidth = size * 0.45;
   const height = size * 0.8;
 
@@ -116,7 +119,7 @@ export const SpireServer: React.FC<SpireServerProps> = ({
       </g>
 
       {/* Label */}
-      {label && (
+      {displayLabel && (
         <text
           x={0}
           y={height / 2 + 18}
@@ -126,7 +129,7 @@ export const SpireServer: React.FC<SpireServerProps> = ({
           fontWeight={500}
           fontFamily="IBM Plex Sans, sans-serif"
         >
-          {label}
+          {displayLabel}
         </text>
       )}
 
@@ -148,7 +151,7 @@ export const SpireServer: React.FC<SpireServerProps> = ({
         fontWeight="bold"
         fontFamily="Space Grotesk, sans-serif"
       >
-        HQ
+        {t('entities.hq', { defaultValue: 'HQ' })}
       </text>
     </g>
   );
