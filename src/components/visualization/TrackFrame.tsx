@@ -173,7 +173,7 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
       <main
         role="main"
         aria-label={`${trackTitle} track, Frame ${currentPosition + 1}: ${frameTitle}`}
-        className="relative min-h-screen pt-20 pb-24 lg:pl-64 bg-background"
+        className="relative flex flex-col h-dvh-fallback overflow-hidden pt-16 pb-20 lg:pl-64 bg-background"
       >
         {/* Top Progress Bar */}
         <div className="fixed top-0 left-0 right-0 lg:left-64 h-1 bg-textMuted/10 z-20">
@@ -185,9 +185,9 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
           />
         </div>
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-1 min-h-0 flex-col max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8">
           {/* Track and Frame indicator */}
-          <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
+          <div className="mb-2 flex flex-wrap items-center gap-2 text-sm">
             <span className={`px-2 py-0.5 rounded border ${trackColors[currentTrack]}`}>
               {track.icon} {trackTitle}
             </span>
@@ -201,8 +201,8 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
             </span>
           </div>
 
-          {/* Frame Title */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-textPrimary mb-6">
+          {/* Frame Title — stays visible; the visualization below flexes/scrolls */}
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-display font-bold text-textPrimary mb-2 sm:mb-3">
             {frameTitle}
           </h1>
 
@@ -216,14 +216,17 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
               transition={{ duration: 0.4 }}
               aria-live="polite"
               aria-atomic="true"
+              className="flex flex-1 min-h-0 flex-col"
             >
               {/* Content text */}
-              <p className="text-lg sm:text-xl text-textSecondary mb-8 max-w-3xl">
+              <p className="text-base sm:text-lg lg:text-xl text-textSecondary mb-4 max-w-3xl flex-shrink-0">
                 {frameContent}
               </p>
 
-              {/* Visualization area */}
-              <div className="relative">{children}</div>
+              {/* Visualization area — takes remaining height and scrolls
+                  internally (e.g. tall interactive simulators) so the frame
+                  title above always stays in view. */}
+              <div className="relative flex-1 min-h-0 overflow-y-auto">{children}</div>
             </motion.div>
           </AnimatePresence>
         </div>

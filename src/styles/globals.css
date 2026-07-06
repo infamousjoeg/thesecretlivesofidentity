@@ -48,6 +48,17 @@
   }
 }
 
+@layer utilities {
+  /* Dynamic viewport height with a static-vh fallback for engines that
+     don't support the dvh unit. Used by the track frame shell so the whole
+     frame (title + body + diagram) is bounded to the visible viewport and
+     the title never scrolls out of view on short laptop screens. */
+  .h-dvh-fallback {
+    height: 100vh;
+    height: 100dvh;
+  }
+}
+
 @layer components {
   .btn-primary {
     @apply px-4 py-2 bg-server text-white rounded-lg font-medium
