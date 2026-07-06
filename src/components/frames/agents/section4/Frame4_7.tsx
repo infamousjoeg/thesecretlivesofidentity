@@ -61,10 +61,10 @@ export const Frame4_7: React.FC = () => {
             animate={{ opacity: 0.55 }}
             transition={{ duration: 0.5 }}
           >
-            <g transform="rotate(-10 690 380)">
-              <PermissionSlip position={{ x: 690, y: 380 }} size={84} state="expired" showCountdown={false} animate={false} />
+            <g transform="rotate(-10 690 372)">
+              <PermissionSlip position={{ x: 690, y: 372 }} size={84} state="expired" showCountdown={false} animate={false} />
             </g>
-            <text x={560} y={420} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontStyle="italic" fontFamily="IBM Plex Sans, sans-serif">
+            <text x={470} y={452} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontStyle="italic" fontFamily="IBM Plex Sans, sans-serif">
               {t('frame4_7.discarded', { defaultValue: 'Yesterday’s slips expire and fall away' })}
             </text>
           </motion.g>

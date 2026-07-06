@@ -15,6 +15,9 @@
     "warning": "…and the start of every horror story."
   },
   "frame1_3": {
+    "res0": "Bank",
+    "res1": "Files",
+    "res2": "Email",
     "agent": "Agent",
     "caption": "Any agent can do anything, anywhere. No containment."
   },
@@ -182,6 +185,9 @@
     "scopeSendEmail": "Send email"
   },
   "frame4_4": {
+    "fresh": "Issued",
+    "expiring": "Minutes later",
+    "expired": "Now useless",
     "time": "time"
   },
   "frame4_5": {
@@ -189,6 +195,13 @@
     "opens": "Audience matches → opens",
     "bankLabel": "Bank service",
     "refuses": "Wrong audience → refused"
+  },
+  "frame4_6": {
+    "subject": "Subject: on whose behalf",
+    "actor": "Actor: who is acting",
+    "scope": "Scope: what is allowed",
+    "audience": "Audience: where",
+    "expiry": "Expiry: until when"
   },
   "frame4_7": {
     "identityLabel": "PERMANENT IDENTITY",
@@ -252,6 +265,9 @@
     "scopeWriteFile": "Write file"
   },
   "frame6_1": {
+    "plan": "Planner",
+    "book": "Booker",
+    "pay": "Payer",
     "calls": "calls",
     "caption": "Each one is a separate workload with its own identity"
   },
@@ -272,6 +288,9 @@
     "inOrder": "Everyone who touched the request, in order"
   },
   "frame6_4": {
+    "actorA": "actor: A",
+    "actorB": "actor: B",
+    "actorC": "actor: C",
     "principalLabel": "Principal",
     "agentALabel": "Agent A",
     "agentBLabel": "Agent B",
@@ -281,9 +300,20 @@
     "caption": "The chain shows the path; the principal stays accountable"
   },
   "frame6_5": {
+    "who": "WHO",
+    "forWhom": "FOR WHOM",
+    "what": "WHAT",
+    "when": "WHEN",
+    "actionRead": "read calendar",
+    "actionCharge": "charge card",
+    "actionReceipt": "send receipt",
     "title": "AUDIT TRAIL"
   },
   "frame6_6": {
+    "signed": "Each link signed by a trusted authority",
+    "narrower": "Each slip narrower than the last",
+    "notExpired": "None expired",
+    "audience": "Each bound to the right audience",
     "verifierLabel": "Verifier",
     "title": "VERIFY THE WHOLE CHAIN"
   },
@@ -304,6 +334,9 @@
     "caption": "Every tool it reaches is a guarded resource."
   },
   "frame7_2": {
+    "server1": "Email",
+    "server2": "Files",
+    "server3": "Calendar",
     "agentLabel": "AI Agent",
     "hubSubtitle": "Model Context Protocol",
     "caption": "Each MCP server is a resource to be guarded."

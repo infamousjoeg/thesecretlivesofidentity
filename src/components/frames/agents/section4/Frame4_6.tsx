@@ -28,11 +28,11 @@ export const Frame4_6: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
 
   const callouts: Callout[] = [
-    { key: 'frame4_6.subject', def: 'Subject — on whose behalf', side: 'left', x: 40, y: 150, anchorX: 318, anchorY: 168 },
-    { key: 'frame4_6.actor', def: 'Actor — who is acting', side: 'left', x: 40, y: 220, anchorX: 318, anchorY: 205 },
-    { key: 'frame4_6.expiry', def: 'Expiry — until when', side: 'left', x: 40, y: 360, anchorX: 318, anchorY: 352 },
-    { key: 'frame4_6.scope', def: 'Scope — what is allowed', side: 'right', x: 560, y: 165, anchorX: 482, anchorY: 250 },
-    { key: 'frame4_6.audience', def: 'Audience — where', side: 'right', x: 560, y: 320, anchorX: 482, anchorY: 318 },
+    { key: 'frame4_6.subject', def: 'Subject: on whose behalf', side: 'left', x: 40, y: 150, anchorX: 318, anchorY: 168 },
+    { key: 'frame4_6.actor', def: 'Actor: who is acting', side: 'left', x: 40, y: 220, anchorX: 318, anchorY: 205 },
+    { key: 'frame4_6.expiry', def: 'Expiry: until when', side: 'left', x: 40, y: 360, anchorX: 318, anchorY: 352 },
+    { key: 'frame4_6.scope', def: 'Scope: what is allowed', side: 'right', x: 560, y: 165, anchorX: 482, anchorY: 250 },
+    { key: 'frame4_6.audience', def: 'Audience: where', side: 'right', x: 560, y: 320, anchorX: 482, anchorY: 318 },
   ];
 
   return (

@@ -24,6 +24,20 @@ export const Frame7_7: React.FC = () => {
     t('frame7_7.prop3', { defaultValue: 'Short-lived' }),
   ];
 
+  // Size each chip to its text so longer translations (pt-BR/es-419) do not
+  // overflow. Approximate glyph width for 13px bold IBM Plex Sans, then lay the
+  // row out centered on x=400 with a fixed gap between chips.
+  const chipGap = 16;
+  const chipWidths = properties.map((p) => Math.max(84, Math.round(p.length * 7.7) + 30));
+  const chipsTotal = chipWidths.reduce((a, b) => a + b, 0) + chipGap * (properties.length - 1);
+  let chipCursor = 400 - chipsTotal / 2;
+  const chips = properties.map((p, i) => {
+    const width = chipWidths[i];
+    const cx = chipCursor + width / 2;
+    chipCursor += width + chipGap;
+    return { label: p, width, cx };
+  });
+
   return (
     <Stage>
       <svg viewBox="0 0 800 500" className="w-full h-full">
@@ -62,11 +76,11 @@ export const Frame7_7: React.FC = () => {
         {/* Property chips — "nothing new was needed" */}
         {phase >= 3 && (
           <motion.g initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            {properties.map((p, i) => (
-              <g key={p} transform={`translate(${260 + i * 110}, 420)`}>
-                <rect x={-50} y={-16} width={100} height={32} rx={16} fill={colors.surface} stroke={colors.permissionSlip} strokeWidth={1.5} />
+            {chips.map((c) => (
+              <g key={c.label} transform={`translate(${c.cx}, 420)`}>
+                <rect x={-c.width / 2} y={-16} width={c.width} height={32} rx={16} fill={colors.surface} stroke={colors.permissionSlip} strokeWidth={1.5} />
                 <text x={0} y={5} textAnchor="middle" fill={colors.permissionSlip} fontSize={13} fontWeight="bold" fontFamily="IBM Plex Sans, sans-serif">
-                  {p}
+                  {c.label}
                 </text>
               </g>
             ))}
