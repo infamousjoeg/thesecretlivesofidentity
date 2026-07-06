@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -22,7 +23,7 @@ interface TrustBundleProps {
  */
 export const TrustBundle: React.FC<TrustBundleProps> = ({
   id: _id,
-  label = 'Trust Bundle',
+  label,
   position,
   size = entitySizes.trustBundle,
   domains,
@@ -31,6 +32,8 @@ export const TrustBundle: React.FC<TrustBundleProps> = ({
   highlighted = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('ui');
+  const displayLabel = label ?? t('entities.trustBundle', { defaultValue: 'Trust Bundle' });
   // Use domains length if provided, otherwise use certCount
   const effectiveCertCount = domains ? domains.length : certCount;
   const width = size * 0.9;
@@ -147,7 +150,7 @@ export const TrustBundle: React.FC<TrustBundleProps> = ({
       </text>
 
       {/* Label */}
-      {label && (
+      {displayLabel && (
         <text
           x={0}
           y={height / 2 + 18}
@@ -156,7 +159,7 @@ export const TrustBundle: React.FC<TrustBundleProps> = ({
           fontSize={10}
           fontFamily="IBM Plex Sans, sans-serif"
         >
-          {label}
+          {displayLabel}
         </text>
       )}
     </g>

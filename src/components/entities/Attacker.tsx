@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -19,12 +20,14 @@ interface AttackerProps {
  */
 export const Attacker: React.FC<AttackerProps> = ({
   id: _id,
-  label = 'Attacker',
+  label,
   position,
   size = entitySizes.attacker,
   blocked = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('ui');
+  const displayLabel = label ?? t('entities.attacker', { defaultValue: 'Attacker' });
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
@@ -149,7 +152,7 @@ export const Attacker: React.FC<AttackerProps> = ({
       )}
 
       {/* Label */}
-      {label && (
+      {(displayLabel || blocked) && (
         <text
           x={0}
           y={size * 0.7}
@@ -159,7 +162,7 @@ export const Attacker: React.FC<AttackerProps> = ({
           fontWeight={500}
           fontFamily="IBM Plex Sans, sans-serif"
         >
-          {blocked ? 'BLOCKED' : label}
+          {blocked ? t('entities.blocked', { defaultValue: 'BLOCKED' }) : displayLabel}
         </text>
       )}
     </g>

@@ -30,5 +30,23 @@
   "shareBluesky": "Compartir en Bluesky",
   "copyLink": "Copiar enlace",
   "copied": "¡Copiado!",
-  "shareText": "Acabo de completar la pista {{track}} de {{module}} en The Secret Lives of Identity"
+  "shareText": "Acabo de completar la pista {{track}} de {{module}} en The Secret Lives of Identity",
+  "entities": {
+    "identity": "IDENTIDAD",
+    "valid": "VÁLIDO",
+    "expiring": "POR VENCER",
+    "soon": "PRONTO",
+    "expired": "VENCIDO",
+    "expiredShort": "VENC",
+    "blocked": "BLOQUEADO",
+    "attacker": "Atacante",
+    "spireServer": "Servidor SPIRE",
+    "spireAgent": "Agente SPIRE",
+    "trustBundle": "Paquete de Confianza",
+    "hq": "SEDE",
+    "ready": "LISTO",
+    "idle": "OCIOSO",
+    "if": "SI:",
+    "then": "ENTONCES:"
+  }
 }

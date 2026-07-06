@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -23,13 +24,15 @@ interface SpireAgentProps {
  */
 export const SpireAgent: React.FC<SpireAgentProps> = ({
   id,
-  label = 'SPIRE Agent',
+  label,
   position,
   size = entitySizes.agent,
   active = false,
   issuing = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('ui');
+  const displayLabel = label ?? t('entities.spireAgent', { defaultValue: 'SPIRE Agent' });
   const width = size * 0.85;
   const height = size * 0.65;
   const uniqueId = id || Math.random().toString(36).substr(2, 9);
@@ -127,11 +130,11 @@ export const SpireAgent: React.FC<SpireAgentProps> = ({
             x={8}
             y={7}
             fill="#059669"
-            fontSize={8}
+            fontSize={7}
             fontWeight="bold"
             fontFamily="JetBrains Mono, monospace"
           >
-            READY
+            {t('entities.ready', { defaultValue: 'READY' })}
           </text>
         </g>
       )}
@@ -142,10 +145,10 @@ export const SpireAgent: React.FC<SpireAgentProps> = ({
             x={8}
             y={7}
             fill="#6B7280"
-            fontSize={8}
+            fontSize={7}
             fontFamily="JetBrains Mono, monospace"
           >
-            IDLE
+            {t('entities.idle', { defaultValue: 'IDLE' })}
           </text>
         </g>
       )}
@@ -234,7 +237,7 @@ export const SpireAgent: React.FC<SpireAgentProps> = ({
       </g>
 
       {/* Label */}
-      {label && (
+      {displayLabel && (
         <text
           x={0}
           y={height / 2 + 28}
@@ -244,7 +247,7 @@ export const SpireAgent: React.FC<SpireAgentProps> = ({
           fontWeight={500}
           fontFamily="IBM Plex Sans, sans-serif"
         >
-          {label}
+          {displayLabel}
         </text>
       )}
     </g>
