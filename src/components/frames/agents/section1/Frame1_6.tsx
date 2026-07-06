@@ -40,9 +40,9 @@ export const Frame1_6: React.FC = () => {
             </text>
             <line x1={486} y1={150} x2={734} y2={150} stroke={colors.textMuted} strokeWidth={0.75} opacity={0.5} />
             {/* header */}
-            <text x={500} y={170} fill={colors.textMuted} fontSize={10} fontFamily="JetBrains Mono, monospace">{t('frame1_6.colTime', { defaultValue: 'TIME' })}</text>
-            <text x={560} y={170} fill={colors.textMuted} fontSize={10} fontFamily="JetBrains Mono, monospace">{t('frame1_6.colWho', { defaultValue: 'WHO' })}</text>
-            <text x={630} y={170} fill={colors.textMuted} fontSize={10} fontFamily="JetBrains Mono, monospace">{t('frame1_6.colAction', { defaultValue: 'ACTION' })}</text>
+            <text x={500} y={170} fill={colors.textSecondary} fontSize={12} fontFamily="JetBrains Mono, monospace">{t('frame1_6.colTime', { defaultValue: 'TIME' })}</text>
+            <text x={560} y={170} fill={colors.textSecondary} fontSize={12} fontFamily="JetBrains Mono, monospace">{t('frame1_6.colWho', { defaultValue: 'WHO' })}</text>
+            <text x={630} y={170} fill={colors.textSecondary} fontSize={12} fontFamily="JetBrains Mono, monospace">{t('frame1_6.colAction', { defaultValue: 'ACTION' })}</text>
             {rows.map((r, i) => {
               const y = 198 + i * 34;
               return (

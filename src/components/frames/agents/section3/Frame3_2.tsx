@@ -49,7 +49,7 @@ export const Frame3_2: React.FC = () => {
         {/* NOT your house keys and bank card */}
         {phase >= 2 && (
           <motion.g initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
-            <text x={400} y={355} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
+            <text x={400} y={355} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="IBM Plex Sans, sans-serif">
               {t('frame3_2.notThese', { defaultValue: 'NOT your house keys and bank card' })}
             </text>
             {/* house key */}

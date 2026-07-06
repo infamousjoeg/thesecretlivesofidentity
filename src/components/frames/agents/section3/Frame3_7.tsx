@@ -57,7 +57,7 @@ export const Frame3_7: React.FC = () => {
             x={400}
             y={448}
             textAnchor="middle"
-            fill={colors.textMuted}
+            fill={colors.textSecondary}
             fontSize={14}
             fontStyle="italic"
             fontFamily="IBM Plex Sans, sans-serif"

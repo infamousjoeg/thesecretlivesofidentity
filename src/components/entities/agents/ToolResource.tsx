@@ -143,7 +143,7 @@ export const ToolResource: React.FC<ToolResourceProps> = ({
           y={top + H + 18}
           textAnchor="middle"
           fill={locked ? colors.textSecondary : colors.toolResource}
-          fontSize={12}
+          fontSize={13}
           fontWeight={500}
           fontFamily="IBM Plex Sans, sans-serif"
         >

@@ -73,7 +73,7 @@ export const Frame5_1: React.FC = () => {
             x={395}
             y={250}
             textAnchor="middle"
-            fill={colors.textMuted}
+            fill={colors.textSecondary}
             fontSize={20}
             fontWeight="bold"
             fontFamily="Space Grotesk, sans-serif"

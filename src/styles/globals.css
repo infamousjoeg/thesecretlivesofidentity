@@ -57,6 +57,13 @@
     height: 100vh;
     height: 100dvh;
   }
+
+  /* Cap a modal to the visible viewport (with a static-vh fallback) so its
+     content scrolls internally instead of overflowing off short screens. */
+  .max-h-dvh-modal {
+    max-height: 90vh;
+    max-height: 90dvh;
+  }
 }
 
 @layer components {

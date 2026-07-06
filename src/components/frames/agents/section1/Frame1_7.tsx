@@ -28,7 +28,7 @@ export const Frame1_7: React.FC = () => {
             <rect x={34} y={-4} width={5} height={15} fill={colors.warning} />
             <rect x={22} y={-4} width={5} height={12} fill={colors.warning} />
           </g>
-          <text x={5} y={48} textAnchor="middle" fill={colors.textMuted} fontSize={12} fontFamily="JetBrains Mono, monospace">
+          <text x={5} y={48} textAnchor="middle" fill={colors.textSecondary} fontSize={12} fontFamily="JetBrains Mono, monospace">
             {t('frame1_7.masterKey', { defaultValue: 'MASTER KEY' })}
           </text>
           {phase >= 1 && (
