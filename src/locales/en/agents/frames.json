@@ -535,6 +535,14 @@
     "feedbackDamage": "✗ Confused deputy! The over-broad slip granted \"Delete records\", so the verifier accepted the malicious instruction and the data was destroyed. The agent was tricked — its slip betrayed it.",
     "feedbackBlocked": "✓ Blocked. The narrow slip never granted \"Delete records\", so even though the agent was tricked, the verifier refused. Tight scope is the defense."
   },
+  "entities": {
+    "forYou": "FOR YOU",
+    "sub": "SUB",
+    "scan": "SCAN",
+    "accepted": "ACCEPTED",
+    "rejected": "REJECTED",
+    "serverLabel": "{{kind}} SERVER"
+  },
   "permissionSlip": {
     "title": "PERMISSION SLIP",
     "onBehalfOf": "ON BEHALF OF",

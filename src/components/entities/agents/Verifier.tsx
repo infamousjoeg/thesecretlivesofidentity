@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -32,6 +33,7 @@ export const Verifier: React.FC<VerifierProps> = ({
   state = 'idle',
   animate = true,
 }) => {
+  const { t } = useTranslation('agents-frames');
   const uniqueId = id || Math.random().toString(36).substr(2, 9);
   const W = size * 0.92;
   const H = size * 0.7;
@@ -112,7 +114,7 @@ export const Verifier: React.FC<VerifierProps> = ({
         <>
           {/* scanning prompt */}
           <text x={0} y={top + H * 0.32} textAnchor="middle" fill={colors.verifier} fontSize={size * 0.1} fontWeight="bold" fontFamily="JetBrains Mono, monospace">
-            SCAN
+            {t('entities.scan', { defaultValue: 'SCAN' })}
           </text>
           {animate && (
             <motion.line
@@ -162,7 +164,11 @@ export const Verifier: React.FC<VerifierProps> = ({
           fontWeight={500}
           fontFamily="IBM Plex Sans, sans-serif"
         >
-          {state === 'reject' ? 'REJECTED' : state === 'accept' ? 'ACCEPTED' : label}
+          {state === 'reject'
+            ? t('entities.rejected', { defaultValue: 'REJECTED' })
+            : state === 'accept'
+              ? t('entities.accepted', { defaultValue: 'ACCEPTED' })
+              : label}
         </text>
       )}
     </g>

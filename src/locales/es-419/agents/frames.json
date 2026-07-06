@@ -535,6 +535,14 @@
     "feedbackDamage": "✗ ¡Delegado confundido! El permiso demasiado amplio otorgaba \"Borrar registros\", así que el verificador aceptó la instrucción maliciosa y los datos se destruyeron. El agente fue engañado, su permiso lo traicionó.",
     "feedbackBlocked": "✓ Bloqueado. El permiso acotado nunca otorgó \"Borrar registros\", así que aunque el agente fue engañado, el verificador se negó. Un alcance ajustado es la defensa."
   },
+  "entities": {
+    "forYou": "PARA TI",
+    "sub": "SUB",
+    "scan": "ESCANEAR",
+    "accepted": "ACEPTADO",
+    "rejected": "RECHAZADO",
+    "serverLabel": "SERVIDOR {{kind}}"
+  },
   "permissionSlip": {
     "title": "PERMISO",
     "onBehalfOf": "EN NOMBRE DE",

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -29,6 +30,7 @@ export const AIAgent: React.FC<AIAgentProps> = ({
   active = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('agents-frames');
   const uniqueId = id || Math.random().toString(36).substr(2, 9);
   const headW = size * 0.62;
   const headH = size * 0.52;
@@ -127,20 +129,22 @@ export const AIAgent: React.FC<AIAgentProps> = ({
         strokeLinecap="round"
       />
 
-      {/* "FOR YOU" delegation tag — marks it as acting on someone's behalf */}
+      {/* "FOR YOU" delegation tag — marks it as acting on someone's behalf.
+          Box widened + letter-spacing trimmed so longer translations
+          (pt-BR "PARA VOCÊ") stay inside the pill. */}
       <g transform={`translate(0, ${headTop + headH + size * 0.16})`}>
-        <rect x={-size * 0.24} y={-size * 0.08} width={size * 0.48} height={size * 0.16} rx={4} fill={colors.background} stroke={colors.agentAI} strokeWidth={1} />
+        <rect x={-size * 0.31} y={-size * 0.08} width={size * 0.62} height={size * 0.16} rx={4} fill={colors.background} stroke={colors.agentAI} strokeWidth={1} />
         <text
           x={0}
           y={size * 0.035}
           textAnchor="middle"
           fill={colors.agentAI}
-          fontSize={size * 0.1}
+          fontSize={size * 0.095}
           fontWeight="bold"
           fontFamily="JetBrains Mono, monospace"
-          letterSpacing="0.5"
+          letterSpacing="0.3"
         >
-          FOR YOU
+          {t('entities.forYou', { defaultValue: 'FOR YOU' })}
         </text>
       </g>
 

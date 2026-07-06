@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -28,6 +29,7 @@ export const SubAgent: React.FC<SubAgentProps> = ({
   active = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('agents-frames');
   const uniqueId = id || Math.random().toString(36).substr(2, 9);
   const headW = size * 0.6;
   const headH = size * 0.5;
@@ -141,7 +143,7 @@ export const SubAgent: React.FC<SubAgentProps> = ({
           fontFamily="JetBrains Mono, monospace"
           letterSpacing="0.5"
         >
-          SUB
+          {t('entities.sub', { defaultValue: 'SUB' })}
         </text>
       </g>
 
