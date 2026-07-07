@@ -51,9 +51,9 @@ export const Frame8_12: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <SpireServer label="Server 1" position={{ x: 250, y: 200 }} animate={!prefersReducedMotion} size={55} />
-            <SpireServer label="Server 2" position={{ x: 400, y: 200 }} animate={!prefersReducedMotion} size={55} />
-            <SpireServer label="Server 3" position={{ x: 550, y: 200 }} animate={!prefersReducedMotion} size={55} />
+            <SpireServer label={`${t('ui:entities.server', { defaultValue: 'Server' })} 1`} position={{ x: 250, y: 200 }} animate={!prefersReducedMotion} size={55} />
+            <SpireServer label={`${t('ui:entities.server', { defaultValue: 'Server' })} 2`} position={{ x: 400, y: 200 }} animate={!prefersReducedMotion} size={55} />
+            <SpireServer label={`${t('ui:entities.server', { defaultValue: 'Server' })} 3`} position={{ x: 550, y: 200 }} animate={!prefersReducedMotion} size={55} />
           </motion.g>
         )}
 

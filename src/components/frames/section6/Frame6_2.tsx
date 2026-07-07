@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Workload, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Two workloads establishing mTLS connection
  */
 export const Frame6_2: React.FC = () => {
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -38,10 +40,10 @@ export const Frame6_2: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <Workload label="Service A" position={{ x: 200, y: 200 }} attested={true} animate={!prefersReducedMotion} size={70} />
+          <Workload label={`${t('ui:entities.service', { defaultValue: 'Service' })} A`} position={{ x: 200, y: 200 }} attested={true} animate={!prefersReducedMotion} size={70} />
           <Badge spiffeId="spiffe://acme/a" position={{ x: 200, y: 290 }} state="valid" size={50} animate={!prefersReducedMotion} />
 
-          <Workload label="Service B" position={{ x: 600, y: 200 }} attested={true} animate={!prefersReducedMotion} size={70} />
+          <Workload label={`${t('ui:entities.service', { defaultValue: 'Service' })} B`} position={{ x: 600, y: 200 }} attested={true} animate={!prefersReducedMotion} size={70} />
           <Badge spiffeId="spiffe://acme/b" position={{ x: 600, y: 290 }} state="valid" size={50} animate={!prefersReducedMotion} />
         </motion.g>
 

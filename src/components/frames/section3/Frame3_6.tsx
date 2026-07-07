@@ -47,7 +47,7 @@ export const Frame3_6: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <SpireAgent
-            label="SPIRE Agent"
+            label={t('ui:entities.spireAgent', { defaultValue: 'SPIRE Agent' })}
             position={{ x: 400, y: 150 }}
             size={70}
             active={true}

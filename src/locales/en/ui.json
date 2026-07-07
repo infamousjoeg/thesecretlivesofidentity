@@ -47,6 +47,46 @@
     "ready": "READY",
     "idle": "IDLE",
     "if": "IF:",
-    "then": "THEN:"
+    "then": "THEN:",
+    "agent": "Agent",
+    "server": "Server",
+    "service": "Service",
+    "workload": "workload"
+  },
+  "a11y": {
+    "state": {
+      "valid": "valid",
+      "expiring": "expiring",
+      "expired": "expired",
+      "active": "active",
+      "blocked": "blocked",
+      "attested": "attested",
+      "unattested": "unattested",
+      "issuing": "issuing SVID",
+      "narrowed": "narrowed",
+      "locked": "locked",
+      "unlocked": "unlocked",
+      "idle": "idle",
+      "accept": "accept",
+      "reject": "reject",
+      "attempting": "attempting",
+      "established": "established",
+      "rejected": "rejected"
+    },
+    "badge": "SVID Badge: {{id}}, {{state}}",
+    "spireServer": "SPIRE Server{{state}}",
+    "spireAgent": "SPIRE Agent{{active}}{{issuing}}",
+    "attacker": "Attacker{{state}}",
+    "workload": "Workload{{label}}{{state}}",
+    "trustBundle": "Trust Bundle containing {{count}} certificate(s)",
+    "trustDomain": "Trust Domain: {{label}}",
+    "connection": "Connection from ({{from}}) to ({{to}}): {{status}}",
+    "registrationEntry": "Registration Entry: {{selectors}} → {{id}}",
+    "principal": "Principal{{label}}{{state}}",
+    "subAgent": "Sub-Agent{{label}}{{state}}",
+    "aiAgent": "AI Agent{{label}}{{state}}",
+    "verifier": "Verifier{{label}} ({{state}})",
+    "permissionSlip": "Permission slip on behalf of {{onBehalfOf}}, {{state}}{{narrowed}}",
+    "toolResource": "Tool resource{{label}} ({{state}})"
   }
 }

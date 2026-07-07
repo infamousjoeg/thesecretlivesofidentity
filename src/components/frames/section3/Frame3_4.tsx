@@ -47,7 +47,7 @@ export const Frame3_4: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <SpireServer
-            label="SPIRE Server"
+            label={t('ui:entities.spireServer', { defaultValue: 'SPIRE Server' })}
             position={{ x: 400, y: 150 }}
             size={70}
             animate={!prefersReducedMotion}

@@ -46,7 +46,7 @@ export const Frame4_9: React.FC = () => {
             {t('frame4_9.nodeLabel')}
           </text>
 
-          <SpireAgent label="Agent" position={{ x: 400, y: 160 }} size={60} active={true} animate={!prefersReducedMotion} />
+          <SpireAgent label={t('ui:entities.agent', { defaultValue: 'Agent' })} position={{ x: 400, y: 160 }} size={60} active={true} animate={!prefersReducedMotion} />
 
           {/* Agent badge */}
           <Badge spiffeId="spiffe://acme.com/spire/agent/..." position={{ x: 400, y: 240 }} state="valid" size={40} showCountdown={false} animate={false} />

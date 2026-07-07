@@ -34,7 +34,10 @@ export const SpireServer: React.FC<SpireServerProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`SPIRE Server${active ? ' (active)' : ''}`}
+      aria-label={t('a11y.spireServer', {
+        state: active ? ` (${t('a11y.state.active', { defaultValue: 'active' })})` : '',
+        defaultValue: `SPIRE Server${active ? ' (active)' : ''}`,
+      })}
     >
       {/* Glow effect when active */}
       {active && animate && (

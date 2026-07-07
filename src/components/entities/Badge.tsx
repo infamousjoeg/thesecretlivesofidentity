@@ -154,7 +154,11 @@ export const Badge: React.FC<BadgeProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`SVID Badge: ${spiffeId}, ${state}`}
+      aria-label={t('a11y.badge', {
+        id: spiffeId,
+        state: t(`a11y.state.${state}`, { defaultValue: state }),
+        defaultValue: `SVID Badge: ${spiffeId}, ${state}`,
+      })}
     >
       <defs>
         {/* Badge gradient for realistic card look */}

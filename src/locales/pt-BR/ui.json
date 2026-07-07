@@ -47,6 +47,46 @@
     "ready": "PRONTO",
     "idle": "OCIOSO",
     "if": "SE:",
-    "then": "ENTÃO:"
+    "then": "ENTÃO:",
+    "agent": "Agente",
+    "server": "Servidor",
+    "service": "Serviço",
+    "workload": "carga de trabalho"
+  },
+  "a11y": {
+    "state": {
+      "valid": "válido",
+      "expiring": "expirando",
+      "expired": "expirado",
+      "active": "ativo",
+      "blocked": "bloqueado",
+      "attested": "atestado",
+      "unattested": "não atestado",
+      "issuing": "emitindo SVID",
+      "narrowed": "restrito",
+      "locked": "trancado",
+      "unlocked": "destrancado",
+      "idle": "ocioso",
+      "accept": "aceito",
+      "reject": "rejeitado",
+      "attempting": "tentando",
+      "established": "estabelecida",
+      "rejected": "rejeitada"
+    },
+    "badge": "Credencial SVID: {{id}}, {{state}}",
+    "spireServer": "Servidor SPIRE{{state}}",
+    "spireAgent": "Agente SPIRE{{active}}{{issuing}}",
+    "attacker": "Atacante{{state}}",
+    "workload": "Carga de trabalho{{label}}{{state}}",
+    "trustBundle": "Pacote de confiança contendo {{count}} certificado(s)",
+    "trustDomain": "Domínio de confiança: {{label}}",
+    "connection": "Conexão de ({{from}}) para ({{to}}): {{status}}",
+    "registrationEntry": "Entrada de registro: {{selectors}} → {{id}}",
+    "principal": "Principal{{label}}{{state}}",
+    "subAgent": "Subagente{{label}}{{state}}",
+    "aiAgent": "Agente de IA{{label}}{{state}}",
+    "verifier": "Verificador{{label}} ({{state}})",
+    "permissionSlip": "Autorização em nome de {{onBehalfOf}}, {{state}}{{narrowed}}",
+    "toolResource": "Recurso de ferramenta{{label}} ({{state}})"
   }
 }

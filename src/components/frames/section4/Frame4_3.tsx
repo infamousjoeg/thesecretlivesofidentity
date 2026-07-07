@@ -60,10 +60,10 @@ export const Frame4_3: React.FC = () => {
             </text>
 
             {/* Agent inside platform */}
-            <SpireAgent label="Agent" position={{ x: 500, y: 300 }} size={60} active={true} animate={!prefersReducedMotion} />
+            <SpireAgent label={t('ui:entities.agent', { defaultValue: 'Agent' })} position={{ x: 500, y: 300 }} size={60} active={true} animate={!prefersReducedMotion} />
 
             {/* Server */}
-            <SpireServer label="Server" position={{ x: 150, y: 280 }} size={60} animate={!prefersReducedMotion} />
+            <SpireServer label={t('ui:entities.server', { defaultValue: 'Server' })} position={{ x: 150, y: 280 }} size={60} animate={!prefersReducedMotion} />
 
             {/* Arrow from platform to server */}
             <line x1={350} y1={270} x2={210} y2={270} stroke={colors.success} strokeWidth={2} />

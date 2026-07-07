@@ -40,7 +40,11 @@ export const SpireAgent: React.FC<SpireAgentProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`SPIRE Agent${active ? ' (active)' : ''}${issuing ? ' (issuing SVID)' : ''}`}
+      aria-label={t('a11y.spireAgent', {
+        active: active ? ` (${t('a11y.state.active', { defaultValue: 'active' })})` : '',
+        issuing: issuing ? ` (${t('a11y.state.issuing', { defaultValue: 'issuing SVID' })})` : '',
+        defaultValue: `SPIRE Agent${active ? ' (active)' : ''}${issuing ? ' (issuing SVID)' : ''}`,
+      })}
     >
       <defs>
         {/* Gradient for the kiosk body */}

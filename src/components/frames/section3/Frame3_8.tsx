@@ -40,7 +40,7 @@ export const Frame3_8: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <SpireServer label="Server" position={{ x: 400, y: 150 }} size={70} animate={!prefersReducedMotion} />
+          <SpireServer label={t('ui:entities.server', { defaultValue: 'Server' })} position={{ x: 400, y: 150 }} size={70} animate={!prefersReducedMotion} />
 
           {/* Thought bubble */}
           <ellipse cx={520} cy={100} rx={80} ry={40} fill={colors.surface} stroke={colors.textMuted} strokeWidth={1} />

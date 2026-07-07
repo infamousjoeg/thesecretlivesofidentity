@@ -40,7 +40,7 @@ export const Frame3_7: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <SpireServer label="SPIRE Server" position={{ x: 400, y: 100 }} size={60} animate={!prefersReducedMotion} />
+          <SpireServer label={t('ui:entities.spireServer', { defaultValue: 'SPIRE Server' })} position={{ x: 400, y: 100 }} size={60} animate={!prefersReducedMotion} />
           <text x={400} y={150} textAnchor="middle" fill={colors.server} fontSize={11} fontWeight="600" fontFamily="Space Grotesk, sans-serif">
             {t('frame3_7.centralAuthority')}
           </text>
@@ -68,15 +68,15 @@ export const Frame3_7: React.FC = () => {
           >
             {/* Node 1 */}
             <rect x={120} y={200} width={160} height={150} rx={8} fill={`${colors.agent}08`} stroke={colors.agent} strokeWidth={1} strokeDasharray="5 3" />
-            <SpireAgent label="Agent" position={{ x: 200, y: 250 }} size={40} active={true} animate={false} />
+            <SpireAgent label={t('ui:entities.agent', { defaultValue: 'Agent' })} position={{ x: 200, y: 250 }} size={40} active={true} animate={false} />
 
             {/* Node 2 */}
             <rect x={320} y={200} width={160} height={150} rx={8} fill={`${colors.agent}08`} stroke={colors.agent} strokeWidth={1} strokeDasharray="5 3" />
-            <SpireAgent label="Agent" position={{ x: 400, y: 250 }} size={40} active={true} animate={false} />
+            <SpireAgent label={t('ui:entities.agent', { defaultValue: 'Agent' })} position={{ x: 400, y: 250 }} size={40} active={true} animate={false} />
 
             {/* Node 3 */}
             <rect x={520} y={200} width={160} height={150} rx={8} fill={`${colors.agent}08`} stroke={colors.agent} strokeWidth={1} strokeDasharray="5 3" />
-            <SpireAgent label="Agent" position={{ x: 600, y: 250 }} size={40} active={true} animate={false} />
+            <SpireAgent label={t('ui:entities.agent', { defaultValue: 'Agent' })} position={{ x: 600, y: 250 }} size={40} active={true} animate={false} />
           </motion.g>
         )}
 

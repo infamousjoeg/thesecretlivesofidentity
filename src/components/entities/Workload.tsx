@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -37,6 +38,7 @@ export const Workload: React.FC<WorkloadProps> = ({
   showQuestionMark: _showQuestionMark = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('ui');
   const uniqueId = id || Math.random().toString(36).substr(2, 9);
 
   // Chip dimensions
@@ -55,7 +57,13 @@ export const Workload: React.FC<WorkloadProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Workload${label ? `: ${label}` : ''}${attested ? ' (attested)' : ' (unattested)'}`}
+      aria-label={t('a11y.workload', {
+        label: label ? `: ${label}` : '',
+        state: attested
+          ? ` (${t('a11y.state.attested', { defaultValue: 'attested' })})`
+          : ` (${t('a11y.state.unattested', { defaultValue: 'unattested' })})`,
+        defaultValue: `Workload${label ? `: ${label}` : ''}${attested ? ' (attested)' : ' (unattested)'}`,
+      })}
     >
       <defs>
         {/* Gradient for chip surface */}
