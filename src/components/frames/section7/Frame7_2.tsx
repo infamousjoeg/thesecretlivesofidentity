@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { Badge, Attacker } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Compromised SVID becomes useless quickly
  */
 export const Frame7_2: React.FC = () => {
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 700, 700, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -39,7 +41,7 @@ export const Frame7_2: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <Attacker
-            label="Attacker"
+            label={t('ui:entities.attacker', { defaultValue: 'Attacker' })}
             position={{ x: 200, y: 200 }}
             blocked={false}
             animate={!prefersReducedMotion}

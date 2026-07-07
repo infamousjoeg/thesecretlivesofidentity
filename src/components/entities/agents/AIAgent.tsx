@@ -39,7 +39,11 @@ export const AIAgent: React.FC<AIAgentProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`AI Agent${label ? `: ${label}` : ''}${active ? ' (active)' : ''}`}
+      aria-label={t('ui:a11y.aiAgent', {
+        label: label ? `: ${label}` : '',
+        state: active ? ` (${t('ui:a11y.state.active', { defaultValue: 'active' })})` : '',
+        defaultValue: `AI Agent${label ? `: ${label}` : ''}${active ? ' (active)' : ''}`,
+      })}
     >
       <defs>
         <linearGradient id={`aiagent-head-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position, ConnectionStatus } from '@/types';
 import { colors } from '@/utils/constants';
 
@@ -28,6 +29,7 @@ export const Connection: React.FC<ConnectionProps> = ({
   label,
   animate = true,
 }) => {
+  const { t } = useTranslation('ui');
   const getStatusStyles = () => {
     switch (status) {
       case 'established':
@@ -66,7 +68,14 @@ export const Connection: React.FC<ConnectionProps> = ({
   const arrowY = to.y - Math.sin(angle * (Math.PI / 180)) * arrowOffset;
 
   return (
-    <g aria-label={`Connection from (${from.x},${from.y}) to (${to.x},${to.y}): ${status}`}>
+    <g
+      aria-label={t('a11y.connection', {
+        from: `${from.x},${from.y}`,
+        to: `${to.x},${to.y}`,
+        status: t(`a11y.state.${status}`, { defaultValue: status }),
+        defaultValue: `Connection from (${from.x},${from.y}) to (${to.x},${to.y}): ${status}`,
+      })}
+    >
       {/* Main line */}
       {animate && status === 'attempting' ? (
         <motion.line

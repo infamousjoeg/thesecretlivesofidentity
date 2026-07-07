@@ -49,7 +49,7 @@ export const Frame4_5: React.FC = () => {
           </text>
 
           {/* Agent inside platform */}
-          <SpireAgent label="Agent" position={{ x: 400, y: 230 }} size={60} active={true} animate={!prefersReducedMotion} />
+          <SpireAgent label={t('ui:entities.agent', { defaultValue: 'Agent' })} position={{ x: 400, y: 230 }} size={60} active={true} animate={!prefersReducedMotion} />
         </motion.g>
 
         {/* Speech bubble from platform */}

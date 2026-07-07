@@ -49,7 +49,7 @@ export const Frame3_3: React.FC = () => {
 
           {/* Server in center */}
           <SpireServer
-            label="Server"
+            label={t('ui:entities.server', { defaultValue: 'Server' })}
             position={{ x: 400, y: 220 }}
             size={90}
             animate={!prefersReducedMotion}

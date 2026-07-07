@@ -42,7 +42,7 @@ export const Frame3_2: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <SpireServer
-              label="SPIRE Server"
+              label={t('ui:entities.spireServer', { defaultValue: 'SPIRE Server' })}
               position={{ x: 250, y: 220 }}
               size={80}
               animate={!prefersReducedMotion}
@@ -67,7 +67,7 @@ export const Frame3_2: React.FC = () => {
             transition={{ duration: 0.5 }}
           >
             <SpireAgent
-              label="SPIRE Agent"
+              label={t('ui:entities.spireAgent', { defaultValue: 'SPIRE Agent' })}
               position={{ x: 550, y: 220 }}
               size={80}
               active={true}

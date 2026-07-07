@@ -45,7 +45,11 @@ export const Verifier: React.FC<VerifierProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Verifier${label ? `: ${label}` : ''} (${state})`}
+      aria-label={t('ui:a11y.verifier', {
+        label: label ? `: ${label}` : '',
+        state: t(`ui:a11y.state.${state}`, { defaultValue: state }),
+        defaultValue: `Verifier${label ? `: ${label}` : ''} (${state})`,
+      })}
     >
       <defs>
         <linearGradient id={`verifier-body-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%">

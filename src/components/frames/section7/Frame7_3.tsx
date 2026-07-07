@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Stage } from '@/components/visualization/Stage';
 import { SpireAgent, Workload, Badge } from '@/components/entities';
 import { useAnimationPhase } from '@/hooks/useAnimationPhase';
@@ -11,6 +12,7 @@ import { colors } from '@/utils/constants';
  * Visual: Agent automatically rotating SVIDs
  */
 export const Frame7_3: React.FC = () => {
+  const { t } = useTranslation('spiffe-frames');
   const { phase } = useAnimationPhase([0, 600, 600, 600]);
   const prefersReducedMotion = useReducedMotion();
 
@@ -39,7 +41,7 @@ export const Frame7_3: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <SpireAgent
-            label="SPIRE Agent"
+            label={t('ui:entities.spireAgent', { defaultValue: 'SPIRE Agent' })}
             position={{ x: 400, y: 150 }}
             active={true}
             animate={!prefersReducedMotion}

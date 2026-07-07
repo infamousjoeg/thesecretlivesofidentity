@@ -41,7 +41,7 @@ export const Frame5_6: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <Workload
-            label="workload"
+            label={t('ui:entities.workload', { defaultValue: 'workload' })}
             position={{ x: 150, y: 250 }}
             attested={false}
             animate={!prefersReducedMotion}
@@ -55,7 +55,7 @@ export const Frame5_6: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <SpireAgent
-            label="Agent"
+            label={t('ui:entities.agent', { defaultValue: 'Agent' })}
             position={{ x: 650, y: 250 }}
             active={true}
             animate={!prefersReducedMotion}

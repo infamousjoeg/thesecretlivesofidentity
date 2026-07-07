@@ -43,7 +43,10 @@ export const TrustBundle: React.FC<TrustBundleProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Trust Bundle containing ${effectiveCertCount} certificate(s)`}
+      aria-label={t('a11y.trustBundle', {
+        count: effectiveCertCount,
+        defaultValue: `Trust Bundle containing ${effectiveCertCount} certificate(s)`,
+      })}
     >
       {/* Highlight glow */}
       {highlighted && animate && (

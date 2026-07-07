@@ -111,7 +111,12 @@ export const PermissionSlip: React.FC<PermissionSlipProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Permission slip on behalf of ${displayOnBehalfOf}, ${state}${narrowed ? ', narrowed' : ''}`}
+      aria-label={t('ui:a11y.permissionSlip', {
+        onBehalfOf: displayOnBehalfOf,
+        state: t(`ui:a11y.state.${state}`, { defaultValue: state }),
+        narrowed: narrowed ? `, ${t('ui:a11y.state.narrowed', { defaultValue: 'narrowed' })}` : '',
+        defaultValue: `Permission slip on behalf of ${displayOnBehalfOf}, ${state}${narrowed ? ', narrowed' : ''}`,
+      })}
     >
       <defs>
         <linearGradient id={`slip-paper-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%">

@@ -44,7 +44,13 @@ export const ToolResource: React.FC<ToolResourceProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Tool resource${label ? `: ${label}` : ''} (${locked ? 'locked' : 'unlocked'})`}
+      aria-label={t('ui:a11y.toolResource', {
+        label: label ? `: ${label}` : '',
+        state: locked
+          ? t('ui:a11y.state.locked', { defaultValue: 'locked' })
+          : t('ui:a11y.state.unlocked', { defaultValue: 'unlocked' }),
+        defaultValue: `Tool resource${label ? `: ${label}` : ''} (${locked ? 'locked' : 'unlocked'})`,
+      })}
     >
       <defs>
         <linearGradient id={`tool-body-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%">

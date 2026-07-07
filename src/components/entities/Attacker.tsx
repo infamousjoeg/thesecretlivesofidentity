@@ -31,7 +31,10 @@ export const Attacker: React.FC<AttackerProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Attacker${blocked ? ' (blocked)' : ''}`}
+      aria-label={t('a11y.attacker', {
+        state: blocked ? ` (${t('a11y.state.blocked', { defaultValue: 'blocked' })})` : '',
+        defaultValue: `Attacker${blocked ? ' (blocked)' : ''}`,
+      })}
     >
       {/* Menacing aura when not blocked */}
       {!blocked && animate && (

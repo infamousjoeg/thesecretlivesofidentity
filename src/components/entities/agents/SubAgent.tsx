@@ -38,7 +38,11 @@ export const SubAgent: React.FC<SubAgentProps> = ({
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Sub-Agent${label ? `: ${label}` : ''}${active ? ' (active)' : ''}`}
+      aria-label={t('ui:a11y.subAgent', {
+        label: label ? `: ${label}` : '',
+        state: active ? ` (${t('ui:a11y.state.active', { defaultValue: 'active' })})` : '',
+        defaultValue: `Sub-Agent${label ? `: ${label}` : ''}${active ? ' (active)' : ''}`,
+      })}
     >
       <defs>
         <linearGradient id={`subagent-head-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%">

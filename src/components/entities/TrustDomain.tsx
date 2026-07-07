@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors } from '@/utils/constants';
 
@@ -31,12 +32,16 @@ export const TrustDomain: React.FC<TrustDomainProps> = ({
   children,
   animate = true,
 }) => {
+  const { t } = useTranslation('ui');
   // Use domain if provided, otherwise fall back to label
   const displayLabel = domain || label || 'acme.com';
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Trust Domain: ${displayLabel}`}
+      aria-label={t('a11y.trustDomain', {
+        label: displayLabel,
+        defaultValue: `Trust Domain: ${displayLabel}`,
+      })}
     >
       {/* Outer glow effect */}
       <defs>

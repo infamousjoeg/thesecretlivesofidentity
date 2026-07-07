@@ -41,7 +41,7 @@ export const Frame5_2: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <SpireAgent
-            label="SPIRE Agent"
+            label={t('ui:entities.spireAgent', { defaultValue: 'SPIRE Agent' })}
             position={{ x: 200, y: 200 }}
             active={true}
             animate={!prefersReducedMotion}

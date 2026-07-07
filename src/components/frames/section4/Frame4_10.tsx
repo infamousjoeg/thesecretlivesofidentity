@@ -41,7 +41,7 @@ export const Frame4_10: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           {/* Attacker */}
-          <Attacker label="Attacker" position={{ x: 200, y: 200 }} size={70} blocked={false} animate={!prefersReducedMotion} />
+          <Attacker label={t('ui:entities.attacker', { defaultValue: 'Attacker' })} position={{ x: 200, y: 200 }} size={70} blocked={false} animate={!prefersReducedMotion} />
 
           {/* Thought bubble */}
           <ellipse cx={300} cy={130} rx={80} ry={40} fill={colors.surface} stroke={colors.attacker} strokeWidth={1} />

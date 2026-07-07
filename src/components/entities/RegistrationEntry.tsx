@@ -44,11 +44,16 @@ export const RegistrationEntry: React.FC<RegistrationEntryProps> = ({
   ];
   const width = size * 1.1;
   const height = size * 1.4;
+  const selectorText = selectors.map((s) => `${s.type}=${s.value}`).join(', ');
 
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Registration Entry: ${selectors.map((s) => `${s.type}=${s.value}`).join(', ')} → ${spiffeId}`}
+      aria-label={t('a11y.registrationEntry', {
+        selectors: selectorText,
+        id: spiffeId,
+        defaultValue: `Registration Entry: ${selectorText} → ${spiffeId}`,
+      })}
     >
       {/* Highlight glow */}
       {highlighted && animate && (

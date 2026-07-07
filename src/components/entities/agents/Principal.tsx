@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { Position } from '@/types';
 import { colors, entitySizes } from '@/utils/constants';
 
@@ -29,13 +30,18 @@ export const Principal: React.FC<PrincipalProps> = ({
   active = false,
   animate = true,
 }) => {
+  const { t } = useTranslation('agents-frames');
   const uniqueId = id || Math.random().toString(36).substr(2, 9);
   const r = size / 2;
 
   return (
     <g
       transform={`translate(${position.x}, ${position.y})`}
-      aria-label={`Principal${label ? `: ${label}` : ''}${active ? ' (active)' : ''}`}
+      aria-label={t('ui:a11y.principal', {
+        label: label ? `: ${label}` : '',
+        state: active ? ` (${t('ui:a11y.state.active', { defaultValue: 'active' })})` : '',
+        defaultValue: `Principal${label ? `: ${label}` : ''}${active ? ' (active)' : ''}`,
+      })}
     >
       <defs>
         <linearGradient id={`principal-body-${uniqueId}`} x1="0%" y1="0%" x2="0%" y2="100%">

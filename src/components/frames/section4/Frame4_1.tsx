@@ -40,7 +40,7 @@ export const Frame4_1: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <SpireServer label="Server" position={{ x: 250, y: 200 }} size={80} animate={!prefersReducedMotion} />
+          <SpireServer label={t('ui:entities.server', { defaultValue: 'Server' })} position={{ x: 250, y: 200 }} size={80} animate={!prefersReducedMotion} />
           <text x={250} y={280} textAnchor="middle" fill={colors.server} fontSize={14} fontFamily="Space Grotesk, sans-serif">
             SPIRE Server
           </text>
@@ -53,7 +53,7 @@ export const Frame4_1: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <SpireAgent label="Agent" position={{ x: 550, y: 200 }} size={80} active={false} animate={!prefersReducedMotion} />
+            <SpireAgent label={t('ui:entities.agent', { defaultValue: 'Agent' })} position={{ x: 550, y: 200 }} size={80} active={false} animate={!prefersReducedMotion} />
             <text x={550} y={280} textAnchor="middle" fill={colors.agent} fontSize={14} fontFamily="Space Grotesk, sans-serif">
               {t('frame4_1.newAgentLabel')}
             </text>
