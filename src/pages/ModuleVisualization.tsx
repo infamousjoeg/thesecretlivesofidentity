@@ -5,7 +5,7 @@ import { useTrackNavigation } from '@/hooks';
 import { getFrameComponent, PlaceholderFrame } from '@/components/frames';
 import { getModule } from '@/content/modules';
 import { useVisualizationStore } from '@/store/visualizationStore';
-import type { TrackId } from '@/content/tracks';
+import { legacyToGoldPosition, type TrackId } from '@/content/tracks';
 
 /**
  * ModuleVisualization renders any module's track experience.
@@ -17,7 +17,7 @@ import type { TrackId } from '@/content/tracks';
  *   preserving the previous legacy-redirect behavior.
  */
 export const ModuleVisualization: React.FC = () => {
-  const params = useParams<{ module?: string; track?: string }>();
+  const params = useParams<{ module?: string; track?: string; frameIndex?: string }>();
   const moduleConfig = getModule(params.module);
   const setActiveModule = useVisualizationStore((s) => s.setActiveModule);
 
@@ -35,10 +35,22 @@ export const ModuleVisualization: React.FC = () => {
     return <Navigate to="/" replace />;
   }
 
-  // Invalid / legacy track -> gold (matches the old /spiffe/:section/:frame redirect).
+  // Invalid / legacy track -> gold.
   const trackParam = params.track as TrackId | undefined;
   const isValidTrack = Boolean(trackParam && moduleConfig.trackOrder.includes(trackParam));
   if (!isValidTrack) {
+    // Preserve position for legacy numeric links (e.g. /spiffe/3/5 = section 3,
+    // frame 5) by mapping them onto the equivalent Gold-track position instead
+    // of dumping the learner at the start of Gold.
+    const sectionNum = Number(trackParam);
+    const frameNum = Number(params.frameIndex);
+    if (Number.isInteger(sectionNum) && sectionNum > 0 && Number.isInteger(frameNum) && frameNum > 0) {
+      const sectionIndex = Math.min(sectionNum - 1, moduleConfig.sections.length - 1);
+      const pos = legacyToGoldPosition(moduleConfig.sections, sectionIndex, frameNum - 1);
+      const goldLen = moduleConfig.tracks.gold.frames.length;
+      const clamped = Math.max(0, Math.min(pos, goldLen - 1));
+      return <Navigate to={`${moduleConfig.basePath}/gold/${clamped + 1}`} replace />;
+    }
     return <Navigate to={`${moduleConfig.basePath}/gold`} replace />;
   }
 

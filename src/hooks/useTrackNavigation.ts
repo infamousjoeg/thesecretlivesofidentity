@@ -46,6 +46,15 @@ function saveProgress(moduleId: string, trackId: TrackId, position: number): voi
   }
 }
 
+/**
+ * Read a track's last saved frame position (0-indexed) for a module.
+ * Used by the track selector to resume where the learner left off, so the
+ * "Progress is saved automatically" promise is actually honored.
+ */
+export function getTrackProgress(moduleId: string, trackId: TrackId): number {
+  return loadProgress(moduleId)[trackId] ?? 0;
+}
+
 export function useTrackNavigation() {
   const navigate = useNavigate();
   const params = useParams<{ module?: string; track?: string; frameIndex?: string }>();
@@ -68,21 +77,25 @@ export function useTrackNavigation() {
     return null;
   }, [moduleConfig, params.track]);
 
-  // Current position within track (0-indexed).
-  const currentPosition = useMemo(() => {
-    const frameIndex = params.frameIndex;
-    if (frameIndex) {
-      const parsed = parseInt(frameIndex, 10);
-      // URL uses 1-indexed, internal uses 0-indexed
-      return isNaN(parsed) ? 0 : parsed - 1;
-    }
-    return 0;
-  }, [params.frameIndex]);
-
   // Get track info.
   const tracks = moduleConfig?.tracks ?? null;
   const track = currentTrack && tracks ? tracks[currentTrack] : null;
   const totalFrames = track?.frames.length ?? 0;
+
+  // Current position within track (0-indexed), always clamped to a valid frame
+  // so out-of-range / non-numeric deep links (e.g. /spiffe/gold/0, /gold/9999)
+  // resolve to the nearest real frame instead of hanging on "Loading...".
+  const currentPosition = useMemo(() => {
+    const frameIndex = params.frameIndex;
+    let pos = 0;
+    if (frameIndex) {
+      const parsed = parseInt(frameIndex, 10);
+      // URL uses 1-indexed, internal uses 0-indexed
+      pos = isNaN(parsed) ? 0 : parsed - 1;
+    }
+    if (totalFrames <= 0) return 0;
+    return Math.max(0, Math.min(pos, totalFrames - 1));
+  }, [params.frameIndex, totalFrames]);
 
   // Get current frame data.
   const frameData = useMemo(() => {

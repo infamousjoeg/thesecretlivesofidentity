@@ -14,6 +14,7 @@
   "framesCount_one": "{{count}} fotograma",
   "framesCount_other": "{{count}} fotogramas",
   "backToHome": "Volver al inicio",
+  "resumeTrack": "Reanudar {{title}}",
   "recommended": "Recomendado",
   "frames": "fotogramas",
   "githubAriaLabel": "Ver código fuente en GitHub",

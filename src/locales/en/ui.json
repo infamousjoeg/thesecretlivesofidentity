@@ -14,6 +14,7 @@
   "framesCount_one": "{{count}} frame",
   "framesCount_other": "{{count}} frames",
   "backToHome": "Back to Home",
+  "resumeTrack": "Resume {{title}}",
   "recommended": "Recommended",
   "frames": "frames",
   "githubAriaLabel": "View source on GitHub",

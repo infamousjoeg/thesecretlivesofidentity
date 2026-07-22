@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, FileText, Target, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useReducedMotion } from '@/hooks';
+import { getTrackProgress } from '@/hooks/useTrackNavigation';
 import type { TrackId } from '@/content/tracks';
 import { getModule, type ModuleConfig } from '@/content/modules';
 
@@ -20,7 +21,12 @@ const TrackCard: React.FC<TrackCardProps> = ({ config, trackId, index, isRecomme
   const tracksNs = `${config.i18nPrefix}-tracks`;
   const { t } = useTranslation([tracksNs, 'ui']);
   const track = config.tracks[trackId];
-  const trackHref = `${config.basePath}/${trackId}`;
+  // Resume where the learner left off if there's saved progress for this track.
+  const savedPosition = getTrackProgress(config.id, trackId);
+  const isResumable = savedPosition > 0 && savedPosition < track.frames.length;
+  const trackHref = isResumable
+    ? `${config.basePath}/${trackId}/${savedPosition + 1}`
+    : `${config.basePath}/${trackId}`;
 
   const title = t(`${tracksNs}:${trackId}.title`, { defaultValue: track.title });
   const subtitle = t(`${tracksNs}:${trackId}.subtitle`, { defaultValue: track.subtitle });
@@ -141,7 +147,11 @@ const TrackCard: React.FC<TrackCardProps> = ({ config, trackId, index, isRecomme
           navigate(trackHref);
         }}
       >
-        <span>{t('trackSelector.startTrack', { title, defaultValue: `Start ${title}` })}</span>
+        <span>
+          {isResumable
+            ? t('resumeTrack', { ns: 'ui', title, defaultValue: `Resume ${title}` })
+            : t('trackSelector.startTrack', { title, defaultValue: `Start ${title}` })}
+        </span>
         <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
       </button>
     </motion.div>
@@ -185,10 +195,12 @@ export const TrackSelector: React.FC = () => {
           transition={{ duration: 0.4 }}
         >
           <h1 className="text-4xl sm:text-5xl font-display font-bold text-textPrimary mb-4">
-            {t(`${tracksNs}:trackSelector.title`)}
+            {t(`${tracksNs}:trackSelector.title`, { defaultValue: 'Choose your path' })}
           </h1>
           <p className="text-lg sm:text-xl text-textSecondary max-w-2xl mx-auto">
-            {t(`${tracksNs}:trackSelector.subtitle`)}
+            {t(`${tracksNs}:trackSelector.subtitle`, {
+              defaultValue: 'Pick a learning path based on how much time you have.',
+            })}
           </p>
         </motion.div>
 
@@ -212,7 +224,9 @@ export const TrackSelector: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.4 }}
         >
-          {t(`${tracksNs}:trackSelector.hint`)}
+          {t(`${tracksNs}:trackSelector.hint`, {
+            defaultValue: 'You can switch tracks anytime. Progress is saved automatically.',
+          })}
         </motion.p>
       </main>
     </div>

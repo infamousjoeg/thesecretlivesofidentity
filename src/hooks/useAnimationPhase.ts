@@ -24,6 +24,15 @@ export const useAnimationPhase = (
   const timeoutRef = useRef<number | null>(null);
   const completedRef = useRef(false);
 
+  // Callers pass a fresh array literal every render (e.g. `useAnimationPhase([0, 500])`),
+  // so depend on the durations' VALUES, not the array's identity — otherwise any
+  // re-render mid-phase tears down and restarts the pending timer, stalling the
+  // animation. A ref holds the latest array for reads without adding it as a dep.
+  const phaseCount = phaseDurations.length;
+  const durationsRef = useRef(phaseDurations);
+  durationsRef.current = phaseDurations;
+  const durationsKey = phaseDurations.join(',');
+
   // Clear any pending timeouts
   const clearPhaseTimeout = useCallback(() => {
     if (timeoutRef.current !== null) {
@@ -36,7 +45,7 @@ export const useAnimationPhase = (
   const nextPhase = useCallback(() => {
     setCurrentPhase((prev) => {
       const next = prev + 1;
-      if (next >= phaseDurations.length) {
+      if (next >= phaseCount) {
         if (!completedRef.current && onComplete) {
           completedRef.current = true;
           onComplete();
@@ -45,16 +54,16 @@ export const useAnimationPhase = (
       }
       return next;
     });
-  }, [phaseDurations.length, onComplete]);
+  }, [phaseCount, onComplete]);
 
   // Go to specific phase
   const goToPhase = useCallback((phase: number) => {
     clearPhaseTimeout();
-    if (phase >= 0 && phase < phaseDurations.length) {
+    if (phase >= 0 && phase < phaseCount) {
       setCurrentPhase(phase);
       completedRef.current = false;
     }
-  }, [phaseDurations.length, clearPhaseTimeout]);
+  }, [phaseCount, clearPhaseTimeout]);
 
   // Reset to first phase
   const reset = useCallback(() => {
@@ -66,12 +75,14 @@ export const useAnimationPhase = (
   // Skip to final phase
   const skipToEnd = useCallback(() => {
     clearPhaseTimeout();
-    setCurrentPhase(phaseDurations.length - 1);
-    completedRef.current = true;
-    if (onComplete) {
-      onComplete();
+    setCurrentPhase(phaseCount - 1);
+    // Only fire onComplete once, matching nextPhase's guard, so a re-running
+    // effect (e.g. under reduced motion) can't invoke it repeatedly.
+    if (!completedRef.current) {
+      completedRef.current = true;
+      onComplete?.();
     }
-  }, [phaseDurations.length, onComplete, clearPhaseTimeout]);
+  }, [phaseCount, onComplete, clearPhaseTimeout]);
 
   // Auto-advance through phases
   useEffect(() => {
@@ -84,17 +95,19 @@ export const useAnimationPhase = (
     }
 
     // Don't advance if at last phase
-    if (currentPhase >= phaseDurations.length - 1) return;
+    if (currentPhase >= phaseCount - 1) return;
 
-    const duration = phaseDurations[currentPhase];
+    const duration = durationsRef.current[currentPhase];
     timeoutRef.current = window.setTimeout(() => {
       nextPhase();
     }, duration);
 
     return clearPhaseTimeout;
+    // durationsKey stands in for the durations array by value (see above),
+    // so re-renders that only re-create the literal don't restart the timer.
   }, [
     currentPhase,
-    phaseDurations,
+    durationsKey,
     autoAdvance,
     prefersReducedMotion,
     nextPhase,
@@ -106,9 +119,9 @@ export const useAnimationPhase = (
     /** Current phase number (0-indexed) */
     phase: currentPhase,
     /** Total number of phases */
-    totalPhases: phaseDurations.length,
+    totalPhases: phaseCount,
     /** Whether currently at the last phase */
-    isComplete: currentPhase >= phaseDurations.length - 1,
+    isComplete: currentPhase >= phaseCount - 1,
     /** Whether currently at the first phase */
     isFirst: currentPhase === 0,
     /** Advance to next phase manually */
