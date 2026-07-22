@@ -4,8 +4,8 @@
 
 This is an interactive educational visualization explaining SPIFFE/SPIRE workload identity concepts, modeled after [thesecretlivesofdata.com/raft](https://thesecretlivesofdata.com/raft). The target audience has **zero prior knowledge** of SPIFFE, workload identity, or cryptographic concepts.
 
-**Live URL**: secretlivesofidentity.com/spiffe  
-**Repository**: github.com/secretlivesofidentity/spiffe  
+**Live URL**: https://thesecretlivesofidentity.com  
+**Repository**: github.com/infamousjoeg/thesecretlivesofidentity  
 **License**: Apache 2.0  
 
 ### Core Metaphor
@@ -804,7 +804,7 @@ VITE_BASE_URL=/spiffe/  # For GitHub Pages subdirectory
 
 ### Custom Domain
 
-Configure `secretlivesofidentity.com` CNAME to point to GitHub Pages, with `/spiffe` as the base path.
+The site is deployed on Netlify at the root domain `thesecretlivesofidentity.com` (modules live at `/spiffe`, `/agents`, etc.).
 
 ---
 
@@ -843,4 +843,4 @@ See `CLAUDE_CODE_TASKS.md` for full task definitions and orchestration patterns.
 
 This is a community contribution to the SPIFFE ecosystem. For questions:
 - SPIFFE Slack: slack.spiffe.io
-- GitHub Issues: github.com/secretlivesofidentity/spiffe/issues
+- GitHub Issues: github.com/infamousjoeg/thesecretlivesofidentity/issues

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Handshake } from 'lucide-react';
+import { ArrowRight, Handshake, Bot } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useReducedMotion } from '@/hooks';
 import { externalLinks } from '@/utils/constants';
@@ -150,6 +150,44 @@ export const Landing: React.FC = () => {
                 <path d="M88.7 238.5H117c2.7 0 5 2.2 5 5v28.3c0 2.7-2.2 5-5 5H88.7c-2.7 0-5-2.2-5-5v-28.3c0-2.7 2.2-5 5-5zm258 76.7h-28.3c-2.7 0-5 2.2-5 5v28.3c0 2.8 2.2 5 5 5h28.3c2.7 0 5-2.2 5-5v-28.3c0-2.8-2.3-5-5-5z" className="spiffe-lime"/>
                 <path d="M270.2 315.2h-258c-2.7 0-5 2.2-5 5v28.3c0 2.7 2.2 5 5 5h258c2.7 0 5-2.2 5-5v-28.3c-.1-2.8-2.3-5-5-5z" className="spiffe-cyan"/>
               </svg>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Featured: AI Agent Identity */}
+      <section className="pb-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-surface to-background border border-agentAI/25 p-8 sm:p-12"
+            initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="relative z-10">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 text-sm font-medium bg-agentAI/20 text-agentAI rounded-full mb-4">
+                <span className="w-2 h-2 rounded-full bg-agentAI" aria-hidden="true" />
+                {t('liveBadge')}
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-display font-bold text-textPrimary mb-4">
+                {t('agentsTitle')}
+              </h2>
+              <p className="text-lg text-textSecondary max-w-xl mb-6">
+                {t('agentsDescription')}
+              </p>
+              <Link
+                to="/agents"
+                className="inline-flex items-center gap-2 text-agentAI hover:text-agentAI/80 font-medium transition-colors"
+              >
+                <span>{t('exploreAgents')}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Agent glyph */}
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-20 hidden lg:block">
+              <Bot className="w-48 h-48 text-agentAI" strokeWidth={1.25} aria-hidden="true" />
             </div>
           </motion.div>
         </div>
