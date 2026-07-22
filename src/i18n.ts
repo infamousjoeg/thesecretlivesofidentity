@@ -88,6 +88,11 @@ i18n
       },
     },
     fallbackLng: 'en',
+    // Region-qualified codes: let a bare 'es'/'pt' (or es-ES/pt-PT) resolve to
+    // our es-419/pt-BR bundles instead of silently falling back to English.
+    supportedLngs: ['en', 'pt-BR', 'es-419'],
+    nonExplicitSupportedLngs: true,
+    load: 'all',
     defaultNS: 'ui',
     ns: [
       'ui',
@@ -108,5 +113,15 @@ i18n
       escapeValue: false,
     },
   });
+
+// Keep <html lang> in sync with the active language so screen readers use the
+// correct pronunciation after a language switch (it starts hardcoded to "en").
+const applyHtmlLang = (lng: string): void => {
+  if (typeof document !== 'undefined' && lng) {
+    document.documentElement.lang = lng;
+  }
+};
+applyHtmlLang(i18n.resolvedLanguage || i18n.language || 'en');
+i18n.on('languageChanged', applyHtmlLang);
 
 export default i18n;

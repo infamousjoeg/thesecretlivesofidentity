@@ -27,7 +27,7 @@ export const colors = {
   // Text
   textPrimary: '#F8FAFC',
   textSecondary: '#94A3B8',
-  textMuted: '#64748B',
+  textMuted: '#7C8AA0',
 
   // Accents
   success: '#22C55E',

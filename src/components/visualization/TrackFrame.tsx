@@ -272,7 +272,7 @@ export const TrackFrame: React.FC<TrackFrameProps> = ({ children }) => {
               }}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
                 isLastFrame
-                  ? 'bg-svid text-white hover:bg-opacity-90'
+                  ? 'bg-svid text-background hover:bg-opacity-90'
                   : 'bg-server text-white hover:bg-opacity-90'
               }`}
               aria-label={isLastFrame ? t('ui:complete') : t('ui:next')}
