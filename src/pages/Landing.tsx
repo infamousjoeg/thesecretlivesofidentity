@@ -161,8 +161,7 @@ export const Landing: React.FC = () => {
           <motion.div
             className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-surface to-background border border-agentAI/25 p-8 sm:p-12"
             initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             <div className="relative z-10">
