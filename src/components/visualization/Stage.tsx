@@ -7,6 +7,7 @@ export const Stage: React.FC<StageProps> = ({
   width = stageDimensions.width,
   height = stageDimensions.height,
   className = '',
+  label,
 }) => {
   return (
     <div
@@ -25,7 +26,7 @@ export const Stage: React.FC<StageProps> = ({
         preserveAspectRatio="xMidYMid meet"
         className="w-full h-full"
         role="img"
-        aria-label="Visualization stage"
+        aria-label={label ?? 'Illustration for this step; the concept is explained in the text above.'}
       >
         {/* Background gradient */}
         <defs>

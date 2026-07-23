@@ -109,4 +109,6 @@ export interface StageProps {
   width?: number;
   height?: number;
   className?: string;
+  /** Accessible label for the diagram, announced to screen readers. */
+  label?: string;
 }
