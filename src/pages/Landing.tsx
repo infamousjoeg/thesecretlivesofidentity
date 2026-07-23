@@ -25,18 +25,6 @@ const OPALogo: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-const WIMSELogo: React.FC<{ className?: string }> = ({ className }) => (
-  <svg viewBox="0 0 100 100" className={className} aria-label="WIMSE logo">
-    {/* Stylized W with identity nodes */}
-    <circle cx="20" cy="30" r="8" fill="#3B82F6" />
-    <circle cx="50" cy="30" r="8" fill="#10B981" />
-    <circle cx="80" cy="30" r="8" fill="#3B82F6" />
-    <path d="M20 42 L35 75 L50 55 L65 75 L80 42" stroke="#64748B" strokeWidth="4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    <line x1="20" y1="38" x2="50" y2="38" stroke="#64748B" strokeWidth="2" strokeDasharray="4 2" />
-    <line x1="50" y1="38" x2="80" y2="38" stroke="#64748B" strokeWidth="2" strokeDasharray="4 2" />
-  </svg>
-);
-
 interface TopicItem {
   id: string;
   icon?: React.FC<{ className?: string }>;
@@ -47,7 +35,6 @@ const upcomingTopicsMeta: TopicItem[] = [
   { id: 'mtls', icon: Handshake },
   { id: 'oauth', customIcon: OpenIDLogo },
   { id: 'opa', customIcon: OPALogo },
-  { id: 'wimse', customIcon: WIMSELogo },
 ];
 
 export const Landing: React.FC = () => {
@@ -198,7 +185,7 @@ export const Landing: React.FC = () => {
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-textPrimary mb-8 text-center">
             {t('comingSoon')}
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {upcomingTopicsMeta.map((topic) => {
               const IconComponent = topic.icon;
               const CustomIconComponent = topic.customIcon;
