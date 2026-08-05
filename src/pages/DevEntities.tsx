@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Workload,
   SpireServer,
@@ -19,11 +19,23 @@ import {
 } from '@/components/entities';
 
 /**
- * Development-only page for visual verification of entity components.
- * This page displays all entity components in isolation with multiple states.
- * Route: /dev/entities (only available in development mode)
+ * Entity component showcase. Displays all entity components in isolation
+ * with multiple states. Public URL for reference sharing, but marked
+ * noindex + nofollow so search engines do not surface it above the
+ * educational tracks; intentionally not linked from the landing page.
+ * Route: /showcase
  */
 export const DevEntities: React.FC = () => {
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    document.head.appendChild(meta);
+    return () => {
+      document.head.removeChild(meta);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background p-8">
       <h1 className="text-3xl font-display font-bold text-textPrimary mb-2">
