@@ -13,11 +13,12 @@ export const App: React.FC = () => {
         {/* Landing page (series overview) */}
         <Route path="/" element={<Landing />} />
 
-        {/* Development-only entity showcase (declared before the dynamic
-            module routes so it is not captured as a module). */}
-        {import.meta.env.DEV && (
-          <Route path="/dev/entities" element={<DevEntities />} />
-        )}
+        {/* Entity showcase. Public route for reference sharing, not linked
+            from the landing page; noindex + nofollow set in DevEntities.tsx
+            and robots.txt disallows /showcase for search engines. Declared
+            before the dynamic module routes so it is not captured as a
+            module. */}
+        <Route path="/showcase" element={<DevEntities />} />
 
         {/* Module track selector, e.g. /spiffe. Validity is checked in the
             page itself (unknown module -> redirect to landing). */}
