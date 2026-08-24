@@ -83,7 +83,9 @@
     "fullName": "Secure Production Identity Framework for Everyone",
     "identityAuthority": "Identity Authority",
     "tagline": "Cryptographic identity without shared secrets",
-    "letsSee": "Let's see how it works..."
+    "letsSee": "Let's see how it works...",
+    "serviceA": "Service A",
+    "serviceB": "Service B"
   },
   "frame2_1": {
     "fullName": "Secure Production Identity Framework for Everyone",
@@ -301,7 +303,8 @@
     "title": "But Wait: Who Gets Identity?",
     "question1": "Which workloads get which IDs?",
     "question2": "How does the Server know?",
-    "answer": "It needs a mapping: workload properties → SPIFFE ID"
+    "answer": "It needs a mapping: workload properties → SPIFFE ID",
+    "question": "How does the Server know?"
   },
   "frame3_9": {
     "title": "Registration Entries",
@@ -540,7 +543,11 @@
     "doesntSVID": "Doesn't the SVID have a private key?",
     "yes": "Yes! But it's fundamentally different.",
     "letsSee": "Let's see why...",
-    "explanation": "The private key never leaves the workload—it's generated locally and never transmitted."
+    "explanation": "The private key never leaves the workload—it's generated locally and never transmitted.",
+    "doesntHave": "Doesn't the SVID have",
+    "privateKey": "a private key?",
+    "diffLine1": "The difference between an SVID private key",
+    "diffLine2": "and a traditional shared secret is night and day."
   },
   "frame5_11": {
     "title": "Why It's Different",

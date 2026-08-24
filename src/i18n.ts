@@ -90,8 +90,15 @@ i18n
     fallbackLng: 'en',
     // Region-qualified codes: let a bare 'es'/'pt' (or es-ES/pt-PT) resolve to
     // our es-419/pt-BR bundles instead of silently falling back to English.
+    //
+    // NOTE: `nonExplicitSupportedLngs` must stay false here. When it is true,
+    // i18next strips the region from the code it is *checking* before testing
+    // it against `supportedLngs` ('pt-BR' -> 'pt'), so region-qualified entries
+    // in this list can never match and EVERY language is rejected down to the
+    // 'en' fallback. Region folding for bare/other-region codes is already
+    // handled by i18next's best-match resolution against `supportedLngs`.
     supportedLngs: ['en', 'pt-BR', 'es-419'],
-    nonExplicitSupportedLngs: true,
+    nonExplicitSupportedLngs: false,
     load: 'all',
     defaultNS: 'ui',
     ns: [
