@@ -301,8 +301,8 @@
   },
   "frame3_8": {
     "title": "Pero espera: ¿quién obtiene identidad?",
-    "question1": "¿Qué cargas de trabajo obtienen qué IDs?",
-    "question2": "¿Cómo lo sabe el Servidor?",
+    "question1": "¿Qué cargas de trabajo",
+    "question2": "obtienen qué IDs?",
     "answer": "Necesita un mapeo: propiedades de carga de trabajo → SPIFFE ID",
     "question": "¿Cómo lo sabe el Servidor?"
   },

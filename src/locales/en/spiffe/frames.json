@@ -301,8 +301,8 @@
   },
   "frame3_8": {
     "title": "But Wait: Who Gets Identity?",
-    "question1": "Which workloads get which IDs?",
-    "question2": "How does the Server know?",
+    "question1": "Which workloads",
+    "question2": "get which IDs?",
     "answer": "It needs a mapping: workload properties → SPIFFE ID",
     "question": "How does the Server know?"
   },
