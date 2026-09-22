@@ -303,7 +303,8 @@
     "title": "Mas Espere: Quem Recebe Identidade?",
     "question1": "Quais cargas de trabalho recebem quais IDs?",
     "question2": "Como o Servidor sabe?",
-    "answer": "Precisa de um mapeamento: propriedades da carga → SPIFFE ID"
+    "answer": "Precisa de um mapeamento: propriedades da carga → SPIFFE ID",
+    "question": "Como o Servidor sabe?"
   },
   "frame3_9": {
     "title": "Entradas de Registro",
@@ -542,7 +543,11 @@
     "doesntSVID": "O SVID não tem uma chave privada?",
     "yes": "Sim! Mas é fundamentalmente diferente.",
     "letsSee": "Vamos ver por quê...",
-    "explanation": "A chave privada nunca sai da carga de trabalho—é gerada localmente e nunca transmitida."
+    "explanation": "A chave privada nunca sai da carga de trabalho—é gerada localmente e nunca transmitida.",
+    "doesntHave": "O SVID não tem",
+    "privateKey": "uma chave privada?",
+    "diffLine1": "A diferença entre a chave privada de um SVID",
+    "diffLine2": "e um segredo compartilhado tradicional é abissal."
   },
   "frame5_11": {
     "title": "Por Que É Diferente",

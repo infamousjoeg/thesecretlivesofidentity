@@ -83,7 +83,9 @@
     "fullName": "Secure Production Identity Framework for Everyone",
     "identityAuthority": "Autoridad de Identidad",
     "tagline": "Identidad criptográfica sin secretos compartidos",
-    "letsSee": "Veamos cómo funciona..."
+    "letsSee": "Veamos cómo funciona...",
+    "serviceA": "Servicio A",
+    "serviceB": "Servicio B"
   },
   "frame2_1": {
     "fullName": "Secure Production Identity Framework for Everyone",
@@ -301,7 +303,8 @@
     "title": "Pero espera: ¿quién obtiene identidad?",
     "question1": "¿Qué cargas de trabajo obtienen qué IDs?",
     "question2": "¿Cómo lo sabe el Servidor?",
-    "answer": "Necesita un mapeo: propiedades de carga de trabajo → SPIFFE ID"
+    "answer": "Necesita un mapeo: propiedades de carga de trabajo → SPIFFE ID",
+    "question": "¿Cómo lo sabe el Servidor?"
   },
   "frame3_9": {
     "title": "Entradas de registro",
@@ -540,7 +543,11 @@
     "doesntSVID": "¿No tiene el SVID una clave privada?",
     "yes": "¡Sí! Pero es fundamentalmente diferente.",
     "letsSee": "Veamos por qué...",
-    "explanation": "La clave privada nunca sale de la carga de trabajo—se genera localmente y nunca se transmite."
+    "explanation": "La clave privada nunca sale de la carga de trabajo—se genera localmente y nunca se transmite.",
+    "doesntHave": "¿No tiene el SVID",
+    "privateKey": "una clave privada?",
+    "diffLine1": "La diferencia entre la clave privada de un SVID",
+    "diffLine2": "y un secreto compartido tradicional es abismal."
   },
   "frame5_11": {
     "title": "Por qué es diferente",
